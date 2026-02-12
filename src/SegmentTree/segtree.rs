@@ -1,19 +1,19 @@
-pub trait SegTreeMonoid{
+pub trait SegtreeMonoid{
     type S: Clone;
     fn identity() -> Self::S;
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
-pub struct SegTree<M: SegTreeMonoid> {
+pub struct Segtree<M: SegtreeMonoid> {
     n: usize,
     data: Vec<M::S>,
 }
 
-impl<M: SegTreeMonoid> SegTree<M> {
+impl<M: SegtreeMonoid> Segtree<M> {
     pub fn new(n: usize) -> Self {
         let n = n.next_power_of_two();
         let data = vec![M::identity(); 2 * n];
-        SegTree{ n, data }
+        Segtree{ n, data }
     }
 
     pub fn set(&mut self, i: usize, x: M::S) {
@@ -34,7 +34,7 @@ impl<M: SegTreeMonoid> SegTree<M> {
         for i in (1..n).rev(){
             data[i] = M::op(&data[2*i], &data[2*i+1]);
         }
-        SegTree{
+        Segtree{
             n, data,
         }
     }
@@ -133,81 +133,4 @@ impl<M: SegTreeMonoid> SegTree<M> {
         } {}
         0
     }
-}
-
-struct SegTreeMax;
-impl SegTreeMonoid for SegTreeMax {
-    type S = i64;
-    fn identity() -> Self::S {
-        i64::MIN
-    }
-
-    fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
-        a.max(b)
-    }
-}
-
-struct SegTreeMin;
-impl SegTreeMonoid for SegTreeMin {
-    type S = i64;
-    fn identity() -> Self::S {
-        i64::MAX
-    }
-
-    fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
-        a.min(b)
-    }
-}
-
-struct SegTreeSum;
-impl SegTreeMonoid for SegTreeSum {
-    type S = i64;
-    fn identity() -> Self::S {
-        0
-    }
-
-    fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
-        a + b
-    }
-}
-
-struct SegTreeXor;
-impl SegTreeMonoid for SegTreeXor {
-    type S = i64;
-    fn identity() -> Self::S {
-        0
-    }
-
-    fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
-        a ^ b
-    }
-}
-
-pub const B: u128 = 127;
-pub const MO: u128 = (1<<64)-59;
-
-pub struct RollingHashMonoid;
-impl SegTreeMonoid for RollingHashMonoid {
-    type S = (u128, u128);
-
-    fn identity() -> Self::S {
-        (1, 0)
-    }
-
-    fn op(a: &Self::S, b: &Self::S) -> Self::S {
-        let &(b1, h1) = a;
-        let &(b2, h2) = b;
-        ((b1 * b2) % MO, (b2 * h1 + h2) % MO)
-    }
-}
-
-pub fn compress<T: Copy+Ord+std::hash::Hash>(a: &Vec<T>) -> Vec<usize> {
-    let mut b = a.clone();
-    b.sort();
-    b.dedup();
-    let mut dic = std::collections::HashMap::new();
-    for (i, &v) in b.iter().enumerate() {
-        dic.insert(v, i);
-    }
-    a.iter().map(|x| dic[x]).collect()
 }

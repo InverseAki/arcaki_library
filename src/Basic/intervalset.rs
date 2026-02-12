@@ -84,6 +84,14 @@ impl<T> IntervalSet<T> where T: Ord+Copy {
         } 
         res
     }
+
+    pub fn contains(&self, p: T)->bool{
+        if let Some((&_, &r)) = self.s.range(..=p).next_back(){
+            p < r
+        } else {
+            false
+        }
+    }
 }
 
 // 上書きしていくタイプ

@@ -1,14 +1,15 @@
-// 2e5に収まるなら3、そうでないなら4。4だと手元で実行できないので注意
-const TREELEVEL: usize = 3;
+//2e5に収まるなら3、1e7に収まるなら4、1e9に収まるなら5
+const TREELEVEL: usize = 4;
 #[derive(Clone, Debug)]
 pub struct Predecessor64{
-    d: [[u64; 1<<(6*(TREELEVEL-1))]; TREELEVEL],
+    d: Vec<Vec<u64>>,
 }
 
 impl Predecessor64 {
     pub fn new()->Self{
+        let d = (0..TREELEVEL).into_iter().map(|k| vec![0; 1<<(6*(TREELEVEL-k-1))]).collect::<Vec<Vec<u64>>>();
         Predecessor64{
-            d: [[0; 1<<(6*(TREELEVEL-1))]; TREELEVEL],
+            d
         }
     }
 

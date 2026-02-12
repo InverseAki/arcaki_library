@@ -4,13 +4,15 @@ pub struct Ratio{
     y: i64,
 }
 
+pub fn floor(a:i64, b:i64)->i64{let res=(a%b+b)%b;(a-res)/b}
+
 impl Ratio {
     #[inline]
     pub fn new(mut x: i64, mut y: i64) -> Self {
         if x < 0{
             (x, y) = (-x, -y);
         }
-        let g = gcd(x, y).abs();
+        let g = gcd(x.abs(), y.abs()).abs();
         if g==0{
             return Ratio{x,y};
         }
@@ -155,7 +157,7 @@ impl Div for Ratio{
     type Output = Ratio;
 
     fn div(self, rhs: Self) -> Self::Output {
-        *self*rhs.inv()
+        self.clone()*rhs.inv()
     }
 }
 

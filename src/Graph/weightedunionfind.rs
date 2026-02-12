@@ -1,7 +1,3 @@
-use std::mem::swap;
-
-// Blue_Sさんの実装をベースに使用させていただいてます！ありがとうございます！！
-
 pub trait UFMonoid{
     type S: Clone+PartialEq;
     fn identity()->Self::S;
