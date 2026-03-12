@@ -139,7 +139,7 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.min_left_dfs(self.root[t] as usize, 0, self.n, r, &mut ac, &f)
     }
 
-        #[inline]
+    #[inline]
     pub fn max_right<F>(&self, t: usize, l: usize, f: F) -> usize where F: Fn(&M::S)->bool{
         assert!(f(&M::identity()));
         if l==self.n{return self.n;}
@@ -147,6 +147,7 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.max_right_dfs(self.root[t] as usize, 0, self.n, l, &mut ac, &f)
     }
 
+    #[inline(always)]
     fn min_left_dfs<F>(&self, cur: usize, l: usize, r: usize, x: usize, ac: &mut M::S, f: &F) -> usize where F: Fn(&M::S)->bool{
         if x <= l {return l;}
         if r <= x{
@@ -167,6 +168,7 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.min_left_dfs(node.left as usize, l, m, x, ac, f)
     }
 
+    #[inline(always)]
     fn max_right_dfs<F>(&self, cur: usize, l: usize, r: usize, x: usize, ac: &mut M::S, f: &F) -> usize where F: Fn(&M::S)->bool{
         if r <= x{return x;}
         if x <= l{
@@ -189,6 +191,7 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.max_right_dfs(rn as usize, m, r, x, ac, f)
     }
 
+    #[inline(always)]
     pub fn get(&self, t: usize, p: usize) -> M::S {
         self.prod(t, p, p+1)
     }

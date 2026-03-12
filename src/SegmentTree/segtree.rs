@@ -52,7 +52,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
         }
     }
 
-    pub fn prod(&mut self, l: usize, r: usize) -> M::S {
+    pub fn prod(&self, l: usize, r: usize) -> M::S {
         let mut p_l = l + self.n;
         let mut p_r = r + self.n;
         let mut res_l = M::identity();
@@ -72,7 +72,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
         M::op(&res_l, &res_r)
     }
 
-    pub fn all_prod(&mut self)-> M::S {
+    pub fn all_prod(&self)-> M::S {
         self.data[1].clone()
     }
 

@@ -1,5 +1,3 @@
-use std::ops::{Add, Sub};
-
 pub struct Cumsum2D<T> where T: Copy+Add<Output=T>+Sub<Output=T>+Default{
     ac: Vec<Vec<T>>,
 }

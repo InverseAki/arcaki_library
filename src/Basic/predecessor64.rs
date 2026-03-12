@@ -1,21 +1,21 @@
 //2e5に収まるなら3、1e7に収まるなら4、1e9に収まるなら5
-const TREELEVEL: usize = 4;
 #[derive(Clone, Debug)]
 pub struct Predecessor64{
+    n: usize,
     d: Vec<Vec<u64>>,
 }
 
 impl Predecessor64 {
-    pub fn new()->Self{
-        let d = (0..TREELEVEL).into_iter().map(|k| vec![0; 1<<(6*(TREELEVEL-k-1))]).collect::<Vec<Vec<u64>>>();
+    pub fn new(n: usize)->Self{
+        let d = (0..n).into_iter().map(|k| vec![0; 1<<(6*(n-k-1))]).collect::<Vec<Vec<u64>>>();
         Predecessor64{
-            d
+            n, d
         }
     }
 
     #[inline(always)]
     pub fn is_empty(&self) -> bool {
-        self.d[TREELEVEL-1][0]==0
+        self.d[self.n-1][0]==0
     }
 
     #[inline(always)]
@@ -25,7 +25,7 @@ impl Predecessor64 {
 
     #[inline(always)]
     pub fn insert(&mut self, p: usize){
-        for i in 0..TREELEVEL{
+        for i in 0..self.n{
             if self.d[i][p>>(6*(i+1))]&1<<((p>>(6*i))&63)==0{
                 self.d[i][p>>(6*(i+1))] |= 1<<((p>>(6*i))&63);
             } else {
@@ -37,7 +37,7 @@ impl Predecessor64 {
     #[inline(always)]
     pub fn remove(&mut self, p: usize){
         if self.d[0][p>>6]&1<<(p&63)==0{return;}
-        for i in 0..TREELEVEL{
+        for i in 0..self.n{
             self.d[i][p>>(6*(i+1))] ^= 1<<((p>>(6*i))&63);
             if self.d[i][p>>(6*(i+1))]!=0{
                 return;
@@ -69,7 +69,7 @@ impl Predecessor64 {
     //存在しないは!0
     #[inline(always)]
     pub fn prev(&self, mut p: usize)->usize{
-        for i in 0..TREELEVEL{
+        for i in 0..self.n{
             if Self::ml(p&63)&self.d[i][p>>6]!=0{
                 let mut res = ((p>>6)<<6)|Self::msb(self.d[i][p>>6]&Self::ml(p&63));
                 for j in (0..i).rev(){
@@ -84,7 +84,7 @@ impl Predecessor64 {
 
     #[inline(always)]
     pub fn next(&self, mut p: usize)->usize{
-        for i in 0..TREELEVEL{
+        for i in 0..self.n{
             if Self::mr(p&63)&self.d[i][p>>6]!=0{
                 let mut res = ((p>>6)<<6)|Self::lsb(self.d[i][p>>6]&Self::mr(p&63));
                 for j in (0..i).rev(){
@@ -116,6 +116,6 @@ impl Predecessor64 {
 
     #[inline(always)]
     pub fn max(&self)->usize{
-        self.inprev((1<<(6*TREELEVEL))-1)
+        self.inprev((1<<(6*self.n))-1)
     }
 }

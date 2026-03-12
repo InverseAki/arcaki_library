@@ -9,7 +9,7 @@ pub struct DynamicSegtree<M> where M: SegtreeMonoid {
     data: Vec<(M::S, Option<usize>, Option<usize>)>,
 }
 
-impl<M> DynamicSegmtree<M> where M: SegtreeMonoid {
+impl<M> DynamicSegtree<M> where M: SegtreeMonoid {
     pub fn new(n: usize) -> Self {
         let n = n.next_power_of_two();
         DynamicSegtree {

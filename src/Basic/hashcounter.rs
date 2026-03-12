@@ -1,37 +1,14 @@
 #[derive(Debug, Clone)]
-pub struct Counter<T: Ord>{
+pub struct HashCounter<T: Ord+Hash>{
     c: usize,
-    map: BTreeMap<T, usize>,
+    map: HashMap<T, usize>,
 }
 
-impl<T: Copy+Ord> Counter<T>{
+impl<T: Copy+Ord+Hash> HashCounter<T>{
     pub fn new()->Self{
-        Counter{
+        HashCounter{
             c: 0,
-            map: BTreeMap::new(),
-        }
-    }
-
-    #[inline(always)]
-    pub fn range<R>(&self, range: R)->BTreeRange<'_, T, usize> where R: RangeBounds<T>{
-        self.map.range(range)
-    }
-
-    #[inline(always)]
-    pub fn mi(&self)->Option<T>{
-        if let Some((x, _)) = self.range(..).next(){
-            Some(*x)
-        } else {
-            None
-        }
-    }
-
-    #[inline(always)]
-    pub fn mx(&self)->Option<T>{
-        if let Some((x, _)) = self.range(..).next_back(){
-            Some(*x)
-        } else {
-            None
+            map: HashMap::new(),
         }
     }
 
@@ -124,7 +101,7 @@ impl<T: Copy+Ord> Counter<T>{
     }
 
     #[inline(always)]
-    pub fn merge(&mut self, rhs: &mut Counter<T>){
+    pub fn merge(&mut self, rhs: &mut HashCounter<T>){
         if self.len() < rhs.len(){
             swap(self, rhs);
         }
