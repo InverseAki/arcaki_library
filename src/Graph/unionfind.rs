@@ -1,5 +1,3 @@
-use std::mem::swap;
-
 pub struct UnionFind{
     parent: Vec<i32>,
 }

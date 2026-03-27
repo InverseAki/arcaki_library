@@ -114,7 +114,7 @@ impl MatrixMonoid for MinPlusMonoid{
     type S = i64;
 
     fn zero()->Self::S {
-        INF
+        1<<60
     }
 
     fn one()->Self::S {

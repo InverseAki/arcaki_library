@@ -58,13 +58,13 @@ impl STLCA {
         STLCA { int, data, dist}
     }
 
-    pub fn query(&self, mut u: usize, mut v: usize)->usize{
+    pub fn lca(&self, mut u: usize, mut v: usize)->usize{
         if self.int[u] > self.int[v]{swap(&mut u, &mut v);}
         self.data.query(self.int[u], self.int[v]+1).1
     }
 
     pub fn distance(&self, u: usize, v: usize)->usize{
-        let p = self.query(u, v);
+        let p = self.lca(u, v);
         self.dist[u]+self.dist[v]-2*self.dist[p]
     }
 }

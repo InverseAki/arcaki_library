@@ -13,6 +13,56 @@ impl Predecessor64 {
         }
     }
 
+    pub fn from_vec_u64(base: Vec<u64>)->Self {
+        if base.is_empty(){
+            return Predecessor64{n:1,d:vec![vec![0]]};
+        }
+        let mut d = Vec::new();
+        d.push(base);
+        while d.last().unwrap().len() > 1{
+            let pre = d.last().unwrap();
+            let mut nex = vec![0; (pre.len()+63)>>6];
+            for (j, &v) in pre.iter().enumerate(){
+                if v!=0{
+                    nex[j>>6] |= 1<<(j&63);
+                }
+            }
+            d.push(nex);
+        }
+        let n = d.len();
+        Predecessor64 { n, d }
+    }
+
+    pub fn from_vec_usize(base: Vec<usize>)->Self {
+        if base.is_empty(){
+            return Predecessor64{n:1,d:vec![vec![0]]};
+        }
+        let mut d = Vec::new();
+        d.push(base.iter().map(|&c| c as u64).collect::<Vec<_>>());
+        while d.last().unwrap().len() > 1{
+            let pre = d.last().unwrap();
+            let mut nex = vec![0; (pre.len()+63)>>6];
+            for (j, &v) in pre.iter().enumerate(){
+                if v!=0{
+                    nex[j>>6] |= 1<<(j&63);
+                }
+            }
+            d.push(nex);
+        }
+        let n = d.len();
+        Predecessor64 { n, d }
+    }
+
+    pub fn from_01_string(s: String)->Self {
+        let mut base = vec![0;(s.len()+63)>>6];
+        for (i, c) in s.bytes().enumerate(){
+            if c==b'1' {
+                base[i>>6] |= 1<<(i&63);
+            }
+        }
+        Self::from_vec_u64(base)
+    }
+    
     #[inline(always)]
     pub fn is_empty(&self) -> bool {
         self.d[self.n-1][0]==0
