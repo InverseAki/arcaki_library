@@ -82,7 +82,7 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
         xs.sort_unstable();
         xs.dedup();
         let n = xs.len();
-        let mut map: HashMap<T, usize, BuildHasherDefault<fxhash::FxHasher>> = FxMap::default();
+        let mut map: HashMap<T, usize, BuildHasherDefault<FxHasher>> = FxMap::default();
         for (i, &v) in xs.iter().enumerate(){
             map.insert(v, i);
         }

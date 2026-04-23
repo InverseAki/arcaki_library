@@ -25,7 +25,7 @@ pub struct Node<F> where F: SplayLazyMonoid{
     prod: <F::M as SplayMonoid>::S,
     lazy: F::F,
     idx: usize,
-    w: usize,
+    _w: usize,
     ac: usize,
     rev: bool,
 }
@@ -40,7 +40,7 @@ impl<F> Node<F> where F: SplayLazyMonoid{
             prod: F::id_e(),
             lazy: F::identity(),
             idx: !0,
-            w: 0,
+            _w: 0,
             ac: 0,
             rev: false,
         }
@@ -55,15 +55,15 @@ impl<F> Node<F> where F: SplayLazyMonoid{
             prod: x.clone(),
             lazy: F::identity(),
             idx,
-            w: 1,
+            _w: 1,
             ac: 1,
             rev: false,
         }
     }
 }
 
-struct SplayTree<F>  where F: SplayLazyMonoid{
-    p_nil: Box<Node<F>>,
+pub struct SplayTree<F>  where F: SplayLazyMonoid{
+    _p_nil: Box<Node<F>>,
     nil: *mut Node<F>,
     data: Vec<Box<Node<F>>>,
     r: *mut Node<F>,
@@ -71,13 +71,13 @@ struct SplayTree<F>  where F: SplayLazyMonoid{
 
 impl<F> SplayTree<F> where F: SplayLazyMonoid {
     pub fn new() -> Self {
-        let mut p_nil = Box::new(Node::<F>::new_nil());
-        let ptr: *mut Node<F> = &mut *p_nil;
-        (*p_nil).l = ptr;
-        (*p_nil).r = ptr;
-        (*p_nil).p = ptr;
+        let mut _p_nil = Box::new(Node::<F>::new_nil());
+        let ptr: *mut Node<F> = &mut *_p_nil;
+        (*_p_nil).l = ptr;
+        (*_p_nil).r = ptr;
+        (*_p_nil).p = ptr;
         SplayTree {
-            p_nil,
+            _p_nil,
             nil: ptr,
             data: Vec::new(),
             r: ptr,
@@ -85,8 +85,9 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
     }
 
     #[inline(always)]
-    unsafe fn apply_down(&mut self, c: *mut Node<F>) {
-        if (*c).l != self.nil {
+    fn apply_down(&mut self, c: *mut Node<F>) {
+        unsafe{
+            if (*c).l != self.nil {
             (*(*c).l).data = F::map(&(*c).lazy, &(*(*c).l).data);
             (*(*c).l).prod = F::map(&(*c).lazy, &(*(*c).l).prod);
             (*(*c).l).lazy = F::composition(&(*c).lazy, &(*(*c).l).lazy);
@@ -109,23 +110,29 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
             (*c).rev = false;
         }
         (*c).lazy = F::identity();
+        }
     }
 
     #[inline(always)]
-    unsafe fn upprod(&mut self, c: *mut Node<F>) {
+    fn upprod(&mut self, c: *mut Node<F>) {
+        unsafe{
         (*c).ac = (*(*c).l).ac + (*(*c).r).ac+1;
         (*c).prod = F::op(&F::op(&(*(*c).l).prod, &(*c).data), &(*(*c).r).prod);
+        }
     }
 
     #[inline(always)]
-    unsafe fn pc(&mut self, p: *mut Node<F>) -> *mut *mut Node<F> {
+    fn pc(&mut self, p: *mut Node<F>) -> *mut *mut Node<F> {
+        unsafe{
         if (*p).p == self.nil {&mut self.r}
         else if (*(*p).p).l==p {&mut (*(*p).p).l}
         else {&mut (*(*p).p).r}
+        }
     }
 
     #[inline(always)]
-    unsafe fn rotleft(&mut self, c: *mut Node<F>) {
+    fn rotleft(&mut self, c: *mut Node<F>) {
+        unsafe{
         let p = (*c).p;
         *self.pc(p) = c;
         (*c).p = (*p).p;
@@ -133,10 +140,12 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         if (*c).l != self.nil {(*(*c).l).p = p}
         (*p).r = (*c).l;
         (*c).l = p;
+        }
     }
 
     #[inline(always)]
-    unsafe fn rotright(&mut self, c: *mut Node<F>) {
+    fn rotright(&mut self, c: *mut Node<F>) {
+        unsafe{
         let p = (*c).p;
         *self.pc(p) = c;
         (*c).p = (*p).p;
@@ -144,10 +153,12 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         if (*c).r != self.nil {(*(*c).r).p = p}
         (*p).l = (*c).r;
         (*c).r = p;
+        }
     }
 
     #[inline(always)]
-    unsafe fn splay(&mut self, c: *mut Node<F>) {
+    fn splay(&mut self, c: *mut Node<F>) {
+        unsafe{
         self.apply_down(c);
         while (*c).p != self.nil {
             let p = (*c).p;
@@ -173,11 +184,13 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
             self.upprod(c);
         }
         self.upprod(c);
+        }
     }
 
     // 0-indexed
     #[inline(always)]
-    unsafe fn kth(&mut self, mut k: usize) -> *mut Node<F> {
+    fn kth(&mut self, mut k: usize) -> *mut Node<F> {
+        unsafe{
         let mut c = self.r;
         loop {
             self.apply_down(c);
@@ -189,6 +202,7 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         self.apply_down(c);
         self.splay(c);
         c
+        }
     }
 
     #[inline]
@@ -259,7 +273,8 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         self.data.pop();}
     }
 
-    unsafe fn sec(&mut self, l: usize, r: usize) -> *mut Node<F>{
+    fn sec(&mut self, l: usize, r: usize) -> *mut Node<F>{
+        unsafe{
         if l == 0 && r == (*self.r).ac{
             return self.r;
         } else if l==0{
@@ -277,10 +292,12 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         (*lp).p = rp;
         self.upprod(rp);
         (*lp).r
+        }
     }
 
     #[inline]
     pub fn reverse(&mut self, l: usize, r: usize){
+        if l >= r{return;}
         unsafe{let c = self.sec(l, r);
         (*c).rev ^= true;
         F::reverse_prod(&mut (*c).prod);
@@ -288,11 +305,11 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
     }
 
     #[inline]
-    pub fn apply(&mut self, l: usize, r: usize, f: &F::F) {
+    pub fn apply(&mut self, l: usize, r: usize, f: F::F) {
         unsafe{let c = self.sec(l, r);
-        (*c).data = F::map(f, &(*c).data);
-        (*c).prod = F::map(f, &(*c).prod);
-        (*c).lazy = F::composition(f, &(*c).lazy);
+        (*c).data = F::map(&f, &(*c).data);
+        (*c).prod = F::map(&f, &(*c).prod);
+        (*c).lazy = F::composition(&f, &(*c).lazy);
         self.splay(c);
     }
     }
@@ -308,16 +325,16 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
 #[derive(Debug, Clone)]
 struct M;
 impl SplayMonoid for M{
-    type S = (i64, i64);
+    type S = i64;
 
     #[inline(always)]
     fn identity() -> Self::S {
-        (0, 0)
+        0
     }
 
     #[inline(always)]
     fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
-        ((a.0+b.0)%MOD, (a.1+b.1)%MOD)
+        a+b
     }
 
     #[inline(always)]
@@ -328,20 +345,20 @@ impl SplayMonoid for M{
 struct MM;
 impl SplayLazyMonoid for MM{
     type M = M;
-    type F = (i64, i64);
+    type F = i64;
 
     #[inline(always)]
     fn identity() -> Self::F {
-        (1, 0)
+        0
     }
 
     #[inline(always)]
     fn map(&f: &Self::F, &x: &<Self::M as SplayMonoid>::S) -> <Self::M as SplayMonoid>::S {
-        ((f.0*x.0+f.1*x.1)%MOD, x.1)
+        f+x
     }
 
     #[inline(always)]
     fn composition(&f: &Self::F, &g: &Self::F) -> Self::F {
-        ((f.0*g.0)%MOD, (f.0*g.1+f.1)%MOD)
+        f+g
     }
 }

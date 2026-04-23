@@ -2,26 +2,26 @@ pub fn bit_length(x: usize) -> usize {
     64 - x.saturating_sub(1).leading_zeros() as usize
 }
 
-pub trait SegTreeMonoid {
+pub trait SegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
 pub trait LazySegtreeMonoid {
-    type M: SegTreeMonoid;
+    type M: SegtreeMonoid;
     type F: Clone;
-    fn id_e() -> <Self::M as SegTreeMonoid>::S { <Self::M as SegTreeMonoid>::identity() }
-    fn op(a: &<Self::M as SegTreeMonoid>::S, b: &<Self::M as SegTreeMonoid>::S) -> <Self::M as SegTreeMonoid>::S { <Self::M>::op(a, b) }
+    fn id_e() -> <Self::M as SegtreeMonoid>::S { <Self::M as SegtreeMonoid>::identity() }
+    fn op(a: &<Self::M as SegtreeMonoid>::S, b: &<Self::M as SegtreeMonoid>::S) -> <Self::M as SegtreeMonoid>::S { <Self::M>::op(a, b) }
     fn identity() -> Self::F;
-    fn map(f: &Self::F, x: &<Self::M as SegTreeMonoid>::S) -> <Self::M as SegTreeMonoid>::S;
+    fn map(f: &Self::F, x: &<Self::M as SegtreeMonoid>::S) -> <Self::M as SegtreeMonoid>::S;
     fn composition(f: &Self::F, g: &Self::F) -> Self::F;
 }
 
 pub struct LazySegtree<F> where F: LazySegtreeMonoid {
     n: usize,
     log: usize,
-    data: Vec<<F::M as SegTreeMonoid>::S>,
+    data: Vec<<F::M as SegtreeMonoid>::S>,
     lazy: Vec<F::F>,
 }
 
@@ -38,7 +38,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
     }
 
     // vectorを飲ませるならこっち。O(N)で初期化。
-    pub fn build(vec: &Vec<<F::M as SegTreeMonoid>::S>) -> Self {
+    pub fn build(vec: &Vec<<F::M as SegtreeMonoid>::S>) -> Self {
         let n = vec.len().next_power_of_two();
         let log = bit_length(n);
         let lazy = vec![F::identity(); n<<1];
@@ -53,7 +53,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         res
     }
 
-    pub fn set(&mut self, mut p: usize, x: <F::M as SegTreeMonoid>::S) {
+    pub fn set(&mut self, mut p: usize, x: <F::M as SegtreeMonoid>::S) {
         p += self.n;
         for i in (1..=self.log).rev() {
             self.push(p >> i);
@@ -82,16 +82,16 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         self.lazy[k] = F::identity();
     }
 
-    pub fn get(&mut self, mut p: usize) -> <F::M as SegTreeMonoid>::S {
+    pub fn get(&mut self, mut p: usize) -> <F::M as SegtreeMonoid>::S {
         p += self.n;
-        for i in (1..self.log).rev() {
+        for i in (1..=self.log).rev() {
             self.push(p >> i);
         }
         self.data[p].clone()
     }
 
     // whileで打ち切った方が早そうだけどどうなんでしょう？
-    pub fn prod(&mut self, mut l: usize, mut r: usize) -> <F::M as SegTreeMonoid>::S {
+    pub fn prod(&mut self, mut l: usize, mut r: usize) -> <F::M as SegtreeMonoid>::S {
         if r <= l { return F::id_e() }
         l += self.n; r += self.n;
         for i in (1..=self.log).rev() {
@@ -99,7 +99,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
                 self.push(l >> i);
             }
             if ((r >> i) << i) != r {
-                self.push(r >> i);
+                self.push((r-1) >> i);
             }
         }
         let mut acl = F::id_e();
@@ -118,7 +118,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         F::op(&acl, &acr)
     }
 
-    pub fn all_prod(&mut self) -> <F::M as SegTreeMonoid>::S {
+    pub fn all_prod(&mut self) -> <F::M as SegtreeMonoid>::S {
         self.update(1);
         self.data[1].clone()
     }
@@ -158,11 +158,11 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
     }
 
     pub fn max_right<G>(&mut self, mut l: usize, g: G) -> usize
-    where G: Fn(<F::M as SegTreeMonoid>::S) -> bool {
+    where G: Fn(<F::M as SegtreeMonoid>::S) -> bool {
         assert!(g(F::id_e()));
         if l >= self.n { return self.n }
         l += self.n;
-        for i in 1..=self.log {
+        for i in (1..=self.log).rev() {
             self.push(l >> i);
         }
         let mut ac = F::id_e();
@@ -191,7 +191,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
     }
 
     pub fn min_left<G>(&mut self, mut r: usize, g: G) -> usize
-    where G: Fn(<F::M as SegTreeMonoid>::S) -> bool {
+    where G: Fn(<F::M as SegtreeMonoid>::S) -> bool {
         assert!(g(F::id_e()));
         if r == 0 { return 0; }
         r += self.n;
@@ -223,7 +223,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         0
     }
 
-    pub fn get_slice(&mut self, mut l: usize, mut r: usize) -> Vec<<F::M as SegTreeMonoid>::S> {
+    pub fn get_slice(&mut self, mut l: usize, mut r: usize) -> Vec<<F::M as SegtreeMonoid>::S> {
         l += self.n; r += self.n;
         for i in 1..self.n {
             self.push(i)

@@ -207,7 +207,9 @@ impl WaveletMatrix {
         if l >= r || upper == 0 {
             return 0;
         }
-
+        if self.max_log < usize::BITS as usize && upper >= (1usize << self.max_log) {
+            return r - l;
+        }
         let mut cnt = 0usize;
         for d in 0..self.max_log {
             let bit = (upper >> (self.max_log - 1 - d)) & 1;

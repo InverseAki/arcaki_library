@@ -4,6 +4,7 @@ pub trait SegtreeMonoid{
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
+#[derive(Clone)]
 pub struct Segtree<M: SegtreeMonoid> {
     n: usize,
     data: Vec<M::S>,

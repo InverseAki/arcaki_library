@@ -8,8 +8,8 @@ pub struct BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Outp
 
 impl<T> BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> {
     pub fn new(n: usize, zero: T) -> Self {
-        let k = n.next_power_of_two();
-        let base = vec![zero; k + 2];
+        let k = n;
+        let base = vec![zero; k+3];
         BIT { n: k, vec: base, zero }
     }
 

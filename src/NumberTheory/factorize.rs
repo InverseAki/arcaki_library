@@ -92,8 +92,6 @@ pub fn prime_finder(n: usize)->usize{
     unreachable!();
 }
 
-use std::collections::HashMap;
-
 pub fn factorize(mut n: usize)->HashMap<usize, usize>{
     let mut res = HashMap::new();
     while !miller_rabin(n) && n > 1{

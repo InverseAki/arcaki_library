@@ -1,301 +1,298 @@
-pub fn bit_length(x: usize) -> usize {
-    64 - x.saturating_sub(1).leading_zeros() as usize
-}
-
-pub trait SegTreeMonoid {
+pub trait DynamicSegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
-pub trait LazySegtreeMonoid {
-    type M: SegTreeMonoid;
+pub trait DynamicLazySegtreeMonoid {
+    type M: DynamicSegtreeMonoid;
     type F: Clone;
-    fn id_e() -> <Self::M as SegTreeMonoid>::S { <Self::M>::identity() }
-    fn op(
-        a: &<Self::M as SegTreeMonoid>::S,
-        b: &<Self::M as SegTreeMonoid>::S
-    ) -> <Self::M as SegTreeMonoid>::S { <Self::M>::op(a, b) }
 
-    fn identity() -> Self::F;
-    fn map(
+    fn id_e() -> Self::F;
+
+    fn mapping(
         f: &Self::F,
-        x: &<Self::M as SegTreeMonoid>::S
-    ) -> <Self::M as SegTreeMonoid>::S;
+        x: &<Self::M as DynamicSegtreeMonoid>::S,
+        len: usize,
+    ) -> <Self::M as DynamicSegtreeMonoid>::S;
+
     fn composition(f: &Self::F, g: &Self::F) -> Self::F;
 }
 
-#[derive(Clone)]
-struct Node<F: LazySegtreeMonoid> {
-    val: <F::M as SegTreeMonoid>::S,
-    lazy: F::F,
-    left: Option<usize>,
-    right: Option<usize>,
+pub struct DynamicSegtreeNode<MM>
+where
+    MM: DynamicLazySegtreeMonoid,
+{
+    val: <MM::M as DynamicSegtreeMonoid>::S,
+    lazy: MM::F,
+    len: u32,
+    left: u32,
+    right: u32,
 }
 
-pub struct DynamicLazySegtree<F: LazySegtreeMonoid> {
-    size: usize,        
-    nodes: Vec<Node<F>>, 
-    root: usize,
+pub struct DynamicLazySegtree<MM>
+where
+    MM: DynamicLazySegtreeMonoid,
+{
+    n: usize,
+    data: Vec<DynamicSegtreeNode<MM>>,
 }
 
-impl<F: LazySegtreeMonoid> DynamicLazySegtree<F> {
-    pub fn new(size: usize) -> Self {
-        assert!(size > 0);
-        let root = Node::<F> {
-            val: F::id_e(),
-            lazy: F::identity(),
-            left: None,
-            right: None,
-        };
-        Self { size, nodes: vec![root], root: 0 }
+impl<MM> DynamicLazySegtree<MM>
+where
+    MM: DynamicLazySegtreeMonoid,
+{
+    pub fn new(n: usize) -> Self {
+        let mut data = Vec::new();
+
+        data.push(DynamicSegtreeNode::<MM> {
+            val: <MM::M as DynamicSegtreeMonoid>::identity(),
+            lazy: MM::id_e(),
+            len: 0,
+            left: 0,
+            right: 0,
+        });
+
+        data.push(DynamicSegtreeNode::<MM> {
+            val: <MM::M as DynamicSegtreeMonoid>::identity(),
+            lazy: MM::id_e(),
+            len: n as u32,
+            left: 0,
+            right: 0,
+        });
+
+        Self { n, data }
     }
 
-    fn new_node(&mut self) -> usize {
-        let idx = self.nodes.len();
-        self.nodes.push(Node::<F> {
-            val: F::id_e(),
-            lazy: F::identity(),
-            left: None,
-            right: None,
+    #[inline]
+    fn new_node(&mut self, len: usize) -> u32 {
+        let idx = self.data.len() as u32;
+        self.data.push(DynamicSegtreeNode::<MM> {
+            val: <MM::M as DynamicSegtreeMonoid>::identity(),
+            lazy: MM::id_e(),
+            len: len as u32,
+            left: 0,
+            right: 0,
         });
         idx
     }
 
-    fn ensure_left(&mut self, k: usize) -> usize {
-        if let Some(c) = self.nodes[k].left { c }
-        else {
-            let c = self.new_node();
-            self.nodes[k].left = Some(c);
-            c
-        }
+    #[inline]
+    fn left_len(len: usize) -> usize {
+        len >> 1
     }
 
-    fn ensure_right(&mut self, k: usize) -> usize {
-        if let Some(c) = self.nodes[k].right { c }
-        else {
-            let c = self.new_node();
-            self.nodes[k].right = Some(c);
-            c
-        }
+    #[inline]
+    fn right_len(len: usize) -> usize {
+        len - (len >> 1)
     }
 
-    fn apply_to_node(&mut self, k: usize, f: F::F) {
-        let v = self.nodes[k].val.clone();
-        self.nodes[k].val = F::map(&f, &v);
-        self.nodes[k].lazy = F::composition(&f, &self.nodes[k].lazy);
-    }
-
-    fn push(&mut self, k: usize) {
-        let f = self.nodes[k].lazy.clone();
-        if f == F::identity() { return; }
-        let lc = self.ensure_left(k);
-        let rc = self.ensure_right(k);
-        self.apply_to_node(lc, f.clone());
-        self.apply_to_node(rc, f);
-        self.nodes[k].lazy = F::identity();
-    }
-
-    fn pull(&mut self, k: usize) {
-        let lv = if let Some(lc) = self.nodes[k].left {
-            self.nodes[lc].val.clone()
-        } else { F::id_e() };
-
-        let rv = if let Some(rc) = self.nodes[k].right {
-            self.nodes[rc].val.clone()
-        } else { F::id_e() };
-
-        self.nodes[k].val = F::op(&lv, &rv);
-    }
-
-    pub fn set(&mut self, p: usize, x: <F::M as SegTreeMonoid>::S) {
-        assert!(p < self.size);
-        self.set_rec(self.root, 0, self.size, p, x);
-    }
-
-    fn set_rec(
-        &mut self,
-        k: usize, l: usize, r: usize,
-        p: usize, x: <F::M as SegTreeMonoid>::S
-    ) {
-        if r - l == 1 {
-            self.nodes[k].val = x;
-            self.nodes[k].lazy = F::identity();
+    #[inline]
+    fn ensure_children(&mut self, k: u32) {
+        let len = self.data[k as usize].len as usize;
+        if len <= 1 {
             return;
         }
-        self.push(k);
-        let m = (l + r) >> 1;
-        if p < m {
-            let lc = self.ensure_left(k);
-            self.set_rec(lc, l, m, p, x);
+        let llen = Self::left_len(len);
+        let rlen = Self::right_len(len);
+
+        if self.data[k as usize].left == 0 {
+            let c = self.new_node(llen);
+            self.data[k as usize].left = c;
+        }
+        if self.data[k as usize].right == 0 {
+            let c = self.new_node(rlen);
+            self.data[k as usize].right = c;
+        }
+    }
+
+    #[inline]
+    fn all_apply(&mut self, k: u32, f: &MM::F) {
+        let len = self.data[k as usize].len as usize;
+        let new_val = MM::mapping(f, &self.data[k as usize].val, len);
+        let new_lazy = MM::composition(f, &self.data[k as usize].lazy);
+        self.data[k as usize].val = new_val;
+        self.data[k as usize].lazy = new_lazy;
+    }
+
+    #[inline]
+    fn push(&mut self, k: u32) {
+        let len = self.data[k as usize].len as usize;
+        if len <= 1 {
+            return;
+        }
+        self.ensure_children(k);
+
+        let f = self.data[k as usize].lazy.clone();
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+
+        self.all_apply(lch, &f);
+        self.all_apply(rch, &f);
+
+        self.data[k as usize].lazy = MM::id_e();
+    }
+
+    #[inline]
+    fn pull(&mut self, k: u32) {
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+
+        let lv = if lch == 0 {
+            <MM::M as DynamicSegtreeMonoid>::identity()
         } else {
-            let rc = self.ensure_right(k);
-            self.set_rec(rc, m, r, p, x);
-        }
-        self.pull(k);
-    }
-
-    pub fn get(&mut self, p: usize) -> <F::M as SegTreeMonoid>::S {
-        assert!(p < self.size);
-        self.get_rec(self.root, 0, self.size, p)
-    }
-
-    fn get_rec(
-        &mut self,
-        k: usize, l: usize, r: usize,
-        p: usize
-    ) -> <F::M as SegTreeMonoid>::S {
-        if r - l == 1 {
-            return self.nodes[k].val.clone();
-        }
-        self.push(k);
-        let m = (l + r) >> 1;
-        if p < m {
-            if let Some(lc) = self.nodes[k].left {
-                self.get_rec(lc, l, m, p)
-            } else { F::id_e() }
+            self.data[lch as usize].val.clone()
+        };
+        let rv = if rch == 0 {
+            <MM::M as DynamicSegtreeMonoid>::identity()
         } else {
-            if let Some(rc) = self.nodes[k].right {
-                self.get_rec(rc, m, r, p)
-            } else { F::id_e() }
+            self.data[rch as usize].val.clone()
+        };
+
+        self.data[k as usize].val = <MM::M as DynamicSegtreeMonoid>::op(&lv, &rv);
+    }
+
+    pub fn apply_range(&mut self, l: usize, r: usize, f: MM::F) {
+        assert!(l <= r && r <= self.n);
+        self.apply_range_rec(1, 0, self.n, l, r, &f);
+    }
+
+    fn apply_range_rec(&mut self, k: u32, nl: usize, nr: usize, ql: usize, qr: usize, f: &MM::F) {
+        if qr <= nl || nr <= ql {
+            return;
         }
-    }
-
-    pub fn apply_range(&mut self, l: usize, r: usize, f: F::F) {
-        if l >= r { return; }
-        assert!(r <= self.size);
-        self.apply_rec(self.root, 0, self.size, l, r, f);
-    }
-
-    fn apply_rec(
-        &mut self,
-        k: usize, nl: usize, nr: usize,
-        ql: usize, qr: usize,
-        f: F::F
-    ) {
-        if qr <= nl || nr <= ql { return; }
         if ql <= nl && nr <= qr {
-            self.apply_to_node(k, f);
+            self.all_apply(k, f);
             return;
         }
         self.push(k);
-        let m = (nl + nr) >> 1;
-        let lc = self.ensure_left(k);
-        let rc = self.ensure_right(k);
-        self.apply_rec(lc, nl, m, ql, qr, f.clone());
-        self.apply_rec(rc, m, nr, ql, qr, f);
+        let mid = nl + ((nr - nl) >> 1);
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+        self.apply_range_rec(lch, nl, mid, ql, qr, f);
+        self.apply_range_rec(rch, mid, nr, ql, qr, f);
         self.pull(k);
     }
 
-    pub fn prod(&mut self, l: usize, r: usize) -> <F::M as SegTreeMonoid>::S {
-        if l >= r { return F::id_e(); }
-        assert!(r <= self.size);
-        self.prod_rec(self.root, 0, self.size, l, r)
+    pub fn prod(&mut self, l: usize, r: usize) -> <MM::M as DynamicSegtreeMonoid>::S {
+        assert!(l <= r && r <= self.n);
+        self.prod_rec(1, 0, self.n, l, r)
     }
 
     fn prod_rec(
         &mut self,
-        k: usize, nl: usize, nr: usize,
-        ql: usize, qr: usize
-    ) -> <F::M as SegTreeMonoid>::S {
-        if qr <= nl || nr <= ql { return F::id_e(); }
-        if ql <= nl && nr <= qr { return self.nodes[k].val.clone(); }
-
-        self.push(k);
-        let m = (nl + nr) >> 1;
-
-        let lv = if let Some(lc) = self.nodes[k].left {
-            self.prod_rec(lc, nl, m, ql, qr)
-        } else { F::id_e() };
-
-        let rv = if let Some(rc) = self.nodes[k].right {
-            self.prod_rec(rc, m, nr, ql, qr)
-        } else { F::id_e() };
-
-        F::op(&lv, &rv)
-    }
-
-    pub fn all_prod(&mut self) -> <F::M as SegTreeMonoid>::S {
-        self.nodes[self.root].val.clone()
-    }
-
-    pub fn max_right<G>(&mut self, l: usize, g: G) -> usize
-    where
-        G: Fn(<F::M as SegTreeMonoid>::S) -> bool
-    {
-        assert!(l <= self.size);
-        assert!(g(F::id_e()));
-        if l == self.size { return self.size; }
-        let mut acc = F::id_e();
-        self.max_right_rec(self.root, 0, self.size, l, &mut acc, &g)
-    }
-
-    fn max_right_rec<G>(
-        &mut self,
-        k: usize, nl: usize, nr: usize,
-        l: usize,
-        acc: &mut <F::M as SegTreeMonoid>::S,
-        g: &G
-    ) -> usize
-    where
-        G: Fn(<F::M as SegTreeMonoid>::S) -> bool
-    {
-        if nr <= l { return l; } 
-        if l <= nl {
-            let combined = F::op(acc, &self.nodes[k].val);
-            if g(combined.clone()) {
-                *acc = combined;
-                return nr;
-            }
-            if nr - nl == 1 {
-                return nl;
-            }
+        k: u32,
+        nl: usize,
+        nr: usize,
+        ql: usize,
+        qr: usize,
+    ) -> <MM::M as DynamicSegtreeMonoid>::S {
+        if qr <= nl || nr <= ql {
+            return <MM::M as DynamicSegtreeMonoid>::identity();
+        }
+        if ql <= nl && nr <= qr {
+            return self.data[k as usize].val.clone();
         }
         self.push(k);
-        let m = (nl + nr) >> 1;
-        let lc = self.ensure_left(k);
-        let res_l = self.max_right_rec(lc, nl, m, l, acc, g);
-        if res_l < m { return res_l; }
-        let rc = self.ensure_right(k);
-        self.max_right_rec(rc, m, nr, l, acc, g)
+        let mid = nl + ((nr - nl) >> 1);
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+        let lv = self.prod_rec(lch, nl, mid, ql, qr);
+        let rv = self.prod_rec(rch, mid, nr, ql, qr);
+        <MM::M as DynamicSegtreeMonoid>::op(&lv, &rv)
     }
 
-    pub fn min_left<G>(&mut self, r: usize, g: G) -> usize
-    where
-        G: Fn(<F::M as SegTreeMonoid>::S) -> bool
-    {
-        assert!(r <= self.size);
-        assert!(g(F::id_e()));
-        if r == 0 { return 0; }
-        let mut acc = F::id_e();
-        self.min_left_rec(self.root, 0, self.size, r, &mut acc, &g)
+    pub fn set(&mut self, p: usize, x: <MM::M as DynamicSegtreeMonoid>::S) {
+        assert!(p < self.n);
+        self.set_rec(1, 0, self.n, p, x);
     }
 
-    fn min_left_rec<G>(
+    fn set_rec(
         &mut self,
-        k: usize, nl: usize, nr: usize,
-        r: usize,
-        acc: &mut <F::M as SegTreeMonoid>::S,
-        g: &G
-    ) -> usize where G: Fn(<F::M as SegTreeMonoid>::S) -> bool {
-        if r <= nl { return r; }
-
-        if nr <= r {
-            let combined = F::op(&self.nodes[k].val, acc);
-            if g(combined.clone()) {
-                *acc = combined;
-                return nl;
-            }
-            if nr - nl == 1 {
-                return nr;
-            }
+        k: u32,
+        nl: usize,
+        nr: usize,
+        p: usize,
+        x: <MM::M as DynamicSegtreeMonoid>::S,
+    ) {
+        if nr - nl == 1 {
+            self.data[k as usize].val = x;
+            self.data[k as usize].lazy = MM::id_e();
+            return;
         }
         self.push(k);
-        let m = (nl + nr) >> 1;
-        let rc = self.ensure_right(k);
-        let res_r = self.min_left_rec(rc, m, nr, r, acc, g);
-        if res_r > m { return res_r; }
-        let lc = self.ensure_left(k);
-        self.min_left_rec(lc, nl, m, r, acc, g)
+        let mid = nl + ((nr - nl) >> 1);
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+        if p < mid {
+            self.set_rec(lch, nl, mid, p, x);
+        } else {
+            self.set_rec(rch, mid, nr, p, x);
+        }
+        self.pull(k);
+    }
+
+    pub fn get(&mut self, p: usize) -> <MM::M as DynamicSegtreeMonoid>::S {
+        assert!(p < self.n);
+        self.get_rec(1, 0, self.n, p)
+    }
+
+    fn get_rec(&mut self, k: u32, nl: usize, nr: usize, p: usize) -> <MM::M as DynamicSegtreeMonoid>::S {
+        if nr - nl == 1 {
+            return self.data[k as usize].val.clone();
+        }
+        self.push(k);
+        let mid = nl + ((nr - nl) >> 1);
+        let lch = self.data[k as usize].left;
+        let rch = self.data[k as usize].right;
+        if p < mid {
+            self.get_rec(lch, nl, mid, p)
+        } else {
+            self.get_rec(rch, mid, nr, p)
+        }
+    }
+
+    pub fn apply_point(&mut self, p: usize, f: MM::F) {
+        self.apply_range(p, p + 1, f);
+    }
+
+    pub fn all_prod(&self) -> <MM::M as DynamicSegtreeMonoid>::S {
+        self.data[1].val.clone()
+    }
+}
+
+struct M;
+impl DynamicSegtreeMonoid for M{
+    type S = MI;
+
+    fn identity() -> Self::S {
+        MI::new(0)
+    }
+
+    fn op(&a: &Self::S, &b: &Self::S) -> Self::S {
+        a+b
+    }
+}
+
+struct MM;
+impl DynamicLazySegtreeMonoid for MM{
+    type M = M;
+
+    type F = (MI, MI);
+
+    fn id_e() -> Self::F {
+        (MI::new(1), MI::new(0))
+    }
+
+    fn mapping(
+        f: &Self::F,
+        &x: &<Self::M as DynamicSegtreeMonoid>::S,
+        len: usize,
+    ) -> <Self::M as DynamicSegtreeMonoid>::S {
+        x*f.0+f.1*len
+    }
+
+    fn composition(f: &Self::F, g: &Self::F) -> Self::F {
+        (f.0*g.0, f.0*g.1+f.1)
     }
 }
