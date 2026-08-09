@@ -3,13 +3,16 @@ pub struct BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Outp
     n: usize,
     vec: Vec<T>,
     zero: T,
+    b: usize,
 }
 
 impl<T> BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T>+PartialOrd{
     pub fn new(n: usize, zero: T) -> Self {
         let k = n.max(1);
         let base = vec![zero; k + 1];
-        BIT { n: k, vec: base, zero }
+        let mut b = k.next_power_of_two();
+        if b > k{b>>=1;}
+        BIT { n: k, vec: base, zero, b}
     }
 
     #[inline]
@@ -52,7 +55,7 @@ impl<T> BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output 
     pub fn lower_bound(&self, ac: T)->usize{
         let mut r = 0;
         let mut cur = self.zero;
-        let mut k = self.n;
+        let mut k = self.b;
         while k > 0{
             let nx = r+k;
             if nx <= self.n{
@@ -99,7 +102,7 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
     }
 
     #[inline]
-    pub fn insert(&mut self, p: T){
+    pub fn one_add(&mut self, p: T){
         let p= self.map[&p];
         self.cnt[p] += 1;
         self.bit.add(p, 1);
@@ -107,7 +110,15 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
     }
 
     #[inline]
-    pub fn erase_one(&mut self, p: T){
+    pub fn add(&mut self, p: T, x: usize){
+        let p= self.map[&p];
+        self.cnt[p] += x as i64;
+        self.bit.add(p, x as i64);
+        self.all += x as i64;
+    }
+
+    #[inline]
+    pub fn one_sub(&mut self, p: T){
         if let Some(&p)= self.map.get(&p){
             if self.cnt[p]==0{return;}
             self.all -= 1;
@@ -117,7 +128,18 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
     }
 
     #[inline]
-    pub fn erase_all(&mut self, p: T){
+    pub fn sub(&mut self, p: T, x: usize){
+        if let Some(&p)= self.map.get(&p){
+            if self.cnt[p]==0{return;}
+            let x = (x as i64).min(self.cnt[p]);
+            self.all -= x;
+            self.cnt[p] -= x;
+            self.bit.add(p, -x);
+        }
+    }
+
+    #[inline]
+    pub fn erase(&mut self, p: T){
         if let Some(&p) = self.map.get(&p){
             self.all -= self.cnt[p];
             self.bit.add(p, -self.cnt[p]);
@@ -126,7 +148,7 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
     }
 
     #[inline]
-    pub fn one(&mut self, p: T){
+    pub fn set_one(&mut self, p: T){
         let p = self.map[&p];
         self.all += 1-self.cnt[p];
         self.bit.add(p, 1-self.cnt[p]);
@@ -134,7 +156,7 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
     }
 
     #[inline]
-    pub fn zero(&mut self, p: T){
+    pub fn set_zero(&mut self, p: T){
         if let Some(&p) = self.map.get(&p){
             self.all -= self.cnt[p];
             self.bit.add(p, -self.cnt[p]);

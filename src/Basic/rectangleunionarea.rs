@@ -18,21 +18,21 @@ pub trait LazySegtreeMonoid {
     fn composition(f: &Self::F, g: &Self::F) -> Self::F;
 }
 
-pub struct LazySegtree<F> where F: LazySegtreeMonoid {
+pub struct _LazySegtree<F> where F: LazySegtreeMonoid {
     n: usize,
     log: usize,
     data: Vec<<F::M as SegtreeMonoid>::S>,
     lazy: Vec<F::F>,
 }
 
-impl<F: LazySegtreeMonoid> LazySegtree<F> {
+impl<F: LazySegtreeMonoid> _LazySegtree<F> {
     // 初期値開始
     pub fn new(n: usize) -> Self {
         let n = n.next_power_of_two();
         let log = bit_length(n);
         let lazy = vec![F::identity(); n << 1];
         let data = vec![F::id_e(); n << 1];
-        LazySegtree {
+        _LazySegtree {
             n, log, data, lazy,
         }
     }
@@ -44,7 +44,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         let lazy = vec![F::identity(); n<<1];
         let mut data = vec![F::id_e(); n << 1];
         data[n..(n + vec.len())].clone_from_slice(vec);
-        let mut res = LazySegtree {
+        let mut res = _LazySegtree {
             n, log, data, lazy,
         };
         for i in (1..n).rev() {
@@ -119,7 +119,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
     }
 
     pub fn all_prod(&mut self) -> <F::M as SegtreeMonoid>::S {
-        self.update(1);
         self.data[1].clone()
     }
 
@@ -233,6 +232,7 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
 }
 
 pub fn area_of_union_rectangles(rec: &[(i64, i64, i64, i64)])->i64{
+    if rec.is_empty(){return 0;}
     struct RecM;
     impl SegtreeMonoid for RecM{
         type S = (i64, i64);
@@ -277,7 +277,7 @@ pub fn area_of_union_rectangles(rec: &[(i64, i64, i64, i64)])->i64{
         my.insert(y, i);
     }
     let mut r = 0;
-    let mut seg = LazySegtree::<RRM>::build(&ys.windows(2).map(|w| (0, w[1]-w[0])).collect::<Vec<_>>());
+    let mut seg = _LazySegtree::<RRM>::build(&ys.windows(2).map(|w| (0, w[1]-w[0])).collect::<Vec<_>>());
     let mut ans = 0;
     let w = ys[ys.len()-1]-ys[0];
     for i in 0..xs.len()-1{

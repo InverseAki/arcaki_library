@@ -1,9 +1,9 @@
 pub trait MatrixMonoid {
     type S: Clone;
     fn sum(a: &Self::S, b: &Self::S)->Self::S;
-    fn one()->Self::S;
-    fn mul(a: &Self::S, b: &Self::S)->Self::S;
     fn zero()->Self::S;
+    fn mul(a: &Self::S, b: &Self::S)->Self::S;
+    fn one()->Self::S;
 }
 
 #[derive(Debug)]

@@ -119,7 +119,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
     }
 
     pub fn all_prod(&mut self) -> <F::M as SegtreeMonoid>::S {
-        self.update(1);
         self.data[1].clone()
     }
 

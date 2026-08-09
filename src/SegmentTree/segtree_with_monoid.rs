@@ -13,14 +13,14 @@ pub struct Segtree<M: SegtreeMonoid> {
 impl<M: SegtreeMonoid> Segtree<M> {
     pub fn new(n: usize, m: M) -> Self {
         let n = n.next_power_of_two();
-        let e = m.identity();
+        let e = M::identity();
         let data = vec![e; 2 * n];
         Segtree { n, data, m }
     }
 
     pub fn from(a: Vec<M::S>, m: M) -> Self {
         let n = a.len().next_power_of_two();
-        let e = m.identity();
+        let e = M::identity();
         let mut data = vec![e; 2 * n];
 
         for (i, v) in a.into_iter().enumerate() {
@@ -57,8 +57,8 @@ impl<M: SegtreeMonoid> Segtree<M> {
     pub fn prod(&self, l: usize, r: usize) -> M::S {
         let mut p_l = l + self.n;
         let mut p_r = r + self.n;
-        let mut res_l = self.m.identity();
-        let mut res_r = self.m.identity();
+        let mut res_l = M::identity();
+        let mut res_r = M::identity();
         while p_l < p_r {
             if p_l & 1 == 1 {
                 res_l = self.m.op(&res_l, &self.data[p_l]);
@@ -82,13 +82,13 @@ impl<M: SegtreeMonoid> Segtree<M> {
     where
         F: Fn(&M::S) -> bool,
     {
-        let e = self.m.identity();
+        let e = M::identity();
         assert!(f(&e));
         if l == self.n {
             return self.n;
         }
         l += self.n;
-        let mut ac = self.m.identity();
+        let mut ac = M::identity();
         while {
             while l % 2 == 0 {
                 l >>= 1;
@@ -116,13 +116,13 @@ impl<M: SegtreeMonoid> Segtree<M> {
     where
         F: Fn(&M::S) -> bool,
     {
-        let e = self.m.identity();
+        let e = M::identity();
         assert!(f(&e));
         if r == 0 {
             return 0;
         }
         r += self.n;
-        let mut ac = self.m.identity();
+        let mut ac = M::identity();
         while {
             r -= 1;
             while r > 1 && r % 2 == 1 {

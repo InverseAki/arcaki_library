@@ -24,6 +24,18 @@ pub struct RollingHash {
 }
 
 impl RollingHash {
+    pub fn new()->Self {
+        RollingHash { hash: vec![0], pow: vec![1] }
+    }
+
+    #[inline]
+    pub fn push(&mut self, x: usize) {
+        let &lh = self.hash.last().unwrap();
+        let &lp = self.pow.last().unwrap();
+        self.hash.push(mod_add(mod_mul(lh, RB), x as u64+1));
+        self.pow.push(mod_mul(lp, RB));
+    }
+
     pub fn char(s: &Vec<char>) -> Self {
         let (mut pow, mut hash) = (Vec::from([1]), Vec::from([0]));
         let (mut p, mut h) = (1, 0);
@@ -93,19 +105,26 @@ impl RollingHash {
         }
     }
 
+    #[inline]
     pub fn get(&self, l: usize, r: usize) -> u64 {
         mod_sub(self.hash[r], mod_mul(self.hash[l], self.pow[r-l]))
     }
 
+    #[inline]
     pub fn len_hash(&self, l: usize)->u64{
         self.pow[l]
     }
 
+    #[inline]
     pub fn map_get(&self, l: usize, r: usize) -> u64 {
         mod_sub(self.hash[r], self.hash[l])
     }
 
+    #[inline]
     pub fn same(&self, l1: usize, r1: usize, l2: usize, r2: usize) -> bool {
         self.get(l1, r1) == self.get(l2, r2)
     }
+
+    #[inline]
+    pub fn len(&self)->usize{self.hash.len().saturating_sub(1)}
 }
