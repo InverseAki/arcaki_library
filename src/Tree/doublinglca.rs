@@ -64,7 +64,7 @@ impl LCA{
         self.dp[u][0]
     }
 
-    pub fn parent(&mut self, u: usize, k: usize) -> usize {
+    pub fn parent(&self, u: usize, k: usize) -> usize {
         let mut x = k;
         let mut p = u;
         let mut z = 0;
@@ -78,7 +78,12 @@ impl LCA{
         p
     }
 
-    pub fn depth(&mut self, p: usize) -> usize {
+    pub fn depth(&self, p: usize) -> usize {
         self.depth[p]
+    }
+
+    pub fn dist(&self, u: usize, v: usize) -> usize {
+        let p = self.lca(u, v);
+        self.depth[u]+self.depth[v]-2*self.depth[p]
     }
 }

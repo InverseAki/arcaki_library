@@ -44,5 +44,4 @@ pub fn lpf_factorize_add(mut x: usize, lpf: &[usize], res: &mut Vec<(usize, usiz
         }
         res.push((d, e));
     }
-    res
 }
