@@ -119,6 +119,7 @@ impl PointAddRectangleSum {
             }
         }
         self.data.clear();
+        self.yn=0;
         res
     }
 
@@ -126,17 +127,25 @@ impl PointAddRectangleSum {
     fn dfs(&self, l: usize, r: usize, bit: &mut BIT<i64>, seq: &mut Vec<(i32, i32, i32, i64)>, ans: &mut Vec<i64>){
         if l+1==r {return;}
         let m = (l+r)>>1;
+        let mut emp1 =true;
         for i in l..m {
             if let PointAddRectangleSumQuery::Add { x, y, w} = self.data[i] {
                 seq.push((x, I, y, w));
+                emp1=false;
             }
         }
+        if emp1{seq.clear();}
+        let mut emp2=true;
         for i in m..r {
             if let PointAddRectangleSumQuery::Query { lx, ly, rx, ry } = self.data[i]{
-                seq.push((lx, ly, ry, i as i64));
-                seq.push((rx, ly, ry, -(i as i64+1)));
+                if !emp1{
+                    seq.push((lx, ly, ry, i as i64));
+                    seq.push((rx, ly, ry, -(i as i64+1)));
+                }
+                emp2=false;
             }
         }
+        if emp1||emp2{seq.clear();}
         seq.sort_unstable_by_key(|w| (w.0,w.1));
         for &(_, l, r, w) in seq.iter(){
             if l==I {
@@ -153,7 +162,7 @@ impl PointAddRectangleSum {
             }
         }
         seq.clear();
-        self.dfs(l, m, bit, seq, ans);
-        self.dfs(m, r, bit, seq, ans);
+        if !emp1{self.dfs(l, m, bit, seq, ans)};
+        if !emp2{self.dfs(m, r, bit, seq, ans)};
     }
 }

@@ -39,11 +39,11 @@ pub struct STLCA{
 }
 
 impl STLCA {
-    pub fn new(n: usize, p: usize, edge: &Vec<Vec<usize>>) -> Self{
+    pub fn new(n: usize, p: usize, edge: &UnweightedGraph) -> Self{
         let mut int = vec![0; n];
         let mut data = Vec::with_capacity(2*n);
         let mut dist = vec![0; n];
-        fn lca_dfs(p: usize, pre: usize, d: usize, edge: &Vec<Vec<usize>>, data: &mut Vec<(usize, usize)>, int: &mut Vec<usize>, dist: &mut Vec<usize>){
+        fn lca_dfs(p: usize, pre: usize, d: usize, edge: &UnweightedGraph, data: &mut Vec<(usize, usize)>, int: &mut Vec<usize>, dist: &mut Vec<usize>){
             int[p] = data.len();
             data.push((d, p));
             for &nex in &edge[p]{
