@@ -1,61 +1,80 @@
-pub trait SegtreeMonoid{
+/// op は結合的、identity は両側単位元。可換性は不要。
+pub trait SegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
+/// 区間は 0-indexed の [l, r)。構築 O(n)、更新・区間積・探索 O(log n)。
 #[derive(Clone)]
 pub struct Segtree<M: SegtreeMonoid> {
     n: usize,
+    size: usize,
     data: Vec<M::S>,
 }
 
 impl<M: SegtreeMonoid> Segtree<M> {
     pub fn new(n: usize) -> Self {
-        let n = n.next_power_of_two();
-        let data = vec![M::identity(); 2 * n];
-        Segtree{ n, data }
+        let size = n.next_power_of_two();
+        let data = vec![M::identity(); 2 * size];
+        Segtree { n, size, data }
+    }
+
+    pub fn len(&self) -> usize {
+        self.n
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
     }
 
     pub fn set(&mut self, i: usize, x: M::S) {
-        let mut p = i + self.n;
+        assert!(i < self.n);
+        let mut p = i + self.size;
         self.data[p] = x;
-        while p > 0 {
+        while p > 1 {
             p /= 2;
             self.data[p] = M::op(&self.data[p << 1], &self.data[(p << 1) | 1]);
         }
     }
 
-    pub fn from(a: Vec<M::S>) -> Self{
-        let n = a.len().next_power_of_two();
-        let mut data = vec![M::identity(); 2*n];
-        for (i, v) in a.iter().enumerate(){
-            data[i+n] = v.clone();
+    pub fn from(a: Vec<M::S>) -> Self {
+        let len = a.len();
+        let n = len.next_power_of_two();
+        let mut data = vec![M::identity(); 2 * n];
+        for (i, v) in a.iter().enumerate() {
+            data[i + n] = v.clone();
         }
-        for i in (1..n).rev(){
-            data[i] = M::op(&data[2*i], &data[2*i+1]);
+        for i in (1..n).rev() {
+            data[i] = M::op(&data[2 * i], &data[2 * i + 1]);
         }
-        Segtree{
-            n, data,
+        Segtree {
+            n: len,
+            size: n,
+            data,
         }
     }
 
-    pub fn get(&self, p: usize)->M::S{
-        self.data[self.n+p].clone()
+    pub fn get(&self, p: usize) -> M::S {
+        assert!(p < self.n);
+        self.data[self.size + p].clone()
     }
 
+    /// A[i] を op(A[i], x) に更新する。
     pub fn push(&mut self, i: usize, x: M::S) {
-        let mut p = i + self.n;
+        assert!(i < self.n);
+        let mut p = i + self.size;
         self.data[p] = M::op(&self.data[p], &x);
-        while p > 0 {
+        while p > 1 {
             p /= 2;
             self.data[p] = M::op(&self.data[p << 1], &self.data[(p << 1) | 1]);
         }
     }
 
     pub fn prod(&self, l: usize, r: usize) -> M::S {
-        let mut p_l = l + self.n;
-        let mut p_r = r + self.n;
+        assert!(l <= r && r <= self.n);
+        let mut p_l = l + self.size;
+        let mut p_r = r + self.size;
         let mut res_l = M::identity();
         let mut res_r = M::identity();
         while p_l < p_r {
@@ -73,23 +92,29 @@ impl<M: SegtreeMonoid> Segtree<M> {
         M::op(&res_l, &res_r)
     }
 
-    pub fn all_prod(&self)-> M::S {
+    pub fn all_prod(&self) -> M::S {
         self.data[1].clone()
     }
 
-    pub fn max_right<F>(&self, mut l: usize, f: F) -> usize where F: Fn(&M::S)->bool {
-        assert!(f(&M::identity())); // これはバグってくれないと多分デバックが悲惨
+    /// f(prod(l, r)) が true となる最大の r。f(identity) は true、
+    /// r を伸ばしたとき true → false の単調性を持ち、同じ引数には同じ結果を返すこと。
+    pub fn max_right<F>(&self, mut l: usize, f: F) -> usize
+    where
+        F: Fn(&M::S) -> bool,
+    {
+        assert!(l <= self.n);
+        assert!(f(&M::identity()));
         if l == self.n {
-            return self.n 
+            return self.n;
         }
-        l += self.n; 
+        l += self.size;
         let mut ac = M::identity();
         while {
             while l % 2 == 0 {
                 l >>= 1;
             }
             if !f(&M::op(&ac, &self.data[l])) {
-                while l < self.n {
+                while l < self.size {
                     l <<= 1;
                     let res = M::op(&ac, &self.data[l]);
                     if f(&res) {
@@ -97,20 +122,27 @@ impl<M: SegtreeMonoid> Segtree<M> {
                         l += 1;
                     }
                 }
-                return l - self.n;
+                return l - self.size;
             }
             ac = M::op(&ac, &self.data[l]);
             l += 1;
-            let z = l as isize;
-            (z & -z) != z
+            !l.is_power_of_two()
         } {}
         self.n
     }
 
-    pub fn min_left<F>(&self, mut r: usize, f: F) -> usize where F: Fn(&M::S) -> bool {
+    /// f(prod(l, r)) が true となる最小の l。f(identity) は true、
+    /// l を縮めたとき true → false の単調性を持ち、同じ引数には同じ結果を返すこと。
+    pub fn min_left<F>(&self, mut r: usize, f: F) -> usize
+    where
+        F: Fn(&M::S) -> bool,
+    {
+        assert!(r <= self.n);
         assert!(f(&M::identity()));
-        if r == 0 {return 0}
-        r += self.n;
+        if r == 0 {
+            return 0;
+        }
+        r += self.size;
         let mut ac = M::identity();
         while {
             r -= 1;
@@ -118,7 +150,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
                 r >>= 1;
             }
             if !f(&M::op(&self.data[r], &ac)) {
-                while r < self.n{
+                while r < self.size {
                     r = 2 * r + 1;
                     let res = M::op(&self.data[r], &ac);
                     if f(&res) {
@@ -126,11 +158,10 @@ impl<M: SegtreeMonoid> Segtree<M> {
                         r -= 1;
                     }
                 }
-                return r + 1 - self.n;
+                return r + 1 - self.size;
             }
             ac = M::op(&self.data[r], &ac);
-            let z = r as isize;
-            z & -z != z
+            !r.is_power_of_two()
         } {}
         0
     }

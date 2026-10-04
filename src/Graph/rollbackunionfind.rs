@@ -1,66 +1,67 @@
-use std::{mem::swap, collections::HashMap};
-
-pub struct RollbackUnionFind{
-    parent: Vec<i32>,
-    hist: Vec<(usize, usize, i32, i32)>,
+/// Union by size、経路圧縮なし。find/merge は O(log n)、rollback は O(1)。
+/// 失敗した merge も 1 操作として記録する。領域 O(n + 保存中の操作数)。
+pub struct RollbackUnionFind {
+    parent: Vec<isize>,
+    hist: Vec<Option<(usize, usize, isize, isize)>>,
 }
 
-impl RollbackUnionFind{
-    pub fn new(n: usize)->Self{
-        RollbackUnionFind{
+impl RollbackUnionFind {
+    pub fn new(n: usize) -> Self {
+        assert!(n <= isize::MAX as usize);
+        Self {
             parent: vec![-1; n],
             hist: Vec::new(),
         }
     }
 
-    pub fn find(&self, u: usize)->usize{
-        let mut res = u;
-        while self.parent[res] >= 0{
-            res = self.parent[res] as usize;
+    pub fn find(&self, mut u: usize) -> usize {
+        while self.parent[u] >= 0 {
+            u = self.parent[u] as usize;
         }
-        res
+        u
     }
 
-    pub fn merge(&mut self, u: usize, v: usize)->bool{
-        let (mut pu, mut pv) = (self.find(u), self.find(v));
-        if pu==pv{
-            self.hist.push((!0, !0, -1, -1));
+    pub fn merge(&mut self, u: usize, v: usize) -> bool {
+        let (mut u, mut v) = (self.find(u), self.find(v));
+        if u == v {
+            self.hist.push(None);
             return false;
         }
-        if self.parent[pu] > self.parent[pv]{
-            swap(&mut pu, &mut pv);
+        if self.parent[u] > self.parent[v] {
+            std::mem::swap(&mut u, &mut v);
         }
-        self.hist.push((pu, pv, self.parent[pu], self.parent[pv]));
-        self.parent[pu] += self.parent[pv];
-        self.parent[pv] = pu as i32;
+        self.hist.push(Some((u, v, self.parent[u], self.parent[v])));
+        self.parent[u] += self.parent[v];
+        self.parent[v] = u as isize;
         true
     }
 
-    pub fn same(&self, u: usize, v: usize) -> bool{
-        self.find(u)==self.find(v)
+    pub fn same(&self, u: usize, v: usize) -> bool {
+        self.find(u) == self.find(v)
     }
 
-    pub fn size(&mut self, p: usize)->usize{
-        (-self.parent[self.find(p)]) as usize
+    pub fn size(&self, u: usize) -> usize {
+        (-self.parent[self.find(u)]) as usize
     }
 
-    pub fn rollback(&mut self){
-        if let Some((u, v, p1, p2)) = self.hist.pop(){
-            if u < self.parent.len(){
-                self.parent[u] = p1;
-                self.parent[v] = p2;
-            }
+    /// 直前の merge を取り消す。履歴がなければ何もしない。
+    pub fn rollback(&mut self) {
+        if let Some(Some((u, v, pu, pv))) = self.hist.pop() {
+            self.parent[u] = pu;
+            self.parent[v] = pv;
         }
     }
-    
-    pub fn snapshot(&mut self){
-        self.hist.clear()
+
+    /// 元実装と同じく、現在を基準にして過去の履歴を捨てる。
+    /// 保存した状態への復帰ではない。O(保存中の操作数) 以内。
+    pub fn snapshot(&mut self) {
+        self.hist.clear();
     }
-    
-    pub fn all_back(&mut self){
-        while let Some((u, v, x, y)) = self.hist.pop(){
-            self.parent[u] = x;
-            self.parent[v] = y;
+
+    /// 最後の snapshot（なければ初期状態）まで戻す。O(保存中の操作数)。
+    pub fn all_back(&mut self) {
+        while !self.hist.is_empty() {
+            self.rollback();
         }
     }
 }

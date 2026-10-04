@@ -32,14 +32,17 @@ impl CSR{
         Self::new(n, &e)
     }
 
+    #[inline]
     pub fn len(&self)->usize{
         self.n
     }
 
+    #[inline]
     pub fn adj(&self, idx: usize)->&[usize]{
         &self.edge[self.ac[idx]..self.ac[idx+1]]
     }
 
+    #[inline]
     pub fn adj_mut(&mut self, idx: usize)->&mut [usize]{
         &mut self.edge[self.ac[idx]..self.ac[idx+1]]
     }

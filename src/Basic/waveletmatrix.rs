@@ -140,7 +140,8 @@ impl WaveletMatrix {
     pub fn is_empty(&self) -> bool {
         self.n == 0
     }
-
+    
+    #[inline]
     pub fn access(&self, mut i: usize) -> usize {
         let mut x = 0usize;
         for d in 0..self.max_log {
@@ -155,6 +156,7 @@ impl WaveletMatrix {
         x
     }
 
+    #[inline]
     pub fn rank(&self, x: usize, mut r: usize) -> usize {
         if self.max_log < usize::BITS as usize && x >= (1usize << self.max_log) {
             return 0;
@@ -170,10 +172,12 @@ impl WaveletMatrix {
         r
     }
 
+    #[inline]
     pub fn rank_range(&self, x: usize, l: usize, r: usize) -> usize {
         self.rank(x, r) - self.rank(x, l)
     }
 
+    #[inline]
     pub fn kth_smallest(&self, mut l: usize, mut r: usize, mut k: usize) -> usize {
         assert!(l <= r && r <= self.n);
         assert!(k < r - l);
@@ -194,15 +198,18 @@ impl WaveletMatrix {
         ans
     }
 
+    #[inline]
     pub fn kth_largest(&self, l: usize, r: usize, k: usize) -> usize {
         assert!(k < r - l);
         self.kth_smallest(l, r, r - l - 1 - k)
     }
 
+    #[inline]
     pub fn quantile(&self, l: usize, r: usize, k: usize) -> usize {
         self.kth_smallest(l, r, k)
     }
 
+    #[inline]
     pub fn range_freq(&self, mut l: usize, mut r: usize, upper: usize) -> usize {
         if l >= r || upper == 0 {
             return 0;
@@ -225,6 +232,7 @@ impl WaveletMatrix {
         cnt
     }
 
+    #[inline]
     pub fn range_freq_between(&self, l: usize, r: usize, lower: usize, upper: usize) -> usize {
         if lower >= upper || l >= r {
             0
@@ -233,6 +241,7 @@ impl WaveletMatrix {
         }
     }
 
+    #[inline]
     pub fn prev_value(&self, l: usize, r: usize, upper: usize) -> Option<usize> {
         let cnt = self.range_freq(l, r, upper);
         if cnt == 0 {
@@ -242,6 +251,7 @@ impl WaveletMatrix {
         }
     }
 
+    #[inline]
     pub fn next_value(&self, l: usize, r: usize, lower: usize) -> Option<usize> {
         let cnt = self.range_freq(l, r, lower);
         if cnt == r - l {

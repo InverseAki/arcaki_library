@@ -1,136 +1,144 @@
+/// 個数0のキーは保持しない。len=種類数、total=総個数。
+/// 総個数がusizeを超える追加、_exの前提違反はreleaseでもpanic。
 #[derive(Debug, Clone)]
-pub struct Counter<T: Ord>{
+pub struct Counter<T> {
     c: usize,
-    map: BTreeMap<T, usize>,
+    map: std::collections::BTreeMap<T, usize>,
+}
+impl<T: Ord> Default for Counter<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
-impl<T: Copy+Ord> Counter<T>{
-    pub fn new()->Self{
-        Counter{
+impl<T: Ord> Counter<T> {
+    pub fn new() -> Self {
+        Self {
             c: 0,
-            map: BTreeMap::new(),
+            map: std::collections::BTreeMap::new(),
         }
     }
-
-    #[inline(always)]
-    pub fn range<R>(&self, range: R)->BTreeRange<'_, T, usize> where R: RangeBounds<T>{
+    pub fn range<R: std::ops::RangeBounds<T>>(
+        &self,
+        range: R,
+    ) -> std::collections::btree_map::Range<'_, T, usize> {
         self.map.range(range)
     }
-
-    #[inline(always)]
-    pub fn mi(&self)->Option<T>{
-        if let Some((x, _)) = self.range(..).next(){
-            Some(*x)
-        } else {
-            None
-        }
+    pub fn mi(&self) -> Option<T>
+    where
+        T: Copy,
+    {
+        self.map.first_key_value().map(|(&k, _)| k)
+    }
+    pub fn mx(&self) -> Option<T>
+    where
+        T: Copy,
+    {
+        self.map.last_key_value().map(|(&k, _)| k)
     }
 
-    #[inline(always)]
-    pub fn mx(&self)->Option<T>{
-        if let Some((x, _)) = self.range(..).next_back(){
-            Some(*x)
-        } else {
-            None
-        }
+    #[inline]
+    pub fn one_add(&mut self, x: T) {
+        self.add(x, 1);
     }
-
-    #[inline(always)]
-    pub fn one_add(&mut self, x: T){
-        *self.map.entry(x).or_insert(0) += 1;
-        self.c += 1;
+    #[inline]
+    pub fn one_sub(&mut self, x: T) {
+        self.sub(x, 1);
     }
-
-    #[inline(always)]
-    pub fn one_sub(&mut self, x: T){
-        if !self.map.contains_key(&x){return}
-        let e = self.map.entry(x).or_insert(0);
-        *e = e.saturating_sub(1);
-        if self.map[&x] <= 0{
-            self.map.remove(&x);
-        }
-        self.c = self.c.saturating_sub(1);
-    }
-
-    #[inline(always)]
-    pub fn one_update(&mut self, x: T, y: T){
+    /// 従来どおり「xを最大1個減らし、yを1個追加」。xがなくてもyを追加する。
+    pub fn one_update(&mut self, x: T, y: T) {
         self.one_sub(x);
         self.one_add(y);
     }
-
-    #[inline(always)]
-    pub fn del(&mut self, x: T){
-        self.c = self.c.saturating_sub(*self.map.get(&x).unwrap_or(&0));
-        self.map.remove(&x);
-    }
-
-    #[inline(always)]
-    pub fn add(&mut self, x: T, c: usize){
-        *self.map.entry(x).or_insert(0) += c;
-        self.c += c;
-    }
-
-    #[inline(always)]
-    pub fn add_ex(&mut self, x: T, c: usize){
-        let e = self.map.get_mut(&x).unwrap();
-        *e += c;
-        self.c += c;
-    }
-
-    #[inline(always)]
-    pub fn sub(&mut self, x: T, c: usize){
-        let e = self.map.entry(x).or_insert(0);
-        *e = e.saturating_sub(c);
-        if self.map[&x] == 0{
-            self.map.remove(&x);
+    #[inline]
+    pub fn add(&mut self, x: T, count: usize) {
+        if count == 0 {
+            return;
         }
-        self.c = self.c.saturating_sub(c);
+        let total = self.c.checked_add(count).expect("total count overflow");
+        *self.map.entry(x).or_insert(0) += count;
+        self.c = total;
     }
-
-    #[inline(always)]
-    pub fn sub_ex(&mut self, x: T, c: usize){
-        let e = self.map.get_mut(&x).unwrap();
-        *e -= c;
-        if *e==0{
-            self.map.remove(&x);
+    /// xが存在することが前提。
+    #[inline]
+    pub fn add_ex(&mut self, x: T, count: usize) {
+        let total = self.c.checked_add(count).expect("total count overflow");
+        let v = self.map.get_mut(&x).expect("missing key");
+        *v += count;
+        self.c = total;
+    }
+    /// 存在する個数だけ減らす。存在しないキーには何もしない。
+    #[inline]
+    pub fn sub(&mut self, x: T, count: usize) {
+        if count == 0 {
+            return;
         }
-        self.c -= c;
+        if let std::collections::btree_map::Entry::Occupied(mut e) = self.map.entry(x) {
+            let removed = count.min(*e.get());
+            if removed == *e.get() {
+                e.remove();
+            } else {
+                *e.get_mut() -= removed;
+            }
+            self.c -= removed;
+        }
     }
-
-    #[inline(always)]
-    pub fn include(&self, x: T)->bool{
+    /// xが存在し、その個数がcount以上であることが前提。
+    #[inline]
+    pub fn sub_ex(&mut self, x: T, count: usize) {
+        match self.map.entry(x) {
+            std::collections::btree_map::Entry::Occupied(mut e) => {
+                assert!(count <= *e.get(), "not enough occurrences");
+                if count == *e.get() {
+                    e.remove();
+                } else {
+                    *e.get_mut() -= count;
+                }
+                self.c -= count;
+            }
+            std::collections::btree_map::Entry::Vacant(_) => panic!("missing key"),
+        }
+    }
+    #[inline]
+    pub fn del(&mut self, x: T) {
+        if let Some(v) = self.map.remove(&x) {
+            self.c -= v;
+        }
+    }
+    #[inline]
+    pub fn include(&self, x: T) -> bool {
         self.map.contains_key(&x)
     }
-
-    #[inline(always)]
-    pub fn cnt(&self, x: T)->usize{
-        *self.map.get(&x).unwrap_or(&0)
+    #[inline]
+    pub fn cnt(&self, x: T) -> usize {
+        self.map.get(&x).copied().unwrap_or(0)
     }
-
-    #[inline(always)]
-    pub fn is_empty(&self)->bool{
+    #[inline]
+    pub fn is_empty(&self) -> bool {
         self.map.is_empty()
     }
-
-    #[inline(always)]
-    pub fn len(&self)->usize{
+    #[inline]
+    pub fn len(&self) -> usize {
         self.map.len()
     }
-
-    #[inline(always)]
-    pub fn clear(&mut self){
+    #[inline]
+    pub fn total(&self) -> usize {
+        self.c
+    }
+    pub fn clear(&mut self) {
         self.map.clear();
         self.c = 0;
     }
-
-    #[inline(always)]
-    pub fn merge(&mut self, rhs: &mut Counter<T>){
-        if self.len() < rhs.len(){
-            swap(self, rhs);
+    /// 小さいmapを大きいmapへ移す。rhsは空になる。
+    pub fn merge(&mut self, rhs: &mut Self) {
+        let total = self.c.checked_add(rhs.c).expect("total count overflow");
+        if self.len() < rhs.len() {
+            std::mem::swap(self, rhs);
         }
-        for (&k, &v) in rhs.map.iter(){
-            self.add(k, v);
+        for (k, v) in std::mem::take(&mut rhs.map) {
+            *self.map.entry(k).or_insert(0) += v;
         }
-        rhs.clear();
+        self.c = total;
+        rhs.c = 0;
     }
 }

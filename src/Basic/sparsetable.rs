@@ -1,13 +1,24 @@
 #[derive(Clone, Debug)]
-pub struct SparseTableMI<T: Ord + Copy> {
+pub struct SparseTableMI<T: Copy> {
     table: Vec<Vec<T>>,
 }
 
 impl<T: Ord + Copy> SparseTableMI<T> {
     pub fn build(a: &Vec<T>) -> Self {
+        Self::build_by_key(a, |x| x)
+    }
+
+    #[inline]
+    pub fn query(&self, l: usize, r: usize) -> T {
+        self.query_by_key(l, r, |x| x)
+    }
+}
+
+impl<T: Copy> SparseTableMI<T> {
+    pub fn build_by_key<K: Ord, F: Fn(T) -> K>(a: &[T], key: F) -> Self {
         let n = a.len();
         let mut table: Vec<Vec<T>> = Vec::new();
-        table.push(a.clone());
+        table.push(a.to_vec());
         let mut k = 1;
         while 1<<k <= n {
             let prev = &table[k-1];
@@ -15,7 +26,8 @@ impl<T: Ord + Copy> SparseTableMI<T> {
             let mut cur = Vec::with_capacity(len);
             let w = 1<<(k-1);
             for i in 0..len {
-                cur.push(prev[i].min(prev[i+w]));
+                let (x, y) = (prev[i], prev[i+w]);
+                cur.push(if key(x) <= key(y) { x } else { y });
             }
             table.push(cur);
             k += 1;
@@ -23,11 +35,14 @@ impl<T: Ord + Copy> SparseTableMI<T> {
         Self { table }
     }
 
-    pub fn query(&self, l: usize, r: usize) -> T {
+    #[inline]
+    pub fn query_by_key<K: Ord, F: Fn(T) -> K>(&self, l: usize, r: usize, key: F) -> T {
+        assert!(l < r && r <= self.table[0].len());
         let s = r-l;
         let k = (usize::BITS-1-s.leading_zeros())as usize;
         let w = 1<<k;
-        self.table[k][l].min(self.table[k][r - w])
+        let (x, y) = (self.table[k][l], self.table[k][r - w]);
+        if key(x) <= key(y) { x } else { y }
     }
 }
 

@@ -63,3 +63,14 @@ ACLが使えたりライブラリ化せず毎回書いていた場合などが�
 ・fortune algorism
 ・2sat
 ・LIS
+
+2026-10-02 追加: 高速な符号付き多倍長整数
+・src/NumberTheory/big_integer.rs: BigInt（十進）/ HexBigInt（十六進）。外部クレート不要。
+・NTT+CRTによる厳密な乗算、整数Newton法による高速な商・剰余。
+・解説: ../algorithm_set/NumberTheory/big_integer.md
+・使用例・公式全141ケースの検証記録: tests/big_integer/README.md
+
+2026-10-04: Reprovedの改善版をsrcに統合
+・以後はsrcを直接改善。従来のファイル名・公開APIを基本として維持。
+・BIT、セグ木、Rollback UnionFind、Counter、数学・組合せ、畳み込みを反映。
+・互換性・仕様・統合後の検証方法: tests/README.md

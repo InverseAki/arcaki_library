@@ -36,10 +36,12 @@ impl CentroidDecomposition {
         CentroidDecomposition { pre: pp, level }
     }
 
+    #[inline]
     pub fn parent(&self, v: usize) -> usize {
         self.pre[v]
     }
 
+    #[inline]
     pub fn depth(&self, v: usize) -> usize {
         self.level[v]
     }
@@ -61,6 +63,7 @@ impl CentroidDecomposition {
         size
     }
 
+    #[inline]
     pub fn lca(&self, mut u: usize, mut v: usize) -> usize {
         let (du, dv) = (self.level[u], self.level[v]);
         if du > dv {
@@ -78,6 +81,7 @@ impl CentroidDecomposition {
         u
     }
 
+    #[inline]
     pub fn ancestors(&self, v: usize) -> impl Iterator<Item = usize> + '_ {
         std::iter::successors(Some(v), |&v| {
             let p = self.pre[v];

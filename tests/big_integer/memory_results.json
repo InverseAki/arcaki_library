@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-02",
+  "method": "POSIX wait4 rusage.ru_maxrss; macOS bytes, Linux KiB converted to bytes",
+  "cases": [
+    {
+      "problem": "multiplication_of_big_integers",
+      "case": "max_max_00",
+      "peak_rss_bytes": 34537472,
+      "seconds": 0.4569377498701215
+    },
+    {
+      "problem": "division_of_big_integers",
+      "case": "a_max_b_random_02",
+      "peak_rss_bytes": 53952512,
+      "seconds": 1.5991832073777914
+    },
+    {
+      "problem": "division_of_big_integers",
+      "case": "length_ratio_integer_00",
+      "peak_rss_bytes": 36929536,
+      "seconds": 1.8334796242415905
+    }
+  ]
+}
