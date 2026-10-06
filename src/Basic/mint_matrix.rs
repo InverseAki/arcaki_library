@@ -1,94 +1,72 @@
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub struct Matrix {
-    n: usize,
-    g: Vec<MI>,
-}
+// MIを同じスコープに用意する。旧Matrix APIを維持する互換入口。
+include!("matrix.rs");
 
-impl Matrix {
-    #[inline]
-    pub fn new(n: usize, g: Vec<MI>) -> Self {
-        assert_eq!(g.len(), n * n);
-        Self { n, g }
+pub struct MintMatrixMonoid;
+impl MatrixMonoid for MintMatrixMonoid {
+    type S = MI;
+    #[inline(always)]
+    fn zero() -> MI {
+        MI::new(0)
     }
-
-    #[inline]
-    pub fn zeros(n: usize) -> Self {
-        Self { n, g: vec![MI::new(0); n * n] }
+    #[inline(always)]
+    fn one() -> MI {
+        MI::new(1)
     }
-
-    #[inline]
-    pub fn identity(n: usize) -> Self {
-        let mut res = Self::zeros(n);
-        for i in 0..n {
-            res[(i, i)] = MI::new(1);
+    #[inline(always)]
+    fn sum(a: &MI, b: &MI) -> MI {
+        *a + *b
+    }
+    #[inline(always)]
+    fn mul(a: &MI, b: &MI) -> MI {
+        *a * *b
+    }
+    #[inline(always)]
+    fn mul_add(acc: &mut MI, a: &MI, b: &MI) {
+        *acc += *a * *b;
+    }
+    fn multiply_kernel(n: usize, a: &[MI], b: &[MI], out: &mut [MI]) {
+        // modulus()を要求せず、旧MIのnew/val/減算から固定modを取得する。
+        let modulus = (MI::new(0) - MI::new(1)).val() as u64 + 1;
+        if modulus <= u32::MAX as u64 && n >= 16 {
+            let a: Vec<u32> = a.iter().map(|x| x.val() as u32).collect();
+            let b: Vec<u32> = b.iter().map(|x| x.val() as u32).collect();
+            let mut c = vec![0u32; n * n];
+            matrix_mod_u32_kernel::<0>(n, &a, &b, &mut c, modulus as u32);
+            for (x, y) in out.iter_mut().zip(c) {
+                // 旧Mintのusize引数と、同梱MIのInto<i128>引数の両方に対応。
+                *x = if modulus <= i32::MAX as u64 {
+                    MI::new(matrix_mint_input(y, 0))
+                } else {
+                    MI::new(matrix_mint_input(y >> 16, 0)) * MI::new(65536)
+                        + MI::new(matrix_mint_input(y & 65535, 0))
+                };
+            }
+        } else {
+            matrix_generic_kernel::<Self>(n, a, b, out);
         }
-        res
-    }
-
-    #[inline]
-    pub fn mul(&self, rhs: &Self) -> Self {
-        let n = self.n;
-        let mut res = vec![MI::new(0); n * n];
-        for i in 0..n {
-            for k in 0..n {
-                let a = self[(i, k)];
-                for j in 0..n {
-                    res[i * n + j] += a * rhs[(k, j)];
-                }
-            }
-        }
-        Self { n, g: res }
-    }
-
-    pub fn inv(&self) -> Self {
-        let n = self.n;
-        let mut a = self.clone();
-        let mut b = Self::identity(n);
-
-        for col in 0..n {
-            let mut pivot = col;
-            while pivot < n && a[(pivot, col)].val() == 0 {
-                pivot += 1;
-            }
-            assert!(pivot < n, "matrix is not invertible");
-
-            if pivot != col {
-                for j in 0..n {
-                    a.g.swap(col * n + j, pivot * n + j);
-                    b.g.swap(col * n + j, pivot * n + j);
-                }
-            }
-
-            let inv_pivot = a[(col, col)].inv();
-            for j in 0..n {
-                a[(col, j)] *= inv_pivot;
-                b[(col, j)] *= inv_pivot;
-            }
-
-            for row in 0..n {
-                if row == col { continue; }
-                let factor = a[(row, col)];
-                if factor.val() == 0 { continue; }
-                for j in 0..n {
-                    a[(row, j)] -= factor * a[(col, j)];
-                    b[(row, j)] -= factor * b[(col, j)];
-                }
-            }
-        }
-
-        b
     }
 }
-
-impl std::ops::Index<(usize, usize)> for Matrix {
-    type Output = MI;
-    fn index(&self, (i, j): (usize, usize)) -> &Self::Output {
-        &self.g[i * self.n + j]
+impl MatrixField for MintMatrixMonoid {
+    #[inline(always)]
+    fn is_zero(x: &MI) -> bool {
+        x.val() == 0
+    }
+    #[inline(always)]
+    fn sub(a: &MI, b: &MI) -> MI {
+        *a - *b
+    }
+    #[inline(always)]
+    fn inverse(x: &MI) -> Option<MI> {
+        if x.val() == 0 {
+            None
+        } else {
+            Some(x.inv())
+        }
     }
 }
+pub type Matrix = SquareMatrix<MintMatrixMonoid>;
 
-impl std::ops::IndexMut<(usize, usize)> for Matrix {
-    fn index_mut(&mut self, (i, j): (usize, usize)) -> &mut Self::Output {
-        &mut self.g[i * self.n + j]
-    }
+#[doc(hidden)]
+fn matrix_mint_input<T: std::convert::TryFrom<u32>>(x: u32, _: T) -> T {
+    T::try_from(x).ok().expect("matrix mint input overflow")
 }

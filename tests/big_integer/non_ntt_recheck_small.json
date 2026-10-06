@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-04",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "environment": "native aarch64",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "official_commit": "1814c4e5205517e368bb57a8d1127eb961cfeaae",
+  "source_sha256": "c6f6b3923009deee9f8c043b00f861cc32c1e9fddf46ec7e9b271ac5ae2391bc",
+  "baseline_sha256": "97b9b66c2abeaabec6cdee10dd94c49ed396281e7d0b830200601e32192b496c",
+  "binary_sha256": {
+    "before": "66f07575b1005d58c0b493e2ac180e38d8770dd98711a3c552b6226bac05b655",
+    "after": "6f65323ce93f7fe669b9a6ea2e7f8b7c3f9b742607ef413e1199bde01579ae49"
+  },
+  "method": "input/output included; alternating order; each run matches official output SHA256; no online submission",
+  "repeats": 9,
+  "cases": [
+    {
+      "case": "small_00",
+      "input_bytes": 5332271,
+      "samples": {
+        "before": [
+          0.15900358371436596,
+          0.16158608347177505,
+          0.17167633399367332,
+          0.1665873322635889,
+          0.15875420812517405,
+          0.15849495865404606,
+          0.16450908314436674,
+          0.15809295792132616,
+          0.16661337483674288
+        ],
+        "after": [
+          0.15265637449920177,
+          0.16217891685664654,
+          0.15683166682720184,
+          0.1528552072122693,
+          0.1596087496727705,
+          0.15451495815068483,
+          0.16037595830857754,
+          0.1962783746421337,
+          0.16107404232025146
+        ]
+      },
+      "median_seconds": {
+        "before": 0.16158608347177505,
+        "after": 0.1596087496727705
+      },
+      "speedup": 1.012388630341748,
+      "output_sha256": "7b6ad6a24af5f67871abc08159f5238343b0b550ab7dc2c888bb5383a2af669c",
+      "status": "PASS"
+    }
+  ],
+  "compiler_flags": [
+    "--edition=2021",
+    "-O",
+    "-Awarnings"
+  ],
+  "cpu_info": "arm"
+}

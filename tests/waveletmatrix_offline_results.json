@@ -1,0 +1,57 @@
+{
+  "seed": 467,
+  "samples_each_profile": 2,
+  "profiles": {
+    "debug": {
+      "random_queries": 10000,
+      "passed": true
+    },
+    "release": {
+      "random_queries": 10000,
+      "passed": true
+    }
+  },
+  "benchmarks": [
+    {
+      "case": "all_equal",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.0895,
+      "rss_bytes": 27115520,
+      "verification": "all queries exact"
+    },
+    {
+      "case": "concentrated_candidates",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.2871,
+      "rss_bytes": 112541696,
+      "verification": "all queries exact"
+    },
+    {
+      "case": "ascending",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.1652,
+      "rss_bytes": 65421312,
+      "verification": "all queries exact"
+    },
+    {
+      "case": "random_candidates",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.4881,
+      "rss_bytes": 118571008,
+      "verification": "128 exact + all sum/cardinality checks"
+    }
+  ],
+  "environment": {
+    "os": "darwin",
+    "architecture": "arm64",
+    "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+    "benchmark_compile_flags": [
+      "--edition=2021",
+      "-O"
+    ]
+  }
+}

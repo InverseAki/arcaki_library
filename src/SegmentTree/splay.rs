@@ -1,5 +1,6 @@
 // 可変長列のSplay木。位置・区間は0-indexed、区間は[l,r)。
-// 列のみ: SplayTree<NilMonoid<T>>。区間積のみ: SplayTree<ProdMonoid<M>>。
+// Vec風の列: SplayVector<T>。列のみの木: SplayTree<NilMonoid<T>>。
+// 区間積のみ: SplayTree<ProdMonoid<M>>。
 // 区間積+遅延更新: 従来どおりSplayTree<F>（F: SplayLazyMonoid）。
 // 各操作は償却O(log n)、from_vecはO(n)。空区間の積は単位元。
 // map(f, op(a,b)) = op(map(f,a), map(f,b))を満たす作用を用意する。
@@ -48,8 +49,8 @@ pub struct ProdMonoid<M>(std::marker::PhantomData<fn() -> M>);
 // 通常の利用者はこのtraitを実装せず、上の2型またはSplayLazyMonoidを使う。
 #[doc(hidden)]
 pub trait SplaySpec {
-    type Value: Clone + std::fmt::Debug;
-    type ValueStorage: Clone + std::fmt::Debug;
+    type Value;
+    type ValueStorage;
     type Product: Clone + std::fmt::Debug;
     type Action: Clone + std::fmt::Debug;
     const HAS_PROD: bool;
@@ -163,7 +164,7 @@ impl<F: SplayLazyMonoid> SplaySpec for F {
     }
 }
 
-impl<T: Clone + std::fmt::Debug> SplaySpec for NilMonoid<T> {
+impl<T> SplaySpec for NilMonoid<T> {
     type Value = T;
     // 番兵だけNone。単位元を持たない型も保存でき、区間積を複製しない。
     type ValueStorage = Option<T>;
@@ -198,8 +199,8 @@ impl<T: Clone + std::fmt::Debug> SplaySpec for NilMonoid<T> {
     #[inline(always)]
     fn empty_action() {}
     #[inline(always)]
-    fn map_value(_: &(), x: &T) -> T {
-        x.clone()
+    fn map_value(_: &(), _: &T) -> T {
+        unreachable!("NilMonoid has no range action")
     }
     #[inline(always)]
     fn map_product(_: &(), _: &()) {}
@@ -266,7 +267,6 @@ impl<M: SplayMonoid> SplaySpec for ProdMonoid<M> {
     fn compose(_: &(), _: &()) {}
 }
 
-#[derive(Clone, Debug)]
 pub struct Node<F>
 where
     F: SplaySpec,
@@ -281,6 +281,45 @@ where
     ac: usize,
     rev: bool,
     has_lazy: bool,
+}
+
+impl<F: SplaySpec> Clone for Node<F>
+where
+    F::ValueStorage: Clone,
+{
+    fn clone(&self) -> Self {
+        Self {
+            l: self.l,
+            r: self.r,
+            p: self.p,
+            data: self.data.clone(),
+            prod: self.prod.clone(),
+            lazy: self.lazy.clone(),
+            idx: self.idx,
+            ac: self.ac,
+            rev: self.rev,
+            has_lazy: self.has_lazy,
+        }
+    }
+}
+impl<F: SplaySpec> std::fmt::Debug for Node<F>
+where
+    F::ValueStorage: std::fmt::Debug,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Node")
+            .field("l", &self.l)
+            .field("r", &self.r)
+            .field("p", &self.p)
+            .field("data", &self.data)
+            .field("prod", &self.prod)
+            .field("lazy", &self.lazy)
+            .field("idx", &self.idx)
+            .field("ac", &self.ac)
+            .field("rev", &self.rev)
+            .field("has_lazy", &self.has_lazy)
+            .finish()
+    }
 }
 
 impl<F> Node<F>
@@ -563,7 +602,10 @@ where
 
     /// k番目の要素を返す。償却O(log n)。
     #[inline]
-    pub fn get(&mut self, k: usize) -> F::Value {
+    pub fn get(&mut self, k: usize) -> F::Value
+    where
+        F::Value: Clone,
+    {
         assert!(k < self.len(), "get index out of range");
         let c = self.kth(k);
         unsafe { F::value(&(*c).data).clone() }
@@ -604,7 +646,10 @@ where
     }
 
     /// 全要素を順番どおり複製する。O(n)時間（値のcloneの費用は別）。
-    pub fn to_vec(&mut self) -> Vec<F::Value> {
+    pub fn to_vec(&mut self) -> Vec<F::Value>
+    where
+        F::Value: Clone,
+    {
         let mut result = Vec::with_capacity(self.len());
         let mut stack = Vec::new();
         let mut c = self.r;
@@ -778,6 +823,530 @@ where
         unsafe { (*self.sec(l, r)).prod.clone() }
     }
 }
+
+/// Vec風の可変長列。TにClone/Debug/Defaultは不要。
+/// 要素は非連続。読み取り参照では木を回転せず、get/indexはO(木の高さ)。
+/// get_splayed/get_mut/index_mutは償却O(log n)。スライス参照は提供しない。
+pub struct SplayVector<T> {
+    tree: SplayTree<NilMonoid<T>>,
+}
+
+impl<T> SplayVector<T> {
+    pub fn new() -> Self {
+        Self {
+            tree: SplayTree::new(),
+        }
+    }
+    pub fn with_capacity(capacity: usize) -> Self {
+        let mut v = Self::new();
+        v.reserve_exact(capacity);
+        v
+    }
+    pub fn from_vec(values: Vec<T>) -> Self {
+        Self {
+            tree: SplayTree::from_vec(values),
+        }
+    }
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.tree.len()
+    }
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.tree.is_empty()
+    }
+    /// ノードの所有ポインタを格納するVecの容量。各ノードのBoxは別途確保する。
+    pub fn capacity(&self) -> usize {
+        self.tree.data.capacity()
+    }
+    pub fn reserve(&mut self, additional: usize) {
+        self.tree.data.reserve(additional);
+    }
+    pub fn reserve_exact(&mut self, additional: usize) {
+        self.tree.data.reserve_exact(additional);
+    }
+    pub fn shrink_to_fit(&mut self) {
+        self.tree.data.shrink_to_fit();
+    }
+    pub fn shrink_to(&mut self, min_capacity: usize) {
+        self.tree.data.shrink_to(min_capacity);
+    }
+
+    // 共有参照がある間は反転の伝播も回転も行わない。
+    // 未伝播の反転を祖先からxorして、論理的な左/右を選ぶ。
+    fn node_at(&self, mut k: usize) -> Option<*mut Node<NilMonoid<T>>> {
+        if k >= self.len() {
+            return None;
+        }
+        let mut c = self.tree.r;
+        let mut flipped = false;
+        unsafe {
+            loop {
+                flipped ^= (*c).rev;
+                let (l, r) = if flipped {
+                    ((*c).r, (*c).l)
+                } else {
+                    ((*c).l, (*c).r)
+                };
+                let left_len = (*l).ac;
+                if k == left_len {
+                    return Some(c);
+                }
+                if k < left_len {
+                    c = l;
+                } else {
+                    k -= left_len + 1;
+                    c = r;
+                }
+            }
+        }
+    }
+    #[inline]
+    pub fn get(&self, k: usize) -> Option<&T> {
+        self.node_at(k)
+            .map(|c| unsafe { (*c).data.as_ref().unwrap() })
+    }
+    /// 読み取りでもsplayする版。共有getと異なり&mut selfを要求する。
+    pub fn get_splayed(&mut self, k: usize) -> Option<&T> {
+        if k >= self.len() {
+            return None;
+        }
+        let c = self.tree.kth(k);
+        unsafe { (*c).data.as_ref() }
+    }
+    pub fn get_mut(&mut self, k: usize) -> Option<&mut T> {
+        if k >= self.len() {
+            return None;
+        }
+        let c = self.tree.kth(k);
+        unsafe { (*c).data.as_mut() }
+    }
+    #[inline]
+    pub fn first(&self) -> Option<&T> {
+        self.get(0)
+    }
+    #[inline]
+    pub fn last(&self) -> Option<&T> {
+        self.len().checked_sub(1).and_then(|k| self.get(k))
+    }
+    #[inline]
+    pub fn first_mut(&mut self) -> Option<&mut T> {
+        self.get_mut(0)
+    }
+    #[inline]
+    pub fn last_mut(&mut self) -> Option<&mut T> {
+        let k = self.len().checked_sub(1)?;
+        self.get_mut(k)
+    }
+    #[inline]
+    pub fn push(&mut self, x: T) {
+        self.tree.push(x);
+    }
+    #[inline]
+    pub fn pop(&mut self) -> Option<T> {
+        self.tree.pop()
+    }
+    #[inline]
+    pub fn insert(&mut self, k: usize, x: T) {
+        self.tree.insert(k, x);
+    }
+    #[inline]
+    pub fn remove(&mut self, k: usize) -> T {
+        self.tree.remove(k)
+    }
+    #[inline]
+    pub fn set(&mut self, k: usize, x: T) {
+        self.tree.set(k, x);
+    }
+    pub fn swap(&mut self, a: usize, b: usize) {
+        assert!(a < self.len() && b < self.len(), "swap index out of range");
+        if a == b {
+            return;
+        }
+        let ca = self.tree.kth(a);
+        let cb = self.tree.kth(b);
+        // 回転でアドレスは変わらず、値は異なるノードの独立したフィールド。
+        unsafe {
+            std::mem::swap(&mut (*ca).data, &mut (*cb).data);
+        }
+    }
+    pub fn swap_remove(&mut self, k: usize) -> T {
+        assert!(k < self.len(), "swap_remove index out of range");
+        self.swap(k, self.len() - 1);
+        self.pop().unwrap()
+    }
+    pub fn truncate(&mut self, len: usize) {
+        while self.len() > len {
+            self.pop();
+        }
+    }
+    /// 所有ポインタの容量を保持し、全要素を破棄する。O(n)。
+    pub fn clear(&mut self) {
+        self.tree.r = self.tree.nil;
+        self.tree.data.clear();
+    }
+    pub fn resize_with<F: FnMut() -> T>(&mut self, len: usize, mut f: F) {
+        self.truncate(len);
+        self.reserve(len - self.len());
+        while self.len() < len {
+            self.push(f());
+        }
+    }
+    pub fn resize(&mut self, len: usize, value: T)
+    where
+        T: Clone,
+    {
+        self.resize_with(len, || value.clone());
+    }
+    pub fn extend_from_slice(&mut self, values: &[T])
+    where
+        T: Clone,
+    {
+        self.extend(values.iter().cloned());
+    }
+    pub fn append(&mut self, other: &mut Self) {
+        // otherの要素を移動し、所有ポインタの容量を保持する。
+        self.extend(other.take_all());
+    }
+    fn take_all(&mut self) -> Vec<T> {
+        let mut walk = SplayVectorWalk::new(self);
+        let mut values = Vec::with_capacity(self.len());
+        while let Some(c) = walk.take(false) {
+            unsafe {
+                values.push((*c).data.take().unwrap());
+            }
+        }
+        self.clear();
+        values
+    }
+    pub fn split_off(&mut self, at: usize) -> Self {
+        assert!(at <= self.len(), "split index out of range");
+        let count = self.len() - at;
+        let mut tail = Vec::with_capacity(count);
+        for _ in 0..count {
+            tail.push(self.remove(at));
+        }
+        Self::from_vec(tail)
+    }
+    /// Vec::reverseと同様に全体を反転する。
+    pub fn reverse(&mut self) {
+        self.tree.reverse(0, self.len());
+    }
+    /// [start,end)に相当するRangeBoundsの区間を反転する。
+    pub fn reverse_range<R: std::ops::RangeBounds<usize>>(&mut self, range: R) {
+        let (l, r) = self.bounds(range);
+        self.tree.reverse(l, r);
+    }
+    fn bounds<R: std::ops::RangeBounds<usize>>(&self, range: R) -> (usize, usize) {
+        use std::ops::Bound;
+        let l = match range.start_bound() {
+            Bound::Included(&k) => k,
+            Bound::Excluded(&k) => k.checked_add(1).expect("range overflow"),
+            Bound::Unbounded => 0,
+        };
+        let r = match range.end_bound() {
+            Bound::Included(&k) => k.checked_add(1).expect("range overflow"),
+            Bound::Excluded(&k) => k,
+            Bound::Unbounded => self.len(),
+        };
+        assert!(l <= r && r <= self.len(), "range out of bounds");
+        (l, r)
+    }
+    /// 範囲を先に削除し、その値を返す。未消費の値はDrain破棄時に破棄する。
+    pub fn drain<R: std::ops::RangeBounds<usize>>(&mut self, range: R) -> SplayVectorDrain<'_, T> {
+        let (l, r) = self.bounds(range);
+        let mut values = Vec::with_capacity(r - l);
+        for _ in l..r {
+            values.push(self.remove(l));
+        }
+        SplayVectorDrain {
+            values: values.into_iter(),
+            marker: std::marker::PhantomData,
+        }
+    }
+    pub fn retain<F: FnMut(&T) -> bool>(&mut self, mut f: F) {
+        self.retain_mut(|x| f(x));
+    }
+    pub fn retain_mut<F: FnMut(&mut T) -> bool>(&mut self, mut f: F) {
+        let mut k = 0;
+        while k < self.len() {
+            if f(self.get_mut(k).unwrap()) {
+                k += 1;
+            } else {
+                self.tree.erase(k);
+            }
+        }
+    }
+    pub fn iter(&self) -> SplayVectorIter<'_, T> {
+        SplayVectorIter {
+            walk: SplayVectorWalk::new(self),
+            marker: std::marker::PhantomData,
+        }
+    }
+    pub fn iter_mut(&mut self) -> SplayVectorIterMut<'_, T> {
+        SplayVectorIterMut {
+            walk: SplayVectorWalk::new(self),
+            marker: std::marker::PhantomData,
+        }
+    }
+    pub fn to_vec(&self) -> Vec<T>
+    where
+        T: Clone,
+    {
+        self.iter().cloned().collect()
+    }
+    pub fn into_vec(self) -> Vec<T> {
+        self.into_iter().collect()
+    }
+}
+
+impl<T> Default for SplayVector<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+impl<T> From<Vec<T>> for SplayVector<T> {
+    fn from(x: Vec<T>) -> Self {
+        Self::from_vec(x)
+    }
+}
+impl<T> From<SplayVector<T>> for Vec<T> {
+    fn from(x: SplayVector<T>) -> Self {
+        x.into_vec()
+    }
+}
+impl<T, const N: usize> From<[T; N]> for SplayVector<T> {
+    fn from(x: [T; N]) -> Self {
+        x.into_iter().collect()
+    }
+}
+impl<T> std::iter::FromIterator<T> for SplayVector<T> {
+    fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
+        Self::from_vec(iter.into_iter().collect())
+    }
+}
+impl<T> Extend<T> for SplayVector<T> {
+    fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
+        let iter = iter.into_iter();
+        self.reserve(iter.size_hint().0);
+        for x in iter {
+            self.push(x);
+        }
+    }
+}
+impl<'a, T: Clone + 'a> Extend<&'a T> for SplayVector<T> {
+    fn extend<I: IntoIterator<Item = &'a T>>(&mut self, iter: I) {
+        self.extend(iter.into_iter().cloned());
+    }
+}
+impl<T: Clone> Clone for SplayVector<T> {
+    fn clone(&self) -> Self {
+        Self::from_vec(self.to_vec())
+    }
+}
+impl<T: std::fmt::Debug> std::fmt::Debug for SplayVector<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_list().entries(self.iter()).finish()
+    }
+}
+impl<T, U> PartialEq<SplayVector<U>> for SplayVector<T>
+where
+    T: PartialEq<U>,
+{
+    fn eq(&self, other: &SplayVector<U>) -> bool {
+        self.iter().eq(other.iter())
+    }
+}
+impl<T: Eq> Eq for SplayVector<T> {}
+impl<T> std::ops::Index<usize> for SplayVector<T> {
+    type Output = T;
+    fn index(&self, k: usize) -> &T {
+        self.get(k).expect("index out of range")
+    }
+}
+impl<T> std::ops::IndexMut<usize> for SplayVector<T> {
+    fn index_mut(&mut self, k: usize) -> &mut T {
+        self.get_mut(k).expect("index out of range")
+    }
+}
+
+// 共有Iteratorは未伝播の反転を読み取りだけで扱う。
+// 前後から取り出す個数の合計をlenまでに制限し、同じノードを二度返さない。
+struct SplayVectorWalk<T> {
+    nil: *mut Node<NilMonoid<T>>,
+    front: Vec<(*mut Node<NilMonoid<T>>, bool)>,
+    back: Vec<(*mut Node<NilMonoid<T>>, bool)>,
+    remaining: usize,
+}
+impl<T> SplayVectorWalk<T> {
+    fn new(v: &SplayVector<T>) -> Self {
+        let mut walk = Self {
+            nil: v.tree.nil,
+            front: Vec::new(),
+            back: Vec::new(),
+            remaining: v.len(),
+        };
+        Self::path(&mut walk.front, v.tree.r, false, walk.nil, false);
+        Self::path(&mut walk.back, v.tree.r, false, walk.nil, true);
+        walk
+    }
+    fn path(
+        stack: &mut Vec<(*mut Node<NilMonoid<T>>, bool)>,
+        mut c: *mut Node<NilMonoid<T>>,
+        mut flipped: bool,
+        nil: *mut Node<NilMonoid<T>>,
+        backward: bool,
+    ) {
+        unsafe {
+            while c != nil {
+                flipped ^= (*c).rev;
+                stack.push((c, flipped));
+                c = if flipped ^ backward { (*c).r } else { (*c).l };
+            }
+        }
+    }
+    fn take(&mut self, backward: bool) -> Option<*mut Node<NilMonoid<T>>> {
+        if self.remaining == 0 {
+            return None;
+        }
+        let stack = if backward {
+            &mut self.back
+        } else {
+            &mut self.front
+        };
+        let (c, flipped) = stack.pop().unwrap();
+        let child = unsafe {
+            if flipped ^ backward {
+                (*c).l
+            } else {
+                (*c).r
+            }
+        };
+        Self::path(stack, child, flipped, self.nil, backward);
+        self.remaining -= 1;
+        Some(c)
+    }
+}
+
+pub struct SplayVectorIter<'a, T> {
+    walk: SplayVectorWalk<T>,
+    marker: std::marker::PhantomData<&'a T>,
+}
+impl<'a, T> Iterator for SplayVectorIter<'a, T> {
+    type Item = &'a T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.walk
+            .take(false)
+            .map(|c| unsafe { (*c).data.as_ref().unwrap() })
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (self.walk.remaining, Some(self.walk.remaining))
+    }
+}
+impl<T> DoubleEndedIterator for SplayVectorIter<'_, T> {
+    fn next_back(&mut self) -> Option<Self::Item> {
+        self.walk
+            .take(true)
+            .map(|c| unsafe { (*c).data.as_ref().unwrap() })
+    }
+}
+impl<T> ExactSizeIterator for SplayVectorIter<'_, T> {}
+impl<T> std::iter::FusedIterator for SplayVectorIter<'_, T> {}
+
+pub struct SplayVectorIterMut<'a, T> {
+    walk: SplayVectorWalk<T>,
+    marker: std::marker::PhantomData<&'a mut T>,
+}
+impl<'a, T> Iterator for SplayVectorIterMut<'a, T> {
+    type Item = &'a mut T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.walk
+            .take(false)
+            .map(|c| unsafe { (*c).data.as_mut().unwrap() })
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (self.walk.remaining, Some(self.walk.remaining))
+    }
+}
+impl<T> DoubleEndedIterator for SplayVectorIterMut<'_, T> {
+    fn next_back(&mut self) -> Option<Self::Item> {
+        self.walk
+            .take(true)
+            .map(|c| unsafe { (*c).data.as_mut().unwrap() })
+    }
+}
+impl<T> ExactSizeIterator for SplayVectorIterMut<'_, T> {}
+impl<T> std::iter::FusedIterator for SplayVectorIterMut<'_, T> {}
+
+pub struct SplayVectorIntoIter<T> {
+    walk: SplayVectorWalk<T>,
+    _owner: SplayVector<T>,
+}
+impl<T> Iterator for SplayVectorIntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<T> {
+        self.walk
+            .take(false)
+            .map(|c| unsafe { (*c).data.take().unwrap() })
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (self.walk.remaining, Some(self.walk.remaining))
+    }
+}
+impl<T> DoubleEndedIterator for SplayVectorIntoIter<T> {
+    fn next_back(&mut self) -> Option<T> {
+        self.walk
+            .take(true)
+            .map(|c| unsafe { (*c).data.take().unwrap() })
+    }
+}
+impl<T> ExactSizeIterator for SplayVectorIntoIter<T> {}
+impl<T> std::iter::FusedIterator for SplayVectorIntoIter<T> {}
+impl<T> IntoIterator for SplayVector<T> {
+    type Item = T;
+    type IntoIter = SplayVectorIntoIter<T>;
+    fn into_iter(self) -> Self::IntoIter {
+        SplayVectorIntoIter {
+            walk: SplayVectorWalk::new(&self),
+            _owner: self,
+        }
+    }
+}
+impl<'a, T> IntoIterator for &'a SplayVector<T> {
+    type Item = &'a T;
+    type IntoIter = SplayVectorIter<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+impl<'a, T> IntoIterator for &'a mut SplayVector<T> {
+    type Item = &'a mut T;
+    type IntoIter = SplayVectorIterMut<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter_mut()
+    }
+}
+
+pub struct SplayVectorDrain<'a, T> {
+    values: std::vec::IntoIter<T>,
+    marker: std::marker::PhantomData<&'a mut SplayVector<T>>,
+}
+impl<T> Iterator for SplayVectorDrain<'_, T> {
+    type Item = T;
+    fn next(&mut self) -> Option<T> {
+        self.values.next()
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.values.size_hint()
+    }
+}
+impl<T> DoubleEndedIterator for SplayVectorDrain<'_, T> {
+    fn next_back(&mut self) -> Option<T> {
+        self.values.next_back()
+    }
+}
+impl<T> ExactSizeIterator for SplayVectorDrain<'_, T> {}
+impl<T> std::iter::FusedIterator for SplayVectorDrain<'_, T> {}
 
 #[derive(Debug, Clone)]
 struct M;

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-04",
+  "method": "POSIX wait4 rusage.ru_maxrss; macOS bytes, Linux KiB converted to bytes",
+  "cases": [
+    {
+      "variant": "before",
+      "problem": "multiplication_of_big_integers",
+      "case": "max_max_00",
+      "peak_rss_bytes": 34488320,
+      "seconds": 0.06569466646760702
+    },
+    {
+      "variant": "after",
+      "problem": "multiplication_of_big_integers",
+      "case": "max_max_00",
+      "peak_rss_bytes": 26427392,
+      "seconds": 0.04794487450271845
+    },
+    {
+      "variant": "before",
+      "problem": "division_of_big_integers",
+      "case": "a_max_b_random_02",
+      "peak_rss_bytes": 54034432,
+      "seconds": 0.2684176256880164
+    },
+    {
+      "variant": "after",
+      "problem": "division_of_big_integers",
+      "case": "a_max_b_random_02",
+      "peak_rss_bytes": 42696704,
+      "seconds": 0.2528787925839424
+    },
+    {
+      "variant": "before",
+      "problem": "division_of_big_integers",
+      "case": "length_ratio_integer_00",
+      "peak_rss_bytes": 37044224,
+      "seconds": 0.32757008355110884
+    },
+    {
+      "variant": "after",
+      "problem": "division_of_big_integers",
+      "case": "length_ratio_integer_00",
+      "peak_rss_bytes": 25804800,
+      "seconds": 0.31312508322298527
+    }
+  ],
+  "source_sha256": "c6f6b3923009deee9f8c043b00f861cc32c1e9fddf46ec7e9b271ac5ae2391bc",
+  "baseline_sha256": "97b9b66c2abeaabec6cdee10dd94c49ed396281e7d0b830200601e32192b496c",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+}

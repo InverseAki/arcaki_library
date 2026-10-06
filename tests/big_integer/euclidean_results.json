@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-04",
+  "semantics": "x=q*d+r, 0<=r<abs(d)",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "sha256": {
+    "src/NumberTheory/big_integer.rs": "2f110382fd7634b81fda24143cfc13d65de998f4fa6aea2a9278fe480ea56113",
+    "src/Basic/big_ratio.rs": "6d1c571e58c2b00dbc91b452c3523ffdc0384c3393dac8b2c84f94ec43b9eab7",
+    "tests/big_integer/unit.rs": "84eb1b12bd75b666e305a784cc5bab2d8bc34c266400e77c1f10f3609cfbe605",
+    "tests/big_integer/check.py": "7ddb8ed7e1d48b1f501bdc11cba2fa946e63fe8c663244c8462147f8f2067cca"
+  },
+  "cargo_tests": {
+    "debug": 51,
+    "release": 51
+  },
+  "integer_differential": {
+    "seed": 20261002,
+    "build": "release",
+    "cases": 108200,
+    "radices": [
+      10,
+      16
+    ],
+    "cases_per_operation_per_radix": 13282,
+    "constructed_division_per_radix": 972,
+    "large": false,
+    "passed": true
+  },
+  "ratio_differential": {
+    "debug": 41365,
+    "release": 41365,
+    "record": "../ratio_check_results.json"
+  }
+}

@@ -1,5 +1,7 @@
 # NilMonoid / ProdMonoid（2026-10-04）
 
+Vec風のAPIは [SplayVector<T>](splay_vector.md) を参照。
+
 本体: `../src/SegmentTree/splay.rs`。
 
 | 型 | 要素 | 区間積 | 遅延更新 |
@@ -27,7 +29,7 @@ assert_eq!(v.pop(), Some("first".into()));
 assert_eq!(v.to_vec(), vec!["second"]);
 ```
 
-`T: Clone + Debug`。Defaultや単位元は要求しない。番兵はOption<T>のNoneで表し、通常の要素はSome(T)。
+TにClone/Debug/Defaultや単位元は要求しない。値を複製して返すget/to_vecだけがT:Cloneを要求する。番兵はOption<T>のNoneで表し、通常の要素はSome(T)。
 `get`と`to_vec`は値をcloneして返す。`insert`・`push`・`set`は値を移動し、`remove`・`pop`はcloneせず所有する値を返す。
 区間積用のTの複製を持たないので、単なる列操作のために値をcloneしない。
 

@@ -1,0 +1,46 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "target": "x86_64-apple-darwin",
+  "method": "operation timing; arithmetic excludes parse/format; explicit parse and format workloads are timed separately; alternating order; exact output equality",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "repeats": 9,
+  "sha256": {
+    "before": "97b9b66c2abeaabec6cdee10dd94c49ed396281e7d0b830200601e32192b496c",
+    "after": "c6f6b3923009deee9f8c043b00f861cc32c1e9fddf46ec7e9b271ac5ae2391bc"
+  },
+  "workloads": {
+    "16_div_200000_100000": {
+      "seconds": {
+        "before": 0.041377,
+        "after": 0.040154167
+      },
+      "samples": {
+        "before": [
+          0.041029625,
+          0.040782292,
+          0.0414845,
+          0.040945625,
+          0.042111417,
+          0.041628292,
+          0.040935708,
+          0.041700167,
+          0.041377
+        ],
+        "after": [
+          0.040394875,
+          0.040062709,
+          0.040154167,
+          0.040302916,
+          0.061593333,
+          0.054523041,
+          0.040032709,
+          0.039969167,
+          0.039979417
+        ]
+      },
+      "speedup": 1.030453452066382,
+      "result_sha256": "35f3209e2c519aa1583281ea29ea1d76171ed12426f6b95c0df66a537ba90553"
+    }
+  },
+  "runtime_simd": "avx2=false"
+}

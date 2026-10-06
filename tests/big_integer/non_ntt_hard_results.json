@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-04",
+  "cases": [
+    {
+      "radix": 10,
+      "digits": 2000000,
+      "case": "all_max_square",
+      "operation": "mul",
+      "seconds": 0.069749,
+      "status": "PASS",
+      "output_sha256": "d8150debc2b8b8043d585f63847a09950b40533d5d3a2f38e36420da96e0f0cc"
+    },
+    {
+      "radix": 10,
+      "digits": 2000000,
+      "case": "full_carry",
+      "operation": "add",
+      "seconds": 0.018823,
+      "status": "PASS",
+      "output_sha256": "c1604429dfef1ff5f3e5a792531e80fe2fd1a4877f71abb7a003df3f6617f0ff"
+    },
+    {
+      "radix": 10,
+      "digits": 2000000,
+      "case": "full_borrow",
+      "operation": "sub",
+      "seconds": 0.018307,
+      "status": "PASS",
+      "output_sha256": "770d0329973d12e67f35d8540052032d7f3e0618c3c859f0f887d96d57ce33df"
+    },
+    {
+      "radix": 10,
+      "digits": 2000000,
+      "case": "power_over_previous",
+      "operation": "div",
+      "seconds": 0.031948,
+      "status": "PASS",
+      "output_sha256": "3f11ad6bbc7ecca0b2416b713dee77f1a635c00aaeaa946e14cde1c2bfae56d5"
+    },
+    {
+      "radix": 10,
+      "digits": 2000000,
+      "case": "smaller_dividend",
+      "operation": "div",
+      "seconds": 0.031316,
+      "status": "PASS",
+      "output_sha256": "c0939cfc02944be4bf47c47a665a01252cf988844ba23d5a5a21cea6e90d90e2"
+    },
+    {
+      "radix": 16,
+      "digits": 1600000,
+      "case": "all_max_square",
+      "operation": "mul",
+      "seconds": 0.07488,
+      "status": "PASS",
+      "output_sha256": "95e73125e132491d92d9ed33dc906e043c1af5e3a4c6cb2b2861e7c0ff9eeb06"
+    },
+    {
+      "radix": 16,
+      "digits": 1600000,
+      "case": "full_carry",
+      "operation": "add",
+      "seconds": 0.017433,
+      "status": "PASS",
+      "output_sha256": "f07db5316ab8c493d617e1d4bd33c82d6464e22f56dd583ce84979f246ac4f79"
+    },
+    {
+      "radix": 16,
+      "digits": 1600000,
+      "case": "full_borrow",
+      "operation": "sub",
+      "seconds": 0.015615,
+      "status": "PASS",
+      "output_sha256": "ac59cbe89f989d393a258f82427c98af930b592a4074d9f676de86fd227d52a0"
+    },
+    {
+      "radix": 16,
+      "digits": 1600000,
+      "case": "power_over_previous",
+      "operation": "div",
+      "seconds": 0.027692,
+      "status": "PASS",
+      "output_sha256": "3f11ad6bbc7ecca0b2416b713dee77f1a635c00aaeaa946e14cde1c2bfae56d5"
+    },
+    {
+      "radix": 16,
+      "digits": 1600000,
+      "case": "smaller_dividend",
+      "operation": "div",
+      "seconds": 0.026993,
+      "status": "PASS",
+      "output_sha256": "b2f920c684ef0fddedc122e298fb77dc6092bfa27f0b28a9543b3fe7dc79f2cf"
+    }
+  ]
+}

@@ -1,131 +1,62 @@
-pub trait MatrixMonoid {
-    type S: Clone;
-    fn sum(a: &Self::S, b: &Self::S)->Self::S;
-    fn zero()->Self::S;
-    fn mul(a: &Self::S, b: &Self::S)->Self::S;
-    fn one()->Self::S;
-}
-
-#[derive(Debug)]
-pub struct DoublingMatrix<M> where M: MatrixMonoid{
-    n: usize,
-    g: Vec<M::S>,
-}
-impl<M> Clone for DoublingMatrix<M>
-where
-    M: MatrixMonoid,
-    M::S: Clone,
-{
-    #[inline]
-    fn clone(&self) -> Self {
-        Self { n: self.n, g: self.g.clone() }
-    }
-}
-impl<M> DoublingMatrix<M> where M: MatrixMonoid{
-    #[inline]
-    pub fn new(n: usize, a: &Vec<M::S>)->Self{
-        DoublingMatrix {n, g: a.clone() }
-    }
-
-    #[inline]
-    pub fn zeros(n: usize)->Self{
-        DoublingMatrix { n, g: vec![M::zero(); n*n] }
-    }
-
-    #[inline]
-    pub fn e(n: usize)->Self{
-        let mut res = Self::zeros(n);
-        for i in 0..n{
-            res.set(i, i, M::one());
-        }
-        res
-    }
-
-    #[inline]
-    pub fn get(&self, i: usize, j: usize)-> &M::S{
-        &self.g[i*self.n+j]
-    }
-
-    #[inline]
-    pub fn set(&mut self, i: usize, j: usize, v: M::S){
-        self.g[i*self.n+j] = v;
-    }
-
-    #[inline(always)]
-    pub fn prod(&self, rhs: &Self)->Self{
-        let n = self.n;
-        let mut res = vec![M::zero(); n*n];
-        for i in 0..n {
-            let a_row = &self.g[i * n .. (i + 1) * n];
-            let out_row = &mut res[i * n .. (i + 1) * n];
-            for k in 0..n {
-                let a = &a_row[k];
-                let b_row = &rhs.g[k * n .. (k + 1) * n];
-                for j in 0..n {
-                    let addend = M::mul(a, &b_row[j]);
-                    out_row[j] = M::sum(&out_row[j], &addend);
-                }
-            }
-        }
-        Self {n, g:res}
-    }
-
-    #[inline]
-    pub fn pow(&self, mut k: usize)->Self {
-        let n = self.n;
-        let mut res = Self::e(n);
-        let mut r = (*self).clone();
-        while k > 0 {
-            if (k & 1) == 1 {
-                res = res.prod(&r);
-            }
-            k >>= 1;
-            if k > 0 {
-                r = r.prod(&r);
-            }
-        }
-        res
-    }
-}
+// 実装はmatrix.rsへ統合。旧ファイルの入口とAddMulMonoid（定数MOD:i64）を維持。
+include!("matrix.rs");
 
 pub struct AddMulMonoid;
-impl MatrixMonoid for AddMulMonoid{
+impl MatrixMonoid for AddMulMonoid {
     type S = i64;
-
-    fn zero()->Self::S {
+    #[inline(always)]
+    fn zero() -> i64 {
+        assert!(MOD > 0);
         0
     }
-
-    fn one()->Self::S {
-        1
+    #[inline(always)]
+    fn one() -> i64 {
+        1 % MOD
     }
-
-    fn sum(&a: &Self::S, &b: &Self::S)->Self::S {
-        if a+b < MOD{a+b}else{a+b-MOD}
+    #[inline(always)]
+    fn sum(a: &i64, b: &i64) -> i64 {
+        if MOD <= i64::MAX / 2 {
+            let v = *a + *b;
+            if v >= MOD {
+                v - MOD
+            } else {
+                v
+            }
+        } else {
+            ((*a as i128 + *b as i128) % MOD as i128) as i64
+        }
     }
-
-    fn mul(a: &Self::S, b: &Self::S)->Self::S {
-        a*b%MOD
+    #[inline(always)]
+    fn mul(a: &i64, b: &i64) -> i64 {
+        if MOD <= i32::MAX as i64 {
+            *a * *b % MOD
+        } else {
+            (*a as i128 * *b as i128 % MOD as i128) as i64
+        }
     }
-}
-
-pub struct MinPlusMonoid;
-impl MatrixMonoid for MinPlusMonoid{
-    type S = i64;
-
-    fn zero()->Self::S {
-        1<<60
-    }
-
-    fn one()->Self::S {
-        0
-    }
-
-    fn sum(&a: &Self::S, &b: &Self::S)->Self::S {
-        a.min(b)
-    }
-
-    fn mul(&a: &Self::S, &b: &Self::S)->Self::S {
-        a+b
+    fn multiply_kernel(n: usize, a: &[i64], b: &[i64], out: &mut [i64]) {
+        if MOD <= u32::MAX as i64 && n >= 16 {
+            let a: Vec<u32> = a
+                .iter()
+                .map(|&x| {
+                    assert!(x >= 0 && x < MOD);
+                    x as u32
+                })
+                .collect();
+            let b: Vec<u32> = b
+                .iter()
+                .map(|&x| {
+                    assert!(x >= 0 && x < MOD);
+                    x as u32
+                })
+                .collect();
+            let mut c = vec![0u32; n * n];
+            matrix_mod_u32_kernel::<{ MOD as u32 }>(n, &a, &b, &mut c, MOD as u32);
+            for (x, y) in out.iter_mut().zip(c) {
+                *x = y as i64;
+            }
+        } else {
+            matrix_generic_kernel::<Self>(n, a, b, out);
+        }
     }
 }

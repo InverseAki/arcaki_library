@@ -1,15 +1,18 @@
+#[path = "../Basic/rollbackvector.rs"]
+mod rollback_uf_vector;
+
 /// Union by size、経路圧縮なし。find/merge は O(log n)、rollback は O(1)。
 /// 失敗した merge も 1 操作として記録する。領域 O(n + 保存中の操作数)。
 pub struct RollbackUnionFind {
-    parent: Vec<isize>,
-    hist: Vec<Option<(usize, usize, isize, isize)>>,
+    parent: rollback_uf_vector::RollbackVector<isize>,
+    hist: Vec<usize>,
 }
 
 impl RollbackUnionFind {
     pub fn new(n: usize) -> Self {
         assert!(n <= isize::MAX as usize);
         Self {
-            parent: vec![-1; n],
+            parent: rollback_uf_vector::RollbackVector::new(n, -1),
             hist: Vec::new(),
         }
     }
@@ -23,16 +26,15 @@ impl RollbackUnionFind {
 
     pub fn merge(&mut self, u: usize, v: usize) -> bool {
         let (mut u, mut v) = (self.find(u), self.find(v));
+        self.hist.push(self.parent.history_len());
         if u == v {
-            self.hist.push(None);
             return false;
         }
         if self.parent[u] > self.parent[v] {
             std::mem::swap(&mut u, &mut v);
         }
-        self.hist.push(Some((u, v, self.parent[u], self.parent[v])));
-        self.parent[u] += self.parent[v];
-        self.parent[v] = u as isize;
+        self.parent.set(u, self.parent[u] + self.parent[v]);
+        self.parent.set(v, u as isize);
         true
     }
 
@@ -46,9 +48,8 @@ impl RollbackUnionFind {
 
     /// 直前の merge を取り消す。履歴がなければ何もしない。
     pub fn rollback(&mut self) {
-        if let Some(Some((u, v, pu, pv))) = self.hist.pop() {
-            self.parent[u] = pu;
-            self.parent[v] = pv;
+        if let Some(len) = self.hist.pop() {
+            self.parent.rollback(len);
         }
     }
 
@@ -56,6 +57,7 @@ impl RollbackUnionFind {
     /// 保存した状態への復帰ではない。O(保存中の操作数) 以内。
     pub fn snapshot(&mut self) {
         self.hist.clear();
+        self.parent.clear_history();
     }
 
     /// 最後の snapshot（なければ初期状態）まで戻す。O(保存中の操作数)。

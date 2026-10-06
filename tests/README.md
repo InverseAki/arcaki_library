@@ -51,3 +51,83 @@ ACLでも確認する場合は各スクリプトに `--acl-rlib /path/to/libac_l
 
 `NilMonoid<T>` と `ProdMonoid<M>` を追加。列操作用のget/set/push/remove/pop/to_vecも追加。
 使い方・仕様・性能比較: [splay_modes.md](splay_modes.md)。本体テストは計27本。
+
+## Vec風のSplayVector（2026-10-04）
+
+[SplayVectorの使い方・対応API・計算量](splay_vector.md)。値にClone/Debug/Defaultは不要。
+本体テストはSplayVectorの4本を加えて計31本。
+
+
+## 正方行列の統合（2026-10-04）
+
+`Basic/matrix.rs` の `SquareMatrix<M>` に統合し、従来の `DoublingMatrix<M>` と MI用 `Matrix` の入口を維持。
+[使い方・積の高速化・計測と検証](matrix.md)。旧2ファイルは `matrix.rs` を読み込むため、コピー時は共通本体も必要。
+本体テストは行列7本を加えて計38本。追加の同梱MI/ACL結合検証は `python3 tests/run_matrix.py`。
+
+
+## 有理数の修正・拡張（2026-10-04）
+
+`Ratio`（i64）、`Ratio128`（i128）、`BigRatio`（既存BigInt）を用意。
+従来の `new(分母, 分子)` は維持し、通常順の `from_fraction(分子, 分母)` も追加。
+[仕様・使い方・検証結果](ratio.md)。BigRatioは `ratio.rs`・`big_integer.rs`・`big_ratio.rs` を同じスコープに用意する。
+本体テストは有理数/GCDの7本を加えて計45本。`python3 tests/check_ratio.py` でPythonとの41,365ケースをdebug/release両方検証。
+
+
+## 多倍長整数の除算をEuclid除算へ統一（2026-10-04）
+
+BigInt/HexBigIntの `/`・`%`・`/=`・`%=`・`div_rem` は `x=q*d+r`、`0<=r<|d|`。
+`div_rem_euclid` も同じ規則。BigRatioの丸め・検証器・使用例・解説も更新した。
+多倍長整数の単体テスト6本をCargoから実行するようにし、本体テストは計51本。
+[検証と符号付き除算の仕様](big_integer/README.md)。
+
+## Rollback可能なデータ構造（2026-10-04）
+
+UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSegtree・RollbackLazySegtreeを追加。
+直前の更新1回のrollback、snapshot（履歴破棄）、all_backを提供。
+[使い方・依存ファイル・計算量・検証](rollback_structures.md)。
+
+
+## ドロネー三角形分割と Euclidean MST（2026-10-04）
+
+整数座標の決定的 O(N log N) 実装を追加。重複点・一直線・共円に対応。
+[API・数値範囲・公式全29ケースの検証結果](euclidean_mst/README.md)。
+
+
+## 2次元の基本幾何（2026-10-04）
+
+`Gemetory/geometry.rs` に整数・有理数座標の点、正規化した直線、線分と基本演算を追加。
+[使用例・返り値の型・数値範囲・検証](geometry.md)。
+`cargo test --offline --test geometry` とreleaseで6本通過。格子上の線分交差390,625ケースを独立計算と比較。
+
+
+## Rollback Mo の追加型・削除型（2026-10-04）
+
+`Basic/rollbackmo.rs` に `RollbackMoState / RollbackMoSolver` と
+`RollbackMoDeleteState / RollbackMoDeleteSolver` を追加。
+`mo.rs` と同じ Data/Query/Ans、左右操作の添え字・データ、質問登録方式を使う。
+左右対称の State も提供。トークン付き snapshot/rollback を使い、solve は開始状態へ復元する。
+旧 `RollbackMoMonoid / solve_rollback_mo` は互換用に維持。
+[仕様・使用例・計算量・検証](../../algorithm_set/Basic/rollbackmo.md)。
+`cargo test --offline --test rollback_mo` とreleaseで7本通過。
+
+
+## 候補登録型の更新可能 Wavelet Matrix（2026-10-05）
+
+各添字の可能な値を先に登録する `WaveletMatrixOffline` を追加。
+値の1点更新、区間 kth、値域・順位の総和、総和を満たす最小個数に対応。
+[使い方・計算量・検証・最大規模の計測](waveletmatrix_offline.md)。
+[ABC467 G の実行例](../examples/abc467_g.rs)も同梱。
+
+2026-10-05: 直線の `cmp_angle` / `cmp_slope`、点・線分の `cmp_angle` を追加。整数比較は積overflowを避け、geometryの計8テストがdebug/releaseで通過。詳細は [geometry.md](geometry.md)。
+
+
+## 凸包・係数付きMinkowski和（2026-10-05）
+
+`Gemetory/convexhull.rs` を基本幾何に統合。点型の上下鎖・一周列、`ConvexHull` と線形時間の係数付きMinkowski和を追加。旧tuple入力は互換入口として保持。
+[API・返り値・数値範囲・検証](convexhull.md)。凸包6本・基礎幾何8本をdebug/releaseで確認。
+
+2026-10-05: 凹多角形も保持できる反時計回りの `Polygon` を基本幾何に追加。
+`Polygon` / `ConvexHull` に `area2`・`area`・`area_f64`、凸包に `to_polygon` を追加。
+仕様は [geometry.md](geometry.md)・[convexhull.md](convexhull.md)。関連17テストがdebug/releaseで通過。
+
+2026-10-05: `ConvexHull::merge` を追加。既存凸包の上下鎖をマージして conv(A ∪ B) を O(N+M) で合成。再ソート不要。詳細は [convexhull.md](convexhull.md)。関連20テストがdebug/releaseで通過。

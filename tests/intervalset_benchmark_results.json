@@ -1,0 +1,986 @@
+{
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "repetitions": 5,
+  "rows": [
+    {
+      "mode": "records",
+      "case": "noop",
+      "median": {
+        "baseline": {
+          "update_ms": 80.152,
+          "total_ms": 96.822
+        },
+        "candidate": {
+          "update_ms": 76.638,
+          "total_ms": 93.196
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 87.932,
+            "total_ms": 112.961,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 82.749,
+            "total_ms": 99.738,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 80.152,
+            "total_ms": 96.822,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 75.637,
+            "total_ms": 91.627,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 75.678,
+            "total_ms": 91.532,
+            "checksum": 196608
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 88.558,
+            "total_ms": 107.096,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 81.866,
+            "total_ms": 99.277,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 76.638,
+            "total_ms": 93.196,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 75.749,
+            "total_ms": 92.264,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 75.358,
+            "total_ms": 91.721,
+            "checksum": 196608
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "shorten",
+      "median": {
+        "baseline": {
+          "update_ms": 155.694,
+          "total_ms": 172.095
+        },
+        "candidate": {
+          "update_ms": 129.886,
+          "total_ms": 146.109
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 217.948,
+            "total_ms": 234.615,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 155.052,
+            "total_ms": 171.215,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 157.083,
+            "total_ms": 173.286,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 155.694,
+            "total_ms": 172.095,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 155.469,
+            "total_ms": 171.561,
+            "checksum": 65308
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 133.373,
+            "total_ms": 150.006,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 130.327,
+            "total_ms": 146.471,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 129.886,
+            "total_ms": 146.109,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 129.779,
+            "total_ms": 146.028,
+            "checksum": 65308
+          },
+          {
+            "update_ms": 129.421,
+            "total_ms": 145.686,
+            "checksum": 65308
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "random",
+      "median": {
+        "baseline": {
+          "update_ms": 206.224,
+          "total_ms": 219.004
+        },
+        "candidate": {
+          "update_ms": 175.759,
+          "total_ms": 189.002
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 206.367,
+            "total_ms": 219.198,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 204.403,
+            "total_ms": 216.996,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 206.224,
+            "total_ms": 219.034,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 206.23,
+            "total_ms": 219.004,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 205.857,
+            "total_ms": 218.964,
+            "checksum": 64375
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 175.759,
+            "total_ms": 189.002,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 174.422,
+            "total_ms": 187.519,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 176.307,
+            "total_ms": 189.305,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 175.994,
+            "total_ms": 189.463,
+            "checksum": 64375
+          },
+          {
+            "update_ms": 175.559,
+            "total_ms": 188.649,
+            "checksum": 64375
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "bulk_1",
+      "median": {
+        "baseline": {
+          "update_ms": 222.855,
+          "total_ms": 238.048
+        },
+        "candidate": {
+          "update_ms": 158.989,
+          "total_ms": 174.662
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 221.724,
+            "total_ms": 236.778,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 222.492,
+            "total_ms": 237.634,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 223.222,
+            "total_ms": 238.421,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 242.146,
+            "total_ms": 257.761,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 222.855,
+            "total_ms": 238.048,
+            "checksum": -1048560
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 157.492,
+            "total_ms": 172.682,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 158.132,
+            "total_ms": 173.236,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 160.566,
+            "total_ms": 176.554,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 158.989,
+            "total_ms": 174.662,
+            "checksum": -1048560
+          },
+          {
+            "update_ms": 159.358,
+            "total_ms": 175.058,
+            "checksum": -1048560
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "bulk_8",
+      "median": {
+        "baseline": {
+          "update_ms": 107.07,
+          "total_ms": 120.058
+        },
+        "candidate": {
+          "update_ms": 54.154,
+          "total_ms": 67.415
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 256.871,
+            "total_ms": 349.138,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 107.07,
+            "total_ms": 120.101,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 107.189,
+            "total_ms": 120.058,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 106.813,
+            "total_ms": 119.664,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 106.706,
+            "total_ms": 119.624,
+            "checksum": -1966064
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 54.143,
+            "total_ms": 67.363,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 54.383,
+            "total_ms": 67.961,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 54.154,
+            "total_ms": 67.359,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 54.125,
+            "total_ms": 67.456,
+            "checksum": -1966064
+          },
+          {
+            "update_ms": 54.196,
+            "total_ms": 67.415,
+            "checksum": -1966064
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "bulk_256",
+      "median": {
+        "baseline": {
+          "update_ms": 51.673,
+          "total_ms": 64.09
+        },
+        "candidate": {
+          "update_ms": 24.9,
+          "total_ms": 37.596
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 51.561,
+            "total_ms": 63.927,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 51.673,
+            "total_ms": 64.09,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 52.129,
+            "total_ms": 64.525,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 51.946,
+            "total_ms": 64.629,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 51.495,
+            "total_ms": 63.928,
+            "checksum": -2093040
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 24.908,
+            "total_ms": 37.702,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 24.794,
+            "total_ms": 37.596,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 24.915,
+            "total_ms": 37.62,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 24.9,
+            "total_ms": 37.522,
+            "checksum": -2093040
+          },
+          {
+            "update_ms": 24.844,
+            "total_ms": 37.569,
+            "checksum": -2093040
+          }
+        ]
+      }
+    },
+    {
+      "mode": "records",
+      "case": "bulk_65536",
+      "median": {
+        "baseline": {
+          "update_ms": 34.328,
+          "total_ms": 46.693
+        },
+        "candidate": {
+          "update_ms": 19.472,
+          "total_ms": 32.203
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 34.38,
+            "total_ms": 46.697,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 34.106,
+            "total_ms": 46.572,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 34.478,
+            "total_ms": 46.785,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 34.153,
+            "total_ms": 46.565,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 34.328,
+            "total_ms": 46.693,
+            "checksum": -2097120
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 19.482,
+            "total_ms": 32.203,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 19.511,
+            "total_ms": 32.324,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 19.472,
+            "total_ms": 32.161,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 19.432,
+            "total_ms": 32.226,
+            "checksum": -2097120
+          },
+          {
+            "update_ms": 19.454,
+            "total_ms": 32.18,
+            "checksum": -2097120
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "noop",
+      "median": {
+        "baseline": {
+          "update_ms": 73.345,
+          "total_ms": 89.493
+        },
+        "candidate": {
+          "update_ms": 73.66,
+          "total_ms": 90.066
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 73.172,
+            "total_ms": 89.128,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.345,
+            "total_ms": 89.493,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.182,
+            "total_ms": 89.171,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.417,
+            "total_ms": 89.71,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.718,
+            "total_ms": 89.85,
+            "checksum": 196608
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 73.601,
+            "total_ms": 89.938,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 92.26,
+            "total_ms": 112.999,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.443,
+            "total_ms": 89.906,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 73.66,
+            "total_ms": 90.066,
+            "checksum": 196608
+          },
+          {
+            "update_ms": 99.358,
+            "total_ms": 115.81,
+            "checksum": 196608
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "shorten",
+      "median": {
+        "baseline": {
+          "update_ms": 147.055,
+          "total_ms": 163.172
+        },
+        "candidate": {
+          "update_ms": 126.597,
+          "total_ms": 143.032
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 147.614,
+            "total_ms": 164.006,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 147.055,
+            "total_ms": 163.349,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 147.057,
+            "total_ms": 163.172,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 145.809,
+            "total_ms": 162.179,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 146.688,
+            "total_ms": 162.903,
+            "checksum": 130958
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 126.753,
+            "total_ms": 143.27,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 127.09,
+            "total_ms": 143.423,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 126.597,
+            "total_ms": 143.012,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 126.203,
+            "total_ms": 142.655,
+            "checksum": 130958
+          },
+          {
+            "update_ms": 126.405,
+            "total_ms": 143.032,
+            "checksum": 130958
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "random",
+      "median": {
+        "baseline": {
+          "update_ms": 198.613,
+          "total_ms": 211.597
+        },
+        "candidate": {
+          "update_ms": 169.629,
+          "total_ms": 182.863
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 198.647,
+            "total_ms": 211.597,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 198.613,
+            "total_ms": 211.571,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 198.559,
+            "total_ms": 211.605,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 198.055,
+            "total_ms": 210.982,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 199.104,
+            "total_ms": 212.034,
+            "checksum": 130476
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 169.643,
+            "total_ms": 182.812,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 169.824,
+            "total_ms": 182.992,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 169.629,
+            "total_ms": 182.894,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 169.474,
+            "total_ms": 182.84,
+            "checksum": 130476
+          },
+          {
+            "update_ms": 169.473,
+            "total_ms": 182.863,
+            "checksum": 130476
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "bulk_1",
+      "median": {
+        "baseline": {
+          "update_ms": 201.703,
+          "total_ms": 217.631
+        },
+        "candidate": {
+          "update_ms": 152.195,
+          "total_ms": 167.899
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 200.851,
+            "total_ms": 216.282,
+            "checksum": 16
+          },
+          {
+            "update_ms": 199.725,
+            "total_ms": 215.033,
+            "checksum": 16
+          },
+          {
+            "update_ms": 210.534,
+            "total_ms": 226.532,
+            "checksum": 16
+          },
+          {
+            "update_ms": 280.96,
+            "total_ms": 298.76,
+            "checksum": 16
+          },
+          {
+            "update_ms": 201.703,
+            "total_ms": 217.631,
+            "checksum": 16
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 152.195,
+            "total_ms": 167.848,
+            "checksum": 16
+          },
+          {
+            "update_ms": 151.792,
+            "total_ms": 167.523,
+            "checksum": 16
+          },
+          {
+            "update_ms": 171.741,
+            "total_ms": 193.068,
+            "checksum": 16
+          },
+          {
+            "update_ms": 152.048,
+            "total_ms": 167.899,
+            "checksum": 16
+          },
+          {
+            "update_ms": 153.115,
+            "total_ms": 168.728,
+            "checksum": 16
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "bulk_8",
+      "median": {
+        "baseline": {
+          "update_ms": 104.442,
+          "total_ms": 117.418
+        },
+        "candidate": {
+          "update_ms": 52.374,
+          "total_ms": 65.524
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 104.199,
+            "total_ms": 117.418,
+            "checksum": 16
+          },
+          {
+            "update_ms": 104.442,
+            "total_ms": 117.315,
+            "checksum": 16
+          },
+          {
+            "update_ms": 103.345,
+            "total_ms": 116.019,
+            "checksum": 16
+          },
+          {
+            "update_ms": 112.463,
+            "total_ms": 127.668,
+            "checksum": 16
+          },
+          {
+            "update_ms": 106.345,
+            "total_ms": 120.271,
+            "checksum": 16
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 53.079,
+            "total_ms": 66.38,
+            "checksum": 16
+          },
+          {
+            "update_ms": 52.365,
+            "total_ms": 65.4,
+            "checksum": 16
+          },
+          {
+            "update_ms": 52.358,
+            "total_ms": 65.371,
+            "checksum": 16
+          },
+          {
+            "update_ms": 54.828,
+            "total_ms": 68.467,
+            "checksum": 16
+          },
+          {
+            "update_ms": 52.374,
+            "total_ms": 65.524,
+            "checksum": 16
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "bulk_256",
+      "median": {
+        "baseline": {
+          "update_ms": 53.621,
+          "total_ms": 68.092
+        },
+        "candidate": {
+          "update_ms": 26.829,
+          "total_ms": 40.875
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 49.015,
+            "total_ms": 61.437,
+            "checksum": 16
+          },
+          {
+            "update_ms": 49.581,
+            "total_ms": 62.178,
+            "checksum": 16
+          },
+          {
+            "update_ms": 80.462,
+            "total_ms": 114.004,
+            "checksum": 16
+          },
+          {
+            "update_ms": 53.621,
+            "total_ms": 68.51,
+            "checksum": 16
+          },
+          {
+            "update_ms": 53.626,
+            "total_ms": 68.092,
+            "checksum": 16
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 24.7,
+            "total_ms": 37.67,
+            "checksum": 16
+          },
+          {
+            "update_ms": 24.63,
+            "total_ms": 37.247,
+            "checksum": 16
+          },
+          {
+            "update_ms": 26.829,
+            "total_ms": 40.897,
+            "checksum": 16
+          },
+          {
+            "update_ms": 26.922,
+            "total_ms": 41.041,
+            "checksum": 16
+          },
+          {
+            "update_ms": 27.167,
+            "total_ms": 40.875,
+            "checksum": 16
+          }
+        ]
+      }
+    },
+    {
+      "mode": "plain",
+      "case": "bulk_65536",
+      "median": {
+        "baseline": {
+          "update_ms": 35.093,
+          "total_ms": 52.981
+        },
+        "candidate": {
+          "update_ms": 22.085,
+          "total_ms": 36.15
+        }
+      },
+      "samples": {
+        "baseline": [
+          {
+            "update_ms": 40.48,
+            "total_ms": 56.249,
+            "checksum": 16
+          },
+          {
+            "update_ms": 38.407,
+            "total_ms": 53.317,
+            "checksum": 16
+          },
+          {
+            "update_ms": 35.093,
+            "total_ms": 52.981,
+            "checksum": 16
+          },
+          {
+            "update_ms": 33.652,
+            "total_ms": 47.246,
+            "checksum": 16
+          },
+          {
+            "update_ms": 33.419,
+            "total_ms": 47.162,
+            "checksum": 16
+          }
+        ],
+        "candidate": [
+          {
+            "update_ms": 31.793,
+            "total_ms": 51.031,
+            "checksum": 16
+          },
+          {
+            "update_ms": 22.085,
+            "total_ms": 36.15,
+            "checksum": 16
+          },
+          {
+            "update_ms": 20.687,
+            "total_ms": 34.399,
+            "checksum": 16
+          },
+          {
+            "update_ms": 20.636,
+            "total_ms": 34.389,
+            "checksum": 16
+          },
+          {
+            "update_ms": 22.162,
+            "total_ms": 37.283,
+            "checksum": 16
+          }
+        ]
+      }
+    }
+  ]
+}

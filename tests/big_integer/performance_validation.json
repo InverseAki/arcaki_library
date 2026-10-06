@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-04",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "source_sha256": "97b9b66c2abeaabec6cdee10dd94c49ed396281e7d0b830200601e32192b496c",
+  "baseline_sha256": "2f110382fd7634b81fda24143cfc13d65de998f4fa6aea2a9278fe480ea56113",
+  "checks": [
+    {
+      "command": "cargo test --offline",
+      "status": "PASS",
+      "tests": 55
+    },
+    {
+      "command": "cargo test --offline --release",
+      "status": "PASS",
+      "tests": 55
+    },
+    {
+      "command": "cargo test --offline --release --test big_integer --target x86_64-apple-darwin",
+      "status": "PASS",
+      "tests": 8,
+      "simd": "avx2=false; scalar fallback under Rosetta"
+    },
+    {
+      "command": "rustc --edition=2021 -O --crate-type lib --emit metadata --target x86_64-unknown-linux-gnu src/NumberTheory/big_integer.rs",
+      "status": "PASS",
+      "scope": "compilation only, not AVX2 execution"
+    },
+    {
+      "command": "python3 tests/big_integer/check.py --large --binary <optimized driver>",
+      "status": "PASS",
+      "cases": 108220
+    },
+    {
+      "command": "python3 tests/big_integer/hard_cases.py --binary <optimized driver> --report tests/big_integer/performance_hard_results.json",
+      "status": "PASS",
+      "cases": 10
+    },
+    {
+      "command": "python3 tests/big_integer/run_official.py --repo <cached official repo> --report tests/big_integer/performance_official_all.json",
+      "status": "PASS",
+      "files": 141
+    },
+    {
+      "command": "rustc --edition=2021 -O tests/big_integer/submissions/division_of_big_integers.rs",
+      "status": "PASS",
+      "scope": "standalone compile and sample cases"
+    },
+    {
+      "command": "run_official.py --problem division_of_big_integers --case example --binary <standalone submission>",
+      "status": "PASS",
+      "method": "official sample input/output SHA256"
+    }
+  ],
+  "online_submission": false,
+  "avx2_hardware_execution": false,
+  "neon_hardware_execution": true,
+  "unchanged_vs_pasted_baseline": [
+    "public API",
+    "representation",
+    "school multiplication",
+    "division and reciprocal algorithms",
+    "Euclidean signed division semantics"
+  ]
+}

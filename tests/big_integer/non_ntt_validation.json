@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-04",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "source_sha256": "c6f6b3923009deee9f8c043b00f861cc32c1e9fddf46ec7e9b271ac5ae2391bc",
+  "baseline_sha256": "97b9b66c2abeaabec6cdee10dd94c49ed396281e7d0b830200601e32192b496c",
+  "cargo_test_counts": {
+    "debug": 64,
+    "release": 64,
+    "x86_64/Rosetta": 24
+  },
+  "python_int_differential": {
+    "native_arm_release": 108220,
+    "x86_64_rosetta_release": 108220
+  },
+  "official_files": 141,
+  "official_input_output_sha256": "PASS",
+  "structured_maximum_digit_cases": 10,
+  "standalone_submission": "compiled and official sample input/output SHA256 matched",
+  "linux_x86_64": "metadata compilation passed; hardware execution not available",
+  "ntt_transform_implementation": "identical to before_non_ntt baseline",
+  "public_representation": "Vec<u32>, decimal base 10000 and hexadecimal base 65536; unchanged",
+  "temporary_school_base": {
+    "aarch64_decimal": 10000000000000000,
+    "aarch64_hexadecimal": 281474976710656,
+    "other_decimal": 100000000,
+    "other_hexadecimal": 4294967296
+  },
+  "online_submission": false
+}

@@ -1,0 +1,221 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "random_seeds": 100,
+  "official": [
+    {
+      "name": "example.in",
+      "seed": 0,
+      "n": 3,
+      "q": 8,
+      "seconds": 0.004050791263580322,
+      "result": "matched"
+    },
+    {
+      "name": "example.in",
+      "seed": 1,
+      "n": 3,
+      "q": 10,
+      "seconds": 0.004492541775107384,
+      "result": "matched"
+    },
+    {
+      "name": "small.cpp",
+      "seed": 0,
+      "n": 1,
+      "q": 1000,
+      "seconds": 0.004531458951532841,
+      "result": "matched"
+    },
+    {
+      "name": "small.cpp",
+      "seed": 1,
+      "n": 2,
+      "q": 1000,
+      "seconds": 0.004169042222201824,
+      "result": "matched"
+    },
+    {
+      "name": "small.cpp",
+      "seed": 2,
+      "n": 3,
+      "q": 1000,
+      "seconds": 0.003967417404055595,
+      "result": "matched"
+    },
+    {
+      "name": "small.cpp",
+      "seed": 3,
+      "n": 4,
+      "q": 1000,
+      "seconds": 0.003632958047091961,
+      "result": "matched"
+    },
+    {
+      "name": "small.cpp",
+      "seed": 4,
+      "n": 5,
+      "q": 1000,
+      "seconds": 0.003957916982471943,
+      "result": "matched"
+    },
+    {
+      "name": "random.cpp",
+      "seed": 0,
+      "n": 17707,
+      "q": 77101,
+      "seconds": 0.2539666248485446,
+      "result": "matched"
+    },
+    {
+      "name": "random.cpp",
+      "seed": 1,
+      "n": 69830,
+      "q": 19691,
+      "seconds": 0.1410932494327426,
+      "result": "matched"
+    },
+    {
+      "name": "random.cpp",
+      "seed": 2,
+      "n": 53336,
+      "q": 61958,
+      "seconds": 0.2847847081720829,
+      "result": "matched"
+    },
+    {
+      "name": "max_random.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.5742759583517909,
+      "result": "matched"
+    },
+    {
+      "name": "max_random.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.558355082757771,
+      "result": "matched"
+    },
+    {
+      "name": "max_random.cpp",
+      "seed": 2,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.5464892080053687,
+      "result": "matched"
+    },
+    {
+      "name": "many_0_query.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.49897895753383636,
+      "result": "matched"
+    },
+    {
+      "name": "many_0_query.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.4426294583827257,
+      "result": "matched"
+    },
+    {
+      "name": "many_1_query.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.15050000045448542,
+      "result": "matched"
+    },
+    {
+      "name": "many_1_query.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.16070604231208563,
+      "result": "matched"
+    },
+    {
+      "name": "many_2_query.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.29903600085526705,
+      "result": "matched"
+    },
+    {
+      "name": "many_2_query.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.34081787522882223,
+      "result": "matched"
+    },
+    {
+      "name": "many_3_query.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.31707445811480284,
+      "result": "matched"
+    },
+    {
+      "name": "many_3_query.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.3420871654525399,
+      "result": "matched"
+    },
+    {
+      "name": "sort_only_short.cpp",
+      "seed": 0,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.1469070827588439,
+      "result": "matched"
+    },
+    {
+      "name": "sort_only_short.cpp",
+      "seed": 1,
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.14661920815706253,
+      "result": "matched"
+    }
+  ],
+  "hard": [
+    {
+      "name": "alternating_full",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.09701454266905785,
+      "result": "matched"
+    },
+    {
+      "name": "shifted_windows",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.24038537498563528,
+      "result": "matched"
+    },
+    {
+      "name": "update_full_sort",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.26233395747840405,
+      "result": "matched"
+    },
+    {
+      "name": "fragment_then_merge",
+      "n": 100000,
+      "q": 100000,
+      "seconds": 0.2535077081993222,
+      "result": "matched"
+    }
+  ],
+  "submission": "/Users/tenp/competitive_programing/librarychecker/submissions/point_set_range_sort_range_composite.rs"
+}

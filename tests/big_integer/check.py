@@ -18,8 +18,8 @@ def run(binary,op,pairs,radix):
     lines=result.stdout.splitlines();assert len(lines)==len(pairs)
     for i,((a,b),line) in enumerate(zip(pairs,lines)):
         if op=='div':
-            q=abs(a)//abs(b);q=-q if (a<0)^(b<0) else q
-            expected=f'{fmt(q,radix)} {fmt(a-q*b,radix)}'
+            r=a%abs(b);q=(a-r)//b
+            expected=f'{fmt(q,radix)} {fmt(r,radix)}'
         else:expected=fmt({'add':lambda:a+b,'sub':lambda:a-b,'mul':lambda:a*b}[op](),radix)
         if line!=expected:
             fail=ROOT/'tests/big_integer/failure.txt'

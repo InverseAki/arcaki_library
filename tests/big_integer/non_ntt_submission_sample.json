@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-04",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "processor": "arm",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "official_commit": "1814c4e5205517e368bb57a8d1127eb961cfeaae",
+  "source_sha256": "c6f6b3923009deee9f8c043b00f861cc32c1e9fddf46ec7e9b271ac5ae2391bc",
+  "method": "official generator + exact input/output SHA256 from official hash.json; local execution, no online submission",
+  "cases": [
+    {
+      "problem": "division_of_big_integers",
+      "case": "example_00",
+      "seconds": 0.398612,
+      "input_bytes": 120,
+      "output_sha256": "e6832e88bcccbde103970c8f1ad0ff1e2869a21a22a026b72db0d6c12772e9a1",
+      "status": "PASS",
+      "time_limit": 10.0
+    }
+  ]
+}

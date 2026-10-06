@@ -3,7 +3,7 @@
 ネットワーク取得はしない。--repo に取得済み library-checker-problems を指定。
 """
 from pathlib import Path
-import argparse, hashlib, json, platform, subprocess, tempfile, time, tomllib
+import datetime, argparse, hashlib, json, platform, subprocess, tempfile, time, tomllib
 ROOT=Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--repo',required=True,type=Path);p.add_argument('--binary',type=Path);p.add_argument('--report',type=Path,default=ROOT/'tests/big_integer/official_results.json');p.add_argument('--problem',action='append');p.add_argument('--case');args=p.parse_args()
 repo=args.repo.resolve()
@@ -44,6 +44,6 @@ with tempfile.TemporaryDirectory(prefix='arcaki-bigint-official-') as tmp:
                 row={'problem':name,'case':case,'seconds':round(elapsed,6),'input_bytes':inp.stat().st_size,'output_sha256':sha(out),'status':'PASS','time_limit':spec['timelimit']}
                 results.append(row)
                 print(f'{name}/{case}: PASS {elapsed:.3f}s / {spec["timelimit"]}s',flush=True)
-                report={'date':'2026-10-02','platform':platform.platform(),'processor':platform.processor(),'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'official_commit':subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),'source_sha256':sha(ROOT/'src/NumberTheory/big_integer.rs'),'method':'official generator + exact input/output SHA256 from official hash.json; local execution, no online submission','cases':results}
+                report={'date':datetime.date.today().isoformat(),'platform':platform.platform(),'processor':platform.processor(),'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'official_commit':subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),'source_sha256':sha(ROOT/'src/NumberTheory/big_integer.rs'),'method':'official generator + exact input/output SHA256 from official hash.json; local execution, no online submission','cases':results}
                 args.report.write_text(json.dumps(report,indent=2)+'\n')
     print(f'PASS: {len(results)} official test files')

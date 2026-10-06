@@ -1,0 +1,22 @@
+{
+  "seed": 20261004,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "cases_per_build": 41365,
+  "oracle": "Python fractions.Fraction and math.gcd",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "sha256": {
+    "src/Basic/ratio.rs": "9269d585b54547c1301028da425dbd22c6b4e1db2c0d5871b03150eba8e5753b",
+    "src/Basic/big_ratio.rs": "6d1c571e58c2b00dbc91b452c3523ffdc0384c3393dac8b2c84f94ec43b9eab7",
+    "src/NumberTheory/big_integer.rs": "2f110382fd7634b81fda24143cfc13d65de998f4fa6aea2a9278fe480ea56113"
+  },
+  "builds": {
+    "debug": {
+      "passed": 41365,
+      "seconds": 23.157685417681932
+    },
+    "release": {
+      "passed": 41365,
+      "seconds": 5.501867458224297
+    }
+  }
+}
