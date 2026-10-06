@@ -7,15 +7,22 @@ mod baseline {
 mod presort;
 mod compressed {
     const SHARED: bool = false;
+    const SIMPLE_TIES: bool = false;
     include!("support/point_add_rectangle_sum_compressed.rs");
 }
 mod shared {
     const SHARED: bool = true;
+    const SIMPLE_TIES: bool = false;
+    include!("support/point_add_rectangle_sum_compressed.rs");
+}
+mod simple_ties {
+    const SHARED: bool = false;
+    const SIMPLE_TIES: bool = true;
     include!("support/point_add_rectangle_sum_compressed.rs");
 }
 use baseline::PointAddRectangleSumQuery as Op;
 
-fn compressed(ops: &[Op], shared_prefix: bool) -> Vec<i64> {
+fn compressed(ops: &[Op], method: &str) -> Vec<i64> {
     macro_rules! run {
         ($module:ident) => {{
             let mut solver = $module::PointAddRectangleSum::new();
@@ -28,11 +35,14 @@ fn compressed(ops: &[Op], shared_prefix: bool) -> Vec<i64> {
             solver.solve()
         }};
     }
-    if shared_prefix { run!(shared) } else { run!(compressed) }
+    match method {
+        "shared" => run!(shared),
+        "simple_ties" => run!(simple_ties),
+        _ => run!(compressed),
+    }
 }
 
 fn baseline(ops: &[Op]) -> Vec<i64> {
-    if ops.is_empty() { return vec![]; }
     let mut solver = baseline::PointAddRectangleSum::new();
     for &op in ops {
         match op {
@@ -99,8 +109,9 @@ fn check(ops: &[Op]) {
     assert_eq!(baseline(ops), expected, "baseline: {ops:?}");
     assert_eq!(presort::solve::<false>(ops), expected, "presort: {ops:?}");
     assert_eq!(presort::solve::<true>(ops), expected, "add-only: {ops:?}");
-    assert_eq!(compressed(ops, false), expected, "compressed: {ops:?}");
-    assert_eq!(compressed(ops, true), expected, "shared: {ops:?}");
+    assert_eq!(compressed(ops, "compressed"), expected, "compressed: {ops:?}");
+    assert_eq!(compressed(ops, "shared"), expected, "shared: {ops:?}");
+    assert_eq!(compressed(ops, "simple_ties"), expected, "simple ties: {ops:?}");
     assert_eq!(presort::solve_merge(ops), expected, "merge: {ops:?}");
 }
 
@@ -119,6 +130,8 @@ fn boundaries() {
         Op::Query { lx: 0, ly: 0, rx: 1, ry: 0 },
     ]);
     let mut solver = baseline::PointAddRectangleSum::new();
+    assert!(solver.solve().is_empty());
+    assert!(solver.solve().is_empty());
     for _ in 0..3 {
         solver.push_add(1, 1, 7);
         solver.push_query(1, 1, 2, 2);
@@ -146,8 +159,7 @@ fn main() {
         "baseline" => baseline(&ops),
         "presort" => presort::solve::<false>(&ops),
         "add_only" => presort::solve::<true>(&ops),
-        "compressed" => compressed(&ops, false),
-        "shared" => compressed(&ops, true),
+        "compressed" | "shared" | "simple_ties" => compressed(&ops, method),
         "merge" => presort::solve_merge(&ops),
         _ => panic!("unknown method"),
     };

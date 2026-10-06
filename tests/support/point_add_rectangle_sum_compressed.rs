@@ -161,7 +161,11 @@ impl PointAddRectangleSum {
             }
         }
         if emp1||emp2{seq.clear();}
-        seq.sort_unstable_by_key(|w| (w.0,w.1));
+        if SIMPLE_TIES {
+            seq.sort_unstable_by_key(|w| (w.0, w.1 == I));
+        } else {
+            seq.sort_unstable_by_key(|w| (w.0, w.1));
+        }
         for &(_, l, r, w) in seq.iter(){
             if l==I {
                 bit.add(r as usize, w);

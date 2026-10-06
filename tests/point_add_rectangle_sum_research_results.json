@@ -10,135 +10,189 @@
       "mode": "mixed",
       "methods": {
         "baseline": {
-          "median_seconds": 0.128665,
-          "max_rss_mib": 21.625,
+          "median_seconds": 0.13027,
+          "max_rss_mib": 21.65625,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.161601,
-              "rss_bytes": 21889024,
+              "seconds": 0.155592,
+              "rss_bytes": 21938176,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.127681,
-              "rss_bytes": 22675456,
+              "seconds": 0.13027,
+              "rss_bytes": 22708224,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.128665,
-              "rss_bytes": 22675456,
+              "seconds": 0.129576,
+              "rss_bytes": 22708224,
               "checksum": "788640478301706727",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.165284,
-          "max_rss_mib": 24.234375,
+          "median_seconds": 0.171424,
+          "max_rss_mib": 24.25,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.165284,
-              "rss_bytes": 25411584,
+              "seconds": 0.171424,
+              "rss_bytes": 25427968,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.170789,
-              "rss_bytes": 25411584,
+              "seconds": 0.163477,
+              "rss_bytes": 25427968,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.1631,
-              "rss_bytes": 25395200,
+              "seconds": 0.173085,
+              "rss_bytes": 25427968,
               "checksum": "788640478301706727",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.154026,
-          "max_rss_mib": 21.921875,
+          "median_seconds": 0.155306,
+          "max_rss_mib": 21.953125,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.155205,
-              "rss_bytes": 22986752,
+              "seconds": 0.15433,
+              "rss_bytes": 23003136,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.153258,
-              "rss_bytes": 22986752,
+              "seconds": 0.170902,
+              "rss_bytes": 23019520,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.154026,
-              "rss_bytes": 22970368,
+              "seconds": 0.155306,
+              "rss_bytes": 23019520,
               "checksum": "788640478301706727",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.119434,
-          "max_rss_mib": 19.34375,
+          "median_seconds": 0.121446,
+          "max_rss_mib": 19.375,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.122599,
-              "rss_bytes": 20283392,
+              "seconds": 0.121446,
+              "rss_bytes": 20316160,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.119434,
-              "rss_bytes": 20267008,
+              "seconds": 0.122769,
+              "rss_bytes": 20316160,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.118828,
-              "rss_bytes": 20283392,
+              "seconds": 0.119477,
+              "rss_bytes": 20316160,
               "checksum": "788640478301706727",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.123734,
-          "max_rss_mib": 19.34375,
+          "median_seconds": 0.122297,
+          "max_rss_mib": 19.375,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.134329,
-              "rss_bytes": 20283392,
+              "seconds": 0.122186,
+              "rss_bytes": 20316160,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.121618,
-              "rss_bytes": 20283392,
+              "seconds": 0.126136,
+              "rss_bytes": 20316160,
               "checksum": "788640478301706727",
               "answers": 100000
             },
             {
               "mode": "mixed",
-              "seconds": 0.123734,
-              "rss_bytes": 20283392,
+              "seconds": 0.122297,
+              "rss_bytes": 20316160,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.131178,
+          "max_rss_mib": 21.953125,
+          "runs": [
+            {
+              "mode": "mixed",
+              "seconds": 0.128017,
+              "rss_bytes": 23003136,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.131178,
+              "rss_bytes": 23019520,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.145432,
+              "rss_bytes": 23003136,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.121907,
+          "max_rss_mib": 19.375,
+          "runs": [
+            {
+              "mode": "mixed",
+              "seconds": 0.121907,
+              "rss_bytes": 20316160,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.123944,
+              "rss_bytes": 20316160,
+              "checksum": "788640478301706727",
+              "answers": 100000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.121651,
+              "rss_bytes": 20299776,
               "checksum": "788640478301706727",
               "answers": 100000
             }
@@ -151,135 +205,189 @@
       "mode": "initial",
       "methods": {
         "baseline": {
-          "median_seconds": 0.028336,
-          "max_rss_mib": 25.0625,
+          "median_seconds": 0.028836,
+          "max_rss_mib": 25.09375,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.029854,
-              "rss_bytes": 26279936,
+              "seconds": 0.028932,
+              "rss_bytes": 26312704,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.027874,
-              "rss_bytes": 26279936,
+              "seconds": 0.028836,
+              "rss_bytes": 26312704,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.028336,
-              "rss_bytes": 26279936,
+              "seconds": 0.028068,
+              "rss_bytes": 26312704,
               "checksum": "2351333644197900497",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.028154,
-          "max_rss_mib": 24.234375,
+          "median_seconds": 0.029126,
+          "max_rss_mib": 24.265625,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.028154,
-              "rss_bytes": 25395200,
+              "seconds": 0.030326,
+              "rss_bytes": 25444352,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.032096,
-              "rss_bytes": 25411584,
+              "seconds": 0.029126,
+              "rss_bytes": 25427968,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.02804,
-              "rss_bytes": 25395200,
+              "seconds": 0.028595,
+              "rss_bytes": 25444352,
               "checksum": "2351333644197900497",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.024214,
-          "max_rss_mib": 21.921875,
+          "median_seconds": 0.024113,
+          "max_rss_mib": 21.9375,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.024214,
-              "rss_bytes": 22986752,
+              "seconds": 0.023786,
+              "rss_bytes": 23003136,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.024728,
-              "rss_bytes": 22986752,
+              "seconds": 0.026986,
+              "rss_bytes": 23003136,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.023684,
-              "rss_bytes": 22970368,
+              "seconds": 0.024113,
+              "rss_bytes": 23003136,
               "checksum": "2351333644197900497",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.023949,
-          "max_rss_mib": 22.78125,
+          "median_seconds": 0.024293,
+          "max_rss_mib": 22.8125,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.023949,
-              "rss_bytes": 23887872,
+              "seconds": 0.024293,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.024712,
-              "rss_bytes": 23887872,
+              "seconds": 0.028081,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.023411,
-              "rss_bytes": 23887872,
+              "seconds": 0.023644,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.023871,
-          "max_rss_mib": 22.78125,
+          "median_seconds": 0.024561,
+          "max_rss_mib": 22.8125,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.025379,
-              "rss_bytes": 23887872,
+              "seconds": 0.023883,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.023732,
-              "rss_bytes": 23887872,
+              "seconds": 0.024561,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             },
             {
               "mode": "initial",
-              "seconds": 0.023871,
-              "rss_bytes": 23887872,
+              "seconds": 0.024641,
+              "rss_bytes": 23904256,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.031525,
+          "max_rss_mib": 21.953125,
+          "runs": [
+            {
+              "mode": "initial",
+              "seconds": 0.031525,
+              "rss_bytes": 23003136,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.031497,
+              "rss_bytes": 23019520,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.038641,
+              "rss_bytes": 23019520,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.024456,
+          "max_rss_mib": 22.8125,
+          "runs": [
+            {
+              "mode": "initial",
+              "seconds": 0.024456,
+              "rss_bytes": 23904256,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.024562,
+              "rss_bytes": 23920640,
+              "checksum": "2351333644197900497",
+              "answers": 100000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.024135,
+              "rss_bytes": 23920640,
               "checksum": "2351333644197900497",
               "answers": 100000
             }
@@ -292,135 +400,189 @@
       "mode": "ties",
       "methods": {
         "baseline": {
-          "median_seconds": 0.057826,
-          "max_rss_mib": 19.3125,
+          "median_seconds": 0.058557,
+          "max_rss_mib": 19.34375,
           "runs": [
             {
               "mode": "ties",
-              "seconds": 0.062821,
-              "rss_bytes": 20250624,
+              "seconds": 0.058468,
+              "rss_bytes": 20283392,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.057715,
-              "rss_bytes": 20250624,
+              "seconds": 0.059119,
+              "rss_bytes": 20283392,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.057826,
-              "rss_bytes": 20250624,
+              "seconds": 0.058557,
+              "rss_bytes": 20283392,
               "checksum": "572750977868713343",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.069115,
-          "max_rss_mib": 19.765625,
+          "median_seconds": 0.069458,
+          "max_rss_mib": 19.796875,
           "runs": [
             {
               "mode": "ties",
-              "seconds": 0.085449,
-              "rss_bytes": 20709376,
+              "seconds": 0.069804,
+              "rss_bytes": 20758528,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.069115,
-              "rss_bytes": 20725760,
+              "seconds": 0.069458,
+              "rss_bytes": 20742144,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.067526,
-              "rss_bytes": 20709376,
+              "seconds": 0.068814,
+              "rss_bytes": 20758528,
               "checksum": "572750977868713343",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.067259,
-          "max_rss_mib": 19.0,
+          "median_seconds": 0.067559,
+          "max_rss_mib": 19.03125,
           "runs": [
             {
               "mode": "ties",
-              "seconds": 0.068466,
-              "rss_bytes": 19922944,
+              "seconds": 0.06724,
+              "rss_bytes": 19939328,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.067259,
-              "rss_bytes": 19922944,
+              "seconds": 0.074601,
+              "rss_bytes": 19939328,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.067028,
-              "rss_bytes": 19922944,
+              "seconds": 0.067559,
+              "rss_bytes": 19955712,
               "checksum": "572750977868713343",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.059747,
-          "max_rss_mib": 17.796875,
+          "median_seconds": 0.059752,
+          "max_rss_mib": 17.828125,
           "runs": [
             {
               "mode": "ties",
-              "seconds": 0.059281,
-              "rss_bytes": 18661376,
+              "seconds": 0.059752,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.063593,
-              "rss_bytes": 18661376,
+              "seconds": 0.065305,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.059747,
-              "rss_bytes": 18661376,
+              "seconds": 0.057593,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.05848,
-          "max_rss_mib": 17.796875,
+          "median_seconds": 0.059926,
+          "max_rss_mib": 17.828125,
           "runs": [
             {
               "mode": "ties",
-              "seconds": 0.059328,
-              "rss_bytes": 18661376,
+              "seconds": 0.059882,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.05803,
-              "rss_bytes": 18661376,
+              "seconds": 0.061882,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             },
             {
               "mode": "ties",
-              "seconds": 0.05848,
-              "rss_bytes": 18661376,
+              "seconds": 0.059926,
+              "rss_bytes": 18694144,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.055087,
+          "max_rss_mib": 19.03125,
+          "runs": [
+            {
+              "mode": "ties",
+              "seconds": 0.055087,
+              "rss_bytes": 19939328,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            },
+            {
+              "mode": "ties",
+              "seconds": 0.053964,
+              "rss_bytes": 19955712,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            },
+            {
+              "mode": "ties",
+              "seconds": 0.062078,
+              "rss_bytes": 19939328,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.055775,
+          "max_rss_mib": 17.828125,
+          "runs": [
+            {
+              "mode": "ties",
+              "seconds": 0.055775,
+              "rss_bytes": 18694144,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            },
+            {
+              "mode": "ties",
+              "seconds": 0.05697,
+              "rss_bytes": 18694144,
+              "checksum": "572750977868713343",
+              "answers": 100000
+            },
+            {
+              "mode": "ties",
+              "seconds": 0.055535,
+              "rss_bytes": 18694144,
               "checksum": "572750977868713343",
               "answers": 100000
             }
@@ -433,135 +595,189 @@
       "mode": "sorted",
       "methods": {
         "baseline": {
-          "median_seconds": 0.12733,
-          "max_rss_mib": 21.640625,
+          "median_seconds": 0.125662,
+          "max_rss_mib": 21.65625,
           "runs": [
             {
               "mode": "sorted",
-              "seconds": 0.130782,
-              "rss_bytes": 22675456,
+              "seconds": 0.125387,
+              "rss_bytes": 22708224,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.125139,
-              "rss_bytes": 22675456,
+              "seconds": 0.125883,
+              "rss_bytes": 22708224,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.12733,
-              "rss_bytes": 22691840,
+              "seconds": 0.125662,
+              "rss_bytes": 22708224,
               "checksum": "233009996320527332",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.140278,
-          "max_rss_mib": 24.234375,
+          "median_seconds": 0.141324,
+          "max_rss_mib": 24.265625,
           "runs": [
             {
               "mode": "sorted",
-              "seconds": 0.14716,
-              "rss_bytes": 25411584,
+              "seconds": 0.143244,
+              "rss_bytes": 25444352,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.139024,
-              "rss_bytes": 25395200,
+              "seconds": 0.141324,
+              "rss_bytes": 25427968,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.140278,
-              "rss_bytes": 25395200,
+              "seconds": 0.141047,
+              "rss_bytes": 25427968,
               "checksum": "233009996320527332",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.1286,
-          "max_rss_mib": 21.90625,
+          "median_seconds": 0.128346,
+          "max_rss_mib": 21.953125,
           "runs": [
             {
               "mode": "sorted",
-              "seconds": 0.1286,
-              "rss_bytes": 22970368,
+              "seconds": 0.128346,
+              "rss_bytes": 23019520,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.126748,
-              "rss_bytes": 22970368,
+              "seconds": 0.135749,
+              "rss_bytes": 23019520,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.12961,
-              "rss_bytes": 22970368,
+              "seconds": 0.128179,
+              "rss_bytes": 23003136,
               "checksum": "233009996320527332",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.116122,
-          "max_rss_mib": 19.34375,
+          "median_seconds": 0.111322,
+          "max_rss_mib": 19.375,
           "runs": [
             {
               "mode": "sorted",
-              "seconds": 0.116122,
-              "rss_bytes": 20283392,
+              "seconds": 0.111322,
+              "rss_bytes": 20316160,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.118157,
-              "rss_bytes": 20283392,
+              "seconds": 0.130302,
+              "rss_bytes": 20316160,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.109806,
-              "rss_bytes": 20283392,
+              "seconds": 0.110622,
+              "rss_bytes": 20316160,
               "checksum": "233009996320527332",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.114557,
-          "max_rss_mib": 20.125,
+          "median_seconds": 0.117287,
+          "max_rss_mib": 19.375,
           "runs": [
             {
               "mode": "sorted",
-              "seconds": 0.114557,
-              "rss_bytes": 20283392,
+              "seconds": 0.117287,
+              "rss_bytes": 20316160,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.112482,
-              "rss_bytes": 20283392,
+              "seconds": 0.118787,
+              "rss_bytes": 20299776,
               "checksum": "233009996320527332",
               "answers": 100000
             },
             {
               "mode": "sorted",
-              "seconds": 0.115117,
-              "rss_bytes": 21102592,
+              "seconds": 0.113222,
+              "rss_bytes": 20316160,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.11307,
+          "max_rss_mib": 21.953125,
+          "runs": [
+            {
+              "mode": "sorted",
+              "seconds": 0.11074,
+              "rss_bytes": 23019520,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            },
+            {
+              "mode": "sorted",
+              "seconds": 0.11307,
+              "rss_bytes": 23003136,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            },
+            {
+              "mode": "sorted",
+              "seconds": 0.115622,
+              "rss_bytes": 23003136,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.112513,
+          "max_rss_mib": 19.375,
+          "runs": [
+            {
+              "mode": "sorted",
+              "seconds": 0.111746,
+              "rss_bytes": 20316160,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            },
+            {
+              "mode": "sorted",
+              "seconds": 0.113978,
+              "rss_bytes": 20316160,
+              "checksum": "233009996320527332",
+              "answers": 100000
+            },
+            {
+              "mode": "sorted",
+              "seconds": 0.112513,
+              "rss_bytes": 20299776,
               "checksum": "233009996320527332",
               "answers": 100000
             }
@@ -574,135 +790,189 @@
       "mode": "add_heavy",
       "methods": {
         "baseline": {
-          "median_seconds": 0.089072,
-          "max_rss_mib": 19.015625,
+          "median_seconds": 0.08982,
+          "max_rss_mib": 19.046875,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.100546,
-              "rss_bytes": 19939328,
+              "seconds": 0.089804,
+              "rss_bytes": 19972096,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.088687,
-              "rss_bytes": 19939328,
+              "seconds": 0.092559,
+              "rss_bytes": 19972096,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.089072,
-              "rss_bytes": 19939328,
+              "seconds": 0.08982,
+              "rss_bytes": 19972096,
               "checksum": "11865959918870470836",
               "answers": 20000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.113212,
-          "max_rss_mib": 19.03125,
+          "median_seconds": 0.110439,
+          "max_rss_mib": 19.0625,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.114287,
-              "rss_bytes": 19939328,
+              "seconds": 0.110439,
+              "rss_bytes": 19988480,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.113212,
-              "rss_bytes": 19955712,
+              "seconds": 0.111388,
+              "rss_bytes": 19988480,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.110284,
-              "rss_bytes": 19955712,
+              "seconds": 0.109668,
+              "rss_bytes": 19972096,
               "checksum": "11865959918870470836",
               "answers": 20000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.110714,
-          "max_rss_mib": 18.546875,
+          "median_seconds": 0.110168,
+          "max_rss_mib": 18.578125,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.116315,
-              "rss_bytes": 19447808,
+              "seconds": 0.108746,
+              "rss_bytes": 19480576,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.109191,
-              "rss_bytes": 19447808,
+              "seconds": 0.11193,
+              "rss_bytes": 19480576,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.110714,
-              "rss_bytes": 19431424,
+              "seconds": 0.110168,
+              "rss_bytes": 19480576,
               "checksum": "11865959918870470836",
               "answers": 20000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.089282,
-          "max_rss_mib": 18.875,
+          "median_seconds": 0.089441,
+          "max_rss_mib": 18.703125,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.089282,
-              "rss_bytes": 19578880,
+              "seconds": 0.089441,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.088805,
-              "rss_bytes": 19578880,
+              "seconds": 0.353785,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.089825,
-              "rss_bytes": 19791872,
+              "seconds": 0.089082,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.089983,
-          "max_rss_mib": 18.671875,
+          "median_seconds": 0.091924,
+          "max_rss_mib": 18.703125,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.089017,
-              "rss_bytes": 19578880,
+              "seconds": 0.091924,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.095044,
-              "rss_bytes": 19578880,
+              "seconds": 0.093258,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.089983,
-              "rss_bytes": 19578880,
+              "seconds": 0.089637,
+              "rss_bytes": 19611648,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.081626,
+          "max_rss_mib": 18.59375,
+          "runs": [
+            {
+              "mode": "add_heavy",
+              "seconds": 0.081626,
+              "rss_bytes": 19496960,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.084179,
+              "rss_bytes": 19496960,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.080756,
+              "rss_bytes": 19480576,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.09035,
+          "max_rss_mib": 18.703125,
+          "runs": [
+            {
+              "mode": "add_heavy",
+              "seconds": 0.09035,
+              "rss_bytes": 19611648,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.093512,
+              "rss_bytes": 19611648,
+              "checksum": "11865959918870470836",
+              "answers": 20000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.090312,
+              "rss_bytes": 19611648,
               "checksum": "11865959918870470836",
               "answers": 20000
             }
@@ -715,135 +985,189 @@
       "mode": "query_heavy",
       "methods": {
         "baseline": {
-          "median_seconds": 0.139234,
-          "max_rss_mib": 23.6875,
+          "median_seconds": 0.137431,
+          "max_rss_mib": 23.71875,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.141842,
-              "rss_bytes": 24838144,
+              "seconds": 0.137431,
+              "rss_bytes": 24870912,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.136253,
-              "rss_bytes": 24821760,
+              "seconds": 0.138065,
+              "rss_bytes": 24870912,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.139234,
-              "rss_bytes": 24838144,
+              "seconds": 0.136798,
+              "rss_bytes": 24870912,
               "checksum": "15503395520335524634",
               "answers": 180000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.171572,
-          "max_rss_mib": 29.40625,
+          "median_seconds": 0.170163,
+          "max_rss_mib": 29.4375,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.171572,
-              "rss_bytes": 30818304,
+              "seconds": 0.169463,
+              "rss_bytes": 30867456,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.170818,
-              "rss_bytes": 30834688,
+              "seconds": 0.17323,
+              "rss_bytes": 30867456,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.173913,
-              "rss_bytes": 30834688,
+              "seconds": 0.170163,
+              "rss_bytes": 30851072,
               "checksum": "15503395520335524634",
               "answers": 180000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.152984,
-          "max_rss_mib": 25.265625,
+          "median_seconds": 0.152266,
+          "max_rss_mib": 25.296875,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.157197,
-              "rss_bytes": 26492928,
+              "seconds": 0.152266,
+              "rss_bytes": 26525696,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.151115,
-              "rss_bytes": 26492928,
+              "seconds": 0.155272,
+              "rss_bytes": 26525696,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.152984,
-              "rss_bytes": 26492928,
+              "seconds": 0.152128,
+              "rss_bytes": 26525696,
               "checksum": "15503395520335524634",
               "answers": 180000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.120754,
-          "max_rss_mib": 18.5625,
+          "median_seconds": 0.119455,
+          "max_rss_mib": 18.59375,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.124768,
-              "rss_bytes": 19464192,
+              "seconds": 0.119455,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.120754,
-              "rss_bytes": 19447808,
+              "seconds": 0.120585,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.119057,
-              "rss_bytes": 19464192,
+              "seconds": 0.118199,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.124647,
-          "max_rss_mib": 18.5625,
+          "median_seconds": 0.12335,
+          "max_rss_mib": 18.59375,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.125905,
-              "rss_bytes": 19464192,
+              "seconds": 0.12335,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.124647,
-              "rss_bytes": 19464192,
+              "seconds": 0.13242,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.123185,
-              "rss_bytes": 19464192,
+              "seconds": 0.123165,
+              "rss_bytes": 19496960,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.125111,
+          "max_rss_mib": 25.296875,
+          "runs": [
+            {
+              "mode": "query_heavy",
+              "seconds": 0.125111,
+              "rss_bytes": 26525696,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.128126,
+              "rss_bytes": 26525696,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.12484,
+              "rss_bytes": 26509312,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.123904,
+          "max_rss_mib": 18.59375,
+          "runs": [
+            {
+              "mode": "query_heavy",
+              "seconds": 0.203021,
+              "rss_bytes": 19496960,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.123097,
+              "rss_bytes": 19496960,
+              "checksum": "15503395520335524634",
+              "answers": 180000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.123904,
+              "rss_bytes": 19496960,
               "checksum": "15503395520335524634",
               "answers": 180000
             }
@@ -856,135 +1180,189 @@
       "mode": "query_first",
       "methods": {
         "baseline": {
-          "median_seconds": 0.010404,
-          "max_rss_mib": 14.296875,
+          "median_seconds": 0.010855,
+          "max_rss_mib": 14.328125,
           "runs": [
             {
               "mode": "query_first",
-              "seconds": 0.010458,
-              "rss_bytes": 14991360,
+              "seconds": 0.010855,
+              "rss_bytes": 15024128,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.010404,
-              "rss_bytes": 14991360,
+              "seconds": 0.010663,
+              "rss_bytes": 15024128,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.010347,
-              "rss_bytes": 14991360,
+              "seconds": 0.01103,
+              "rss_bytes": 15024128,
               "checksum": "0",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.019801,
-          "max_rss_mib": 21.9375,
+          "median_seconds": 0.019893,
+          "max_rss_mib": 21.96875,
           "runs": [
             {
               "mode": "query_first",
-              "seconds": 0.019801,
-              "rss_bytes": 22970368,
+              "seconds": 0.019608,
+              "rss_bytes": 23019520,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.020032,
-              "rss_bytes": 22986752,
+              "seconds": 0.021819,
+              "rss_bytes": 23035904,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.019357,
-              "rss_bytes": 23003136,
+              "seconds": 0.019893,
+              "rss_bytes": 23019520,
               "checksum": "0",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.015985,
-          "max_rss_mib": 21.15625,
+          "median_seconds": 0.015942,
+          "max_rss_mib": 21.171875,
           "runs": [
             {
               "mode": "query_first",
-              "seconds": 0.01605,
-              "rss_bytes": 22183936,
+              "seconds": 0.015668,
+              "rss_bytes": 22200320,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.015985,
-              "rss_bytes": 22167552,
+              "seconds": 0.016281,
+              "rss_bytes": 22200320,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.015724,
-              "rss_bytes": 22183936,
+              "seconds": 0.015942,
+              "rss_bytes": 22200320,
               "checksum": "0",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.006701,
-          "max_rss_mib": 13.546875,
+          "median_seconds": 0.006712,
+          "max_rss_mib": 13.578125,
           "runs": [
             {
               "mode": "query_first",
-              "seconds": 0.006808,
-              "rss_bytes": 14188544,
+              "seconds": 0.006811,
+              "rss_bytes": 14237696,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.006701,
-              "rss_bytes": 14204928,
+              "seconds": 0.006651,
+              "rss_bytes": 14237696,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.006635,
-              "rss_bytes": 14204928,
+              "seconds": 0.006712,
+              "rss_bytes": 14221312,
               "checksum": "0",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.006632,
-          "max_rss_mib": 13.546875,
+          "median_seconds": 0.006863,
+          "max_rss_mib": 13.578125,
           "runs": [
             {
               "mode": "query_first",
-              "seconds": 0.006887,
-              "rss_bytes": 14204928,
+              "seconds": 0.006653,
+              "rss_bytes": 14237696,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.006632,
-              "rss_bytes": 14204928,
+              "seconds": 0.007356,
+              "rss_bytes": 14237696,
               "checksum": "0",
               "answers": 100000
             },
             {
               "mode": "query_first",
-              "seconds": 0.00656,
-              "rss_bytes": 14204928,
+              "seconds": 0.006863,
+              "rss_bytes": 14237696,
+              "checksum": "0",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.01957,
+          "max_rss_mib": 21.953125,
+          "runs": [
+            {
+              "mode": "query_first",
+              "seconds": 0.018769,
+              "rss_bytes": 23019520,
+              "checksum": "0",
+              "answers": 100000
+            },
+            {
+              "mode": "query_first",
+              "seconds": 0.019703,
+              "rss_bytes": 23003136,
+              "checksum": "0",
+              "answers": 100000
+            },
+            {
+              "mode": "query_first",
+              "seconds": 0.01957,
+              "rss_bytes": 23019520,
+              "checksum": "0",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.006921,
+          "max_rss_mib": 13.578125,
+          "runs": [
+            {
+              "mode": "query_first",
+              "seconds": 0.007262,
+              "rss_bytes": 14237696,
+              "checksum": "0",
+              "answers": 100000
+            },
+            {
+              "mode": "query_first",
+              "seconds": 0.006843,
+              "rss_bytes": 14237696,
+              "checksum": "0",
+              "answers": 100000
+            },
+            {
+              "mode": "query_first",
+              "seconds": 0.006921,
+              "rss_bytes": 14237696,
               "checksum": "0",
               "answers": 100000
             }
@@ -997,27 +1375,27 @@
       "mode": "only_add",
       "methods": {
         "baseline": {
-          "median_seconds": 0.007236,
-          "max_rss_mib": 17.03125,
+          "median_seconds": 0.007561,
+          "max_rss_mib": 17.0625,
           "runs": [
             {
               "mode": "only_add",
-              "seconds": 0.007237,
-              "rss_bytes": 17858560,
+              "seconds": 0.007561,
+              "rss_bytes": 17891328,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.007236,
-              "rss_bytes": 17858560,
+              "seconds": 0.00724,
+              "rss_bytes": 17891328,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.00721,
-              "rss_bytes": 17858560,
+              "seconds": 0.007876,
+              "rss_bytes": 17891328,
               "checksum": "0",
               "answers": 0
             }
@@ -1025,107 +1403,161 @@
         },
         "presort": {
           "median_seconds": 0.000189,
-          "max_rss_mib": 6.96875,
+          "max_rss_mib": 7.0,
           "runs": [
             {
               "mode": "only_add",
-              "seconds": 0.000204,
+              "seconds": 0.000186,
               "rss_bytes": 7307264,
+              "checksum": "0",
+              "answers": 0
+            },
+            {
+              "mode": "only_add",
+              "seconds": 0.000212,
+              "rss_bytes": 7323648,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
               "seconds": 0.000189,
-              "rss_bytes": 7290880,
-              "checksum": "0",
-              "answers": 0
-            },
-            {
-              "mode": "only_add",
-              "seconds": 0.000178,
-              "rss_bytes": 7307264,
+              "rss_bytes": 7340032,
               "checksum": "0",
               "answers": 0
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.000195,
-          "max_rss_mib": 6.96875,
+          "median_seconds": 0.000186,
+          "max_rss_mib": 7.0,
           "runs": [
             {
               "mode": "only_add",
-              "seconds": 0.000228,
-              "rss_bytes": 7290880,
+              "seconds": 0.000182,
+              "rss_bytes": 7323648,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.000195,
-              "rss_bytes": 7307264,
+              "seconds": 0.000193,
+              "rss_bytes": 7323648,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.000178,
-              "rss_bytes": 7307264,
+              "seconds": 0.000186,
+              "rss_bytes": 7340032,
               "checksum": "0",
               "answers": 0
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.007246,
-          "max_rss_mib": 17.734375,
+          "median_seconds": 0.007226,
+          "max_rss_mib": 17.765625,
           "runs": [
             {
               "mode": "only_add",
-              "seconds": 0.007781,
-              "rss_bytes": 18595840,
+              "seconds": 0.007226,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.007215,
-              "rss_bytes": 18595840,
+              "seconds": 0.00785,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.007246,
-              "rss_bytes": 18595840,
+              "seconds": 0.007207,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.007354,
-          "max_rss_mib": 17.734375,
+          "median_seconds": 0.007398,
+          "max_rss_mib": 17.765625,
           "runs": [
             {
               "mode": "only_add",
-              "seconds": 0.007354,
-              "rss_bytes": 18595840,
+              "seconds": 0.007339,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.00718,
-              "rss_bytes": 18595840,
+              "seconds": 0.008583,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             },
             {
               "mode": "only_add",
-              "seconds": 0.01094,
-              "rss_bytes": 18595840,
+              "seconds": 0.007398,
+              "rss_bytes": 18628608,
+              "checksum": "0",
+              "answers": 0
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.000189,
+          "max_rss_mib": 7.0,
+          "runs": [
+            {
+              "mode": "only_add",
+              "seconds": 0.000182,
+              "rss_bytes": 7340032,
+              "checksum": "0",
+              "answers": 0
+            },
+            {
+              "mode": "only_add",
+              "seconds": 0.000193,
+              "rss_bytes": 7340032,
+              "checksum": "0",
+              "answers": 0
+            },
+            {
+              "mode": "only_add",
+              "seconds": 0.000189,
+              "rss_bytes": 7340032,
+              "checksum": "0",
+              "answers": 0
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.007339,
+          "max_rss_mib": 17.765625,
+          "runs": [
+            {
+              "mode": "only_add",
+              "seconds": 0.007293,
+              "rss_bytes": 18612224,
+              "checksum": "0",
+              "answers": 0
+            },
+            {
+              "mode": "only_add",
+              "seconds": 0.007339,
+              "rss_bytes": 18628608,
+              "checksum": "0",
+              "answers": 0
+            },
+            {
+              "mode": "only_add",
+              "seconds": 0.007715,
+              "rss_bytes": 18628608,
               "checksum": "0",
               "answers": 0
             }
@@ -1138,135 +1570,189 @@
       "mode": "only_query",
       "methods": {
         "baseline": {
-          "median_seconds": 0.013824,
-          "max_rss_mib": 15.984375,
+          "median_seconds": 0.014739,
+          "max_rss_mib": 16.015625,
           "runs": [
             {
               "mode": "only_query",
-              "seconds": 0.013824,
-              "rss_bytes": 16760832,
+              "seconds": 0.014739,
+              "rss_bytes": 16793600,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.013787,
-              "rss_bytes": 16760832,
+              "seconds": 0.0141,
+              "rss_bytes": 16793600,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.013854,
-              "rss_bytes": 16760832,
+              "seconds": 0.014798,
+              "rss_bytes": 16793600,
               "checksum": "0",
               "answers": 200000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.026765,
-          "max_rss_mib": 27.640625,
+          "median_seconds": 0.027495,
+          "max_rss_mib": 27.671875,
           "runs": [
             {
               "mode": "only_query",
-              "seconds": 0.027486,
-              "rss_bytes": 28983296,
+              "seconds": 0.026714,
+              "rss_bytes": 29016064,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.026765,
-              "rss_bytes": 28966912,
+              "seconds": 0.030069,
+              "rss_bytes": 29016064,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.026634,
-              "rss_bytes": 28983296,
+              "seconds": 0.027495,
+              "rss_bytes": 28999680,
               "checksum": "0",
               "answers": 200000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 6.5e-05,
-          "max_rss_mib": 7.640625,
+          "median_seconds": 6.8e-05,
+          "max_rss_mib": 7.671875,
           "runs": [
             {
               "mode": "only_query",
-              "seconds": 6.9e-05,
-              "rss_bytes": 8011776,
+              "seconds": 6.6e-05,
+              "rss_bytes": 8044544,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 6.5e-05,
-              "rss_bytes": 8011776,
+              "seconds": 8.3e-05,
+              "rss_bytes": 8044544,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 6.5e-05,
-              "rss_bytes": 8011776,
+              "seconds": 6.8e-05,
+              "rss_bytes": 8044544,
               "checksum": "0",
               "answers": 200000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.001637,
-          "max_rss_mib": 13.921875,
+          "median_seconds": 0.001634,
+          "max_rss_mib": 13.9375,
           "runs": [
             {
               "mode": "only_query",
-              "seconds": 0.001694,
-              "rss_bytes": 14598144,
+              "seconds": 0.001634,
+              "rss_bytes": 14614528,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.001624,
-              "rss_bytes": 14598144,
+              "seconds": 0.001897,
+              "rss_bytes": 14614528,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.001637,
-              "rss_bytes": 14598144,
+              "seconds": 0.001596,
+              "rss_bytes": 14614528,
               "checksum": "0",
               "answers": 200000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.001651,
-          "max_rss_mib": 13.921875,
+          "median_seconds": 0.001696,
+          "max_rss_mib": 13.953125,
           "runs": [
             {
               "mode": "only_query",
-              "seconds": 0.001856,
-              "rss_bytes": 14598144,
+              "seconds": 0.001647,
+              "rss_bytes": 14630912,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.001585,
-              "rss_bytes": 14598144,
+              "seconds": 0.001751,
+              "rss_bytes": 14630912,
               "checksum": "0",
               "answers": 200000
             },
             {
               "mode": "only_query",
-              "seconds": 0.001651,
-              "rss_bytes": 14598144,
+              "seconds": 0.001696,
+              "rss_bytes": 14630912,
+              "checksum": "0",
+              "answers": 200000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 7.3e-05,
+          "max_rss_mib": 7.671875,
+          "runs": [
+            {
+              "mode": "only_query",
+              "seconds": 7.3e-05,
+              "rss_bytes": 8044544,
+              "checksum": "0",
+              "answers": 200000
+            },
+            {
+              "mode": "only_query",
+              "seconds": 7.9e-05,
+              "rss_bytes": 8044544,
+              "checksum": "0",
+              "answers": 200000
+            },
+            {
+              "mode": "only_query",
+              "seconds": 6.7e-05,
+              "rss_bytes": 8044544,
+              "checksum": "0",
+              "answers": 200000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.001668,
+          "max_rss_mib": 13.9375,
+          "runs": [
+            {
+              "mode": "only_query",
+              "seconds": 0.001646,
+              "rss_bytes": 14614528,
+              "checksum": "0",
+              "answers": 200000
+            },
+            {
+              "mode": "only_query",
+              "seconds": 0.001702,
+              "rss_bytes": 14614528,
+              "checksum": "0",
+              "answers": 200000
+            },
+            {
+              "mode": "only_query",
+              "seconds": 0.001668,
+              "rss_bytes": 14614528,
               "checksum": "0",
               "answers": 200000
             }
@@ -1279,135 +1765,189 @@
       "mode": "mixed",
       "methods": {
         "baseline": {
-          "median_seconds": 0.812724,
-          "max_rss_mib": 95.40625,
+          "median_seconds": 0.841985,
+          "max_rss_mib": 95.4375,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.812724,
-              "rss_bytes": 100040704,
+              "seconds": 0.841985,
+              "rss_bytes": 100073472,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.809766,
-              "rss_bytes": 100040704,
+              "seconds": 0.873729,
+              "rss_bytes": 100073472,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.938373,
-              "rss_bytes": 100040704,
+              "seconds": 0.805402,
+              "rss_bytes": 100073472,
               "checksum": "18006226038254165959",
               "answers": 500000
             }
           ]
         },
         "presort": {
-          "median_seconds": 1.038148,
-          "max_rss_mib": 116.28125,
+          "median_seconds": 0.987211,
+          "max_rss_mib": 116.3125,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 1.343909,
-              "rss_bytes": 121880576,
+              "seconds": 0.987211,
+              "rss_bytes": 121946112,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 1.038148,
-              "rss_bytes": 121913344,
+              "seconds": 0.979422,
+              "rss_bytes": 121962496,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.985052,
-              "rss_bytes": 121929728,
+              "seconds": 1.012161,
+              "rss_bytes": 121946112,
               "checksum": "18006226038254165959",
               "answers": 500000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.946302,
-          "max_rss_mib": 102.84375,
+          "median_seconds": 0.925772,
+          "max_rss_mib": 102.875,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.931087,
-              "rss_bytes": 107823104,
+              "seconds": 0.936762,
+              "rss_bytes": 107855872,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.946302,
-              "rss_bytes": 107839488,
+              "seconds": 0.925772,
+              "rss_bytes": 107872256,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 1.091688,
-              "rss_bytes": 107823104,
+              "seconds": 0.925241,
+              "rss_bytes": 107872256,
               "checksum": "18006226038254165959",
               "answers": 500000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.760584,
-          "max_rss_mib": 84.0,
+          "median_seconds": 0.751566,
+          "max_rss_mib": 84.03125,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.830595,
-              "rss_bytes": 88080384,
+              "seconds": 0.741155,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.73699,
-              "rss_bytes": 88080384,
+              "seconds": 0.764819,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.760584,
-              "rss_bytes": 88064000,
+              "seconds": 0.751566,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.771134,
-          "max_rss_mib": 84.0,
+          "median_seconds": 0.763601,
+          "max_rss_mib": 84.03125,
           "runs": [
             {
               "mode": "mixed",
-              "seconds": 0.771134,
-              "rss_bytes": 88080384,
+              "seconds": 0.764401,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.7575,
-              "rss_bytes": 88080384,
+              "seconds": 0.75797,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             },
             {
               "mode": "mixed",
-              "seconds": 0.775402,
-              "rss_bytes": 88080384,
+              "seconds": 0.763601,
+              "rss_bytes": 88113152,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.779019,
+          "max_rss_mib": 102.875,
+          "runs": [
+            {
+              "mode": "mixed",
+              "seconds": 0.792677,
+              "rss_bytes": 107872256,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.779019,
+              "rss_bytes": 107855872,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.762605,
+              "rss_bytes": 107839488,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.752266,
+          "max_rss_mib": 84.03125,
+          "runs": [
+            {
+              "mode": "mixed",
+              "seconds": 0.750807,
+              "rss_bytes": 88113152,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.773768,
+              "rss_bytes": 88113152,
+              "checksum": "18006226038254165959",
+              "answers": 500000
+            },
+            {
+              "mode": "mixed",
+              "seconds": 0.752266,
+              "rss_bytes": 88113152,
               "checksum": "18006226038254165959",
               "answers": 500000
             }
@@ -1420,135 +1960,189 @@
       "mode": "initial",
       "methods": {
         "baseline": {
-          "median_seconds": 0.173527,
-          "max_rss_mib": 108.765625,
+          "median_seconds": 0.167934,
+          "max_rss_mib": 108.796875,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.16042,
-              "rss_bytes": 114049024,
+              "seconds": 0.178678,
+              "rss_bytes": 114065408,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.176496,
-              "rss_bytes": 114049024,
+              "seconds": 0.163095,
+              "rss_bytes": 114081792,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.173527,
-              "rss_bytes": 114032640,
+              "seconds": 0.167934,
+              "rss_bytes": 114081792,
               "checksum": "10350856980742886686",
               "answers": 500000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.177196,
-          "max_rss_mib": 116.28125,
+          "median_seconds": 0.170906,
+          "max_rss_mib": 116.3125,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.177196,
-              "rss_bytes": 121913344,
+              "seconds": 0.174298,
+              "rss_bytes": 121946112,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.186704,
-              "rss_bytes": 121929728,
+              "seconds": 0.170906,
+              "rss_bytes": 121946112,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.164656,
-              "rss_bytes": 121929728,
+              "seconds": 0.168953,
+              "rss_bytes": 121962496,
               "checksum": "10350856980742886686",
               "answers": 500000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.139118,
-          "max_rss_mib": 102.84375,
+          "median_seconds": 0.138995,
+          "max_rss_mib": 102.875,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.139102,
-              "rss_bytes": 107839488,
+              "seconds": 0.14323,
+              "rss_bytes": 107872256,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.159971,
-              "rss_bytes": 107839488,
+              "seconds": 0.138446,
+              "rss_bytes": 107872256,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.139118,
-              "rss_bytes": 107823104,
+              "seconds": 0.138995,
+              "rss_bytes": 107855872,
               "checksum": "10350856980742886686",
               "answers": 500000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.139859,
-          "max_rss_mib": 97.359375,
+          "median_seconds": 0.138362,
+          "max_rss_mib": 97.390625,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.142021,
-              "rss_bytes": 102088704,
+              "seconds": 0.136539,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.139859,
-              "rss_bytes": 102072320,
+              "seconds": 0.152432,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.137286,
-              "rss_bytes": 102088704,
+              "seconds": 0.138362,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.14493,
-          "max_rss_mib": 97.359375,
+          "median_seconds": 0.138915,
+          "max_rss_mib": 97.390625,
           "runs": [
             {
               "mode": "initial",
-              "seconds": 0.14493,
-              "rss_bytes": 102088704,
+              "seconds": 0.14143,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.139548,
-              "rss_bytes": 102088704,
+              "seconds": 0.138399,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             },
             {
               "mode": "initial",
-              "seconds": 0.1527,
-              "rss_bytes": 102088704,
+              "seconds": 0.138915,
+              "rss_bytes": 102121472,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.186578,
+          "max_rss_mib": 102.875,
+          "runs": [
+            {
+              "mode": "initial",
+              "seconds": 0.183308,
+              "rss_bytes": 107872256,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.191498,
+              "rss_bytes": 107872256,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.186578,
+              "rss_bytes": 107872256,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.137106,
+          "max_rss_mib": 97.390625,
+          "runs": [
+            {
+              "mode": "initial",
+              "seconds": 0.137106,
+              "rss_bytes": 102121472,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.239746,
+              "rss_bytes": 102121472,
+              "checksum": "10350856980742886686",
+              "answers": 500000
+            },
+            {
+              "mode": "initial",
+              "seconds": 0.136202,
+              "rss_bytes": 102121472,
               "checksum": "10350856980742886686",
               "answers": 500000
             }
@@ -1561,135 +2155,189 @@
       "mode": "add_heavy",
       "methods": {
         "baseline": {
-          "median_seconds": 0.694778,
-          "max_rss_mib": 81.90625,
+          "median_seconds": 0.697865,
+          "max_rss_mib": 81.9375,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.693306,
-              "rss_bytes": 85884928,
+              "seconds": 0.697865,
+              "rss_bytes": 85917696,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.694778,
-              "rss_bytes": 85868544,
+              "seconds": 0.694143,
+              "rss_bytes": 85917696,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.719882,
-              "rss_bytes": 85884928,
+              "seconds": 0.748924,
+              "rss_bytes": 85917696,
               "checksum": "16916853647538928028",
               "answers": 100000
             }
           ]
         },
         "presort": {
-          "median_seconds": 0.709403,
-          "max_rss_mib": 89.546875,
+          "median_seconds": 0.690302,
+          "max_rss_mib": 89.59375,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.684302,
-              "rss_bytes": 93896704,
+              "seconds": 0.686806,
+              "rss_bytes": 93945856,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.709403,
-              "rss_bytes": 93896704,
+              "seconds": 0.690302,
+              "rss_bytes": 93945856,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.719306,
-              "rss_bytes": 93896704,
+              "seconds": 0.690834,
+              "rss_bytes": 93945856,
               "checksum": "16916853647538928028",
               "answers": 100000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.653484,
-          "max_rss_mib": 87.28125,
+          "median_seconds": 0.662396,
+          "max_rss_mib": 87.3125,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.653484,
-              "rss_bytes": 91504640,
+              "seconds": 0.667951,
+              "rss_bytes": 91553792,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.652221,
-              "rss_bytes": 91504640,
+              "seconds": 0.655484,
+              "rss_bytes": 91537408,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.701154,
-              "rss_bytes": 91521024,
+              "seconds": 0.662396,
+              "rss_bytes": 91553792,
               "checksum": "16916853647538928028",
               "answers": 100000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.661712,
-          "max_rss_mib": 80.15625,
+          "median_seconds": 0.657367,
+          "max_rss_mib": 80.1875,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.65523,
-              "rss_bytes": 84049920,
+              "seconds": 0.657367,
+              "rss_bytes": 84082688,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.661712,
-              "rss_bytes": 84049920,
+              "seconds": 0.677101,
+              "rss_bytes": 84066304,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.670892,
-              "rss_bytes": 84049920,
+              "seconds": 0.653193,
+              "rss_bytes": 84082688,
               "checksum": "16916853647538928028",
               "answers": 100000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.678144,
-          "max_rss_mib": 80.15625,
+          "median_seconds": 0.658078,
+          "max_rss_mib": 80.1875,
           "runs": [
             {
               "mode": "add_heavy",
-              "seconds": 0.896085,
-              "rss_bytes": 84049920,
+              "seconds": 0.654949,
+              "rss_bytes": 84082688,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.664369,
-              "rss_bytes": 84049920,
+              "seconds": 0.659631,
+              "rss_bytes": 84082688,
               "checksum": "16916853647538928028",
               "answers": 100000
             },
             {
               "mode": "add_heavy",
-              "seconds": 0.678144,
-              "rss_bytes": 84049920,
+              "seconds": 0.658078,
+              "rss_bytes": 84082688,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.555904,
+          "max_rss_mib": 87.3125,
+          "runs": [
+            {
+              "mode": "add_heavy",
+              "seconds": 0.555904,
+              "rss_bytes": 91537408,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.571213,
+              "rss_bytes": 91553792,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.554346,
+              "rss_bytes": 91553792,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.660911,
+          "max_rss_mib": 80.1875,
+          "runs": [
+            {
+              "mode": "add_heavy",
+              "seconds": 0.660911,
+              "rss_bytes": 84082688,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.751221,
+              "rss_bytes": 84082688,
+              "checksum": "16916853647538928028",
+              "answers": 100000
+            },
+            {
+              "mode": "add_heavy",
+              "seconds": 0.658507,
+              "rss_bytes": 84082688,
               "checksum": "16916853647538928028",
               "answers": 100000
             }
@@ -1702,135 +2350,189 @@
       "mode": "query_heavy",
       "methods": {
         "baseline": {
-          "median_seconds": 0.947054,
-          "max_rss_mib": 107.59375,
+          "median_seconds": 0.913329,
+          "max_rss_mib": 107.625,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 1.486943,
-              "rss_bytes": 104939520,
+              "seconds": 0.913329,
+              "rss_bytes": 112852992,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.931309,
-              "rss_bytes": 112820224,
+              "seconds": 0.898013,
+              "rss_bytes": 112852992,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.947054,
-              "rss_bytes": 112820224,
+              "seconds": 0.966076,
+              "rss_bytes": 112852992,
               "checksum": "13290100243219126222",
               "answers": 900000
             }
           ]
         },
         "presort": {
-          "median_seconds": 1.074066,
-          "max_rss_mib": 142.203125,
+          "median_seconds": 1.071211,
+          "max_rss_mib": 142.234375,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 1.053126,
-              "rss_bytes": 149078016,
+              "seconds": 1.10345,
+              "rss_bytes": 149143552,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 1.096655,
-              "rss_bytes": 149110784,
+              "seconds": 1.071211,
+              "rss_bytes": 149127168,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 1.074066,
-              "rss_bytes": 149094400,
+              "seconds": 1.069647,
+              "rss_bytes": 149127168,
               "checksum": "13290100243219126222",
               "answers": 900000
             }
           ]
         },
         "add_only": {
-          "median_seconds": 0.929906,
-          "max_rss_mib": 119.59375,
+          "median_seconds": 0.914134,
+          "max_rss_mib": 119.640625,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.940457,
-              "rss_bytes": 125403136,
+              "seconds": 0.914134,
+              "rss_bytes": 125452288,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.911679,
-              "rss_bytes": 125403136,
+              "seconds": 0.91905,
+              "rss_bytes": 125452288,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.929906,
-              "rss_bytes": 125403136,
+              "seconds": 0.907356,
+              "rss_bytes": 125435904,
               "checksum": "13290100243219126222",
               "answers": 900000
             }
           ]
         },
         "compressed": {
-          "median_seconds": 0.748355,
-          "max_rss_mib": 87.125,
+          "median_seconds": 0.744708,
+          "max_rss_mib": 87.15625,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.752295,
-              "rss_bytes": 91357184,
+              "seconds": 0.741022,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.745722,
-              "rss_bytes": 91357184,
+              "seconds": 0.753659,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.748355,
-              "rss_bytes": 91357184,
+              "seconds": 0.744708,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             }
           ]
         },
         "shared": {
-          "median_seconds": 0.789483,
-          "max_rss_mib": 87.125,
+          "median_seconds": 0.771453,
+          "max_rss_mib": 87.15625,
           "runs": [
             {
               "mode": "query_heavy",
-              "seconds": 0.789483,
-              "rss_bytes": 91357184,
+              "seconds": 0.77121,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.770007,
-              "rss_bytes": 91357184,
+              "seconds": 0.771453,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             },
             {
               "mode": "query_heavy",
-              "seconds": 0.870711,
-              "rss_bytes": 91357184,
+              "seconds": 0.791439,
+              "rss_bytes": 91389952,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            }
+          ]
+        },
+        "merge": {
+          "median_seconds": 0.75751,
+          "max_rss_mib": 119.640625,
+          "runs": [
+            {
+              "mode": "query_heavy",
+              "seconds": 0.753679,
+              "rss_bytes": 125452288,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.75751,
+              "rss_bytes": 125452288,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.772572,
+              "rss_bytes": 125435904,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            }
+          ]
+        },
+        "simple_ties": {
+          "median_seconds": 0.755016,
+          "max_rss_mib": 87.15625,
+          "runs": [
+            {
+              "mode": "query_heavy",
+              "seconds": 0.755016,
+              "rss_bytes": 91389952,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.76894,
+              "rss_bytes": 91389952,
+              "checksum": "13290100243219126222",
+              "answers": 900000
+            },
+            {
+              "mode": "query_heavy",
+              "seconds": 0.750598,
+              "rss_bytes": 91389952,
               "checksum": "13290100243219126222",
               "answers": 900000
             }

@@ -15,7 +15,7 @@ for n, modes in [
     (200000, ["mixed", "initial", "ties", "sorted", "add_heavy", "query_heavy", "query_first", "only_add", "only_query"]),
     (1000000, ["mixed", "initial", "add_heavy", "query_heavy"]),
 ]:
-    grouped = {method: [] for method in ["baseline", "presort", "add_only", "compressed", "shared"]}
+    grouped = {method: [] for method in ["baseline", "presort", "add_only", "compressed", "shared", "merge", "simple_ties"]}
     for repeat in range(3):
         for method in list(grouped)[repeat:] + list(grouped)[:repeat]:
             for mode in modes:
