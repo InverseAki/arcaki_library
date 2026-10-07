@@ -2,7 +2,6 @@ pub trait MoState {
     type Data;
     type Query;
     type Ans;
-    // 添え字とその場所でのデータ
     fn add_left(&mut self, idx: usize, data: &Self::Data);
     fn add_right(&mut self, idx: usize, data: &Self::Data);
     fn sub_left(&mut self, idx: usize, data: &Self::Data);
@@ -10,7 +9,6 @@ pub trait MoState {
     fn ans(&mut self, query_id: usize, q_data: &Self::Query) -> Self::Ans;
 }
 
-// 対称ならこっち
 pub trait SymMoState {
     type Data;
     type Query;
@@ -87,7 +85,6 @@ impl<M> MoSolver<M> where M: MoState {
         ord.into_iter().map(|(_, i)| i).collect()
     }
     
-    // 状態をstateで管理する
     pub fn solve(&mut self, state: &mut M) -> Vec<M::Ans> {
         let q = self.query.len();
         let mut res: Vec<Option<M::Ans>> = (0..q).map(|_| None).collect();

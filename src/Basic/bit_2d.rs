@@ -78,18 +78,6 @@ impl BIT2D {
     }
 }
 
-/// x は 0..h の配列添字、y は Ord な座標の二次元 BIT。重みは i64。
-/// 更新する全座標を new に事前登録する（重複可）。
-/// 座標を所有するため T に Clone / Copy は不要。
-///
-/// ```ignore
-/// let mut bit = BIT2DArray::new(5, [(0, "apple"), (3, "pear")]);
-/// bit.add(3, &"pear", 7);
-/// assert_eq!(bit.prod(1, &"banana", 5, &"z"), 7);
-/// ```
-/// 登録点数 m とすると構築 O(m log m + m log(h+1) + h)、
-/// 空間 O(h + m log(h+1))。更新・検索は O(log(m+1) log(h+1))。
-/// 比較を O(1) とした計算量。
 pub struct BIT2DArray<T: Ord> {
     h: usize,
     ys: Vec<T>,
@@ -99,8 +87,6 @@ pub struct BIT2DArray<T: Ord> {
 }
 
 impl<T: Ord> BIT2DArray<T> {
-    /// h: x 方向の配列長。add: 将来更新する (x, y) の全座標。
-    /// Vec・配列・所有権を渡す iterator を受け取れる。
     pub fn new(h: usize, add: impl IntoIterator<Item = (usize, T)>) -> Self {
         let mut points: Vec<_> = add.into_iter().collect();
         assert!(points.iter().all(|(x, _)| *x < h), "x must be in 0..h");
@@ -114,7 +100,6 @@ impl<T: Ord> BIT2DArray<T> {
             let id = ys.len() - 1;
             let mut p = x + 1;
             while p <= h {
-                // y 順に登録するため各節点も整列済み。重複だけ除く。
                 if nodes[p].last() != Some(&id) {
                     nodes[p].push(id);
                 }
@@ -131,8 +116,6 @@ impl<T: Ord> BIT2DArray<T> {
         Self { h, ys, flat, xp, data }
     }
 
-    /// 事前登録した点 (x, y) に w を加える。負の重みも可。
-    /// x は 0..h。未登録点への更新は不可。
     pub fn add(&mut self, x: usize, y: &T, w: i64) {
         assert!(x < self.h, "x must be in 0..h");
         let id = self.ys.binary_search(y).expect("y must be registered");
@@ -166,14 +149,11 @@ impl<T: Ord> BIT2DArray<T> {
         res
     }
 
-    /// [0, x) × { v | v < y } の和。x は 0..=h、y は未登録でも可。
     pub fn prefix(&self, x: usize, y: &T) -> i64 {
         assert!(x <= self.h, "x must be in 0..=h");
         self.prefix_rank(x, self.ys.partition_point(|v| v < y))
     }
 
-    /// [lx, rx) × [ly, ry) の和。0 <= lx <= rx <= h、ly <= ry。
-    /// y の端点は未登録でも可。空区間の和は 0。
     pub fn prod(&self, lx: usize, ly: &T, rx: usize, ry: &T) -> i64 {
         assert!(lx <= rx && rx <= self.h, "invalid x range");
         assert!(ly <= ry, "invalid y range");

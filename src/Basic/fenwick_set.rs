@@ -1,4 +1,3 @@
-// [0, r) の半開区間
 pub struct BIT<T>
 where
     T: Copy
@@ -59,7 +58,6 @@ where
         self.add(p, x - pre);
     }
 
-    // Sum(A[0, r)) < ac となる最大の r を返す
     #[inline]
     pub fn lower_bound(&self, ac: T) -> usize {
         let mut r = 0;
@@ -233,25 +231,21 @@ impl OrderedSet {
         Some(p)
     }
 
-    // < x
     #[inline]
     pub fn count_l(&self, x: usize) -> usize {
         self.bit.g(x.min(self.n)) as usize
     }
 
-    // <= x
     #[inline]
     pub fn count_leq(&self, x: usize) -> usize {
         self.bit.g((x + 1).min(self.n)) as usize
     }
 
-    // > x
     #[inline]
     pub fn count_r(&self, x: usize) -> usize {
         self.len() - self.count_leq(x)
     }
 
-    // >= x
     #[inline]
     pub fn count_req(&self, x: usize) -> usize {
         self.len() - self.count_l(x)

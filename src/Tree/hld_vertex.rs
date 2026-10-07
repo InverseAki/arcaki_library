@@ -10,6 +10,7 @@ pub struct HLDVertex {
 impl HLDVertex {
     pub fn new(r: usize, edge: &mut UnweightedGraph)->Self{
         HLDVertex::size_dfs(r, !0, edge);
+        let n = edge.n;
         let mut int: Vec<u32> = vec![0; n];
         let mut seq: Vec<u32> = Vec::with_capacity(n);
         let mut out: Vec<u32> = vec![0; n];
@@ -131,7 +132,6 @@ impl HLDVertex {
         res
     }
 
-    // (left, right, rev: bool)
     #[inline]
     pub fn path(&self, mut u: usize, mut v: usize)->Vec<(usize, usize, bool)> {
         let mut res = Vec::new();

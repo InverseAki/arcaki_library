@@ -35,7 +35,6 @@ fn exhaustive_small_registered_subsets_and_rectangles() {
     for mask in 0..1usize << coords.len() {
         let points: Vec<_> = coords.iter().enumerate()
             .filter(|(i, _)| mask >> i & 1 != 0).map(|(_, &p)| p).collect();
-        // 逆順かつ重複した登録で構築順と dedup を検証。
         let mut bit = BIT2DArray::new(3, points.iter().rev().chain(&points).copied());
         let mut weights = vec![0; points.len()];
         for round in 0..3 {

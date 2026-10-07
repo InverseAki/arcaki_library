@@ -1,6 +1,8 @@
 # IntervalSet 検証・性能比較
 
 2026-10-06、macOS arm64、rustc 1.93.0、rustc -O。
+
+この性能比較は内部区間の変更記録を返していた時点のもの。測定時の [extract_if版](support/intervalset_extract_before_delta.rs) を固定している。現在は差分の区間ペアを返す仕様に変更済み。下記の性能数値を現在版の実測値としては扱わない。現在版は全列挙・途中破棄・連続更新・境界のdebug/release各3テストで検証した。
 比較元は今回の extract_if 導入直前の、短縮時の右端直接更新を含む実装。
 [比較元](support/intervalset_research_baseline.rs)を固定している。
 

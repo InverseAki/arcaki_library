@@ -37,8 +37,6 @@ impl SparseTable2D{
         }
     }
 
-    // [s, u), [t, v) で作動
-    // (s, t)を含み (u, v)を含まない矩形領域
     pub fn query(&self, s: usize, t: usize, u: usize, v: usize)->i64{
         let p = bit_length(u-s)-1;
         let q = bit_length(v-t)-1;

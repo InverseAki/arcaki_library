@@ -11,7 +11,6 @@ impl<const SIGMA: usize> AhoCorasik<SIGMA>{
         AhoCorasik { trie: vec![[!0;SIGMA]], last: vec![0], link: vec![0] }
     }
 
-    // add→小bitなら集合で、いらないなら適当に0/1でも入れといて
     pub fn add(&mut self, arr: &[usize], id: usize){
         let mut p = 0;
         for &c in arr{

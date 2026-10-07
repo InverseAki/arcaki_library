@@ -152,3 +152,9 @@ impl Index<usize> for UnweightedGraph{
         &self.edge[index]
     }
 }
+
+impl IndexMut<usize> for UnweightedGraph{
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.edge[index]
+    }
+}

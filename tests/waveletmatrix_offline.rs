@@ -197,7 +197,6 @@ fn structured_candidates_and_large_sums() {
         (0..65).collect(),
         (0..65).rev().collect(),
     ] {
-        // Many inactive candidates at just one index; no global Cartesian expansion.
         let updates: Vec<_> = (0..67).map(|x| (31, x)).collect();
         let mut a = initial.clone();
         let mut wm = WaveletMatrixOffline::new(&a, &updates);

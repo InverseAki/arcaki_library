@@ -1,29 +1,3 @@
-pub fn floor(a:i64, b:i64)->i64{
-    let res=(a%b+b)%b;
-    (a-res)/b
-}
-
-pub fn modulo(x: i64, y: i64)->i64{
-    (x%y+y)%y
-}
-
-pub fn gcd(a: i64, b: i64)->i64{
-    if b==0{
-        a
-    } else {
-        gcd(b, modulo(a, b))
-    }
-}
-
-pub fn ext_gcd(a: i64, b: i64)->(i64, i64, i64){
-    if b==0{
-        (a, 1, 0)
-    } else {
-        let (g, x, y) = ext_gcd(b, modulo(a, b));
-        (g, y, x-floor(a, b)*y)
-    }
-}
-
 pub fn crt(ss: &Vec<(usize, usize)>)->(usize, usize){
     let mut r = 0; let mut m = 1;
     for &(bi, mi) in ss{

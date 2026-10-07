@@ -6,7 +6,7 @@ mod baseline {
 }
 mod candidate {
     use std::collections::BTreeMap;
-    include!("../src/Basic/intervalset_rust189.rs");
+    include!("support/intervalset_rust189_before_delta.rs");
 }
 macro_rules! run {
     ($module:ident, $case:expr, $records:expr) => {{

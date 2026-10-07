@@ -1,0 +1,163 @@
+{
+  "problem": "rectangle_add_point_get",
+  "official_revision": "1814c4e5205517e368bb57a8d1127eb961cfeaae",
+  "implementation_sha256": "81efdbfce807e343cb970ca220b342a229fef6ebb99d0cd3751ad501f4bc8549",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "work_directory": "/var/folders/4y/78lt_6517zl9klyctd9lxrgr0000gn/T/rectangle_add_official_avh5jv9y",
+  "cases": [
+    {
+      "case": "example_00",
+      "seconds": 0.4036172507330775,
+      "input_sha256": "9298a09e06398cf65918f9907bfc1b6e038916b3fcb46a10154f9ad3ac4ff46c",
+      "output_sha256": "b4a88223aad900a5bb864725830964385f454678f13746d29b1e38560e0d7d11",
+      "checker": "ok 9 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "example_01",
+      "seconds": 0.005884417332708836,
+      "input_sha256": "0af03e46e344da2f5771fe6721e9ff87da1eb4037213bc32e64fe83452afb3b7",
+      "output_sha256": "3146db811253c21de7de9f0fbd371cde2081bcd99453a33ff8d873d9a6e0d1c3",
+      "checker": "ok 6 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_00",
+      "seconds": 0.0060179587453603745,
+      "input_sha256": "40952eb562c8e7b305f6bbf66ba3b6f4b214617195e75892e34492bfdbd29f40",
+      "output_sha256": "1975a46f88ee2bda5db4078fec0f1827950cc82e84875c774a4f4403a11b2c92",
+      "checker": "ok 157 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_01",
+      "seconds": 0.005783791653811932,
+      "input_sha256": "7f683cb4afe87e6f2833133b322faebccbc1124255dbccbbf294f11e653d751f",
+      "output_sha256": "931ed898c3df6ff99825119d1be4d5decb56253c26a7d1485e81a59dcabc090b",
+      "checker": "ok 121 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_02",
+      "seconds": 0.005457792431116104,
+      "input_sha256": "fbc61acafe4ed9d3e668c5c84734638cc20defb8d0d5a047f97e3510355280a1",
+      "output_sha256": "426336b1cb157b575df0c0775139eb16c20923721f6b51555bfb02b99b48a49e",
+      "checker": "ok 185 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_03",
+      "seconds": 0.005276292562484741,
+      "input_sha256": "c178b4ec2992dfc4f0278d705442026ab967157b3dacb17c3c32f08b0bb42fbd",
+      "output_sha256": "611faef0202f8ccaeed4a0d55d99e106782988896501fc74b3782e2e440d99d1",
+      "checker": "ok 125 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_04",
+      "seconds": 0.005372708663344383,
+      "input_sha256": "b8f8a50bdc6aa3047692da6279e6c31ed5c61978b08f7c3bc2b8cea8b4f8e164",
+      "output_sha256": "b894958f102a886cab02e991f84334031e8e8805134304677d355cc45a1e9d0e",
+      "checker": "ok 430 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "random_00",
+      "seconds": 0.13503374997526407,
+      "input_sha256": "2dc9a335fcfbb29dfd514ced7e9bc1551f94a2dd21da82e7307eec752d9e3f7c",
+      "output_sha256": "043a02d15cb3793ad3c79c5c55d3977f86b23992e43b93d2f9f34312a236ea1f",
+      "checker": "ok 38645 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "random_01",
+      "seconds": 0.08600141759961843,
+      "input_sha256": "970906b09a5b7355eae9cc9126d94b6593441702a14e616c9868e3c645909cf5",
+      "output_sha256": "7fab5546e20fc1f118163f6de12df57216aec93c81cdc2672b2198f5815e54c7",
+      "checker": "ok 9793 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "random_02",
+      "seconds": 0.07740091718733311,
+      "input_sha256": "1704eabaff693b8be667c46a363f3d130fd500e5a0304de12860a299d0e82a1c",
+      "output_sha256": "4b1dc4ce12c0c807dc4910eb050ffd0cc9c30f7547b4be8203f390de6e05c282",
+      "checker": "ok 30985 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "max_random_00",
+      "seconds": 0.1300575416535139,
+      "input_sha256": "6183973f0afe20d3443ae700ff398765f23987cf3a0df0018f463d43e9e5d479",
+      "output_sha256": "2aef9d6c2ca2686a241705aa5a0368898027144e70e4227c24fadebca921664c",
+      "checker": "ok 50184 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "max_random_01",
+      "seconds": 0.13411916606128216,
+      "input_sha256": "883ccca6298a9c4dba27247c54f6218e05f73d40c83518adbcacad541729180c",
+      "output_sha256": "6f9fd18e62deb13747cd23bd32daf18a6215db65c388661050153ce888d65f7a",
+      "checker": "ok 50063 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "many_points_00",
+      "seconds": 0.07829237449914217,
+      "input_sha256": "45b56d8ee3648e4d976cecad3f34f24f1aaef912a0ce69e8c667290b6e4a8431",
+      "output_sha256": "1b8ed157794dbc4094328d6c609afd17e25b48265cdf5c3531149e1078cf6bd4",
+      "checker": "ok 90994 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "many_rectangles_00",
+      "seconds": 0.1266576675698161,
+      "input_sha256": "e5cb7dfc4b57592056dd263ec691163420f65d0eee0f5b0b78c68570db25cda1",
+      "output_sha256": "d054379efd4eca419af8b9f7d31a6bc19fe30f1603e582ce6c2ad170c9ca2321",
+      "checker": "ok 8990 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_coord_00",
+      "seconds": 0.07874154206365347,
+      "input_sha256": "64aab4d1b54826243a2925e4e540eb4176a6aac82f23e66404a7f712f9c703f1",
+      "output_sha256": "746fc1caca864bfeda6f438f63e0fdcd26e4c67b610b6d2adb2068233aca9f5d",
+      "checker": "ok 50037 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_coord_01",
+      "seconds": 0.07902095932513475,
+      "input_sha256": "f99f657344de70498d1fc5c8b7c06855f97bd6a333898c81b194021c629f4ad3",
+      "output_sha256": "82fc5679024c4635e36a043e4a2eee2ac82e0cc7a4c61971d4246e6b66170896",
+      "checker": "ok 49956 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "small_coord_02",
+      "seconds": 0.07844358403235674,
+      "input_sha256": "93f4311db97a54fbdf211ba0ca5f2af13e05e2901fc4ad1de57a3dc38cb9edb7",
+      "output_sha256": "9d6564c38fe516f182105b4af3aee45b9d86b99ce9313467f14132ca2810b487",
+      "checker": "ok 50077 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "power_of_2_00",
+      "seconds": 0.07955237478017807,
+      "input_sha256": "17b837e61d44bf01c87492047134d829c06b5b55a82a2c23164bc402f8a91a90",
+      "output_sha256": "a81f9e94d1b3cc60829b4e99e4d175363a0fca871670ad9be4749e0676ebac12",
+      "checker": "ok 32883 tokens",
+      "status": "AC"
+    },
+    {
+      "case": "power_of_2_01",
+      "seconds": 0.0789050841704011,
+      "input_sha256": "0262e96df11b0651b1e8857b05ddf610157bfd03b558d3d963ee956dbeb4c4c3",
+      "output_sha256": "5a1cc4a2ff3b2f4019eed33b8f390d31b8dfe301f8cddec6cf5d7af052c34d48",
+      "checker": "ok 32743 tokens",
+      "status": "AC"
+    }
+  ],
+  "online_submission": false
+}

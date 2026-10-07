@@ -1,4 +1,3 @@
-// [l, r)の半開区間で設定します。
 pub struct BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T>+PartialOrd{
     n: usize,
     vec: Vec<T>,
@@ -50,7 +49,6 @@ impl<T> BIT<T> where T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output 
         self.add(p, x-pre);
     }
 
-    // Sum(A[0, r))がac < Tとなる最大のrを返す
     #[inline]
     pub fn lower_bound(&self, ac: T)->usize{
         let mut r = 0;
@@ -253,7 +251,6 @@ impl<T> OrderedSet<T> where T: Copy+Ord+Hash{
         }
     }
 
-    // x)
     #[inline]
     pub fn count_l(&self, x: T)->usize{
         let l = self.a.partition_point(|&v| v<x);

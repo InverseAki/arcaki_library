@@ -1,4 +1,3 @@
-// Performance experiment. The production source is unchanged.
 use super::baseline::{BIT, PointAddRectangleSumQuery as Op};
 
 #[derive(Clone, Copy, Default)]
@@ -7,7 +6,7 @@ struct Event {
     lo: u32,
     hi: u32,
     time: u32,
-    payload: i64, // add weight, or signed answer index
+    payload: i64,
 }
 
 const ADD: u32 = u32::MAX;
@@ -58,7 +57,6 @@ fn solve_impl<const ADD_ONLY: bool, const MERGE: bool>(ops: &[Op]) -> Vec<i64> {
             }
         }
     }
-    // Boundaries before adds at the same x implements x < boundary.
     let mut scratch = vec![Event::default(); events.len()];
     let mut bit = BIT::new(ys.len(), 0i64);
     if MERGE {
@@ -72,7 +70,6 @@ fn solve_impl<const ADD_ONLY: bool, const MERGE: bool>(ops: &[Op]) -> Vec<i64> {
 
 fn dfs_merge(events: &mut [Event], scratch: &mut [Event], bit: &mut BIT<i64>, answers: &mut [i64]) {
     if events.len() <= 1 { return; }
-    // A homogeneous time interval has no internal add -> query contribution.
     let adds = events.iter().filter(|e| e.hi == ADD).count();
     if adds == 0 || adds == events.len() {
         events.sort_unstable_by_key(|e| e.x);

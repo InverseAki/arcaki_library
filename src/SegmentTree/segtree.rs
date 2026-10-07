@@ -1,11 +1,9 @@
-/// op は結合的、identity は両側単位元。可換性は不要。
 pub trait SegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;
     fn op(a: &Self::S, b: &Self::S) -> Self::S;
 }
 
-/// 区間は 0-indexed の [l, r)。構築 O(n)、更新・区間積・探索 O(log n)。
 #[derive(Clone)]
 pub struct Segtree<M: SegtreeMonoid> {
     n: usize,
@@ -60,7 +58,6 @@ impl<M: SegtreeMonoid> Segtree<M> {
         self.data[self.size + p].clone()
     }
 
-    /// A[i] を op(A[i], x) に更新する。
     pub fn push(&mut self, i: usize, x: M::S) {
         assert!(i < self.n);
         let mut p = i + self.size;
@@ -96,8 +93,6 @@ impl<M: SegtreeMonoid> Segtree<M> {
         self.data[1].clone()
     }
 
-    /// f(prod(l, r)) が true となる最大の r。f(identity) は true、
-    /// r を伸ばしたとき true → false の単調性を持ち、同じ引数には同じ結果を返すこと。
     pub fn max_right<F>(&self, mut l: usize, f: F) -> usize
     where
         F: Fn(&M::S) -> bool,
@@ -131,8 +126,6 @@ impl<M: SegtreeMonoid> Segtree<M> {
         self.n
     }
 
-    /// f(prod(l, r)) が true となる最小の l。f(identity) は true、
-    /// l を縮めたとき true → false の単調性を持ち、同じ引数には同じ結果を返すこと。
     pub fn min_left<F>(&self, mut r: usize, f: F) -> usize
     where
         F: Fn(&M::S) -> bool,

@@ -1,5 +1,3 @@
-/// 再現可能な競プロ用乱数。暗号用途には使わない。
-/// このファイルだけをコピーして使える（外部クレート不要）。
 #[derive(Clone, Debug)]
 pub struct SplitMix64 {
     state: u64,
@@ -10,7 +8,6 @@ impl SplitMix64 {
         Self { state: seed }
     }
 
-    /// 従来 API。next_u64() と同じ乱数列を返す。
     #[inline]
     pub fn next(&mut self) -> u64 {
         self.next_u64()
@@ -35,28 +32,21 @@ impl SplitMix64 {
         ((self.next_u64() as u128) << 64) | self.next_u64() as u128
     }
 
-    /// [0, 1) の 2^53 個の等間隔な値。
     #[inline]
     pub fn gen_f64(&mut self) -> f64 {
         (self.next_u64() >> 11) as f64 * (1.0 / 9007199254740992.0)
     }
 
-    /// [0, 1) の 2^24 個の等間隔な値。
     #[inline]
     pub fn gen_f32(&mut self) -> f32 {
         (self.next_u64() >> 40) as f32 * (1.0 / 16777216.0)
     }
 
-    /// 確率 p で true。p は有限の [0, 1]（範囲外・NaN は panic）。
-    /// gen_f64 の 53 bit 精度で確率を表す。
     pub fn gen_bool(&mut self, p: f64) -> bool {
         assert!((0.0..=1.0).contains(&p), "probability must be in [0, 1]");
         self.gen_f64() < p
     }
 
-    /// 全組込み整数型に対応。半開・閉・片側・全範囲を使える。
-    /// 例: gen_range(0..n), gen_range(-10..=10), gen_range(..=u64::MAX)。
-    /// 空範囲・逆順範囲は panic。棄却法で剰余の偏りを除く。
     pub fn gen_range<T: SplitMixInteger>(&mut self, range: impl std::ops::RangeBounds<T>) -> T {
         use std::ops::Bound;
         let low = match range.start_bound() {
@@ -74,7 +64,6 @@ impl SplitMix64 {
             Bound::Excluded(&x) => x.to_ordered().checked_sub(1).expect("empty random range"),
         };
         assert!(low <= high, "empty random range");
-        // 0 は 2^128 通りの全範囲を表す。
         let width = high.wrapping_sub(low).wrapping_add(1);
         T::from_ordered(low + self.sample_below(width))
     }
@@ -106,7 +95,6 @@ impl SplitMix64 {
         }
     }
 
-    /// Fisher–Yates。空スライスにも対応。O(n)、追加メモリ O(1)。
     pub fn shuffle<T>(&mut self, values: &mut [T]) {
         for i in (1..values.len()).rev() {
             let j = self.gen_range(0..=i);
@@ -114,7 +102,6 @@ impl SplitMix64 {
         }
     }
 
-    /// 空なら None。要素をコピーせず参照を返す。
     pub fn choose<'a, T>(&mut self, values: &'a [T]) -> Option<&'a T> {
         if values.is_empty() {
             None
@@ -137,8 +124,6 @@ mod split_mix_private {
     pub trait Sealed {}
 }
 
-/// gen_range 用の整数型。全組込み整数型に実装済み。
-/// 順序を保つ u128 への変換（符号付きは符号 bit を反転）。
 pub trait SplitMixInteger: Copy + split_mix_private::Sealed {
     #[doc(hidden)]
     const MAX_ORDERED: u128;

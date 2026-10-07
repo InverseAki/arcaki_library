@@ -1,9 +1,6 @@
 #[path = "../Basic/rollbackvector.rs"]
 mod rollback_lazy_vector;
 
-/// opは結合的、id_eは両側単位元。mapはopを保つ作用。
-/// composition(f, g)は「gを適用してからf」を表す。
-/// map(identity(), x) = x。値に区間長が必要ならSに長さを含める。
 pub trait RollbackLazySegtreeMonoid {
     type S: Clone;
     type F: Clone;
@@ -14,13 +11,9 @@ pub trait RollbackLazySegtreeMonoid {
     fn composition(f: &Self::F, g: &Self::F) -> Self::F;
 }
 
-/// 半開区間[l, r)。構築O(n)、更新・取得・探索O(log n)。
-/// rollbackは直前の更新1回を戻し、O(log n)。読み取りは履歴を変更しない。
-/// 領域O(n + 保存中の更新数 * log n)。空区間への更新も1操作として記録。
 pub struct RollbackLazySegtree<M: RollbackLazySegtreeMonoid> {
     n: usize,
     size: usize,
-    // 集約値には自身の遅延作用を反映済み。子には未反映。
     nodes: rollback_lazy_vector::RollbackVector<(M::S, Option<M::F>)>,
     hist: Vec<usize>,
 }
@@ -60,7 +53,6 @@ impl<M: RollbackLazySegtreeMonoid> RollbackLazySegtree<M> {
             self.nodes.rollback(len);
         }
     }
-    /// 現在の状態を基準にして履歴を捨てる。
     pub fn snapshot(&mut self) {
         self.hist.clear();
         self.nodes.clear_history();
@@ -138,7 +130,6 @@ impl<M: RollbackLazySegtreeMonoid> RollbackLazySegtree<M> {
         self.apply_inner(2 * k + 1, mid, r, ql, qr, f);
         self.pull(k);
     }
-    // 祖先の作用は自身の遅延作用より新しい。
     fn descend(&self, k: usize, carry: &Option<M::F>) -> Option<M::F> {
         match (carry, &self.nodes[k].1) {
             (Some(f), Some(g)) => Some(M::composition(f, g)),
@@ -188,18 +179,15 @@ impl<M: RollbackLazySegtreeMonoid> RollbackLazySegtree<M> {
     pub fn all_prod(&self) -> M::S {
         self.nodes[1].0.clone()
     }
-    /// O((r-l) log n)。読み取りで遅延作用をpushしない。
     pub fn get_slice(&self, l: usize, r: usize) -> Vec<M::S> {
         assert!(l <= r && r <= self.n);
         (l..r).map(|p| self.get(p)).collect()
     }
-    /// g(id_e())はtrue。区間を右に伸ばしたときtrueからfalseになる単調な述語。
     pub fn max_right<G: Fn(&M::S) -> bool>(&self, l: usize, g: G) -> usize {
         assert!(l <= self.n && g(&M::id_e()));
         self.search(1, 0, self.size, l, self.n, &None, &mut M::id_e(), &g, false)
             .unwrap_or(self.n)
     }
-    /// g(id_e())はtrue。区間を左に伸ばしたときtrueからfalseになる単調な述語。
     pub fn min_left<G: Fn(&M::S) -> bool>(&self, r: usize, g: G) -> usize {
         assert!(r <= self.n && g(&M::id_e()));
         self.search(1, 0, self.size, 0, r, &None, &mut M::id_e(), &g, true)

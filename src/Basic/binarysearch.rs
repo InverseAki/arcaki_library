@@ -1,8 +1,3 @@
-/*
-二分探索
-昇順のAに於いて初めてt以上となる要素のindexを返す
- */
-
 pub fn binary_search<T>(t: T, a: &Vec<T>) -> usize where T: Copy+PartialOrd+Ord {
     let mut l = 0;
     let mut r = a.len() + 1;

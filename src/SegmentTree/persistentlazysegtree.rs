@@ -96,10 +96,8 @@ pub struct PersistentLazySegtree<MM>
 where
     MM: LazySegtreeMonoid,
 {
-    /// 外から見える本来の長さ
     size: usize,
 
-    /// 内部の 2 冪サイズ
     n: usize,
 
     root: Vec<u32>,
@@ -268,9 +266,6 @@ where
         idx
     }
 
-    /// p を複製し、lazy を子へ押し下げた新しいノードを返す。
-    ///
-    /// 元の p は変更しない。
     fn push(&mut self, p: u32) -> u32 {
         let node = self.data[p as usize].clone();
         let len = node.len as usize;
@@ -300,7 +295,6 @@ where
         idx
     }
 
-    /// version t に対して [l, r) に f を作用させた新 version を追加する。
     pub fn apply_range(&mut self, t: usize, l: usize, r: usize, f: MM::F) -> usize {
         assert!(t < self.root.len());
         assert!(l <= r);
@@ -359,21 +353,11 @@ where
         idx
     }
 
-    /// version t の i 番目を取得する。
-    ///
-    /// 探索中に push した結果を新 version として追加する。
-    ///
-    /// 返り値は `(値, 新 version 番号)`。
     pub fn get(&mut self, t: usize, i: usize) -> (MM::S, usize) {
         assert!(i < self.size);
         self.prod(t, i, i + 1)
     }
 
-    /// version t の [l, r) の積を取得する。
-    ///
-    /// 探索中に必要な push を実体化した version を末尾に追加する。
-    ///
-    /// 返り値は `(区間積, 新 version 番号)`。
     pub fn prod(&mut self, t: usize, l: usize, r: usize) -> (MM::S, usize) {
         assert!(t < self.root.len());
         assert!(l <= r);
@@ -435,8 +419,6 @@ where
         (idx, ans)
     }
 
-    /// version t をベースにして、
-    /// version k の [l, r) をコピーした新 version を追加する。
     pub fn range_copy(&mut self, t: usize, k: usize, l: usize, r: usize) -> usize {
         assert!(t < self.root.len());
         assert!(k < self.root.len());

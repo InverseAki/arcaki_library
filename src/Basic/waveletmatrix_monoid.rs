@@ -1,5 +1,3 @@
-// Copy this file together with Basic/waveletmatrix.rs (or keep both files adjacent).
-// Positions and value/rank ranges are half-open; equal keys keep original index order.
 mod wavelet_monoid_detail {
     include!("waveletmatrix.rs");
 
@@ -32,7 +30,6 @@ mod wavelet_monoid_detail {
     }
 }
 
-/// Associative operation with identity. COMMUTATIVE=true promises op(a,b)=op(b,a).
 pub trait WaveletMonoid {
     type S: Clone;
     const COMMUTATIVE: bool = false;
@@ -82,8 +79,6 @@ impl<S: Clone> WaveletAggregateTree<S> {
     }
 }
 
-/// Fixed usize keys and mutable arbitrary payloads. Aggregation order is key ascending,
-/// then original index ascending, including for noncommutative monoids.
 pub struct WaveletMatrixMonoid<M: WaveletMonoid> {
     wm: wavelet_monoid_detail::WaveletMatrix,
     trees: Vec<WaveletAggregateTree<M::S>>,
@@ -124,7 +119,6 @@ impl<M: WaveletMonoid> WaveletMatrixMonoid<M> {
         assert!(i < self.len());
         self.trees[0].data[self.trees[0].size + i].clone()
     }
-    /// Replace payload at an original index; keys remain fixed.
     pub fn set(&mut self, mut i: usize, x: M::S) {
         assert!(i < self.len());
         self.trees[0].set(i, x.clone(), &self.m);
@@ -161,7 +155,6 @@ impl<M: WaveletMonoid> WaveletMatrixMonoid<M> {
     pub fn prefix_prod(&self, l: usize, r: usize, k: usize) -> M::S {
         self.prod_sorted(l, r, 0, k)
     }
-    /// Aggregate all selected payloads in stable ascending key order.
     pub fn prod(&self, l: usize, r: usize) -> M::S {
         self.check(l, r);
         self.prod_sorted(l, r, 0, r - l)

@@ -97,14 +97,12 @@ fn signed_boundaries_cancellation_and_overflow() {
     );
     let n = Ratio::from_fraction(1, i64::MAX);
     assert_eq!(n.try_mul(&n), Err(RatioError::Overflow));
-    // 中間積は128bitを超えるが、共通因子を消した最終値はi128に収まる。
     let g = BigInt::from(1u128 << 64);
     let a = BigInt::from((1u128 << 62) + 1);
     let b = BigInt::from((1u128 << 62) + 3);
     let x = &g * &a;
     let u = &g * &b;
     let n = &x - BigInt::one();
-    // aの2^64を法とする逆元（a=1+2^62なので1-2^62）。
     let residue = (&b * BigInt::from((1u128 << 64) - (1u128 << 62) + 1)) % &g;
     let m = &u - &g + residue;
     let aa = Ratio128::new(x.to_i128().unwrap(), n.to_i128().unwrap());
@@ -189,14 +187,6 @@ fn convenience_parsing_rounding_and_conversion() {
             assert_eq!(a.floor(), n.div_euclid(d));
             assert_eq!(a.ceil(), -(-n).div_euclid(d));
             assert_eq!(a.trunc(), n / d);
-        }
-    }
-    for n in -30..=30 {
-        for d in -10..=10 {
-            if d == 0 {
-                continue;
-            }
-            assert_eq!(floor(n, d), (n as f64 / d as f64).floor() as i64);
         }
     }
     let a = Ratio128::int(i128::MIN);

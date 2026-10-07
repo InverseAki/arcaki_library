@@ -135,7 +135,6 @@ fn powers_inverse_and_constructor_compatibility() {
     let mut seed = 1234;
     for n in 1..15 {
         let mut a = Mat::identity(n);
-        // 可逆な行基本変形から構造的に可逆な行列を作る。
         for _ in 0..n * 12 {
             let i = (next(&mut seed) % n as u64) as usize;
             let j = (next(&mut seed) % n as u64) as usize;

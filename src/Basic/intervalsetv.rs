@@ -1,4 +1,3 @@
-// Rust 1.91 以降の BTreeMap::extract_if を使用する。
 #[derive(Clone)]
 pub struct IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
     s: BTreeMap<T, (T, V)>,
@@ -17,8 +16,6 @@ impl<T, V> IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
         drop(self.remove_with_data(l, r));
     }
 
-    /// (左端, 右端, 値, 追加なら true) を順に返す。Vec の確保は行わない。
-    /// 更新は作成・消費時に進み、途中で破棄した場合も Drop で完了する。
     pub fn insert_with_data(&mut self, mut l: T, mut r: T, v: V) -> impl Iterator<Item = (T, T, V, bool)> + '_ {
         let mut prefix = [None; 3];
         let mut suffix = [None; 2];
@@ -31,7 +28,6 @@ impl<T, V> IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
                 prefix[0] = Some((ll, lr, lv, false));
                 l = ll;
                 r = r.max(lr);
-                // このキーは抽出から除外し、最後に新しい区間で上書きする。
             } else if lv != v && l < lr {
                 prefix[0] = Some((ll, lr, lv, false));
                 let mut count = 1;
@@ -59,8 +55,6 @@ impl<T, V> IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
                 suffix[0] = Some((r, nr, nv, true));
             }
         }
-        // 旧実装では同値の隣接区間が残る場合もある。伸びた右端からは
-        // 一つの range で走査し、連続する同値区間を全て統合する。
         if r < end {
             for (&nl, &(nr, nv)) in self.s.range(end..) {
                 if nl == end && nv == v { end = nr; }
@@ -72,15 +66,12 @@ impl<T, V> IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
         if suffix[0].is_some() { suffix[1] = final_change; }
         else { suffix[0] = final_change; }
         let bounds = (std::ops::Bound::Excluded(l), std::ops::Bound::Excluded(end));
-        // 挿入した左端と、右側に残す異値区間は抽出対象外。
         let has_middle = last.is_some_and(|(nl, _, _)| nl < r) || r < end
             || (last.is_some_and(|(nl, _, _)| nl == r) && self.s.range(bounds).next().is_some());
         let removed = has_middle.then(|| self.s.extract_if(bounds, interval_set_v_extract_all::<T, V> as fn(&T, &mut (T, V)) -> bool));
         IntervalSetVChanges::new(removed, prefix, suffix)
     }
 
-    /// (左端, 右端, 値, 追加なら true) を順に返す。Vec の確保は行わない。
-    /// 更新は作成・消費時に進み、途中で破棄した場合も Drop で完了する。
     pub fn remove_with_data(&mut self, l: T, r: T) -> impl Iterator<Item = (T, T, V, bool)> + '_ {
         let mut prefix = [None; 3];
         let mut suffix = [None; 2];

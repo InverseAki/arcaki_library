@@ -1,4 +1,3 @@
-// max→false, min→true
 #[derive(Clone, Copy, Debug)]
 struct LiChaoLine {
     a: i64, b: i128,

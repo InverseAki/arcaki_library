@@ -80,7 +80,6 @@ mod wavelet_offline_detail {
                 p &= p - 1;
             }
             p = l;
-            // Compute each prefix separately: intermediate subtractions cannot underflow.
             let (mut left_count, mut left_sum) = (0, 0);
             while p > 0 {
                 left_count += self.counts[p];
@@ -149,10 +148,6 @@ mod wavelet_offline_detail {
     }
 }
 
-/// A point-set wavelet matrix with pre-registered (index, value) candidates.
-/// Values are nonnegative usize; sums and sum targets are u128.
-/// Exactly one candidate is active at each original index.
-/// All index/value/rank ranges are half-open; ranks are zero-based.
 pub struct WaveletMatrixOffline {
     offsets: Vec<usize>,
     candidates: Vec<usize>,
@@ -163,8 +158,6 @@ pub struct WaveletMatrixOffline {
 }
 
 impl WaveletMatrixOffline {
-    /// Initial values are registered automatically. Duplicate candidates are allowed.
-    /// The execution order of future updates is not needed, only their candidates.
     pub fn new(initial: &[usize], updates: &[(usize, usize)]) -> Self {
         let n = initial.len();
         let mut points: Vec<_> = initial.iter().copied().enumerate().collect();
@@ -218,7 +211,6 @@ impl WaveletMatrixOffline {
     pub fn is_empty(&self) -> bool {
         self.current.is_empty()
     }
-    /// Number of distinct registered (index, value) points, including initial values.
     pub fn candidate_len(&self) -> usize {
         self.candidates.len()
     }
@@ -226,7 +218,6 @@ impl WaveletMatrixOffline {
         assert!(i < self.len());
         self.candidates[self.current[i]]
     }
-    /// Set a pre-registered value. Invalid updates panic before changing the state.
     pub fn set(&mut self, i: usize, x: usize) {
         assert!(i < self.len());
         let next = self.offsets[i]
@@ -300,7 +291,6 @@ impl WaveletMatrixOffline {
         }
         self.trees[depth].count(l, r)
     }
-    /// Number of active values strictly below upper.
     pub fn range_freq(&self, l: usize, r: usize, upper: usize) -> usize {
         let (mut a, mut b) = self.interval(l, r);
         let upper = self.values.partition_point(|&v| v < upper);
@@ -359,7 +349,6 @@ impl WaveletMatrixOffline {
             self.sum_less(l, r, upper) - self.sum_less(l, r, lower)
         }
     }
-    /// Sum of the k smallest active values in [l,r). k=0 is allowed.
     pub fn sum_smallest(&self, l: usize, r: usize, mut k: usize) -> u128 {
         let (mut a, mut b) = self.interval(l, r);
         assert!(k <= r - l);
@@ -389,15 +378,11 @@ impl WaveletMatrixOffline {
         assert!(k <= r - l);
         self.range_sum(l, r) - self.sum_smallest(l, r, r - l - k)
     }
-    /// Sum of zero-based ascending ranks [start,end) in the original interval [l,r).
     pub fn sum_sorted(&self, l: usize, r: usize, start: usize, end: usize) -> u128 {
         self.interval(l, r);
         assert!(start <= end && end <= r - l);
         self.sum_smallest(l, r, end) - self.sum_smallest(l, r, start)
     }
-    /// Minimum number of values selected from [l,r) whose sum is >= target.
-    /// Selects the largest values first; returns None if the target is unreachable.
-    /// target=0 returns Some(0), including for an empty interval.
     pub fn min_count_for_sum(&self, l: usize, r: usize, mut target: u128) -> Option<usize> {
         let (mut l, mut r) = self.interval(l, r);
         if target == 0 {
@@ -422,7 +407,6 @@ impl WaveletMatrixOffline {
                 r = zr;
             }
         }
-        // The maintained remaining sum is >= target > 0, so this value is positive.
         let value = self.values[rank] as u128;
         Some(ans + ((target - 1) / value + 1) as usize)
     }

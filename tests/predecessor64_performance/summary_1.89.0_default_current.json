@@ -1,0 +1,898 @@
+{
+  "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "flags": [
+    "--edition=2021",
+    "-Awarnings",
+    "-O"
+  ],
+  "count_per_case": 1000000,
+  "repeats": 7,
+  "date": "2026-10-07",
+  "cases": [
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 7.71308,
+      "min_ns": 7.63479,
+      "max_ns": 8.47758,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 4.07779,
+      "min_ns": 4.02475,
+      "max_ns": 5.10017,
+      "ratio": 0.528685038920898
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 9.63683,
+      "min_ns": 8.87763,
+      "max_ns": 10.33329,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 7.67508,
+      "min_ns": 7.05067,
+      "max_ns": 9.49696,
+      "ratio": 0.7964320217332879
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 5.37437,
+      "min_ns": 4.79387,
+      "max_ns": 7.64492,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 4.53808,
+      "min_ns": 4.266,
+      "max_ns": 9.57129,
+      "ratio": 0.8443929241939055
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 6.4195,
+      "min_ns": 5.99558,
+      "max_ns": 6.87054,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 3.90242,
+      "min_ns": 3.62921,
+      "max_ns": 4.10679,
+      "ratio": 0.6079009268634629
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 7.69525,
+      "min_ns": 7.64867,
+      "max_ns": 7.94317,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 6.76458,
+      "min_ns": 6.53046,
+      "max_ns": 6.90292,
+      "ratio": 0.8790591598713492
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 7.85925,
+      "min_ns": 7.75263,
+      "max_ns": 8.04112,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 6.92092,
+      "min_ns": 6.79275,
+      "max_ns": 7.21162,
+      "ratio": 0.8806082005280401
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 7.62188,
+      "min_ns": 7.51008,
+      "max_ns": 8.7265,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 7.18217,
+      "min_ns": 6.87538,
+      "max_ns": 8.15525,
+      "ratio": 0.9423095089400516
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 3.12783,
+      "min_ns": 3.05287,
+      "max_ns": 3.22846,
+      "ratio": 1.0
+    },
+    {
+      "n": 64,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 2.39887,
+      "min_ns": 2.34912,
+      "max_ns": 2.52067,
+      "ratio": 0.7669438556443285
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 7.8045,
+      "min_ns": 7.57396,
+      "max_ns": 7.854,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 4.23054,
+      "min_ns": 4.07158,
+      "max_ns": 4.32763,
+      "ratio": 0.5420641937343841
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 9.07162,
+      "min_ns": 8.74875,
+      "max_ns": 10.83017,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 6.99683,
+      "min_ns": 6.68438,
+      "max_ns": 8.8265,
+      "ratio": 0.7712878184932791
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 4.70308,
+      "min_ns": 4.65354,
+      "max_ns": 4.92387,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 4.09792,
+      "min_ns": 4.07533,
+      "max_ns": 4.24779,
+      "ratio": 0.8713268751541544
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 6.69667,
+      "min_ns": 6.25946,
+      "max_ns": 7.09083,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 4.23871,
+      "min_ns": 3.84283,
+      "max_ns": 4.82996,
+      "ratio": 0.6329578730921488
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 9.25025,
+      "min_ns": 9.03467,
+      "max_ns": 9.41875,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 7.8495,
+      "min_ns": 7.67717,
+      "max_ns": 8.26621,
+      "ratio": 0.8485716602253993
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 10.30087,
+      "min_ns": 9.85929,
+      "max_ns": 10.74842,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 9.02512,
+      "min_ns": 8.74433,
+      "max_ns": 9.30154,
+      "ratio": 0.8761512377109895
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 8.77996,
+      "min_ns": 8.43554,
+      "max_ns": 9.09317,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 7.83863,
+      "min_ns": 7.54929,
+      "max_ns": 8.20892,
+      "ratio": 0.8927865275012642
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 7.05583,
+      "min_ns": 6.74075,
+      "max_ns": 7.70325,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 6.03163,
+      "min_ns": 5.91788,
+      "max_ns": 7.37525,
+      "ratio": 0.8548434415228258
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 6.64238,
+      "min_ns": 6.51312,
+      "max_ns": 6.96208,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 5.30225,
+      "min_ns": 5.18667,
+      "max_ns": 5.76854,
+      "ratio": 0.798245508387054
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 8.23463,
+      "min_ns": 8.05921,
+      "max_ns": 8.99575,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 6.92288,
+      "min_ns": 6.87758,
+      "max_ns": 7.23112,
+      "ratio": 0.8407032252815246
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 6.60933,
+      "min_ns": 6.38083,
+      "max_ns": 7.01979,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 5.20017,
+      "min_ns": 5.04529,
+      "max_ns": 5.37492,
+      "ratio": 0.7867923072384039
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 3.99333,
+      "min_ns": 3.96837,
+      "max_ns": 4.40979,
+      "ratio": 1.0
+    },
+    {
+      "n": 4096,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 2.93987,
+      "min_ns": 2.89446,
+      "max_ns": 3.18637,
+      "ratio": 0.7361951053381514
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 7.738,
+      "min_ns": 7.57879,
+      "max_ns": 7.89379,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 4.08983,
+      "min_ns": 4.06367,
+      "max_ns": 4.19325,
+      "ratio": 0.5285383820108555
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 8.75492,
+      "min_ns": 8.53913,
+      "max_ns": 8.99296,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 6.46708,
+      "min_ns": 6.40146,
+      "max_ns": 6.7215,
+      "ratio": 0.7386795082079562
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 4.78429,
+      "min_ns": 4.657,
+      "max_ns": 4.85637,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 4.17754,
+      "min_ns": 4.10625,
+      "max_ns": 4.22054,
+      "ratio": 0.8731786743696556
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 6.20212,
+      "min_ns": 6.13796,
+      "max_ns": 6.26221,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 3.75862,
+      "min_ns": 3.70696,
+      "max_ns": 3.84912,
+      "ratio": 0.6060218118965773
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 8.89329,
+      "min_ns": 8.76083,
+      "max_ns": 8.90933,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 7.66983,
+      "min_ns": 7.63037,
+      "max_ns": 7.74417,
+      "ratio": 0.8624288649082623
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 11.80242,
+      "min_ns": 10.53083,
+      "max_ns": 82.1455,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 11.18562,
+      "min_ns": 9.28129,
+      "max_ns": 34.7945,
+      "ratio": 0.9477395313842416
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 8.69492,
+      "min_ns": 8.6415,
+      "max_ns": 8.76346,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 7.72942,
+      "min_ns": 7.68725,
+      "max_ns": 7.87604,
+      "ratio": 0.8889581502762534
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 6.99658,
+      "min_ns": 6.91992,
+      "max_ns": 7.23404,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 5.87367,
+      "min_ns": 5.80833,
+      "max_ns": 6.33004,
+      "ratio": 0.8395058728693161
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 10.55867,
+      "min_ns": 9.88004,
+      "max_ns": 11.39687,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 9.01258,
+      "min_ns": 8.60412,
+      "max_ns": 9.48875,
+      "ratio": 0.853571519897866
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 10.87933,
+      "min_ns": 10.58733,
+      "max_ns": 10.97029,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 9.57333,
+      "min_ns": 9.28112,
+      "max_ns": 9.76458,
+      "ratio": 0.8799558428690003
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 10.14963,
+      "min_ns": 9.47312,
+      "max_ns": 11.20233,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 8.71608,
+      "min_ns": 8.3805,
+      "max_ns": 14.22571,
+      "ratio": 0.8587583980893885
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 7.57913,
+      "min_ns": 7.45442,
+      "max_ns": 9.7935,
+      "ratio": 1.0
+    },
+    {
+      "n": 262144,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 6.69025,
+      "min_ns": 6.34008,
+      "max_ns": 7.05075,
+      "ratio": 0.8827200483432794
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 8.90196,
+      "min_ns": 8.82842,
+      "max_ns": 10.89883,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 4.47517,
+      "min_ns": 4.16225,
+      "max_ns": 5.04321,
+      "ratio": 0.5027173790940422
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 8.15833,
+      "min_ns": 7.88275,
+      "max_ns": 8.75846,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 6.19238,
+      "min_ns": 5.97454,
+      "max_ns": 6.30492,
+      "ratio": 0.7590254378040604
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 5.04996,
+      "min_ns": 4.85342,
+      "max_ns": 8.25558,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 4.44287,
+      "min_ns": 4.25042,
+      "max_ns": 7.992,
+      "ratio": 0.8797832062036136
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 3.94608,
+      "min_ns": 3.84483,
+      "max_ns": 5.51233,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 2,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 2.94429,
+      "min_ns": 2.90767,
+      "max_ns": 3.06596,
+      "ratio": 0.746130336941978
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 10.49137,
+      "min_ns": 10.2715,
+      "max_ns": 11.1335,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 9.26892,
+      "min_ns": 9.06992,
+      "max_ns": 11.35033,
+      "ratio": 0.8834804224805721
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 11.14333,
+      "min_ns": 10.65896,
+      "max_ns": 11.41108,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 10.11417,
+      "min_ns": 9.90113,
+      "max_ns": 10.55817,
+      "ratio": 0.90764340641442
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 11.45033,
+      "min_ns": 10.26629,
+      "max_ns": 14.50996,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 9.50163,
+      "min_ns": 8.85704,
+      "max_ns": 13.80433,
+      "ratio": 0.8298127652216138
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 7.65417,
+      "min_ns": 7.51213,
+      "max_ns": 8.31175,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 64,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 6.79788,
+      "min_ns": 6.65587,
+      "max_ns": 7.33617,
+      "ratio": 0.8881276480663483
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "median_ns": 10.99925,
+      "min_ns": 10.21288,
+      "max_ns": 18.04038,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "inclusive",
+      "implementation": "current",
+      "median_ns": 9.73079,
+      "min_ns": 9.09021,
+      "max_ns": 46.84887,
+      "ratio": 0.8846775916539765
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "baseline",
+      "median_ns": 11.99587,
+      "min_ns": 11.78546,
+      "max_ns": 13.54379,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "mixed",
+      "implementation": "current",
+      "median_ns": 10.74308,
+      "min_ns": 10.07883,
+      "max_ns": 11.76046,
+      "ratio": 0.8955648902497276
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "baseline",
+      "median_ns": 10.63354,
+      "min_ns": 10.25013,
+      "max_ns": 11.00321,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "strict",
+      "implementation": "current",
+      "median_ns": 9.44321,
+      "min_ns": 9.11179,
+      "max_ns": 10.00571,
+      "ratio": 0.8880589154693546
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "baseline",
+      "median_ns": 8.73642,
+      "min_ns": 8.49854,
+      "max_ns": 10.41879,
+      "ratio": 1.0
+    },
+    {
+      "n": 16777216,
+      "stride": 4096,
+      "workload": "update",
+      "implementation": "current",
+      "median_ns": 7.44079,
+      "min_ns": 7.32158,
+      "max_ns": 8.33587,
+      "ratio": 0.851697835039982
+    }
+  ],
+  "source_sha256": {
+    "baseline.rs": "56bce9606533cb91d74b5992aa9c0e9ca1c1db6649b96d18279c46e3b9a74161",
+    "predecessor64.rs": "bc965fb88680e17b28131910c7b9d6b936c29bccf1c087590bdb62e7c570b14c"
+  }
+}

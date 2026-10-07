@@ -50,13 +50,60 @@ impl Input {
         self.buf[l..r].to_vec()
     }
 
+    #[inline]
+    pub fn binary_u64(&mut self) -> Vec<u64> {
+        let (l, r) = self.token_range();
+        Self::pack_binary(&self.buf[l..r])
+    }
+
+    #[inline]
+    pub fn binary_u64_len(&mut self, n: usize) -> Vec<u64> {
+        if n == 0 {
+            return Vec::new();
+        }
+        self.skip_whitespace();
+        let l = self.pos;
+        let r = l.checked_add(n).expect("binary token length overflow");
+        assert!(r < self.buf.len(), "binary token shorter than requested");
+        assert!(
+            self.buf[r] == 0 || self.buf[r].is_ascii_whitespace(),
+            "binary token longer than requested"
+        );
+        self.pos = r;
+        Self::pack_binary(&self.buf[l..r])
+    }
+
+    fn pack_binary(bytes: &[u8]) -> Vec<u64> {
+        let mut invalid = 0u64;
+        let words = bytes
+            .chunks(64)
+            .map(|chunk| {
+                let mut word = 0;
+                let mut groups = chunk.chunks_exact(8);
+                for (i, group) in groups.by_ref().enumerate() {
+                    let raw = u64::from_le_bytes(group.try_into().unwrap());
+                    invalid |= (raw & 0xfefe_fefe_fefe_fefe) ^ 0x3030_3030_3030_3030;
+                    let bits = raw & 0x0101_0101_0101_0101;
+                    let packed = bits.wrapping_mul(0x0102_0408_1020_4080) >> 56;
+                    word |= packed << (i * 8);
+                }
+                let offset = (chunk.len() / 8) * 8;
+                for (i, &c) in groups.remainder().iter().enumerate() {
+                    invalid |= ((c & 0xfe) ^ b'0') as u64;
+                    word |= ((c & 1) as u64) << (offset + i);
+                }
+                word
+            })
+            .collect();
+        assert_eq!(invalid, 0, "binary token must contain only 0 and 1");
+        words
+    }
+
     #[inline(always)]
     pub fn string(&mut self) -> String {
         let (l, r) = self.token_range();
 
-        unsafe {
-            String::from_utf8_unchecked(self.buf[l..r].to_vec())
-        }
+        unsafe { String::from_utf8_unchecked(self.buf[l..r].to_vec()) }
     }
 
     #[inline(always)]

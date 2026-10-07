@@ -1,6 +1,6 @@
 # PointAddRectangleSum 性能検討（2026-10-06）
 
-本体 `src/Basic/point_add_rectangle_sum.rs` は変更していない。推奨は、現状の時間方向の分割統治を維持し、y の座標圧縮対象を加算点に限定すること。同一 x のイベント順を表す第二キーの簡略化も小さな追加候補。
+この資料はジェネリクス・build 追加前の性能検討記録。後の実装変更は [build の検証記録](point_add_rectangle_sum_build.md) を参照。この検討時点では本体を変更していない。推奨は、現状の時間方向の分割統治を維持し、y の座標圧縮対象を加算点に限定すること。同一 x のイベント順を表す第二キーの簡略化も小さな追加候補。
 
 ## 推奨する変更
 
@@ -55,4 +55,4 @@ rustc --edition=2021 --test -O arcaki_library/tests/point_add_rectangle_sum_rese
 python3 arcaki_library/tests/run_point_add_rectangle_sum_research.py
 ```
 
-全実測値は `point_add_rectangle_sum_research_results.json`。benchmark の現状実装は現時点の本体を include するため、将来本体を変更すると比較対象も変わる。
+全実測値は `point_add_rectangle_sum_research_results.json`。benchmark の旧実装は `support/point_add_rectangle_sum_baseline.rs` に保存した、ジェネリクス・build 追加前のスナップショットを include する。

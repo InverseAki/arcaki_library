@@ -1,4 +1,3 @@
-// 逆元あり
 pub trait SqrtDecomposition{
     type S: Clone;
     fn identity()->Self::S;

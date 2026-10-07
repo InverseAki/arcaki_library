@@ -1,6 +1,3 @@
-/// u64列の畳み込みをmod 2^64で返す。加算・乗算はwrapping演算の意味。
-/// 空入力なら空。結果長<=2^24。外部クレート・MIへの依存なし。
-/// 短い側<=60は愚直、それ以外は5素数NTT+CRT。O(N log N)、領域O(N)。
 pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     if a.is_empty() || b.is_empty() {
         return vec![];
@@ -21,8 +18,6 @@ pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     let c2 = convolution_u64_detail::convolve::<2013265921, 31>(a, b);
     let c3 = convolution_u64_detail::convolve::<1811939329, 13>(a, b);
     let c4 = convolution_u64_detail::convolve::<2113929217, 5>(a, b);
-    // 各係数の整数値 <= 2^23*(2^64-1)^2 < P0*P1*P2*P3*P4。
-    // 整数値はu128を超え得るので、混合基数の桁を順に求め、最後だけmod 2^64。
     const P0: u64 = 754974721;
     const P1: u64 = 1224736769;
     const P2: u64 = 2013265921;
@@ -34,9 +29,9 @@ pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     let mut answer = Vec::with_capacity(size);
     for i in 0..size {
         let t0 = c0[i] as u64;
-        let t1 = (c1[i] as u64 + P1 - t0) * 656108986 % P1; // P0^-1 mod P1
+        let t1 = (c1[i] as u64 + P1 - t0) * 656108986 % P1;
         let low = t0 + P0 * t1;
-        let t2 = (c2[i] as u64 + P2 - low % P2) * 642531681 % P2; // (P0P1)^-1
+        let t2 = (c2[i] as u64 + P2 - low % P2) * 642531681 % P2;
         let r3 = (low % P3 + (P01 % P3) * t2) % P3;
         let t3 = (c3[i] as u64 + P3 - r3) * 340200806 % P3;
         let r4 = (low % P4 + (P01 % P4) * t2 % P4 + 1137597963 * t3) % P4;

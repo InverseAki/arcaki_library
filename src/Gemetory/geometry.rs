@@ -1,12 +1,11 @@
-// 2次元の厳密幾何。Basic/ratio.rs を同じスコープにコピーする。
-// 中間値はi128/Ratio128。範囲超過はreleaseでもpanic。無限座標は不可。
-
-/// 座標の計算型。整数座標はi128へ、有理数座標はRatio128へ拡張する。
 pub trait GeometryCoordinate: Copy + Ord {
     type Wide: GeometryNumber;
     fn wide(self) -> Self::Wide;
+    fn cmp_turn(a: Point<Self>, b: Point<Self>, c: Point<Self>) -> std::cmp::Ordering {
+        let (u, v) = (b.difference(a), c.difference(a));
+        Self::Wide::cmp_products(u.x, v.y, u.y, v.x)
+    }
 }
-/// 幾何演算用の閉じた数値型。独自実装時もオーバーフローを検出すること。
 pub trait GeometryNumber: GeometryCoordinate<Wide = Self> {
     fn zero() -> Self;
     fn add(self, rhs: Self) -> Self;
@@ -14,7 +13,6 @@ pub trait GeometryNumber: GeometryCoordinate<Wide = Self> {
     fn mul(self, rhs: Self) -> Self;
     fn neg(self) -> Self;
     fn rational(self) -> Ratio128;
-    /// a*b と c*d を比較する。整数実装は積を作らず全域に対応。
     fn cmp_products(a: Self, b: Self, c: Self, d: Self) -> std::cmp::Ordering {
         a.mul(b).cmp(&c.mul(d))
     }
@@ -71,13 +69,24 @@ impl GeometryNumber for i128 {
     }
 }
 impl GeometryCoordinate for Ratio {
+    fn cmp_turn(a: Point<Self>, b: Point<Self>, c: Point<Self>) -> std::cmp::Ordering {
+        geometry_cmp_rational_turn(a.to_rational(), b.to_rational(), c.to_rational())
+    }
+
     type Wide = Ratio128;
     fn wide(self) -> Ratio128 {
         assert!(self.is_finite(), "infinite coordinate");
-        Ratio128::from_fraction(*self.numerator() as i128, *self.denominator() as i128)
+        self.into()
     }
 }
 impl GeometryCoordinate for Ratio128 {
+    fn cmp_turn(a: Point<Self>, b: Point<Self>, c: Point<Self>) -> std::cmp::Ordering {
+        a.wide();
+        b.wide();
+        c.wide();
+        geometry_cmp_rational_turn(a, b, c)
+    }
+
     type Wide = Ratio128;
     fn wide(self) -> Self {
         assert!(self.is_finite(), "infinite coordinate");
@@ -85,6 +94,18 @@ impl GeometryCoordinate for Ratio128 {
     }
 }
 impl GeometryNumber for Ratio128 {
+    fn cmp_products(a: Self, b: Self, c: Self, d: Self) -> std::cmp::Ordering {
+        assert!(a.is_finite() && b.is_finite() && c.is_finite() && d.is_finite());
+        let fast = (|| {
+            let left = a.numerator().checked_mul(*b.numerator())?;
+            let right = c.numerator().checked_mul(*d.numerator())?;
+            let ld = a.denominator().checked_mul(*b.denominator())?;
+            let rd = c.denominator().checked_mul(*d.denominator())?;
+            Some(geometry_cmp_integer_products(left, rd, right, ld))
+        })();
+        fast.unwrap_or_else(|| (a * b).cmp(&(c * d)))
+    }
+
     fn zero() -> Self {
         Ratio128::zero()
     }
@@ -128,7 +149,6 @@ impl<T: GeometryCoordinate> Point<T> {
         let p = self.wide();
         Point::new(p.x.rational(), p.y.rational())
     }
-    /// 加減算・スカラー倍は拡張型で返す。i64の引き算も先にi128へ拡張。
     pub fn translated(self, v: Self) -> Point<T::Wide> {
         let (p, v) = (self.wide(), v.wide());
         Point::new(p.x.add(v.x), p.y.add(v.y))
@@ -174,7 +194,6 @@ impl<T: GeometryCoordinate> Point<T> {
         let (p, q) = (self.to_rational(), other.to_rational());
         Point::new((p.x + q.x) / 2, (p.y + q.y) / 2)
     }
-    /// 角度は[-pi, pi]。零ベクトルはNone。
     pub fn angle(self) -> Option<f64> {
         let p = self.to_rational();
         if p.x.is_zero() && p.y.is_zero() {
@@ -183,13 +202,11 @@ impl<T: GeometryCoordinate> Point<T> {
             Some(p.y.to_f64().atan2(p.x.to_f64()))
         }
     }
-    /// 2ベクトル間の符号付き角度[-pi, pi]。零ベクトルならNone。
     pub fn angle_to(self, other: Self) -> Option<f64> {
         let delta = other.angle()? - self.angle()?;
         Some(delta.sin().atan2(delta.cos()))
     }
 
-    /// +x軸から反時計回りの偏角[0, 2pi)を厳密比較。零ベクトルはNone。
     pub fn cmp_angle(self, other: Self) -> Option<std::cmp::Ordering> {
         let (p, q) = (self.wide(), other.wide());
         let z = T::Wide::zero();
@@ -210,14 +227,12 @@ impl<T: GeometryCoordinate> Point<T> {
     pub fn is_perpendicular(self, other: Self) -> bool {
         self.dot(other) == T::Wide::zero()
     }
-    /// 整数の除算も切り捨てず有理数で返す。
     pub fn divided(self, divisor: T) -> RationalPoint {
         let divisor = divisor.wide().rational();
         assert!(!divisor.is_zero(), "zero divisor");
         let p = self.to_rational();
         Point::new(p.x / divisor, p.y / divisor)
     }
-    /// 任意角回転だけはf64座標を返す（厳密値でない）。
     pub fn rotated(self, radians: f64) -> Point<f64> {
         let p = self.to_rational();
         let (s, c) = radians.sin_cos();
@@ -282,7 +297,6 @@ pub fn triangle_centroid<T: GeometryCoordinate>(
 ) -> RationalPoint {
     (a.to_rational() + b.to_rational() + c.to_rational()) / Ratio128::int(3)
 }
-/// 三角形の外心。一直線・重複点の場合はNone。
 pub fn triangle_circumcenter<T: GeometryCoordinate>(
     a: Point<T>,
     b: Point<T>,
@@ -312,16 +326,11 @@ pub fn polygon_area<T: GeometryCoordinate>(points: &[Point<T>]) -> Ratio128 {
     signed_polygon_area2(points).abs().rational() / 2
 }
 
-/// 周回順の頂点列で表す単純多角形（凹を含む、穴なし）。
-/// 入力が時計回りなら反転して反時計回りに揃える。自己交差の検出はしない。
-/// 空・点・線分・面積0の退化多角形も許し、面積は0。
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Polygon<T: GeometryCoordinate = i64> {
     vertices: Vec<Point<T>>,
 }
 impl<T: GeometryCoordinate> Polygon<T> {
-    /// 頂点は境界を周回する順序で渡す。点集合から凸包を作る処理ではない。
-    /// 連続重複・末尾の先頭点を除去。最初の頂点は維持する。O(N)。
     pub fn new(vertices: &[Point<T>]) -> Self {
         let mut vertices = vertices.to_vec();
         for p in &vertices {
@@ -348,11 +357,9 @@ impl<T: GeometryCoordinate> Polygon<T> {
     pub fn is_empty(&self) -> bool {
         self.vertices.is_empty()
     }
-    /// 面積の2倍。整数座標はi128、有理数座標はRatio128。O(N)。
     pub fn area2(&self) -> T::Wide {
         signed_polygon_area2(&self.vertices).abs()
     }
-    /// 半整数も切り捨てない厳密な面積。O(N)。
     pub fn area(&self) -> Ratio128 {
         self.area2().rational() / 2
     }
@@ -369,7 +376,6 @@ pub enum Ccw {
     Beyond,
     OnSegment,
 }
-/// a=bの場合、c=aはOnSegment、それ以外はBeyond。
 pub fn ccw<T: GeometryCoordinate>(a: Point<T>, b: Point<T>, c: Point<T>) -> Ccw {
     let (u, v) = (b.difference(a), c.difference(a));
     match u.cross(v).sign() {
@@ -387,8 +393,6 @@ pub fn ccw<T: GeometryCoordinate>(a: Point<T>, b: Point<T>, c: Point<T>) -> Ccw 
     }
 }
 
-/// ax+by+c=0。gcd(|a|,|b|,|c|)=1、最初の非零係数は正。
-/// フィールドを非公開にして正規形を維持する。
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Line {
     a: i128,
@@ -402,7 +406,6 @@ pub enum LineIntersection {
     Point(RationalPoint),
 }
 impl Line {
-    /// a=b=0は直線でないためNone。
     pub fn new(a: i128, b: i128, c: i128) -> Option<Self> {
         if a == 0 && b == 0 {
             return None;
@@ -430,7 +433,6 @@ impl Line {
         }
         Some(Self { a, b, c })
     }
-    /// 有理数係数の分母を払って同じ正規形にする。
     pub fn from_rational_coefficients(a: Ratio128, b: Ratio128, c: Ratio128) -> Option<Self> {
         assert!(a.is_finite() && b.is_finite() && c.is_finite());
         if a.is_zero() && b.is_zero() {
@@ -447,7 +449,6 @@ impl Line {
             GeometryNumber::mul(*c.numerator(), lcm / *c.denominator()),
         )
     }
-    /// 同一点ならNone。整数座標は整数演算で構築する。
     pub fn through<T: GeometryCoordinate>(p: Point<T>, q: Point<T>) -> Option<Self> {
         let (p, q) = (p.wide(), q.wide());
         let a = p.y.sub(q.y);
@@ -465,13 +466,10 @@ impl Line {
     pub fn contains<T: GeometryCoordinate>(self, p: Point<T>) -> bool {
         self.evaluate(p).is_zero()
     }
-    /// 正規化された法線に対する符号（throughの点順には依存しない）。
     pub fn side<T: GeometryCoordinate>(self, p: Point<T>) -> i8 {
         self.evaluate(p).signum()
     }
 
-    /// 向きを持たない直線の角度[0, pi)を比較。平行ならEqual（cは無視）。
-    /// 水平、正の傾き、垂直、負の傾きの順。i128係数の全域で積overflowなし。
     pub fn cmp_angle(self, other: Self) -> std::cmp::Ordering {
         match (self.a == 0, other.a == 0) {
             (true, true) => std::cmp::Ordering::Equal,
@@ -480,7 +478,6 @@ impl Line {
             (false, false) => geometry_cmp_integer_products(self.b, other.a, other.b, self.a),
         }
     }
-    /// 数値としての傾き -a/b を比較。垂直は+∞として最後に置く。
     pub fn cmp_slope(self, other: Self) -> std::cmp::Ordering {
         match (self.b == 0, other.b == 0) {
             (true, true) => std::cmp::Ordering::Equal,
@@ -557,9 +554,43 @@ impl Line {
         Self::from_rational_coefficients(a, b, -(a * p.x + b * p.y)).unwrap()
     }
 }
-// 符号を分け、|a|*|b| vs |c|*|d| を |a|/|c| vs |d|/|b| へ変換。
-// 連分数比較なのでi128::MINの絶対値もu128で扱え、積を生成しない。
+
+fn geometry_cmp_rational_turn(
+    a: RationalPoint,
+    b: RationalPoint,
+    c: RationalPoint,
+) -> std::cmp::Ordering {
+    let values = [a.x, a.y, b.x, b.y, c.x, c.y];
+    let fast = (|| {
+        let mut denominator = 1i128;
+        for value in values {
+            let d = *value.denominator();
+            denominator = (denominator / (geometry_gcd(denominator as u128, d as u128) as i128))
+                .checked_mul(d)?;
+        }
+        let mut v = [0i128; 6];
+        for (i, value) in values.iter().enumerate() {
+            v[i] = value
+                .numerator()
+                .checked_mul(denominator / *value.denominator())?;
+        }
+        Some(geometry_cmp_integer_products(
+            v[2].checked_sub(v[0])?,
+            v[5].checked_sub(v[1])?,
+            v[3].checked_sub(v[1])?,
+            v[4].checked_sub(v[0])?,
+        ))
+    })();
+    fast.unwrap_or_else(|| {
+        let (u, v) = (b - a, c - a);
+        Ratio128::cmp_products(u.x, v.y, u.y, v.x)
+    })
+}
 fn geometry_cmp_integer_products(a: i128, b: i128, c: i128, d: i128) -> std::cmp::Ordering {
+    if let (Some(left), Some(right)) = (a.checked_mul(b), c.checked_mul(d)) {
+        return left.cmp(&right);
+    }
+
     let sign = |a: i128, b: i128| {
         if a == 0 || b == 0 {
             0i8
@@ -633,8 +664,6 @@ impl<T: GeometryCoordinate> Segment<T> {
         Self { a, b }
     }
 
-    /// 始点aから終点bへの向きの角度[0, 2pi)。零長ならNone。
-    /// i64の端点差はi128へ拡張するため、i64座標全域で比較可能。
     pub fn cmp_angle(self, other: Self) -> Option<std::cmp::Ordering> {
         self.b
             .difference(self.a)
@@ -670,7 +699,6 @@ impl<T: GeometryCoordinate> Segment<T> {
             || other.contains(a)
             || other.contains(b)
     }
-    /// 重なりの端点は辞書順で返す。零長線分にも対応。
     pub fn intersection(self, other: Self) -> SegmentIntersection {
         if !self.intersects(other) {
             return SegmentIntersection::None;

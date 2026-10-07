@@ -1,9 +1,3 @@
-// 前提: StaticModInt と Mod998244353（ACL版または同梱MI版）。
-/// mod998244353の畳み込み。各入力長<=2^24、結果長<=2^25-1。
-/// 空入力は空。短い側<=60は愚直、結果長<=2^23は998244353のNTT、
-/// それ以上は2^25変換に対応する3素数NTT+CRT。O(N log N)、領域O(N)。
-/// 最大入力では入力・出力・作業配列を合わせ約640MiBを必要とする。
-/// convolution_merge等では `use convolution_mod998244353 as convolution;`。
 pub fn convolution_mod998244353(
     a: &[StaticModInt<Mod998244353>],
     b: &[StaticModInt<Mod998244353>],
@@ -42,12 +36,9 @@ mod convolution_998244353_detail {
         a: &[super::StaticModInt<super::Mod998244353>],
         b: &[super::StaticModInt<super::Mod998244353>],
     ) -> Vec<super::StaticModInt<super::Mod998244353>> {
-        // 呼出側が非空かつ各長さ<=2^24を保証。
         let c1 = convolve::<167772161, 3>(a, b);
         let c2 = convolve::<469762049, 3>(a, b);
         let c3 = convolve::<2013265921, 31>(a, b);
-        // min(n,m)*(998244353-1)^2 <= 2^24*(998244353-1)^2 < P1*P2*P3。
-        // 整数係数を一意に復元してから目的modに還元する。
         const P1: u64 = 167772161;
         const P2: u64 = 469762049;
         const P3: u64 = 2013265921;

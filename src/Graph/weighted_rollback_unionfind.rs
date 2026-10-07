@@ -1,8 +1,6 @@
 #[path = "../Basic/rollbackvector.rs"]
 mod rollback_weighted_uf_vector;
 
-/// 群上の重み。opは群の積、identityは両側単位元、invは両側逆元。
-/// 可換性は不要。
 pub trait UFMonoid {
     type S: Clone + PartialEq;
     fn identity(&self) -> Self::S;
@@ -57,9 +55,6 @@ where
         self.find(p).0
     }
 
-    /// diff(u, v) = wという制約を追加する。
-    /// 既存の制約と矛盾する場合は状態を変えずfalseを返す。
-    /// 矛盾は内部に蓄積しない。どの場合も1操作として履歴に記録する。
     #[inline]
     pub fn union(&mut self, u: usize, v: usize, w: M::S) -> bool {
         let ((mut pu, wu), (mut pv, wv)) = (self.find(u), self.find(v));
@@ -103,7 +98,6 @@ where
         }
     }
 
-    /// 直前のunionを取り消す。整合済み・矛盾した制約も1操作として扱う。
     pub fn rollback(&mut self) {
         if let Some((parent, data)) = self.hist.pop() {
             self.parent.rollback(parent);
@@ -113,7 +107,6 @@ where
 }
 
 impl<M: UFMonoid> RollbackWeightedUnionFind<M> {
-    /// 現在の状態を基準にして履歴を捨てる。
     pub fn snapshot(&mut self) {
         self.hist.clear();
         self.parent.clear_history();

@@ -1,0 +1,13 @@
+{
+  "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "flags": [
+    "--edition=2021",
+    "-O",
+    "-Awarnings"
+  ],
+  "n": 10000000,
+  "q": 1000000,
+  "repeats": 7,
+  "note": "Local generated cases following official distributions; not official files. Process startup/drop/output capture included in wall_ms."
+}

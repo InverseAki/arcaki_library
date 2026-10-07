@@ -1,6 +1,4 @@
-// Experimental copy: add-only y compression, optional shared-prefix BIT query.
 const I: i32 = i32::MAX;
-// [0, r) の半開区間
 pub struct BIT<T>
 where
     T: Copy
@@ -90,7 +88,6 @@ impl PointAddRectangleSum {
         self.yn+=1;
     }
 
-    // [lx, rx)×[ly, ry) なので注意
     #[inline]
     pub fn push_query(&mut self, lx: i32, ly: i32, rx: i32, ry: i32,){
         self.data.push(PointAddRectangleSumQuery::Query {lx, ly, rx, ry});

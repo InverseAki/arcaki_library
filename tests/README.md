@@ -131,3 +131,39 @@ UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSeg
 仕様は [geometry.md](geometry.md)・[convexhull.md](convexhull.md)。関連17テストがdebug/releaseで通過。
 
 2026-10-05: `ConvexHull::merge` を追加。既存凸包の上下鎖をマージして conv(A ∪ B) を O(N+M) で合成。再ソート不要。詳細は [convexhull.md](convexhull.md)。関連20テストがdebug/releaseで通過。
+
+## 点加算・矩形和のジェネリクスと初期点 build（2026-10-06）
+
+[API・検証・性能比較](point_add_rectangle_sum_build.md)。座標型を各軸で指定でき、初期点は一度の走査で全質問へ寄与させる。24,000ケースの愚直比較と型・境界テストを debug/release で実行。
+
+## 矩形加算・点取得（2026-10-06）
+
+[API・検証・性能比較](rectangle_add_point_get.md)。座標型の指定、初期矩形 build、負の重み・半開境界に対応する独立コピー可能な実装。24,000ケースの愚直比較、1,296組の矩形・境界比較を debug/release で実行し、公式登録19ケースもローカル verifier/checker で確認。
+
+## 静的な矩形加算・矩形和（2026-10-07）
+
+[API・4本BIT・検証と実測](static_rectangle_add_rectangle_sum.md)。座標・重み型を指定可能。i128 と既存 Mint の両方で12,000ケースの愚直比較、1,296組×225質問の全比較を debug/release で実行。公式13ケースもローカル verifier/checker で全件AC。
+
+
+## ABC478 Gでの幾何の速度改善（2026-10-07）
+
+整数比較のchecked積、有理数の共通分母による向き判定、Ratio拡張の再約分省略、整数Ratio演算の高速経路を追加。既存の型・返り値・巨大値fallbackを維持。
+[測定・再現手順・提出例](geometry_performance/README.md)。関連32テスト・Python有理数照合41,365ケースがdebug/releaseで通過。サンプル3件と小ケース200件、10万点の構造付き5形状も比較。
+
+## 線分追加 Li Chao Tree（2026-10-07）
+
+`SegmentTree/lichaotree_segment.rs` に単独コピーできる `LiChaoSegmentTree` を追加。
+直線版と同じ min/max 指定・i64座標/傾き・i128切片/評価値・閉区間を採用。
+`add_segment(a,b,l,r)`、`add_line(a,b)`、`query(x)` を提供する。
+[仕様・使い方・検証範囲](../../algorithm_set/SegmentTree/lichaotree_segment.md)。
+`cargo test --offline --test lichaotree_segment` と同 release の8テストが通過。
+
+## テスト配置と整数補助の統合
+
+- 多倍長整数の内部テストは `big_integer/ntt.rs` と `big_integer/non_ntt.rs`。本体からテスト時のみ読み込む。
+- AVL 木・SortableSequence の検証メソッドは `support/keyed_avl_invariants.rs` と `support/sortable_sequence_invariants.rs`。
+- `Basic/ratio.rs` に整数用の `floor` は含めない。整数補助は `Basic/math.rs` を使う。
+- `NumberTheory/crt.rs` は `Basic/math.rs` と同じスコープにコピーする。旧名 `ext_gcd` も math が提供する。
+- `NumberTheory/modcombination.rs` は固定 `MOD = 1_000_000_007` と math の互換入口。math と同じスコープに重ねてコピーせず、どちらかを使う。
+- `floor_sum.rs` は総和計算の別アルゴリズムとして維持する。
+- `math_integration.rs` で math・ratio・CRT の同時コピー、負の除数・整数境界、旧組合せ入口を検証する。

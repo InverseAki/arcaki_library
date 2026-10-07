@@ -8,7 +8,6 @@ fn p(x: i64, y: i64) -> IntPoint {
 fn r(n: i128, d: i128) -> Ratio128 {
     Ratio128::from_fraction(n, d)
 }
-// 独立なgift wrapping。小さい検証座標では通常の厳密外積で十分。
 fn jarvis<T: GeometryNumber>(points: &[Point<T>]) -> Vec<Point<T>> {
     let mut points = points.to_vec();
     points.sort();
@@ -294,7 +293,6 @@ fn merge_all_small_grid_hulls() {
             .map(|(_, &p)| p)
             .collect();
         let hull = ConvexHull::new(&points);
-        // 共有頂点・同一x座標・点と線分の鎖も辞書順に取得できる。
         let mut sorted = hull.vertices().to_vec();
         sorted.sort();
         sorted.dedup();

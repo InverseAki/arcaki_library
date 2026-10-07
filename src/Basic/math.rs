@@ -1,4 +1,3 @@
-/// 標準整数型の共通部分。外部クレート不要、型ごとに静的に最適化される。
 pub trait MathInteger:
     Copy
     + Ord
@@ -12,7 +11,6 @@ pub trait MathInteger:
     fn euclid_div(self, rhs: Self) -> Self;
     fn euclid_rem(self, rhs: Self) -> Self;
 }
-/// 拡張GCDの係数を表現できる符号付き整数。
 pub trait SignedMathInteger: MathInteger {}
 macro_rules! impl_math_signed {
     ($($t:ty),*) => {$ (
@@ -21,7 +19,6 @@ macro_rules! impl_math_signed {
             const ONE: Self = 1;
             #[inline] fn euclid_div(self, rhs: Self) -> Self { self.div_euclid(rhs) }
             #[inline] fn euclid_rem(self, rhs: Self) -> Self {
-                // MIN/-1 の商は表現不能だが、余りは0。
                 if rhs == -1 { 0 } else { self.rem_euclid(rhs) }
             }
         }
@@ -41,7 +38,6 @@ macro_rules! impl_math_unsigned {
 impl_math_signed!(i8, i16, i32, i64, i128, isize);
 impl_math_unsigned!(u8, u16, u32, u64, u128, usize);
 
-/// 非負の整数の最大公約数。gcd(0,0)=0。全標準整数型に対応。
 #[inline]
 pub fn gcd<T: MathInteger>(mut a: T, mut b: T) -> T {
     assert!(a >= T::ZERO && b >= T::ZERO);
@@ -50,20 +46,14 @@ pub fn gcd<T: MathInteger>(mut a: T, mut b: T) -> T {
     }
     a
 }
-/// a=b*q+r, 0<=r<|b| の商。負の除数では数学的なfloorと異なる。
-/// 除数0、符号付きMIN/-1の商はpanic。
 #[inline]
 pub fn floor<T: MathInteger>(a: T, b: T) -> T {
     a.euclid_div(b)
 }
-/// a=b*q+r, 0<=r<|b| の余り。除数0はpanic。MIN%-1は0。
 #[inline]
 pub fn modulo<T: MathInteger>(a: T, b: T) -> T {
     a.euclid_rem(b)
 }
-/// 非負入力に対して (g,x,y): a*x+b*y=g=gcd(a,b)。全符号付き整数型。
-/// (0,0)=(0,1,0)。係数の計算は入力と同じ型。標準の更新式の係数は
-/// |x|<=b/g, |y|<=a/g に収まり、非負入力なら型の範囲を超えない。
 pub fn extended_gcd<T: SignedMathInteger>(a: T, b: T) -> (T, T, T) {
     assert!(a >= T::ZERO && b >= T::ZERO);
     let (mut r, mut s) = (a, b);
@@ -77,7 +67,10 @@ pub fn extended_gcd<T: SignedMathInteger>(a: T, b: T) -> (T, T, T) {
     (r, x, y)
 }
 
-// 以下は既存API。階乗・組合せは同じスコープの定数MODを使う。
+pub fn ext_gcd<T: SignedMathInteger>(a: T, b: T) -> (T, T, T) {
+    extended_gcd(a, b)
+}
+
 pub fn factorial_i64(n: usize) -> (Vec<i64>, Vec<i64>) {
     let mut res = vec![1; n + 1];
     let mut inv = vec![1; n + 1];
@@ -90,7 +83,6 @@ pub fn factorial_i64(n: usize) -> (Vec<i64>, Vec<i64>) {
     }
     (res, inv)
 }
-/// 正の法mでaの逆元を返す。互いに素であることが前提。
 pub fn mod_inverse(a: i64, m: i64) -> i64 {
     assert!(m > 0);
     let (_, x, _) = extended_gcd(a.rem_euclid(m), m);

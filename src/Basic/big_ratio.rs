@@ -1,5 +1,3 @@
-// ratio.rsとNumberTheory/big_integer.rsを同じスコープに用意する。
-// 整数部品はRadixBigIntをそのまま利用し、別の多倍長整数実装は持たない。
 pub type BigRatio = Rational<BigInt>;
 impl<const B: u32> RatioInteger for RadixBigInt<B> {
     fn normalize(mut x: Self, mut y: Self) -> Result<(Self, Self), RatioError> {
@@ -76,7 +74,6 @@ impl<const B: u32> RatioInteger for RadixBigInt<B> {
         (y * u).cmp(&(v * x))
     }
     fn round(x: &Self, y: &Self, mode: i8) -> Self {
-        // x>0なのでEuclid除算の商はfloor、剰余は常に非負。
         let (q, r) = y.div_rem(x);
         if !r.is_zero() && (mode > 0 || (mode == 0 && y.is_negative())) {
             q + Self::one()

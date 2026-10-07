@@ -1,7 +1,7 @@
 #[derive(Clone, Default, Eq, PartialEq, Hash)]
 pub struct RadixBigInt<const BASE: u32> {
     negative: bool,
-    digits: Vec<u32>, // little endian、0は空、最上位の0なし
+    digits: Vec<u32>,
 }
 pub type BigInt = RadixBigInt<10000>;
 pub type HexBigInt = RadixBigInt<65536>;
@@ -50,8 +50,6 @@ impl<const B: u32> RadixBigInt<B> {
     pub fn abs(&self) -> Self {
         Self::from_digits(false, self.digits.clone())
     }
-    /// 非負の最大公約数。gcd(0,0)=0。符号は結果に影響しない。
-    /// 小さい値はu128で計算し、大きい値は既存の剰余によるEuclid互除法。
     pub fn gcd(&self, rhs: &Self) -> Self {
         let (mut a, mut b) = (self.abs(), rhs.abs());
         if a < b {
@@ -75,7 +73,6 @@ impl<const B: u32> RadixBigInt<B> {
     pub fn limb_len(&self) -> usize {
         self.digits.len()
     }
-    /// 4文字ずつ直接読み込む。BigIntは10進、HexBigIntは16進。+/-と先頭0可。
     pub fn parse_bytes(s: &[u8]) -> Result<Self, ParseBigIntError> {
         Self::check_base();
         let (negative, s) = match s.first() {
@@ -106,7 +103,6 @@ impl<const B: u32> RadixBigInt<B> {
         }
         Ok(Self::from_digits(negative, digits))
     }
-    /// ネイティブ基数（BigInt=10進、HexBigInt=大文字16進）で追記。
     pub fn append_to(&self, output: &mut String) {
         Self::check_base();
         if self.is_zero() {
@@ -114,7 +110,6 @@ impl<const B: u32> RadixBigInt<B> {
             return;
         }
         output.reserve(self.digits.len() * 4 + self.negative as usize);
-        // SAFETY: 追記する全byteは数字ASCIIまたは'-'。既存UTF-8を保つ。
         let bytes = unsafe { output.as_mut_vec() };
         if self.negative {
             bytes.push(b'-');
@@ -144,8 +139,6 @@ impl<const B: u32> RadixBigInt<B> {
             bytes.extend_from_slice(&buf[start..]);
         }
     }
-    /// Euclid除算。self=q*rhs+r、0<=r<|rhs|。正の除数では商はfloor。
-    /// rhs=0ならpanic。/、%、/=、%=もこの規則を使う。
     pub fn div_rem(&self, rhs: &Self) -> (Self, Self) {
         assert!(!rhs.is_zero(), "division by zero");
         let (q, r) = big_integer_detail::div_rem::<B>(&self.digits, &rhs.digits);
@@ -168,7 +161,6 @@ impl<const B: u32> RadixBigInt<B> {
             Some(self.div_rem(rhs))
         }
     }
-    /// 互換名。通常のdiv_remも非負の剰余を返す。
     pub fn div_rem_euclid(&self, rhs: &Self) -> (Self, Self) {
         self.div_rem(rhs)
     }
@@ -412,7 +404,6 @@ mod big_integer_detail {
         }
         c
     }
-    // a>=b。呼び出し側で正規化済み。
     pub(super) fn sub<const B: u32>(a: &[u32], b: &[u32]) -> Vec<u32> {
         debug_assert!(cmp(a, b) != Ordering::Less);
         let mut c = a.to_vec();
@@ -497,7 +488,6 @@ mod big_integer_detail {
         }
         let size = a.len().checked_add(b.len() - 1).expect("length overflow");
         let coefficients = if a.len().min(b.len()) <= 48 {
-            // 逐次carryではなく整数係数を集める。短い側<=48ならu64に十分収まる。
             let mut c = vec![0u64; size];
             for (i, &x) in a.iter().enumerate() {
                 for (j, &y) in b.iter().enumerate() {
@@ -510,7 +500,6 @@ mod big_integer_detail {
             let mut answer = convolve::<167772161, 3>(a, b);
             let residues = convolve::<469762049, 3>(a, b);
             let mut carry = 0u64;
-            // CRT復元とcarryを融合し、最初のNTT配列を結果の桁配列へ再利用。
             for (digit, y) in answer.iter_mut().zip(residues) {
                 let t = (y as u64 + 469762049 - *digit as u64) * 104391568 % 469762049;
                 let x = *digit as u64 + 167772161 * t + carry;
@@ -552,7 +541,6 @@ mod big_integer_detail {
         }
         y
     }
-    // P<2^29。NTT中はMontgomery表現、値域[0,2P)で加減算をまとめる。
     const fn ntt_neg_inverse(p: u32) -> u32 {
         let mut x = p;
         let mut i = 0;
@@ -633,7 +621,6 @@ mod big_integer_detail {
             );
             vcombine_u32(vshrn_n_u64::<32>(lo), vshrn_n_u64::<32>(hi))
         }
-        // callerは全sliceが同じ長さ、長さがLANESの倍数、対応CPU feature有効を保証。
         #[inline]
         #[target_feature(enable = "neon")]
         pub(super) unsafe fn forward4<const P: u64, const UNIT: bool>(
@@ -747,7 +734,6 @@ mod big_integer_detail {
             );
             _mm256_blend_epi32::<0xAA>(_mm256_srli_epi64::<32>(even), odd)
         }
-        // callerは全sliceが同じ長さ、長さがLANESの倍数、対応CPU feature有効を保証。
         #[inline]
         #[target_feature(enable = "avx2")]
         pub(super) unsafe fn forward4<const P: u64, const UNIT: bool>(
@@ -894,8 +880,6 @@ mod big_integer_detail {
             assert_eq!(a0.len(), a1.len());
             assert_eq!(a0.len(), a2.len());
             assert_eq!(a0.len(), a3.len());
-            // sliceはradix-4段で4等分した互いに重ならない領域。
-            // pは2冪。SIMDはCPU feature検出後、pがlane数以上のときだけ呼ぶ。
             #[cfg(target_arch = "aarch64")]
             if self.simd && a0.len() >= 4 {
                 unsafe {
@@ -954,8 +938,6 @@ mod big_integer_detail {
             assert_eq!(a0.len(), a1.len());
             assert_eq!(a0.len(), a2.len());
             assert_eq!(a0.len(), a3.len());
-            // sliceはradix-4段で4等分した互いに重ならない領域。
-            // pは2冪。SIMDはCPU feature検出後、pがlane数以上のときだけ呼ぶ。
             #[cfg(target_arch = "aarch64")]
             if self.simd && a0.len() >= 4 {
                 unsafe {
@@ -1092,8 +1074,6 @@ mod big_integer_detail {
             }
         }
     }
-    // radix-4 DIF/DIT。根の表を2つの法ごとに一度だけ構築する。
-    // 段順序はsrc/Fps/convolution_mod998244353.rsと同じ。
     fn ntt<const P: u64, const G: u64>(a: &mut [u32], inverse: bool) {
         static P0: std::sync::OnceLock<Plan> = std::sync::OnceLock::new();
         static P1: std::sync::OnceLock<Plan> = std::sync::OnceLock::new();
@@ -1120,80 +1100,7 @@ mod big_integer_detail {
     }
     #[cfg(test)]
     mod ntt_tests {
-        use super::*;
-        fn check<const P: u64>() {
-            let mut state = 20261004u64;
-            let mut random = || {
-                state ^= state << 13;
-                state ^= state >> 7;
-                state ^= state << 17;
-                state
-            };
-            let mut scalar = Plan::new::<P, 3>();
-            scalar.simd = false;
-            let vector = Plan::new::<P, 3>();
-            let r2 = (((1u64 << 32) % P).pow(2) % P) as u32;
-            for _ in 0..10000 {
-                let a = (random() % (2 * P)) as u32;
-                let b = (random() % (2 * P)) as u32;
-                let product = ntt_mul::<P>(a, b);
-                assert!((product as u64) < 2 * P);
-                assert_eq!(
-                    product as u64 % P,
-                    a as u64 * b as u64 % P * mod_pow::<P>((1 << 32) % P, P - 2) % P
-                );
-            }
-            // Odd/even stage counts, SIMD cutoff, and deliberately unaligned slices.
-            for log in 0..=16 {
-                let n = 1 << log;
-                let source: Vec<_> = (0..n)
-                    .map(|i| match i % 5 {
-                        0 => 0,
-                        1 => P as u32 - 1,
-                        _ => (random() % P) as u32,
-                    })
-                    .collect();
-                let mut roundtrip = source.clone();
-                ntt::<P, 3>(&mut roundtrip, false);
-                ntt::<P, 3>(&mut roundtrip, true);
-                assert_eq!(roundtrip, source);
-                for offset in [0, 1, 3, 7] {
-                    let mut a = vec![0; n + offset];
-                    for (x, &v) in a[offset..].iter_mut().zip(&source) {
-                        *x = ntt_mul::<P>(v, r2);
-                    }
-                    let mut b = a.clone();
-                    scalar.forward::<P>(&mut a[offset..]);
-                    vector.forward::<P>(&mut b[offset..]);
-                    assert_eq!(a, b);
-                    scalar.inverse::<P>(&mut a[offset..]);
-                    vector.inverse::<P>(&mut b[offset..]);
-                    assert_eq!(a, b);
-                }
-            }
-            for n in [1, 2, 4, 7, 31, 48, 49, 63, 64, 65, 127, 128, 129] {
-                for m in [1, 3, 49, 64, 129] {
-                    let a: Vec<_> = (0..n).map(|_| (random() % P) as u32).collect();
-                    let b: Vec<_> = (0..m).map(|_| (random() % P) as u32).collect();
-                    let mut expected = vec![0u32; n + m - 1];
-                    for (i, &x) in a.iter().enumerate() {
-                        for (j, &y) in b.iter().enumerate() {
-                            expected[i + j] =
-                                ((expected[i + j] as u64 + x as u64 * y as u64) % P) as u32;
-                        }
-                    }
-                    assert_eq!(convolve::<P, 3>(&a, &b), expected);
-                }
-            }
-        }
-        #[test]
-        fn montgomery_radix4_scalar_and_simd_prime0() {
-            check::<167772161>();
-        }
-        #[test]
-        fn montgomery_radix4_scalar_and_simd_prime1() {
-            check::<469762049>();
-        }
+        include!("../../tests/big_integer/ntt.rs");
     }
     fn convolve<const P: u64, const G: u64>(a: &[u32], b: &[u32]) -> Vec<u32> {
         let size = a.len() + b.len() - 1;
@@ -1220,7 +1127,6 @@ mod big_integer_detail {
     mod wide_school {
 
         use std::cmp::Ordering;
-        // ARMは4/3 limbをu128でまとめる。他では2 limbをu64で処理。
         #[cfg(target_arch = "aarch64")]
         type Product = u128;
         #[cfg(not(target_arch = "aarch64"))]
@@ -1301,7 +1207,6 @@ mod big_integer_detail {
             (c, r as u64)
         }
 
-        // 正規化済み b（最上位>=wide_base::<B>()/2）に対するKnuthの筆算除算。
         fn school_div<const B: u32>(a: &[u64], b: &[u64]) -> (Vec<u64>, Vec<u64>) {
             if cmp(a, b) == Ordering::Less {
                 return (vec![], a.to_vec());
@@ -1399,7 +1304,6 @@ mod big_integer_detail {
         }
     }
 
-    // 正規化済み b（最上位>=B/2）に対するKnuthの筆算除算。
     fn school_div<const B: u32>(a: &[u32], b: &[u32]) -> (Vec<u32>, Vec<u32>) {
         if cmp(a, b) == Ordering::Less {
             return (vec![], a.to_vec());
@@ -1448,7 +1352,6 @@ mod big_integer_detail {
         trim(&mut q);
         (q, u)
     }
-    // value*B^position-a。積の配列を補数へ書き換え、大きな0配列を省く。
     fn power_minus<const B: u32>(position: usize, value: u32, mut a: Vec<u32>) -> Vec<u32> {
         assert!(a.len() <= position + 1);
         a.resize(position + 1, 0);
@@ -1465,73 +1368,13 @@ mod big_integer_detail {
     }
     #[cfg(test)]
     mod non_ntt_tests {
-        use super::*;
-        fn check<const B: u32>() {
-            let mut state = 20261004u64;
-            let mut random = || {
-                state ^= state << 13;
-                state ^= state >> 7;
-                state ^= state << 17;
-                (state % B as u64) as u32
-            };
-            for n in [
-                2, 3, 4, 5, 7, 8, 9, 15, 16, 31, 32, 33, 63, 64, 65, 127, 128, 129, 255,
-            ] {
-                for qn in [1, 2, 3, 4, 7, 8, 31, 32, 33] {
-                    for top in [1, B / 2, B - 1] {
-                        let mut b: Vec<_> = (0..n).map(|_| random()).collect();
-                        b[n - 1] = top;
-                        let mut q: Vec<_> = (0..qn).map(|_| random()).collect();
-                        q[qn - 1] = (B - 1).max(1);
-                        for r in [vec![], vec![1], sub::<B>(&b, &[1])] {
-                            let a = add::<B>(&mul::<B>(&q, &b), &r);
-                            let scale = B / (b[n - 1] + 1);
-                            let (reference_q, reference_r) = school_div::<B>(
-                                &mul_small::<B>(&a, scale),
-                                &mul_small::<B>(&b, scale),
-                            );
-                            let (reference_r, rem) = div_small::<B>(&reference_r, scale);
-                            assert_eq!(rem, 0);
-                            let (wide_q, wide_r) = wide_school::divide::<B>(&a, &b);
-                            assert_eq!(wide_q, reference_q);
-                            assert_eq!(wide_r, reference_r);
-                            assert_eq!(div_rem::<B>(&a, &b), (q.clone(), r));
-                        }
-                    }
-                }
-            }
-            for p in [0, 1, 2, 31, 32, 63, 64, 65, 255] {
-                for top in [1, 2] {
-                    let x = power(p, top);
-                    for a in [vec![], vec![1], x.clone(), sub::<B>(&x, &[1])] {
-                        assert_eq!(power_minus::<B>(p, top, a.clone()), sub::<B>(&x, &a));
-                    }
-                }
-            }
-            // Full carry/borrow chains with unequal operand lengths.
-            for n in [1, 4, 64, 257] {
-                let max = vec![B - 1; n];
-                let pow = power(n, 1);
-                assert_eq!(add::<B>(&max, &[1]), pow);
-                assert_eq!(sub::<B>(&pow, &[1]), max);
-                assert_eq!(add::<B>(&max, &[]), max);
-            }
-        }
-        #[test]
-        fn wide_school_and_reused_arrays_decimal() {
-            check::<10000>();
-        }
-        #[test]
-        fn wide_school_and_reused_arrays_hex() {
-            check::<65536>();
-        }
+        include!("../../tests/big_integer/non_ntt.rs");
     }
     fn power(position: usize, value: u32) -> Vec<u32> {
         let mut a = vec![0; position + 1];
         a[position] = value;
         a
     }
-    // floor(B^(2n)/a)、aの最上位>=B/2。上半分の厳密逆数から精度を倍増。
     fn reciprocal<const B: u32>(a: &[u32]) -> Vec<u32> {
         let n = a.len();
         debug_assert!(a[n - 1] >= B / 2);
@@ -1543,12 +1386,10 @@ mod big_integer_detail {
         x.extend(reciprocal::<B>(&a[n - m..]));
         let ax = mul::<B>(a, &x);
         let correction = power_minus::<B>(2 * n, 2, ax);
-        // x <- floor(x*(2S-a*x)/S)。常に真の逆数以下へ着地する。
         x = mul::<B>(&x, &correction).into_iter().skip(2 * n).collect();
         trim(&mut x);
         let ax = mul::<B>(a, &x);
         let mut r = power_minus::<B>(2 * n, 1, ax);
-        // 上半分由来の誤差<=4B^(n-m)、Newton後の誤差<17。
         while cmp(&r, a) != Ordering::Less {
             sub_assign::<B>(&mut r, a);
             increment::<B>(&mut x);
@@ -1566,7 +1407,6 @@ mod big_integer_detail {
             let p = b.len().min(quotient_len + 2);
             let cut = b.len() - p;
             let mut high = b[cut..].to_vec();
-            // 切り捨てた低位がある場合は上へ丸め、商の過大推定を防ぐ。
             if cut != 0 {
                 increment::<B>(&mut high);
             }
@@ -1614,7 +1454,6 @@ mod big_integer_detail {
             let (q, r) = div_small::<B>(a, b[0]);
             return (q, if r == 0 { vec![] } else { vec![r] });
         }
-        // 一つの非零limbだけを持つ除数なら、低位を切り分けてscalar除算。
         let shift = b.len() - 1;
         if b[..shift].iter().all(|&x| x == 0) {
             let (q, rem) = div_small::<B>(&a[shift..], b[shift]);
@@ -1626,8 +1465,6 @@ mod big_integer_detail {
             trim(&mut r);
             return (q, r);
         }
-        // 筆算の領域だけ4桁をまとめる。NTTでは従来の基数を直接使う。
-        // 短い入力は変換コストを避け、商が長い場合はNewton法へ進む。
         if a.len() >= 64 && (b.len() <= 32 || a.len() - b.len() + 1 <= 32) {
             return wide_school::divide::<B>(a, b);
         }

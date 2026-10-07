@@ -1,13 +1,9 @@
-// 抽象化した正方行列。値は行優先の連続配列。セル(i,j)はi*n+j。
-// MatrixMonoidは加法・乗法の半環（zeroは乗法の吸収元）を用意する。
-// 区間積と異なり積算の順序はk=0,1,...を維持する。スカラー乗法は非可換でもよい。
 pub trait MatrixMonoid {
     type S: Clone;
     fn sum(a: &Self::S, b: &Self::S) -> Self::S;
     fn zero() -> Self::S;
     fn mul(a: &Self::S, b: &Self::S) -> Self::S;
     fn one() -> Self::S;
-    /// 省略してよい加法単位元だけtrue。既存実装は追加実装不要。
     #[inline(always)]
     fn is_additive_zero(_: &Self::S) -> bool {
         false
@@ -16,14 +12,12 @@ pub trait MatrixMonoid {
     fn mul_add(acc: &mut Self::S, a: &Self::S, b: &Self::S) {
         *acc = Self::sum(acc, &Self::mul(a, b));
     }
-    /// outはn*n個のzeroで初期化済み。特殊型はこのカーネルを上書きできる。
     #[inline]
     fn multiply_kernel(n: usize, a: &[Self::S], b: &[Self::S], out: &mut [Self::S]) {
         matrix_generic_kernel::<Self>(n, a, b, out);
     }
 }
 
-/// 逆行列を求めるための体の演算。半環だけの型は実装しなくてよい。
 pub trait MatrixField: MatrixMonoid {
     fn is_zero(x: &Self::S) -> bool;
     fn sub(a: &Self::S, b: &Self::S) -> Self::S;
@@ -65,7 +59,6 @@ pub struct SquareMatrix<M: MatrixMonoid> {
     n: usize,
     g: Vec<M::S>,
 }
-/// 旧DoublingMatrixの型名・メソッドを維持する。
 pub type DoublingMatrix<M> = SquareMatrix<M>;
 
 impl<M: MatrixMonoid> Clone for SquareMatrix<M> {
@@ -98,7 +91,6 @@ where
 impl<M: MatrixMonoid> Eq for SquareMatrix<M> where M::S: Eq {}
 
 impl<M: MatrixMonoid> SquareMatrix<M> {
-    /// Vecは移動し、&Vec/&[T]は複製する。要素数はn*nでなければならない。
     pub fn new<D: MatrixData<M::S>>(n: usize, data: D) -> Self {
         let cells = n.checked_mul(n).expect("matrix size overflow");
         let g = data.into_matrix_data();
@@ -167,7 +159,6 @@ impl<M: MatrixMonoid> SquareMatrix<M> {
     pub fn prod(&self, rhs: &Self) -> Self {
         self.mul(rhs)
     }
-    /// 出力領域を再利用する。outも同じ次元であること。
     pub fn mul_into(&self, rhs: &Self, out: &mut Self) {
         assert_eq!(self.n, rhs.n, "matrix dimensions differ");
         assert_eq!(self.n, out.n, "output dimensions differ");
@@ -292,7 +283,6 @@ pub fn matrix_generic_kernel<M: MatrixMonoid + ?Sized>(
         }
         return;
     }
-    // kの順序を変えず、右辺と出力の近い領域をまとめて使う。
     for ii in (0..n).step_by(32) {
         for kk in (0..n).step_by(32) {
             for jj in (0..n).step_by(64) {
@@ -315,8 +305,6 @@ pub fn matrix_generic_kernel<M: MatrixMonoid + ?Sized>(
     }
 }
 
-/// 法1..=u32::MAX、セルは0<=x<P。加算・乗算をmod Pで行う。
-/// 逆行列のAPIを使うときはPが素数であることを検査する。
 pub struct ModMatrixMonoid<const P: u32>;
 impl<const P: u32> MatrixMonoid for ModMatrixMonoid<P> {
     type S = u32;
@@ -387,7 +375,6 @@ fn matrix_is_prime(p: u32) -> bool {
     true
 }
 
-/// min-plus。INFは加法単位元。有限値とその演算結果は絶対値<INFの範囲で使う。
 pub struct MinPlusMonoid;
 impl MinPlusMonoid {
     pub const INF: i64 = 1 << 60;
@@ -419,7 +406,6 @@ impl MatrixMonoid for MinPlusMonoid {
         *x == Self::INF
     }
     fn multiply_kernel(n: usize, a: &[i64], b: &[i64], out: &mut [i64]) {
-        // 右辺にINFがなければ内側の吸収元判定を全て省ける。
         if b.iter().all(|&x| x != Self::INF) {
             for (a_row, out_row) in a.chunks_exact(n.max(1)).zip(out.chunks_exact_mut(n.max(1))) {
                 for (k, &x) in a_row.iter().enumerate() {
@@ -462,7 +448,6 @@ impl MatrixMonoid for BoolMatrixMonoid {
     }
 }
 
-// P=0なら実行時のmodulusを使う。入力は正規化済みのu32。
 #[doc(hidden)]
 pub fn matrix_mod_u32_kernel<const P: u32>(
     n: usize,
@@ -504,7 +489,6 @@ pub fn matrix_mod_u32_kernel<const P: u32>(
         return;
     }
     let bound = modulus as u64 - 1;
-    // 既存の剰余も含めてu64に収まる個数だけ積算する。法が大きいと1になる。
     let batch = ((u64::MAX - bound) / (bound * bound)).min(64) as usize;
     if zeros > a.len() / 4 {
         matrix_mod_u32_blocked::<P, true>(n, a, b, out, modulus, batch);

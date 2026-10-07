@@ -10,7 +10,6 @@ impl KeyedAvlMonoid for Affine {
     fn identity() -> Self::S {
         (1, 0)
     }
-    // 左の関数fの後に右の関数gを適用する（g∘f）。
     fn op(f: &Self::S, g: &Self::S) -> Self::S {
         (f.0 * g.0 % MOD, (f.1 * g.0 + g.1) % MOD)
     }

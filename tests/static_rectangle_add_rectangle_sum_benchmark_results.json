@@ -1,0 +1,181 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "seed": 123456789,
+  "repetitions": 3,
+  "timing": "registration/build plus solve; excludes generation, process startup, compilation and I/O",
+  "results": [
+    {
+      "rectangles": 200000,
+      "queries": 200000,
+      "mode": "mixed",
+      "methods": {
+        "exact": {
+          "median_seconds": 0.319713,
+          "max_rss_mib": 95.546875,
+          "runs": [
+            {
+              "seconds": 0.33567,
+              "rss_mib": 95.546875
+            },
+            {
+              "seconds": 0.319713,
+              "rss_mib": 95.515625
+            },
+            {
+              "seconds": 0.290268,
+              "rss_mib": 95.515625
+            }
+          ]
+        },
+        "modular": {
+          "median_seconds": 0.256012,
+          "max_rss_mib": 72.640625,
+          "runs": [
+            {
+              "seconds": 0.236953,
+              "rss_mib": 72.640625
+            },
+            {
+              "seconds": 0.256012,
+              "rss_mib": 72.640625
+            },
+            {
+              "seconds": 0.26429,
+              "rss_mib": 72.640625
+            }
+          ]
+        }
+      }
+    },
+    {
+      "rectangles": 200000,
+      "queries": 200000,
+      "mode": "ties",
+      "methods": {
+        "exact": {
+          "median_seconds": 0.027649,
+          "max_rss_mib": 58.453125,
+          "runs": [
+            {
+              "seconds": 0.030771,
+              "rss_mib": 58.453125
+            },
+            {
+              "seconds": 0.027649,
+              "rss_mib": 58.453125
+            },
+            {
+              "seconds": 0.02731,
+              "rss_mib": 58.453125
+            }
+          ]
+        },
+        "modular": {
+          "median_seconds": 0.025566,
+          "max_rss_mib": 51.171875,
+          "runs": [
+            {
+              "seconds": 0.025716,
+              "rss_mib": 51.171875
+            },
+            {
+              "seconds": 0.025566,
+              "rss_mib": 51.171875
+            },
+            {
+              "seconds": 0.025519,
+              "rss_mib": 51.171875
+            }
+          ]
+        }
+      }
+    },
+    {
+      "rectangles": 200000,
+      "queries": 10000,
+      "mode": "mixed",
+      "methods": {
+        "exact": {
+          "median_seconds": 0.155787,
+          "max_rss_mib": 65.03125,
+          "runs": [
+            {
+              "seconds": 0.154149,
+              "rss_mib": 65.015625
+            },
+            {
+              "seconds": 0.155847,
+              "rss_mib": 65.03125
+            },
+            {
+              "seconds": 0.155787,
+              "rss_mib": 65.03125
+            }
+          ]
+        },
+        "modular": {
+          "median_seconds": 0.138553,
+          "max_rss_mib": 48.03125,
+          "runs": [
+            {
+              "seconds": 0.138553,
+              "rss_mib": 48.03125
+            },
+            {
+              "seconds": 0.136877,
+              "rss_mib": 48.03125
+            },
+            {
+              "seconds": 0.140151,
+              "rss_mib": 48.03125
+            }
+          ]
+        }
+      }
+    },
+    {
+      "rectangles": 10000,
+      "queries": 200000,
+      "mode": "mixed",
+      "methods": {
+        "exact": {
+          "median_seconds": 0.059231,
+          "max_rss_mib": 35.53125,
+          "runs": [
+            {
+              "seconds": 0.056176,
+              "rss_mib": 35.53125
+            },
+            {
+              "seconds": 0.059591,
+              "rss_mib": 35.53125
+            },
+            {
+              "seconds": 0.059231,
+              "rss_mib": 35.53125
+            }
+          ]
+        },
+        "modular": {
+          "median_seconds": 0.054535,
+          "max_rss_mib": 29.953125,
+          "runs": [
+            {
+              "seconds": 0.054535,
+              "rss_mib": 29.953125
+            },
+            {
+              "seconds": 0.054143,
+              "rss_mib": 29.953125
+            },
+            {
+              "seconds": 0.054903,
+              "rss_mib": 29.953125
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

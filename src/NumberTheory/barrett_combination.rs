@@ -1,7 +1,3 @@
-// 同じスコープに Barrett32 を用意する（Basic/barrett.rsをコピペ）。
-/// 実行時modの階乗テーブル。前計算O(n+log m)、問い合わせO(1)、領域約8(n+1)bytes。
-/// n! がmod mで可逆な範囲限定。素数mなら n<m。任意の合成数modを
-/// 無条件に扱うものではない。各インスタンスで異なる法を同時に使える。
 pub struct BarrettCombination {
     barrett: Barrett32,
     fact: Vec<u32>,
@@ -11,7 +7,6 @@ impl BarrettCombination {
     pub fn new(n: usize, modulus: u32) -> Self {
         Self::try_new(n, modulus).expect("requires modulus >= 2 and invertible n! modulo modulus")
     }
-    /// 非対応の法・前計算範囲ならNone（メモリ確保失敗の回復はしない）。
     pub fn try_new(n: usize, modulus: u32) -> Option<Self> {
         if modulus < 2 || n as u128 >= modulus as u128 {
             return None;
@@ -77,7 +72,6 @@ impl BarrettCombination {
             self.inv_fact[n - k],
         )
     }
-    /// 重複組合せ n H k。0 H 0=1、0 H k=0 (k>0)。
     pub fn h(&self, n: usize, k: usize) -> u32 {
         if k == 0 {
             return 1;

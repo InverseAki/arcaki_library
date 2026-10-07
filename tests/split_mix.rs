@@ -96,7 +96,6 @@ fn rejected_samples_match_reference() {
             } else {
                 u128::MAX
             };
-            // 許容領域のサイズが width の倍数になる先頭位置。
             let threshold = (max % width + 1) % width;
             let expected = loop {
                 let x = if width <= 1u128 << 64 {
@@ -114,7 +113,6 @@ fn rejected_samples_match_reference() {
         }
     }
     assert!(rejected > 1000);
-    // 8 bit の乱数空間で全幅を列挙し、棄却後の各剰余の個数が等しいことも確認。
     for width in 1usize..=256 {
         let threshold = 256 % width;
         let mut counts = vec![0; width];

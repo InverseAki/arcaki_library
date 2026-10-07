@@ -100,7 +100,6 @@ fn sum_structures_match_naive() {
 }
 #[test]
 fn noncommutative_products_and_searches() {
-    // starts_with / ends_with は要素順を誤ると答えが変わる単調な述語。
     for n in 0..18 {
         let mut a: Vec<String> = (0..n)
             .map(|i| ((b'a' + i as u8) as char).to_string())

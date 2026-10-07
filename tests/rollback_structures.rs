@@ -26,8 +26,8 @@ impl RollbackSegtreeMonoid for Sum {
 }
 struct Affine;
 impl RollbackLazySegtreeMonoid for Affine {
-    type S = (i64, i64); // sum, length
-    type F = (i64, i64); // a*x+b
+    type S = (i64, i64);
+    type F = (i64, i64);
     fn id_e() -> Self::S {
         (0, 0)
     }

@@ -45,7 +45,6 @@ impl<M> Rerooting<M> where M: RerootingMonoid{
     }
 
     pub fn build(&mut self){
-        // 辺構築パート
         let mut nes = vec![(0, 0, 0); 2*self.n-2];
         let mut ns = vec![0; self.n+2];
         for &v in &self.st{ ns[v+2] += 1; }
@@ -58,7 +57,6 @@ impl<M> Rerooting<M> where M: RerootingMonoid{
         self.es = nes;
         self.st = ns;
 
-        // DFS1回目
 
         let mut subdp = vec![M::pub_vertex(&self.monoid, &M::identity(&self.monoid), 0); self.n];
         self.out = vec![M::identity(&self.monoid); self.n];

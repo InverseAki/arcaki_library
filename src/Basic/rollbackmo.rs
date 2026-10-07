@@ -1,6 +1,3 @@
-/// 追加だけで区間を構築する Rollback Mo の状態。
-/// solve 開始時は空区間。snapshot は履歴を消さず、rollback は指定位置まで戻す。
-/// ブロック用と質問用の snapshot を入れ子に使う。
 pub trait RollbackMoState {
     type Data;
     type Query;
@@ -13,7 +10,6 @@ pub trait RollbackMoState {
     fn ans(&mut self, query_id: usize, q_data: &Self::Query) -> Self::Ans;
 }
 
-/// 左右の追加が対称な状態用。
 pub trait SymRollbackMoState {
     type Data;
     type Query;
@@ -52,9 +48,6 @@ impl<M: SymRollbackMoState> RollbackMoState for M {
     }
 }
 
-/// 削除だけで区間を構築する Rollback Mo の状態。
-/// solve 開始時は全区間 [0, data.len())。追加操作は不要。
-/// snapshot / rollback の契約は RollbackMoState と同じ。
 pub trait RollbackMoDeleteState {
     type Data;
     type Query;
@@ -67,7 +60,6 @@ pub trait RollbackMoDeleteState {
     fn ans(&mut self, query_id: usize, q_data: &Self::Query) -> Self::Ans;
 }
 
-/// 左右の削除が対称な状態用。
 pub trait SymRollbackMoDeleteState {
     type Data;
     type Query;
@@ -106,7 +98,6 @@ impl<M: SymRollbackMoDeleteState> RollbackMoDeleteState for M {
     }
 }
 
-// mo.rs と同じスコープにコピーしても型名が衝突しない。
 mod rollback_mo_detail {
     pub struct Query {
         pub l: usize,
@@ -170,10 +161,6 @@ mod rollback_mo_detail {
     }
 }
 
-/// MoSolver と同じ登録方式の追加型 Rollback Mo。
-/// 初期状態は空区間。正常終了時に state を開始時の snapshot へ戻す。
-/// 操作 O(N²/B + QB + N)、ソート O(Q log Q)、補助空間 O(Q)。
-/// snapshot / ans が O(1)、rollback が戻す操作数に比例する場合の見積り。
 pub struct RollbackMoSolver<M: RollbackMoState> {
     queries: rollback_mo_detail::Queries<M::Data, M::Query>,
 }
@@ -185,17 +172,14 @@ impl<M: RollbackMoState> RollbackMoSolver<M> {
         }
     }
 
-    /// 半開区間 [l, r)。空区間も可。範囲外なら panic。
     pub fn add_query(&mut self, l: usize, r: usize, qd: M::Query) {
         self.queries.add_query(l, r, qd);
     }
 
-    /// B ≈ N / sqrt(Q)。答案は質問の登録順。
     pub fn solve(&mut self, state: &mut M) -> Vec<M::Ans> {
         self.solve_with_block_size(state, self.queries.block_size())
     }
 
-    /// 操作コストに合わせて B を指定する。B=0 は panic。
     pub fn solve_with_block_size(&mut self, state: &mut M, block_size: usize) -> Vec<M::Ans> {
         let queries = &self.queries;
         let ord = queries.order(block_size, false);
@@ -214,7 +198,6 @@ impl<M: RollbackMoState> RollbackMoSolver<M> {
             for &qi in &ord[begin..end] {
                 let (query, qd) = &queries.query[qi];
                 if query.r <= border {
-                    // 同じブロック内の短区間。右端昇順なので長区間より先に来る。
                     let snapshot = state.snapshot();
                     for idx in query.l..query.r {
                         state.add_right(idx, &queries.data[idx]);
@@ -222,7 +205,6 @@ impl<M: RollbackMoState> RollbackMoSolver<M> {
                     res[query.id] = Some(state.ans(query.id, qd));
                     state.rollback(snapshot);
                 } else {
-                    // [border, right) は確定部分。左側だけ一時追加する。
                     while right < query.r {
                         state.add_right(right, &queries.data[right]);
                         right += 1;
@@ -242,9 +224,6 @@ impl<M: RollbackMoState> RollbackMoSolver<M> {
     }
 }
 
-/// 両端からの削除だけを使う Rollback Mo。
-/// 初期状態は全区間。正常終了時に state を開始時の snapshot へ戻す。
-/// 操作数・ソート・補助空間は RollbackMoSolver と同じ。
 pub struct RollbackMoDeleteSolver<M: RollbackMoDeleteState> {
     queries: rollback_mo_detail::Queries<M::Data, M::Query>,
 }
@@ -256,7 +235,6 @@ impl<M: RollbackMoDeleteState> RollbackMoDeleteSolver<M> {
         }
     }
 
-    /// 半開区間 [l, r)。空区間も可。範囲外なら panic。
     pub fn add_query(&mut self, l: usize, r: usize, qd: M::Query) {
         self.queries.add_query(l, r, qd);
     }
@@ -265,7 +243,6 @@ impl<M: RollbackMoDeleteState> RollbackMoDeleteSolver<M> {
         self.solve_with_block_size(state, self.queries.block_size())
     }
 
-    /// 操作コストに合わせて B を指定する。B=0 は panic。
     pub fn solve_with_block_size(&mut self, state: &mut M, block_size: usize) -> Vec<M::Ans> {
         let queries = &self.queries;
         let ord = queries.order(block_size, true);
@@ -285,7 +262,6 @@ impl<M: RollbackMoDeleteState> RollbackMoDeleteSolver<M> {
             let mut right = queries.data.len();
             for &qi in &ord[begin..end] {
                 let (query, qd) = &queries.query[qi];
-                // 確定部分 [start, right) の右端を単調に縮める。
                 while right > query.r {
                     right -= 1;
                     state.sub_right(right, &queries.data[right]);
@@ -304,7 +280,6 @@ impl<M: RollbackMoDeleteState> RollbackMoDeleteSolver<M> {
     }
 }
 
-// 旧APIの互換入口。新規実装では上記の State / Solver を使用する。
 pub trait RollbackMoMonoid {
     type S: Clone;
     type T;

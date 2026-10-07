@@ -1,21 +1,8 @@
-/// Integer Delaunay triangulation (deterministic O(n log n) time, O(n) space).
-///
-/// All indices refer to the original input. Coincident points are represented by
-/// their smallest input index. `edges` has no zero-length edges; `duplicate_edges`
-/// connects each other coincident point to its representative. Collinear points
-/// produce a sorted chain and no triangles. Cocircular faces are triangulated
-/// deterministically, with an arbitrary choice of diagonal.
-///
-/// Each coordinate's range (max - min) must be at most 1_000_000_000. Absolute
-/// coordinates may be any i64. This bound makes every i128 predicate exact;
-/// invalid input panics in both debug and release. No floating point is used.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct DelaunayTriangulation {
     pub edges: Vec<(usize, usize)>,
-    /// Counterclockwise triangles, rotated to start at the smallest input index.
     pub triangles: Vec<[usize; 3]>,
     pub duplicate_edges: Vec<(usize, usize)>,
-    /// representatives[i] is the smallest index having the same coordinates as i.
     pub representatives: Vec<usize>,
 }
 
@@ -76,8 +63,6 @@ impl DelaunayTriangulation {
             let b = ids[mesh.dest(4 * q)];
             result.edges.push((a.min(b), a.max(b)));
         }
-        // Each directed primal edge belongs to exactly one left face. The outer
-        // face has clockwise orientation, including when it has three edges.
         let mut visited = vec![false; mesh.quads.len() * 2];
         for q in 0..mesh.quads.len() {
             if !mesh.quads[q].alive {
@@ -116,9 +101,6 @@ impl DelaunayTriangulation {
     }
 }
 
-/// Returns the n-1 edges of a Euclidean MST, in original input indices.
-/// Empty input returns []. Same preconditions and complexity as triangulation.
-/// Squared distances suffice for Kruskal: taking sqrt preserves edge order.
 pub fn euclidean_mst(points: &[(i64, i64)]) -> Vec<(usize, usize)> {
     let triangulation = DelaunayTriangulation::new(points);
     let mut candidates: Vec<_> = triangulation
@@ -164,8 +146,6 @@ pub fn euclidean_mst(points: &[(i64, i64)]) -> Vec<(usize, usize)> {
     mst
 }
 
-// Quad-edge topology: e and e^2 are primal edges; the other two are dual.
-// Recycle deleted quads so merging does not retain O(n log n) allocations.
 struct DelaunayQuad {
     next: [usize; 4],
     vertices: [usize; 2],
@@ -262,9 +242,6 @@ impl DelaunayMesh {
     fn right_of(&self, p: usize, e: usize) -> bool {
         self.orient(self.org(e), self.dest(e), p) < 0
     }
-    // Positive precisely when d is inside the oriented CCW circle abc.
-    // Each difference <= B; each of the three terms <= 4 B^4.
-    // With B=10^9, 12 B^4 < i128::MAX, including intermediate sums.
     fn in_circle(&self, a: usize, b: usize, c: usize, d: usize) -> bool {
         let (dx, dy) = self.points[d];
         let relative = |p: usize| {
@@ -279,7 +256,6 @@ impl DelaunayMesh {
             + (cx * cx + cy * cy) * (ax * by - ay * bx)
             > 0
     }
-    // Returns the left/right outer hull edges, pointing respectively up/down.
     fn build(&mut self, lo: usize, hi: usize) -> (usize, usize) {
         if hi - lo == 2 {
             let e = self.make_edge(lo, lo + 1);
@@ -303,7 +279,6 @@ impl DelaunayMesh {
         let mid = (lo + hi) / 2;
         let (mut ldo, mut ldi) = self.build(lo, mid);
         let (mut rdi, mut rdo) = self.build(mid, hi);
-        // Find the lower common tangent of the two convex hulls.
         loop {
             if self.left_of(self.org(rdi), ldi) {
                 ldi = self.lnext(ldi);
@@ -320,8 +295,6 @@ impl DelaunayMesh {
         if self.org(rdi) == self.org(rdo) {
             rdo = base;
         }
-        // Grow the seam upwards, removing edges that violate the empty-circle
-        // condition. Strict predicates leave ties stable for cocircular points.
         loop {
             let mut left = self.onext(Self::sym(base));
             if self.right_of(self.dest(left), base) {

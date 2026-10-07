@@ -1,4 +1,3 @@
-// 隣接をマージするタイプ
 #[derive(Clone)]
 pub struct IntervalSet<T: Ord+Copy>{
     s: BTreeMap<T, T>,
@@ -66,16 +65,10 @@ impl<T> IntervalSet<T> where T: Ord+Copy {
         } 
     }
 
-    /// 変更記録 (左端, 右端, 追加なら true) を順に返す。
-    /// 更新は遅延実行される。途中で破棄した場合も Drop で更新を完了する。
-    /// 記録を保存したい場合は collect::<Vec<_>>() を使う。
     pub fn insert_with_data(&mut self, l: T, r: T)->impl Iterator<Item = (T, T, bool)> + '_ {
         IntervalSetChanges::new(&mut self.s, l, r, true)
     }
 
-    /// 変更記録 (左端, 右端, 追加なら true) を順に返す。
-    /// 更新は遅延実行される。途中で破棄した場合も Drop で更新を完了する。
-    /// 記録を保存したい場合は collect::<Vec<_>>() を使う。
     pub fn remove_with_data(&mut self, l: T, r: T)->impl Iterator<Item = (T, T, bool)> + '_ {
         IntervalSetChanges::new(&mut self.s, l, r, false)
     }
@@ -97,7 +90,6 @@ impl<T> IntervalSet<T> where T: Ord+Copy {
     }
 }
 
-// 分割で発生する追加記録は最大二つなので、固定長バッファで保持する。
 struct IntervalSetChanges<'a, T: Ord + Copy> {
     s: &'a mut BTreeMap<T, T>,
     l: T,
@@ -129,7 +121,6 @@ impl<T: Ord + Copy> Iterator for IntervalSetChanges<'_, T> {
             self.started = true;
             if let Some((&ll, end)) = self.s.range_mut(..=self.l).next_back() {
                 let lr = *end;
-                // 左端を維持できる短縮は、検索で得た値をその場で書き換える。
                 if !self.inserting && ll < self.l && self.l < lr {
                     *end = self.l;
                 }

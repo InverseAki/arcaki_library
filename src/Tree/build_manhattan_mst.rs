@@ -115,7 +115,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
     }
 
     pub fn max_right<F>(&self, mut l: usize, f: F) -> usize where F: Fn(&M::S)->bool {
-        assert!(f(&M::identity())); // これはバグってくれないと多分デバックが悲惨
+        assert!(f(&M::identity()));
         if l == self.n {
             return self.n 
         }

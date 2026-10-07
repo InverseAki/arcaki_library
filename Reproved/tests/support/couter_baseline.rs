@@ -1,4 +1,3 @@
-// 統合前の比較用実装。実用にはsrcを使う。
 #[derive(Debug, Clone)]
 pub struct Counter<T: Ord>{
     c: usize,

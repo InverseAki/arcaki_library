@@ -30,7 +30,6 @@ pub struct LazySegtree<F> where F: LazySegtreeMonoid{
 }
 
 impl<F: LazySegtreeMonoid> LazySegtree<F>{
-    // 初期値開始
     pub fn new(n: usize)->Self{
         let n = n.next_power_of_two();
         let log = bit_length(n);
@@ -41,7 +40,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F>{
         }
     }
 
-    // vectorを飲ませるならこっち。O(N)で初期化。
     pub fn build(vec: &Vec<<F::M as SegtreeMonoid>::S>)->Self {
         let n = vec.len().next_power_of_two();
         let log = bit_length(n);
@@ -68,13 +66,11 @@ impl<F: LazySegtreeMonoid> LazySegtree<F>{
         }
     }
 
-    // 下からデータ更新
     #[inline(always)]
     fn update(&mut self, k: usize){
         self.data[k] = F::op(&self.data[2*k], &self.data[2*k+1]);
     }
 
-    // 遅延反映
     #[inline(always)]
     fn inner_apply(&mut self, k: usize, f: F::F){
         self.data[k] = F::map(&f, &self.data[k]);
@@ -86,7 +82,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F>{
         }
     }
 
-    // 上から遅延更新
     #[inline(always)]
     fn push(&mut self, k: usize){
         self.inner_apply(2*k, self.lazy[k].clone());
@@ -102,7 +97,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F>{
         self.data[p].clone()
     }
 
-    // whileで打ち切った方が早そうだけどどうなんでしょう？
     #[inline]
     pub fn prod(&mut self, mut l: usize, mut r: usize)-><F::M as SegtreeMonoid>::S{
         if r<=l{return F::id_e()}
@@ -337,8 +331,6 @@ impl SegtreeMonoid for M{
 struct MM;
 impl LazySegtreeMonoid for MM{
     type M = M;
-    // (chmin, chmax, add)
-    // ub, lb,
     type F = (i64, i64, i64);
 
     fn identity() -> Self::F {

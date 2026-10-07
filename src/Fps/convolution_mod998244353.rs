@@ -1,9 +1,3 @@
-// 前提: StaticModInt と Mod998244353（ACL版または同梱MI版）。
-/// mod998244353の畳み込み。各入力長<=2^24、結果長<=2^25-1。
-/// 998244353のradix-4 NTTを使用。長い入力はブロック分割し、変換済み配列を再利用。
-/// 外部NTT/CRTに依存しない。空入力は空。入力は変更しない。
-/// 最大長同士の配列領域ピークは入力込み約544MiB（実行環境の追加領域は別）。
-/// 最大長時は4ブロックずつ、順変換8回・逆変換7回。変換長はいずれも2^23。
 pub fn convolution_mod998244353(
     a: &[StaticModInt<Mod998244353>],
     b: &[StaticModInt<Mod998244353>],
@@ -30,9 +24,6 @@ pub fn convolution_mod998244353(
     convolution_998244353_detail::blocked(a, b, block_size)
 }
 
-/// 入力Vecを消費する省メモリ版。同じ結果を返し、入力は呼出後に利用できない。
-/// 大きい入力では各側の変換が済んだ時点で元Vecを解放する。
-/// 最大長同士の配列領域ピークは約416MiB（元Vecの余分なcapacity等は別）。
 pub fn convolution_mod998244353_owned(
     a: Vec<StaticModInt<Mod998244353>>,
     b: Vec<StaticModInt<Mod998244353>>,
@@ -89,7 +80,6 @@ mod convolution_998244353_detail {
             "each input length must be <= 2^24"
         );
     }
-    // ACLのbutterflyと同じ段順序。独立したbit reversalは行わない。
     // https://github.com/atcoder/ac-library/blob/master/atcoder/convolution.hpp (CC0)
     struct Plan {
         root: [u32; 24],
@@ -356,14 +346,12 @@ mod convolution_998244353_detail {
         n: usize,
         plan: &Plan,
     ) -> Vec<MI> {
-        // 出力を一度だけ確保。不要になったスペクトルは先に解放する。
         let mut out = vec![MI::raw(0); size];
         let mut work = vec![0; n];
         let inv = pow(n as u32, P - 2);
         for k in 0..aa.len() + bb.len() - 1 {
             let lo = k.saturating_sub(bb.len() - 1);
             let count = k.min(aa.len() - 1) - lo + 1;
-            // 最大入力でも1対角線は4積以下。u64で加算して還元を1回にまとめる。
             macro_rules! diagonal {
                 ($($j:expr),+) => {{
                     let xs=[$(&aa[lo+$j][..]),+];let ys=[$(&bb[k-lo-$j][..]),+];

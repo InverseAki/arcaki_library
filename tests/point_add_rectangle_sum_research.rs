@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 mod baseline {
     const I: i32 = i32::MAX;
-    include!("../src/Basic/point_add_rectangle_sum.rs");
+    include!("support/point_add_rectangle_sum_baseline.rs");
 }
 #[path = "support/point_add_rectangle_sum_presort.rs"]
 mod presort;

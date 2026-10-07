@@ -122,7 +122,6 @@ fn integer_types_and_wide_area() {
     assert_eq!(area_of_union_rectangles(&[(a, a, a + 10, a + 10)]), 100);
 }
 
-// Hash・外部クレート・AddAssign を要求しない独自型でも使える。
 #[derive(Copy, Clone, Default, Eq, PartialEq, Ord, PartialOrd, Debug)]
 struct Scalar(i128);
 macro_rules! op {

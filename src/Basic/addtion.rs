@@ -1,4 +1,3 @@
-//平方根
 pub fn get_sqrt(x: i64) -> i64 {
     let mut res = (x as f64).sqrt() as i64 - 100;
     while res < 0 || (res + 1) * (res + 1) <= x{
@@ -7,7 +6,6 @@ pub fn get_sqrt(x: i64) -> i64 {
     res
 }
 
-//セグ木を直書きする用
 pub fn get_index(mut l: usize, mut r: usize, w: usize)->Vec<usize>{
     l += w; r += w;
     let mut res = Vec::new();

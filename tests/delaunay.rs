@@ -19,7 +19,6 @@ fn distance(a: P, b: P) -> i128 {
     let dy = a.1 as i128 - b.1 as i128;
     dx * dx + dy * dy
 }
-// Complete-graph Prim, independent of triangulation and Kruskal.
 fn prim(p: &[P]) -> Vec<i128> {
     if p.is_empty() {
         return vec![];
@@ -174,7 +173,6 @@ fn boundaries_and_degeneracies() {
     ] {
         check(&p);
     }
-    // Translation near either i64 endpoint must not overflow before casting.
     for offset in [i64::MIN, i64::MAX - 1_000_000_000] {
         check(&[
             (offset, offset),

@@ -4,7 +4,6 @@ include!("../src/Basic/rollbackmo.rs");
 
 use std::collections::VecDeque;
 
-// Clone / Default を要求されない Data / Query / Ans / Snapshot。
 struct Data(i64);
 struct QueryData {
     l: usize,
@@ -102,7 +101,6 @@ impl IntervalState {
                 .map(|i| (i, value(i)))
                 .collect::<Vec<_>>()
         );
-        // ans の変更も query snapshot で復元されることを検証。
         self.history.push(Undo::Aux(self.aux));
         self.aux += 1;
         self.answers += 1;
@@ -192,7 +190,6 @@ fn check_intervals(n: usize, ranges: &[(usize, usize)], block: Option<usize>) {
     }
     let mut add_state = IntervalState::empty();
     let mut sub_state = IntervalState::full(n);
-    // solver / state の再利用、以前の履歴の保持も確認。
     for _ in 0..2 {
         let actual_add = match block {
             Some(b) => add.solve_with_block_size(&mut add_state, b),
@@ -372,7 +369,6 @@ fn structured_queries_respect_operation_bound() {
     let mut sub = RollbackMoDeleteSolver::<SumState>::new(vec![0; n]);
     let mut expected = Vec::new();
     for id in 0..q {
-        // 全左ブロックを使い、短区間・全長・空区間・交互の右端を混ぜる。
         let l = id * 37 % (n + 1);
         let r = match id % 4 {
             0 => l,

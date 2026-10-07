@@ -1,10 +1,7 @@
-// 有理数。旧new(分母, 分子)を維持。from_fractionは通常の(分子, 分母)。
-// 有限値は分母>0、約分済み。±∞は分母0、分子±1。0/0は拒否する。
-// 単独コピー可。Ratio=i64、Ratio128=i128。BigRatioはbig_ratio.rsも用意する。
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct Rational<T: RatioInteger> {
-    x: T, // denominator
-    y: T, // numerator
+    x: T,
+    y: T,
 }
 pub type Ratio = Rational<i64>;
 pub type Ratio128 = Rational<i128>;
@@ -28,7 +25,6 @@ impl std::fmt::Display for RatioError {
 }
 impl std::error::Error for RatioError {}
 
-// 整数バックエンド。返す組は全て(分母, 分子)、有限値の演算結果は約分済み。
 #[doc(hidden)]
 pub trait RatioInteger:
     Clone + Ord + std::hash::Hash + std::fmt::Display + std::str::FromStr + From<i32>
@@ -50,14 +46,13 @@ pub trait RatioInteger:
         divide: bool,
     ) -> Result<(Self, Self), RatioError>;
     fn cmp_finite(x: &Self, y: &Self, u: &Self, v: &Self) -> std::cmp::Ordering;
-    fn round(x: &Self, y: &Self, mode: i8) -> Self; // -1 floor、0 trunc、1 ceil
+    fn round(x: &Self, y: &Self, mode: i8) -> Self;
 }
 impl<T: RatioInteger> Rational<T> {
     pub fn try_new(x: T, y: T) -> Result<Self, RatioError> {
         let (x, y) = T::normalize(x, y)?;
         Ok(Self { x, y })
     }
-    /// 従来の引数順: new(分母, 分子)。
     pub fn new(x: T, y: T) -> Self {
         Self::try_new(x, y).expect("invalid ratio")
     }
@@ -348,7 +343,6 @@ impl<T: RatioInteger> PartialOrd<T> for Rational<T> {
     }
 }
 
-// i128の中間交差積は最大256bit。最終値が収まる場合を余計に拒否しない。
 mod ratio_detail {
     #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd)]
     pub(super) struct Wide {
@@ -476,6 +470,14 @@ macro_rules! ratio_fixed {
                 v: &Self,
                 subtract: bool,
             ) -> Result<(Self, Self), RatioError> {
+                if *x == 1 && *u == 1 {
+                    let value = if subtract {
+                        y.checked_sub(*v)
+                    } else {
+                        y.checked_add(*v)
+                    };
+                    return value.map(|n| (1, n)).ok_or(RatioError::Overflow);
+                }
                 let (d, e) = (*x as u128, *u as u128);
                 let g = ratio_detail::gcd(d, e);
                 let a = ratio_detail::Wide::mul(y.unsigned_abs() as u128, e / g);
@@ -499,6 +501,12 @@ macro_rules! ratio_fixed {
                 v: &Self,
                 divide: bool,
             ) -> Result<(Self, Self), RatioError> {
+                if !divide && *x == 1 && *u == 1 {
+                    return y
+                        .checked_mul(*v)
+                        .map(|n| (1, n))
+                        .ok_or(RatioError::Overflow);
+                }
                 let (mut n, mut d, mut m, mut e) = (
                     y.unsigned_abs() as u128,
                     *x as u128,
@@ -568,7 +576,6 @@ macro_rules! ratio_fixed {
         }
     };
 }
-// 整数型にメソッドは追加できないので、変換は小さな専用traitへ置く。
 trait RatioSignedMagnitude: Sized {
     fn ratio_from_magnitude(n: u128, negative: bool) -> Result<Self, RatioError>;
 }
@@ -607,17 +614,6 @@ impl TryFrom<Ratio128> for Ratio {
             x: i64::try_from(r.x).map_err(|_| RatioError::Overflow)?,
             y: i64::try_from(r.y).map_err(|_| RatioError::Overflow)?,
         })
-    }
-}
-
-/// 旧補助関数を維持。数学的なfloor除算。0除算・MIN/-1はpanic。
-pub fn floor(a: i64, b: i64) -> i64 {
-    let q = a.checked_div(b).expect("invalid floor division");
-    let r = a % b;
-    if r != 0 && (r < 0) != (b < 0) {
-        q - 1
-    } else {
-        q
     }
 }
 

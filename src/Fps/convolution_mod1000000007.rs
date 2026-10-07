@@ -1,9 +1,3 @@
-// 前提: StaticModInt と Mod1000000007（ACL版または同梱MI版）。
-// NTT本体はこのファイルに同梱。外部のconvolutionには依存しない。
-/// mod 1_000_000_007 の畳み込み。空入力なら空。結果の長さは2^24以下。
-/// 短い側が60以下なら愚直、それ以外は3素数NTT+CRT。O(N log N)、領域O(N)。
-/// convolution_merge等と組み合わせる場合はMIをMod1000000007にし、
-/// `use convolution_mod1000000007 as convolution;` で名前を合わせる。
 pub fn convolution_mod1000000007(
     a: &[StaticModInt<Mod1000000007>],
     b: &[StaticModInt<Mod1000000007>],
@@ -27,8 +21,6 @@ pub fn convolution_mod1000000007(
     let c1 = convolution_1000000007_detail::convolve::<167772161, 3>(&a, &b);
     let c2 = convolution_1000000007_detail::convolve::<469762049, 3>(&a, &b);
     let c3 = convolution_1000000007_detail::convolve::<754974721, 11>(&a, &b);
-    // min(n,m)*(MOD-1)^2 <= 2^23*(MOD-1)^2 < P1*P2*P3。
-    // よって3剰余から非負整数として一意に復元可能（i64の範囲に制限しない）。
     const P1: u64 = 167772161;
     const P2: u64 = 469762049;
     const P3: u64 = 754974721;
@@ -40,7 +32,7 @@ pub fn convolution_mod1000000007(
         .zip(c3)
         .map(|((x, y), z)| {
             let t1 = (y as u64 + P2 - x as u64) * INV_P1_MOD_P2 % P2;
-            let low = x as u64 + P1 * t1; // <P1*P2、u64に収まる。
+            let low = x as u64 + P1 * t1;
             let t2 = (z as u64 + P3 - low % P3) * INV_P1P2_MOD_P3 % P3;
             let value = (low % MOD + (P1 * P2 % MOD) * t2) % MOD;
             StaticModInt::<Mod1000000007>::raw(value as u32)

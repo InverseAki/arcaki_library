@@ -47,24 +47,21 @@ pub mod fps {
         convolution(a, b)
     }
 
-    /// Formal power series inverse: g(x) = 1/f(x) mod x^n
-    /// Precondition: f[0] != 0
     pub fn inv(f: &[Mint], n: usize) -> Vec<Mint> {
         assert!(n > 0);
         assert!(!f.is_empty() && f[0] != zero());
 
-        let mut g = vec![f[0].inv()]; // length 1
+        let mut g = vec![f[0].inv()];
         let mut m = 1usize;
 
         while m < n {
-            let _m2 = (m << 1).min(n.next_power_of_two()); // just a safe upper; we truncate anyway
-            let need = (m << 1).min(n); // we only need up to 2m terms (capped by n)
+            let _m2 = (m << 1).min(n.next_power_of_two());
+            let need = (m << 1).min(n);
 
             let f_tr = prefix(f.to_vec(), need);
             let mut t = mul(&f_tr, &g);
-            t = prefix(t, need); // t = f * g mod x^need
+            t = prefix(t, need);
 
-            // t = 2 - t
             for i in 0..need { t[i] = -t[i]; }
             t[0] += two();
 
@@ -77,8 +74,6 @@ pub mod fps {
         prefix(g, n)
     }
 
-    /// Compute remainder p mod q (polynomial), using NTT + inv on reversed polynomial.
-    /// Requires q != 0.
     pub fn poly_mod(p: &[Mint], q: &[Mint]) -> Vec<Mint> {
         let mut p = trim(p.to_vec());
         let q = trim(q.to_vec());
@@ -88,29 +83,23 @@ pub mod fps {
             return p;
         }
 
-        // degree
         let n = p.len() - 1;
         let m = q.len() - 1;
-        let k = n - m + 1; // quotient length
+        let k = n - m + 1;
 
-        // reverse
         let mut rp = p.clone(); rp.reverse();
         let mut rq = q.clone(); rq.reverse();
 
-        // inv(rq) up to k
         assert!(rq[0] != zero());
         let inv_rq = inv(&rq, k);
 
-        // q_rev = (rp[0..k] * inv_rq)[0..k]
         let rp_k = prefix(rp, k);
         let mut qrev = mul(&rp_k, &inv_rq);
         qrev = prefix(qrev, k);
 
-        // quotient = reverse(qrev)
         qrev.reverse();
         let quo = qrev;
 
-        // r = p - quo*q
         let mut prod = mul(&quo, &q);
         prod.resize(p.len(), zero());
 
@@ -137,37 +126,28 @@ pub mod fps {
 
     #[inline]
     fn negate_odd(mut q: Vec<Mint>) -> Vec<Mint> {
-        // q(-x): odd index negated
         for i in (1..q.len()).step_by(2) { q[i] = -q[i]; }
         q
     }
 
-    /// Bostan–Mori:
-    /// returns [x^k] P(x)/Q(x).
-    ///
-    /// Requirements (standard):
-    /// - Q[0] != 0
-    /// - Typically deg P < deg Q (if not, reduce by poly_mod first)
     pub fn bostan_mori(mut p: Vec<Mint>, mut q: Vec<Mint>, mut k: u64) -> Mint {
         p = trim(p);
         q = trim(q);
         assert!(!q.is_empty() && q[0] != zero());
 
-        // Normalize so q[0] = 1 (optional but nice)
         let inv_q0 = q[0].inv();
         for x in p.iter_mut() { *x *= inv_q0; }
         for x in q.iter_mut() { *x *= inv_q0; }
 
-        // If deg P >= deg Q, reduce.
         if p.len() >= q.len() {
             p = poly_mod(&p, &q);
         }
 
         while k > 0 {
-            let q_neg = negate_odd(q.clone()); // Q(-x)
+            let q_neg = negate_odd(q.clone());
 
-            let u = mul(&p, &q_neg); // P(x)Q(-x)
-            let v = mul(&q, &q_neg); // Q(x)Q(-x) : only even degrees survive
+            let u = mul(&p, &q_neg);
+            let v = mul(&q, &q_neg);
 
             if (k & 1) == 0 {
                 p = even_coeffs(&u);
@@ -176,7 +156,6 @@ pub mod fps {
             }
             q = even_coeffs(&v);
 
-            // renormalize q[0]=1 to keep stable
             assert!(!q.is_empty() && q[0] != zero());
             let inv_q0 = q[0].inv();
             for x in p.iter_mut() { *x *= inv_q0; }
@@ -186,7 +165,6 @@ pub mod fps {
             if p.is_empty() { return zero(); }
         }
 
-        // k==0 => coefficient is P(0)/Q(0) but we normalized Q(0)=1.
         if p.is_empty() { zero() } else { p[0] }
     }
 }

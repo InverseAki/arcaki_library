@@ -128,7 +128,6 @@ fn check_euclid<const B: u32>() {
             assert_eq!(r.cmp(&RadixBigInt::zero()) == Ordering::Less, false);
         }
     }
-    // 大きな負数、割り切れる値、剰余1・d-1、絶対値が除数未満。
     let d = RadixBigInt::<B>::from(10).pow(1200) + RadixBigInt::from(37);
     let q = RadixBigInt::<B>::from(10).pow(1800) + RadixBigInt::from(11);
     for r in [

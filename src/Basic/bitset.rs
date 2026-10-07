@@ -408,9 +408,6 @@ impl<'a, 'b> BitXor<&'b BitSet> for &'a BitSet {
     }
 }
 
-/// 各行をBitSetで保持する0/1行列。bitset.rsと同じスコープで使う。
-/// mul_and/or/xorは C[i][j] = sum_k (A[i][k] op B[k][j]) を返す。
-/// 加算は整数の和。OR-ANDの論理行列積やGF(2)の積とは異なる。
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct BitMatrix {
     width: usize,
@@ -422,7 +419,6 @@ impl BitMatrix {
         Self { width, rows: vec![BitSet::new(width); height] }
     }
 
-    /// widthを明示するので0行の行列も表せる。不揃いな行はpanic。
     pub fn from_rows(width: usize, rows: Vec<BitSet>) -> Self {
         assert!(rows.iter().all(|row| row.len() == width), "matrix row length mismatch");
         Self { width, rows }
@@ -443,7 +439,6 @@ impl BitMatrix {
         self.rows[i].set(j, value);
     }
 
-    /// O(height * ceil(width/64) + 1の個数)。末尾の未使用ビットは常に0。
     pub fn transpose(&self) -> Self {
         let mut out = Self::new(self.width, self.height());
         for (i, row) in self.rows.iter().enumerate() {
@@ -459,48 +454,38 @@ impl BitMatrix {
         out
     }
 
-    /// C[i][j] = sum_k (A[i][k] & B[k][j])。共通する1の個数。
     pub fn mul_and(&self, rhs: &Self) -> Vec<Vec<usize>> {
         self.count_product::<0>(rhs)
     }
 
-    /// C[i][j] = sum_k (A[i][k] | B[k][j])。どちらかが1の個数。
     pub fn mul_or(&self, rhs: &Self) -> Vec<Vec<usize>> {
         self.count_product::<1>(rhs)
     }
 
-    /// C[i][j] = sum_k (A[i][k] ^ B[k][j])。異なるビットの個数。
     pub fn mul_xor(&self, rhs: &Self) -> Vec<Vec<usize>> {
         self.count_product::<2>(rhs)
     }
 
-    /// AND-OR積: C[i][j] = AND_k (A[i][k] | B[k][j])。
-    /// 内側次元0の空のANDはtrue。mul_andの整数集計とは異なる。
     pub fn prod_and(&self, rhs: &Self) -> Self {
         self.logical_product::<0>(rhs)
     }
 
-    /// OR-AND積: C[i][j] = OR_k (A[i][k] & B[k][j])。
     pub fn prod_or(&self, rhs: &Self) -> Self {
         self.logical_product::<1>(rhs)
     }
 
-    /// XOR-AND積: C[i][j] = XOR_k (A[i][k] & B[k][j])。GF(2)の積。
     pub fn prod_xor(&self, rhs: &Self) -> Self {
         self.logical_product::<2>(rhs)
     }
 
-    /// AND-OR積による累乗。0乗は対角false・非対角true。
     pub fn pow_and(&self, exponent: u64) -> Self {
         self.logical_power::<0>(exponent)
     }
 
-    /// OR-AND積による累乗。0乗は対角true・非対角false。
     pub fn pow_or(&self, exponent: u64) -> Self {
         self.logical_power::<1>(exponent)
     }
 
-    /// GF(2)の累乗。0乗は対角true・非対角false。
     pub fn pow_xor(&self, exponent: u64) -> Self {
         self.logical_power::<2>(exponent)
     }
@@ -544,8 +529,6 @@ impl BitMatrix {
         result
     }
 
-    // OPはconstなので内側ループには演算選択の分岐が残らない。
-    // 積O(height * rhs.width * ceil(width/64)) + 右辺転置・出力初期化。
     fn count_product<const OP: u8>(&self, rhs: &Self) -> Vec<Vec<usize>> {
         assert_eq!(self.width, rhs.height(), "matrix product shape mismatch");
         let transposed = rhs.transpose();

@@ -26,7 +26,6 @@ pub struct LazySegtree<F> where F: LazySegtreeMonoid {
 }
 
 impl<F: LazySegtreeMonoid> LazySegtree<F> {
-    // 初期値開始
     pub fn new(n: usize) -> Self {
         let n = n.next_power_of_two();
         let log = bit_length(n);
@@ -37,7 +36,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         }
     }
 
-    // vectorを飲ませるならこっち。O(N)で初期化。
     pub fn build(vec: &Vec<<F::M as SegtreeMonoid>::S>) -> Self {
         let n = vec.len().next_power_of_two();
         let log = bit_length(n);
@@ -64,18 +62,15 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         }
     }
 
-    // 下からデータ更新
     fn update(&mut self, k: usize) {
         self.data[k] = F::op(&self.data[2 * k], &self.data[2 * k + 1]);
     }
 
-    // 遅延反映
     fn inner_apply(&mut self, k: usize, f: F::F) {
         self.data[k] = F::map(&f, &self.data[k]);
         if k < self.n { self.lazy[k] = F::composition(&f, &self.lazy[k]) }
     }
 
-    // 上から遅延更新
     fn push(&mut self, k: usize) {
         self.inner_apply(2 * k, self.lazy[k].clone());
         self.inner_apply(2 * k + 1, self.lazy[k].clone());
@@ -90,7 +85,6 @@ impl<F: LazySegtreeMonoid> LazySegtree<F> {
         self.data[p].clone()
     }
 
-    // whileで打ち切った方が早そうだけどどうなんでしょう？
     pub fn prod(&mut self, mut l: usize, mut r: usize) -> <F::M as SegtreeMonoid>::S {
         if r <= l { return F::id_e() }
         l += self.n; r += self.n;

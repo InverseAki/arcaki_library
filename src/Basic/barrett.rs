@@ -1,4 +1,3 @@
-/// 実行時の法 2..=u32::MAX。法をインスタンスごとに保持する。
 #[derive(Clone, Copy)]
 pub struct Barrett32 {
     m: u64,
@@ -15,7 +14,6 @@ impl Barrett32 {
     pub fn modulus(&self) -> u32 {
         self.m as u32
     }
-    /// 任意の u32 入力を許す（a,b < m でなくてもよい）。
     #[inline]
     pub fn mul(&self, a: u32, b: u32) -> u32 {
         let x = a as u64 * b as u64;
@@ -26,12 +24,10 @@ impl Barrett32 {
         }
         r as u32
     }
-    /// 互換用。mod_pow と同じ。
     #[inline]
     pub fn pow(&self, a: u32, exp: u64) -> u32 {
         self.mod_pow(a, exp)
     }
-    /// a^exp mod m。0^0 = 1。
     pub fn mod_pow(&self, a: u32, mut exp: u64) -> u32 {
         let mut a = a % self.modulus();
         let mut ans = 1;
@@ -44,7 +40,6 @@ impl Barrett32 {
         }
         ans
     }
-    /// 素数でない法も対応。逆元が存在しなければ None。
     pub fn try_inv(&self, a: u32) -> Option<u32> {
         let (mut r, mut s) = ((a as u64 % self.m) as i128, self.m as i128);
         let (mut x, mut nx) = (1i128, 0i128);

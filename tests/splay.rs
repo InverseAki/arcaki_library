@@ -167,7 +167,6 @@ fn pending_updates_at_insert_erase_and_empty_ranges() {
 }
 #[test]
 fn deep_tree_and_bulk_build() {
-    // 同梱の区間加算・区間和の例も検証する。末尾insertは極端な深さを作る。
     let n = 100000;
     let mut tree = SplayTree::<MM>::new();
     for i in 0..n {
@@ -313,7 +312,6 @@ fn prod_monoid_noncommutative_sequence() {
 #[test]
 fn nil_values_without_identity_and_owned_removal() {
     use std::{cell::Cell, rc::Rc};
-    // Defaultも単位元も持たない、所有リソースを含む型。
     #[derive(Debug)]
     struct Value {
         id: usize,
@@ -408,7 +406,6 @@ fn original_generic_lazy_interface_remains_compatible() {
         tree.reverse(0, 1);
         let result: <F::M as SplayMonoid>::S = tree.prod(0, 1);
         tree.erase(0);
-        // Nodeの旧コンストラクタの型も維持。
         let _: Node<F> = Node::new(x, 0, std::ptr::null_mut());
         result
     }

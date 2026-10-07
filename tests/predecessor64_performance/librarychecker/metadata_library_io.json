@@ -1,0 +1,19 @@
+{
+  "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "flags": [
+    "--edition=2021",
+    "-O",
+    "-Awarnings"
+  ],
+  "n": 10000000,
+  "q": 1000000,
+  "repeats": 7,
+  "note": "Local generated cases following official distributions; not official files. Process startup/drop/output capture included in wall_ms.",
+  "source_sha256": {
+    "basic_io.rs": "c04daf1fd790fecf10f757e66ad3c3c9157e5255aad5cfca317a0ea47463b6d9",
+    "basic_output.rs": "f820d6378f1f94d496b16ab41fc30fd922eccfded071d1b4a1431ef2d031f87d",
+    "predecessor64.rs": "bc965fb88680e17b28131910c7b9d6b936c29bccf1c087590bdb62e7c570b14c",
+    "predecessor_problem.rs": "6af05c5c6d6d4b94a9f9af2fbbc0f26b72ff433cd49ed7949194701ba885fe7f"
+  }
+}

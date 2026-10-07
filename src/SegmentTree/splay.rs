@@ -1,13 +1,3 @@
-// 可変長列のSplay木。位置・区間は0-indexed、区間は[l,r)。
-// Vec風の列: SplayVector<T>。列のみの木: SplayTree<NilMonoid<T>>。
-// 区間積のみ: SplayTree<ProdMonoid<M>>。
-// 区間積+遅延更新: 従来どおりSplayTree<F>（F: SplayLazyMonoid）。
-// 各操作は償却O(log n)、from_vecはO(n)。空区間の積は単位元。
-// map(f, op(a,b)) = op(map(f,a), map(f,b))を満たす作用を用意する。
-// 区間和ならSに要素数も含める。composition(f,g)はgの後にfを適用する順。
-// 作用は反転と可換であること。reverse_prodは集約値の要素順だけを反転する。
-// Boxでノードのアドレスを固定し、所有権はdata/_p_nilが持つ。
-// UnsafeCell内のノードをraw pointerで操作し、所有用Boxから&mut Nodeは作らない。
 pub trait SplayMonoid {
     type S: Clone + std::fmt::Debug;
     fn identity() -> Self::S;
@@ -35,18 +25,12 @@ pub trait SplayLazyMonoid {
     fn composition(f: &Self::F, g: &Self::F) -> Self::F;
 }
 
-/// 区間積・遅延更新を持たない可変長列用。TにDefaultや単位元は不要。
-/// `SplayTree::<NilMonoid<T>>::new()` の形で使う。
 #[derive(Clone, Debug)]
 pub struct NilMonoid<T>(std::marker::PhantomData<fn() -> T>);
 
-/// 区間積と反転を持ち、遅延更新を持たない用途のアダプタ。
-/// Mは通常のSplayMonoid。`SplayTree::<ProdMonoid<M>>::new()` の形で使う。
 #[derive(Clone, Debug)]
 pub struct ProdMonoid<M>(std::marker::PhantomData<fn() -> M>);
 
-// 保存型を分離する内部アダプタ。既存のSplayLazyMonoid実装は自動で対応する。
-// 通常の利用者はこのtraitを実装せず、上の2型またはSplayLazyMonoidを使う。
 #[doc(hidden)]
 pub trait SplaySpec {
     type Value;
@@ -129,7 +113,6 @@ impl<F: SplayLazyMonoid> SplaySpec for F {
         has_l: bool,
         has_r: bool,
     ) -> Self::Product {
-        // SplayLazyMonoidでのopの上書きも従来どおり尊重する。
         if !has_l {
             if !has_r {
                 x.clone()
@@ -166,7 +149,6 @@ impl<F: SplayLazyMonoid> SplaySpec for F {
 
 impl<T> SplaySpec for NilMonoid<T> {
     type Value = T;
-    // 番兵だけNone。単位元を持たない型も保存でき、区間積を複製しない。
     type ValueStorage = Option<T>;
     type Product = ();
     type Action = ();
@@ -390,7 +372,6 @@ where
 
     #[inline]
     pub fn len(&self) -> usize {
-        // rはselfが所有するノードまたはnilを指す。
         unsafe { (*self.r).ac }
     }
 
@@ -399,7 +380,6 @@ where
         self.r == self.nil
     }
 
-    /// 平衡形で一括構築する。O(n)時間、構築直後の木の高さはO(log n)。
     pub fn from_vec(values: Vec<F::Value>) -> Self {
         let mut tree = Self::new();
         tree.data.reserve(values.len());
@@ -464,7 +444,6 @@ where
                     self.apply_node((*c).r, &(*c).lazy);
                 }
                 (*c).has_lazy = false;
-                // lazyの値は次のapplyで上書きする。identityの再生成は不要。
             }
             if (*c).rev {
                 std::mem::swap(&mut (*c).l, &mut (*c).r);
@@ -542,7 +521,6 @@ where
     #[inline(always)]
     fn splay(&mut self, c: *mut Node<F>) {
         unsafe {
-            // kthが根からcまで伝播済み。回転中に再伝播する必要はない。
             while (*c).p != self.nil {
                 let p = (*c).p;
                 let pp = (*p).p;
@@ -578,7 +556,6 @@ where
         }
     }
 
-    // 0-indexed
     #[inline(always)]
     fn kth(&mut self, mut k: usize) -> *mut Node<F> {
         unsafe {
@@ -600,7 +577,6 @@ where
         }
     }
 
-    /// k番目の要素を返す。償却O(log n)。
     #[inline]
     pub fn get(&mut self, k: usize) -> F::Value
     where
@@ -611,7 +587,6 @@ where
         unsafe { F::value(&(*c).data).clone() }
     }
 
-    /// k番目の要素を置き換える。償却O(log n)。
     #[inline]
     pub fn set(&mut self, k: usize, x: F::Value) {
         assert!(k < self.len(), "set index out of range");
@@ -629,7 +604,6 @@ where
         self.insert(self.len(), x);
     }
 
-    /// 値をcloneせず取り出す。償却O(log n)。
     #[inline]
     pub fn remove(&mut self, k: usize) -> F::Value {
         let node = (*self.erase_node(k)).into_inner();
@@ -645,7 +619,6 @@ where
         }
     }
 
-    /// 全要素を順番どおり複製する。O(n)時間（値のcloneの費用は別）。
     pub fn to_vec(&mut self) -> Vec<F::Value>
     where
         F::Value: Clone,
@@ -774,8 +747,6 @@ where
         assert!(l <= r && r <= self.len(), "range out of bounds");
     }
 
-    // secの返す区間ノードには境界の祖先が高々2つある。
-    // 区間全体を根へ回転する代わりに、その祖先の集約値だけを更新する。
     #[inline(always)]
     fn update_boundaries(&mut self, c: *mut Node<F>) {
         unsafe {
@@ -824,9 +795,6 @@ where
     }
 }
 
-/// Vec風の可変長列。TにClone/Debug/Defaultは不要。
-/// 要素は非連続。読み取り参照では木を回転せず、get/indexはO(木の高さ)。
-/// get_splayed/get_mut/index_mutは償却O(log n)。スライス参照は提供しない。
 pub struct SplayVector<T> {
     tree: SplayTree<NilMonoid<T>>,
 }
@@ -855,7 +823,6 @@ impl<T> SplayVector<T> {
     pub fn is_empty(&self) -> bool {
         self.tree.is_empty()
     }
-    /// ノードの所有ポインタを格納するVecの容量。各ノードのBoxは別途確保する。
     pub fn capacity(&self) -> usize {
         self.tree.data.capacity()
     }
@@ -872,8 +839,6 @@ impl<T> SplayVector<T> {
         self.tree.data.shrink_to(min_capacity);
     }
 
-    // 共有参照がある間は反転の伝播も回転も行わない。
-    // 未伝播の反転を祖先からxorして、論理的な左/右を選ぶ。
     fn node_at(&self, mut k: usize) -> Option<*mut Node<NilMonoid<T>>> {
         if k >= self.len() {
             return None;
@@ -906,7 +871,6 @@ impl<T> SplayVector<T> {
         self.node_at(k)
             .map(|c| unsafe { (*c).data.as_ref().unwrap() })
     }
-    /// 読み取りでもsplayする版。共有getと異なり&mut selfを要求する。
     pub fn get_splayed(&mut self, k: usize) -> Option<&T> {
         if k >= self.len() {
             return None;
@@ -965,7 +929,6 @@ impl<T> SplayVector<T> {
         }
         let ca = self.tree.kth(a);
         let cb = self.tree.kth(b);
-        // 回転でアドレスは変わらず、値は異なるノードの独立したフィールド。
         unsafe {
             std::mem::swap(&mut (*ca).data, &mut (*cb).data);
         }
@@ -980,7 +943,6 @@ impl<T> SplayVector<T> {
             self.pop();
         }
     }
-    /// 所有ポインタの容量を保持し、全要素を破棄する。O(n)。
     pub fn clear(&mut self) {
         self.tree.r = self.tree.nil;
         self.tree.data.clear();
@@ -1005,7 +967,6 @@ impl<T> SplayVector<T> {
         self.extend(values.iter().cloned());
     }
     pub fn append(&mut self, other: &mut Self) {
-        // otherの要素を移動し、所有ポインタの容量を保持する。
         self.extend(other.take_all());
     }
     fn take_all(&mut self) -> Vec<T> {
@@ -1028,11 +989,9 @@ impl<T> SplayVector<T> {
         }
         Self::from_vec(tail)
     }
-    /// Vec::reverseと同様に全体を反転する。
     pub fn reverse(&mut self) {
         self.tree.reverse(0, self.len());
     }
-    /// [start,end)に相当するRangeBoundsの区間を反転する。
     pub fn reverse_range<R: std::ops::RangeBounds<usize>>(&mut self, range: R) {
         let (l, r) = self.bounds(range);
         self.tree.reverse(l, r);
@@ -1052,7 +1011,6 @@ impl<T> SplayVector<T> {
         assert!(l <= r && r <= self.len(), "range out of bounds");
         (l, r)
     }
-    /// 範囲を先に削除し、その値を返す。未消費の値はDrain破棄時に破棄する。
     pub fn drain<R: std::ops::RangeBounds<usize>>(&mut self, range: R) -> SplayVectorDrain<'_, T> {
         let (l, r) = self.bounds(range);
         let mut values = Vec::with_capacity(r - l);
@@ -1170,8 +1128,6 @@ impl<T> std::ops::IndexMut<usize> for SplayVector<T> {
     }
 }
 
-// 共有Iteratorは未伝播の反転を読み取りだけで扱う。
-// 前後から取り出す個数の合計をlenまでに制限し、同じノードを二度返さない。
 struct SplayVectorWalk<T> {
     nil: *mut Node<NilMonoid<T>>,
     front: Vec<(*mut Node<NilMonoid<T>>, bool)>,

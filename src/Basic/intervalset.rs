@@ -16,70 +16,50 @@ impl<T> IntervalSet<T> where T: Ord+Copy {
         drop(self.remove_with_data(l, r));
     }
 
-    /// 変更記録 (左端, 右端, 追加なら true) を順に返す。
-    /// 更新はイテレータの作成・消費に伴って進む。Drop でも更新を完了する。
-    /// 記録を保存したい場合は collect::<Vec<_>>() を使う。
-    pub fn insert_with_data(&mut self, mut l: T, r: T)->impl Iterator<Item = (T, T, bool)> + '_ {
-        let mut prefix = [None; 3];
+    pub fn insert_with_data(&mut self, mut l: T, r: T)->impl Iterator<Item = (T, T)> + '_ {
+        let mut gap = l;
         if l >= r {
-            return IntervalSetChanges::new(None, prefix, None);
+            return IntervalSetAdded::new(None, r, r);
         }
         if let Some((&ll, &lr)) = self.s.range(..=l).next_back() {
             if r <= lr {
-                return IntervalSetChanges::new(None, prefix, None);
+                return IntervalSetAdded::new(None, r, r);
             }
             if l <= lr {
-                prefix[0] = Some((ll, lr, false));
+                gap = lr;
                 l = ll;
             }
         }
         let bounds = (std::ops::Bound::Excluded(l), std::ops::Bound::Included(r));
-        // 既存区間は隣接もしないため、r を越えて伸びるのは最後の一つだけ。
         let last = self.s.range(bounds).next_back().map(|(_, &nr)| nr);
         let end = last.map_or(r, |nr| r.max(nr));
-        // 新しい区間の左端は抽出範囲から除外される。
         self.s.insert(l, end);
         let removed = last.map(|_| self.s.extract_if(bounds, interval_set_extract_all::<T> as fn(&T, &mut T) -> bool));
-        IntervalSetChanges::new(removed, prefix, Some((l, end, true)))
+        IntervalSetAdded::new(removed, gap, r)
     }
 
-    /// 変更記録 (左端, 右端, 追加なら true) を順に返す。
-    /// 更新はイテレータの作成・消費に伴って進む。Drop でも更新を完了する。
-    /// 記録を保存したい場合は collect::<Vec<_>>() を使う。
-    pub fn remove_with_data(&mut self, l: T, r: T)->impl Iterator<Item = (T, T, bool)> + '_ {
-        let mut prefix = [None; 3];
+    pub fn remove_with_data(&mut self, l: T, r: T)->impl Iterator<Item = (T, T)> + '_ {
+        let mut prefix = None;
         if l >= r {
-            return IntervalSetChanges::new(None, prefix, None);
+            return IntervalSetRemoved::new(None, prefix, r);
         }
         if let Some((&ll, end)) = self.s.range_mut(..=l).next_back() {
             let lr = *end;
             if l < lr {
-                prefix[0] = Some((ll, lr, false));
-                let mut count = 1;
-                if ll < l {
-                    *end = l;
-                    prefix[count] = Some((ll, l, true));
-                    count += 1;
-                } else {
-                    self.s.remove(&ll);
-                }
+                prefix = Some((l, lr.min(r)));
+                if ll < l { *end = l; }
+                else { self.s.remove(&ll); }
                 if r <= lr {
-                    if r < lr {
-                        self.s.insert(r, lr);
-                        prefix[count] = Some((r, lr, true));
-                    }
-                    return IntervalSetChanges::new(None, prefix, None);
+                    if r < lr { self.s.insert(r, lr); }
+                    return IntervalSetRemoved::new(None, prefix, r);
                 }
             }
         }
         let bounds = (std::ops::Bound::Included(l), std::ops::Bound::Excluded(r));
         let last = self.s.range(bounds).next_back().map(|(_, &nr)| nr);
-        let suffix = last.filter(|&nr| r < nr).map(|nr| {
-            self.s.insert(r, nr);
-            (r, nr, true)
-        });
+        if let Some(nr) = last.filter(|&nr| r < nr) { self.s.insert(r, nr); }
         let removed = last.map(|_| self.s.extract_if(bounds, interval_set_extract_all::<T> as fn(&T, &mut T) -> bool));
-        IntervalSetChanges::new(removed, prefix, suffix)
+        IntervalSetRemoved::new(removed, prefix, r)
     }
 
     pub fn contains(&self, p: T)->bool{
@@ -99,52 +79,77 @@ impl<T> IntervalSet<T> where T: Ord+Copy {
     }
 }
 
-// Rust 1.91 以降の BTreeMap::extract_if を使用する。
 fn interval_set_extract_all<T>(_: &T, _: &mut T) -> bool { true }
 
 type IntervalSetExtract<'a, T> = std::collections::btree_map::ExtractIf<
     'a, T, T, (std::ops::Bound<T>, std::ops::Bound<T>), fn(&T, &mut T) -> bool,
 >;
 
-// 境界の分割記録は最大三つ。抽出中は木の走査位置を extract_if が保持する。
-struct IntervalSetChanges<'a, T: Ord + Copy> {
+struct IntervalSetAdded<'a, T: Ord + Copy> {
     removed: Option<IntervalSetExtract<'a, T>>,
-    prefix: [Option<(T, T, bool)>; 3],
-    prefix_index: usize,
-    suffix: Option<(T, T, bool)>,
+    gap: T,
+    r: T,
+    done: bool,
 }
 
-impl<'a, T: Ord + Copy> IntervalSetChanges<'a, T> {
-    fn new(removed: Option<IntervalSetExtract<'a, T>>, prefix: [Option<(T, T, bool)>; 3], suffix: Option<(T, T, bool)>) -> Self {
-        Self { removed, prefix, prefix_index: 0, suffix }
+impl<'a, T: Ord + Copy> IntervalSetAdded<'a, T> {
+    fn new(removed: Option<IntervalSetExtract<'a, T>>, gap: T, r: T) -> Self {
+        Self { removed, gap, r, done: false }
     }
 }
 
-impl<T: Ord + Copy> Iterator for IntervalSetChanges<'_, T> {
-    type Item = (T, T, bool);
-
+impl<T: Ord + Copy> Iterator for IntervalSetAdded<'_, T> {
+    type Item = (T, T);
+    #[inline]
     fn next(&mut self) -> Option<Self::Item> {
-        if self.prefix_index < self.prefix.len() {
-            if let Some(change) = self.prefix[self.prefix_index].take() {
-                self.prefix_index += 1;
-                return Some(change);
-            }
-            self.prefix_index = self.prefix.len();
-        }
+        if self.done { return None; }
         if let Some(removed) = &mut self.removed {
-            if let Some((l, r)) = removed.next() {
-                return Some((l, r, false));
+            for (l, r) in removed {
+                let a = self.gap;
+                let b = l.min(self.r);
+                self.gap = self.gap.max(r);
+                if a < b { return Some((a, b)); }
             }
             self.removed = None;
         }
-        self.suffix.take()
+        self.done = true;
+        if self.gap < self.r { Some((self.gap, self.r)) } else { None }
     }
 }
 
-impl<T: Ord + Copy> Drop for IntervalSetChanges<'_, T> {
+impl<T: Ord + Copy> Drop for IntervalSetAdded<'_, T> {
     fn drop(&mut self) {
+        if let Some(removed) = &mut self.removed { for _ in removed {} }
+    }
+}
+
+struct IntervalSetRemoved<'a, T: Ord + Copy> {
+    removed: Option<IntervalSetExtract<'a, T>>,
+    prefix: Option<(T, T)>,
+    r: T,
+}
+
+impl<'a, T: Ord + Copy> IntervalSetRemoved<'a, T> {
+    fn new(removed: Option<IntervalSetExtract<'a, T>>, prefix: Option<(T, T)>, r: T) -> Self {
+        Self { removed, prefix, r }
+    }
+}
+
+impl<T: Ord + Copy> Iterator for IntervalSetRemoved<'_, T> {
+    type Item = (T, T);
+    #[inline]
+    fn next(&mut self) -> Option<Self::Item> {
+        if let Some(change) = self.prefix.take() { return Some(change); }
         if let Some(removed) = &mut self.removed {
-            for _ in removed {}
+            if let Some((l, r)) = removed.next() { return Some((l, r.min(self.r))); }
+            self.removed = None;
         }
+        None
+    }
+}
+
+impl<T: Ord + Copy> Drop for IntervalSetRemoved<'_, T> {
+    fn drop(&mut self) {
+        if let Some(removed) = &mut self.removed { for _ in removed {} }
     }
 }

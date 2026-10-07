@@ -1,4 +1,3 @@
-// 実装はmatrix.rsへ統合。旧ファイルの入口とAddMulMonoid（定数MOD:i64）を維持。
 include!("matrix.rs");
 
 pub struct AddMulMonoid;

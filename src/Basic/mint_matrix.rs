@@ -1,4 +1,3 @@
-// MIを同じスコープに用意する。旧Matrix APIを維持する互換入口。
 include!("matrix.rs");
 
 pub struct MintMatrixMonoid;
@@ -25,7 +24,6 @@ impl MatrixMonoid for MintMatrixMonoid {
         *acc += *a * *b;
     }
     fn multiply_kernel(n: usize, a: &[MI], b: &[MI], out: &mut [MI]) {
-        // modulus()を要求せず、旧MIのnew/val/減算から固定modを取得する。
         let modulus = (MI::new(0) - MI::new(1)).val() as u64 + 1;
         if modulus <= u32::MAX as u64 && n >= 16 {
             let a: Vec<u32> = a.iter().map(|x| x.val() as u32).collect();
@@ -33,7 +31,6 @@ impl MatrixMonoid for MintMatrixMonoid {
             let mut c = vec![0u32; n * n];
             matrix_mod_u32_kernel::<0>(n, &a, &b, &mut c, modulus as u32);
             for (x, y) in out.iter_mut().zip(c) {
-                // 旧Mintのusize引数と、同梱MIのInto<i128>引数の両方に対応。
                 *x = if modulus <= i32::MAX as u64 {
                     MI::new(matrix_mint_input(y, 0))
                 } else {

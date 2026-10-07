@@ -1,4 +1,3 @@
-// [0, r) の半開区間
 pub struct BIT<T>
 where
     T: Copy

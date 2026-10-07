@@ -1,5 +1,3 @@
-/// 個数0のキーは保持しない。len=種類数、total=総個数。
-/// 総個数がusizeを超える追加、_exの前提違反はreleaseでもpanic。
 #[derive(Debug, Clone)]
 pub struct Counter<T> {
     c: usize,
@@ -45,7 +43,6 @@ impl<T: Ord> Counter<T> {
     pub fn one_sub(&mut self, x: T) {
         self.sub(x, 1);
     }
-    /// 従来どおり「xを最大1個減らし、yを1個追加」。xがなくてもyを追加する。
     pub fn one_update(&mut self, x: T, y: T) {
         self.one_sub(x);
         self.one_add(y);
@@ -59,7 +56,6 @@ impl<T: Ord> Counter<T> {
         *self.map.entry(x).or_insert(0) += count;
         self.c = total;
     }
-    /// xが存在することが前提。
     #[inline]
     pub fn add_ex(&mut self, x: T, count: usize) {
         let total = self.c.checked_add(count).expect("total count overflow");
@@ -67,7 +63,6 @@ impl<T: Ord> Counter<T> {
         *v += count;
         self.c = total;
     }
-    /// 存在する個数だけ減らす。存在しないキーには何もしない。
     #[inline]
     pub fn sub(&mut self, x: T, count: usize) {
         if count == 0 {
@@ -83,7 +78,6 @@ impl<T: Ord> Counter<T> {
             self.c -= removed;
         }
     }
-    /// xが存在し、その個数がcount以上であることが前提。
     #[inline]
     pub fn sub_ex(&mut self, x: T, count: usize) {
         match self.map.entry(x) {
@@ -129,7 +123,6 @@ impl<T: Ord> Counter<T> {
         self.map.clear();
         self.c = 0;
     }
-    /// 小さいmapを大きいmapへ移す。rhsは空になる。
     pub fn merge(&mut self, rhs: &mut Self) {
         let total = self.c.checked_add(rhs.c).expect("total count overflow");
         if self.len() < rhs.len() {

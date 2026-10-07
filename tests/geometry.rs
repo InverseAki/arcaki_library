@@ -43,7 +43,6 @@ fn point_and_area() {
         Some(Point::new(r(5, 2), r(4, 1)))
     );
     assert_eq!(triangle_circumcenter(a, a, c), None);
-    // i64で差を取るとoverflowするケース。i128では収まる。
     assert_eq!(
         p(i64::MIN, 0).manhattan_distance(p(i64::MAX, 0)),
         u64::MAX as i128
@@ -141,7 +140,6 @@ fn exhaustive_small_grid_against_parametric_intersection() {
                 for &d in &points {
                     let s = Segment::new(a, b);
                     let t = Segment::new(c, d);
-                    // 独立なパラメータ方程式 a+u(b-a)=c+v(d-c)。平行時は座標範囲で比較。
                     let (ux, uy, vx, vy, wx, wy) = (
                         b.x - a.x,
                         b.y - a.y,
@@ -331,7 +329,6 @@ fn integer_product_comparator_boundaries_and_reference() {
         for &b in &values {
             for &c in &values {
                 for &d in &values {
-                    // 既存有理数の独立な256bit積を参照モデルとする。
                     let sign = |a: i128, b: i128| {
                         if a == 0 || b == 0 {
                             0i8
@@ -364,7 +361,6 @@ fn integer_product_comparator_boundaries_and_reference() {
             }
         }
     }
-    // 全方向の厳密な順序と、数値的な傾き順を小格子で確認。
     let vectors: Vec<_> = (-8..=8)
         .flat_map(|x| (-8..=8).map(move |y| p(x, y)))
         .filter(|q| *q != p(0, 0))
@@ -403,7 +399,6 @@ fn integer_product_comparator_boundaries_and_reference() {
 
 #[test]
 fn concave_polygon_orientation_and_area() {
-    // 3x3正方形から右上の2x2を除いたL字。凸包なら面積7、元の多角形は5。
     let boundary = [p(0, 0), p(3, 0), p(3, 1), p(1, 1), p(1, 3), p(0, 3)];
     let polygon = Polygon::new(&boundary);
     assert_eq!(polygon.vertices(), boundary);
@@ -463,4 +458,42 @@ fn polygon_degenerate_boundaries() {
         y: Ratio::zero()
     }]))
     .is_err());
+}
+
+#[test]
+fn optimized_rational_predicates_and_fallbacks() {
+    use std::cmp::Ordering::*;
+    let mut state = 478u64;
+    let mut next = || {
+        state ^= state << 7;
+        state ^= state >> 9;
+        state
+    };
+    for _ in 0..4000 {
+        let mut point = || {
+            Point::new(
+                r((next() % 201) as i128 - 100, (next() % 13 + 1) as i128),
+                r((next() % 201) as i128 - 100, (next() % 13 + 1) as i128),
+            )
+        };
+        let (a, b, c) = (point(), point(), point());
+        let expected = signed_triangle_area2(a, b, c).cmp(&Ratio128::zero());
+        assert_eq!(Ratio128::cmp_turn(a, b, c), expected);
+        let narrow = |p: RationalPoint| {
+            Point::new(Ratio::try_from(p.x).unwrap(), Ratio::try_from(p.y).unwrap())
+        };
+        assert_eq!(Ratio::cmp_turn(narrow(a), narrow(b), narrow(c)), expected);
+    }
+    let a = Point::new(r(1, 10i128.pow(20)), r(1, 10i128.pow(20) + 1));
+    assert_eq!(Ratio128::cmp_turn(a, a, a), Equal);
+    let (a, b) = (r(i128::MAX, 2), r(2, i128::MAX));
+    assert_eq!(Ratio128::cmp_products(a, b, r(1, 1), r(1, 1)), Equal);
+    assert_eq!(Ratio128::cmp_products(a, b, r(2, 1), r(1, 1)), Less);
+    let k = i128::MAX / 8;
+    let (a, b, c) = (
+        Point::new(r(0, 1), r(0, 1)),
+        Point::new(r(k, 1), r(0, 1)),
+        Point::new(r(0, 1), r(k, 1)),
+    );
+    assert_eq!(Ratio128::cmp_turn(a, b, c), Greater);
 }

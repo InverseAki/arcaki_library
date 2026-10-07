@@ -1,5 +1,3 @@
-// Copy this file together with Basic/waveletmatrix.rs (or keep both files adjacent).
-// Positions and value/rank ranges are half-open; equal keys keep original index order.
 mod wavelet_group_detail {
     include!("waveletmatrix.rs");
 
@@ -32,7 +30,6 @@ mod wavelet_group_detail {
     }
 }
 
-/// An abelian group: op must be associative and commutative; difference undoes a prefix.
 pub trait WaveletGroup {
     type S: Clone;
     fn identity() -> Self::S;
@@ -84,7 +81,6 @@ where
     }
 }
 
-/// Static payloads with O(log U) prefix/value/rank aggregation.
 pub struct WaveletMatrixPrefix<G: WaveletGroup> {
     wm: wavelet_group_detail::WaveletMatrix,
     prefix: Vec<Vec<G::S>>,
@@ -122,12 +118,10 @@ impl<G: WaveletGroup> WaveletMatrixPrefix<G> {
     fn at(&self, d: usize, l: usize, r: usize) -> G::S {
         self.g.difference(&self.prefix[d][r], &self.prefix[d][l])
     }
-    /// Aggregate in the original index interval, without a key restriction.
     pub fn prod(&self, l: usize, r: usize) -> G::S {
         self.check(l, r);
         self.at(0, l, r)
     }
-    /// Aggregate data whose key is less than upper.
     pub fn prod_less(&self, mut l: usize, mut r: usize, upper: usize) -> G::S {
         self.check(l, r);
         let depth = wavelet_group_detail::depth(&self.wm);
@@ -156,7 +150,6 @@ impl<G: WaveletGroup> WaveletMatrixPrefix<G> {
         self.g
             .difference(&self.prod_less(l, r, upper), &self.prod_less(l, r, lower))
     }
-    /// Aggregate the first k elements sorted by (key, original index).
     pub fn prefix_prod(&self, mut l: usize, mut r: usize, mut k: usize) -> G::S {
         self.check(l, r);
         assert!(k <= r - l);
@@ -178,7 +171,6 @@ impl<G: WaveletGroup> WaveletMatrixPrefix<G> {
             &self.at(wavelet_group_detail::depth(&self.wm), l, l + k),
         )
     }
-    /// Aggregate sorted ranks [start, end), using zero-based ranks.
     pub fn prod_sorted(&self, l: usize, r: usize, start: usize, end: usize) -> G::S {
         self.check(l, r);
         assert!(start <= end && end <= r - l);

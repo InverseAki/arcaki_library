@@ -54,8 +54,6 @@ impl RollbackUnionFind{
     }
 }
 
-// query: 0 → 追加、1 → 削除、2 → 質問
-// queryにおいて頂点番号は u < vに統一してください！
 pub fn offline_dynamic_connectivity(n: usize, query: &Vec<(usize, usize, usize)>)->Vec<bool>{
     let mut uf = RollbackUnionFind::new(n);
     let q = query.len().next_power_of_two();

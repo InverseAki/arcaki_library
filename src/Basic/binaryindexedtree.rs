@@ -1,6 +1,3 @@
-/// 加算・減算による Fenwick tree。区間は 0-indexed の [l, r)。
-/// T の加算は可換、zero は加法単位元。演算結果は T に収まること。
-/// 構築 O(n)、更新・取得・探索 O(log n)、領域 O(n)。
 pub struct BIT<T>
 where
     T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + PartialOrd,
@@ -81,10 +78,6 @@ where
         self.add(p, x - pre);
     }
 
-    /// 全要素が非負であること（累積和が単調非減少）。
-    /// ac > zero のとき、sum(A[0..r]) < ac を満たす最大の r を返す。
-    /// つまり累積和が ac 以上になる最初の要素の 0-indexed 添字。
-    /// 到達しなければ n、ac <= zero または空配列なら 0。
     #[inline]
     pub fn lower_bound(&self, ac: T) -> usize {
         if self.n == 0 || ac <= self.zero {

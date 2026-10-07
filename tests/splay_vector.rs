@@ -246,7 +246,6 @@ fn non_clone_non_debug_values_drop_exactly_once() {
     assert_eq!(values[0].id, 1);
     drop(values);
     assert_eq!(drops.get(), 101);
-    // 基盤のNilMonoidもClone/Debugのない型を受け付ける。
     let mut t = SplayTree::<NilMonoid<Resource>>::new();
     t.push(Resource {
         id: 2,

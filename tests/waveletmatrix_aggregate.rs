@@ -54,7 +54,6 @@ fn verify(keys: &[usize], seed: &mut u64) {
                     assert_eq!(mc.matrix().kth_smallest(l, r, k), keys[i]);
                 }
                 for start in 0..=order.len() {
-                    // All short cases; random rank interval otherwise, plus full prefix/suffix.
                     let mut ends = vec![start, order.len()];
                     if n <= 9 {
                         ends.extend(start..=order.len());

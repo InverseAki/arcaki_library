@@ -26,17 +26,6 @@ impl<K: Ord, M: KeyedAvlMonoid> SortableBlock<K, M> {
     }
 }
 
-/// (key, value)列の一点代入・区間ソート・区間積。
-/// モノイドはvalueだけを集約し、キーで昇順/降順ソートする。非可換も可。
-/// 全ての現在のキーが一意であること（setにも必要、重複チェックはしない）。
-/// 区間は0-indexedの[l,r)。空列・空区間も可。列長は変更しない。
-/// ソート済みブロックをKeyedAvlTreeで持ち、ブロック積をセグ木で管理する。
-/// 構築O(n)、set/prodは最悪O(log n)。sortは複数ブロックを統合するので
-/// 1回でO(log n)にはならない。対象s要素、kブロックなら境界分割と
-/// ブロック管理にO((k+1)log(n+1))、加えて各木のmergeの計算量がかかる。
-/// 保守的な1回の上界はO((s+1)log(n+1))。領域O(n)。
-/// op/Clone/キー比較をO(1)とした計算量。キーの座標圧縮・Clone・乱数は不要。
-/// コピー時はkeyed_avl_tree.rsも同じディレクトリに配置する。
 pub struct SortableSequence<K: Ord, M: KeyedAvlMonoid> {
     n: usize,
     size: usize,
@@ -161,7 +150,6 @@ impl<K: Ord, M: KeyedAvlMonoid> SortableSequence<K, M> {
         );
     }
 
-    /// descending=falseなら昇順、trueなら降順。
     pub fn sort(&mut self, l: usize, r: usize, descending: bool) {
         assert!(l <= r && r <= self.n, "invalid range");
         if l == r {
@@ -209,26 +197,7 @@ impl<K: Ord, M: KeyedAvlMonoid> SortableSequence<K, M> {
     pub fn all_prod(&self) -> M::S {
         self.products[1].clone()
     }
-
-    #[cfg(test)]
-    pub(crate) fn check_invariants(&self)
-    where
-        M::S: PartialEq,
-    {
-        let mut at = 0;
-        for (&start, block) in &self.blocks {
-            assert_eq!(start, at);
-            assert!(!block.tree.is_empty());
-            block.tree.check_invariants();
-            assert!(self.products[self.size + start] == block.all_prod());
-            for i in start + 1..start + block.tree.len() {
-                assert!(self.products[self.size + i] == M::identity());
-            }
-            at += block.tree.len();
-        }
-        assert_eq!(at, self.n);
-        for i in (1..self.size).rev() {
-            assert!(self.products[i] == M::op(&self.products[2 * i], &self.products[2 * i + 1]));
-        }
-    }
 }
+
+#[cfg(test)]
+include!("../../tests/support/sortable_sequence_invariants.rs");

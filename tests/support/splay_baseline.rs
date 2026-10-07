@@ -187,7 +187,6 @@ impl<F> SplayTree<F> where F: SplayLazyMonoid {
         }
     }
 
-    // 0-indexed
     #[inline(always)]
     fn kth(&mut self, mut k: usize) -> *mut Node<F> {
         unsafe{

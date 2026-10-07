@@ -1,4 +1,3 @@
-// run_math_migration.py からテンプレートの実物を結合して実行する。
 #[test]
 fn integer_math_contracts() {
     for a in -100i64..=100 {

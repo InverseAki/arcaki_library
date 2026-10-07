@@ -66,7 +66,6 @@ impl RollingHash {
         }
     }
 
-    // mxは種類数上限。あと種類はちゃん全部列挙しないとなので配列が複数あるなら全部まとめてから座圧せよ。
     pub fn num_set(a: &Vec<usize>, mx: usize) -> Self {
         let (mut pow, mut hash) = (Vec::from([1]), Vec::from([0]));
         let (mut p, mut h) = (1, 0);

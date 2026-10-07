@@ -56,7 +56,6 @@ fn random_full_width_and_thresholds() {
 }
 #[test]
 fn full_width_patterns() {
-    // 真の整数係数はu128にも収まらないが、(-1)*(-1)=1 mod 2^64。
     let n = 4097;
     let m = 3000;
     let a = vec![u64::MAX; n];
@@ -107,7 +106,6 @@ fn primes_roots_and_crt_constants() {
         ps[..3].iter().fold(1u64, |x, &q| x * (q % ps[4]) % ps[4]),
         1137597963
     );
-    // 5素数の積が係数上限2^151を超えることを、多倍長積で確認。
     let mut limbs = vec![1u64];
     for p in ps {
         let mut carry = 0u128;

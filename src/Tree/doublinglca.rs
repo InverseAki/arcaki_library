@@ -1,5 +1,3 @@
-// 現在は演算機能がついていないが今後前計算で計算も一緒に行うようにする予定
-
 pub struct LCA {
     n: usize,
     log: usize,

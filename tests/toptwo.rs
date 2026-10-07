@@ -84,7 +84,6 @@ fn duplicate_keys_promotions_and_ties() {
 
 #[test]
 fn exhaustive_small_sequences_match_all_candidates() {
-    // 全 9^5 列。重複・負値・同値と、捨てた種類の再登場も含む。
     for mut code in 0..9usize.pow(5) {
         let mut top = TopTwo::new();
         let mut items = Vec::new();

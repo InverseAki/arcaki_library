@@ -51,7 +51,6 @@ fn generic_integer_boundaries() {
         let b = (s >> 1) as i128;
         let (g, x, y) = math::extended_gcd(a, b);
         assert_eq!(g, math::gcd(a, b));
-        // 等式の積がi128を超える場合も、mod 2^128なら検証できる。
         assert_eq!(a.wrapping_mul(x).wrapping_add(b.wrapping_mul(y)), g);
     }
 }
@@ -210,7 +209,6 @@ fn hash_counter_random_model_and_custom_hasher() {
         usize,
         std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher>,
     >::default());
-    // OrdもCopyも持たないキーで使用可能。
     #[derive(Hash, PartialEq, Eq)]
     struct Key(String);
     let mut h = HashCounter::new();

@@ -1,0 +1,198 @@
+{
+  "n": 100000,
+  "small_cases": 200,
+  "repeat": 2,
+  "profiles": "rustc --edition=2021 -O",
+  "cases": {
+    "random": {
+      "submitted_rational": {
+        "seconds": [
+          2.195595790632069,
+          2.192178625613451
+        ],
+        "answer": "115159189550880727 288"
+      },
+      "improved_rational": {
+        "seconds": [
+          1.1645585419610143,
+          1.1603705417364836
+        ],
+        "answer": "115159189550880727 288"
+      },
+      "integer_previous_library": {
+        "seconds": [
+          0.23592716734856367,
+          0.23225499968975782
+        ],
+        "answer": "115159189550880727 288"
+      },
+      "integer_improved_library": {
+        "seconds": [
+          0.17380645778030157,
+          0.17429137509316206
+        ],
+        "answer": "115159189550880727 288"
+      },
+      "integer_rebuild_hulls": {
+        "seconds": [
+          0.22329479176551104,
+          0.22321804240345955
+        ],
+        "answer": "115159189550880727 288"
+      }
+    },
+    "circle_ordered": {
+      "submitted_rational": {
+        "seconds": [
+          2.5824520839378238,
+          2.552720000036061
+        ],
+        "answer": "22619468028022847 72"
+      },
+      "improved_rational": {
+        "seconds": [
+          1.3813113328069448,
+          1.3720248751342297
+        ],
+        "answer": "22619468028022847 72"
+      },
+      "integer_previous_library": {
+        "seconds": [
+          0.49309574998915195,
+          0.4909840002655983
+        ],
+        "answer": "22619468028022847 72"
+      },
+      "integer_improved_library": {
+        "seconds": [
+          0.1980528747662902,
+          0.1980057917535305
+        ],
+        "answer": "22619468028022847 72"
+      },
+      "integer_rebuild_hulls": {
+        "seconds": [
+          0.20982445776462555,
+          0.2093762494623661
+        ],
+        "answer": "22619468028022847 72"
+      }
+    },
+    "circle_shuffled": {
+      "submitted_rational": {
+        "seconds": [
+          6.356958083808422,
+          5.611143624410033
+        ],
+        "answer": "45238936050500005 144"
+      },
+      "improved_rational": {
+        "seconds": [
+          3.3460566252470016,
+          3.2117430828511715
+        ],
+        "answer": "45238936050500005 144"
+      },
+      "integer_previous_library": {
+        "seconds": [
+          0.867065791040659,
+          0.8742017922922969
+        ],
+        "answer": "45238936050500005 144"
+      },
+      "integer_improved_library": {
+        "seconds": [
+          0.417453832924366,
+          0.41056495904922485
+        ],
+        "answer": "45238936050500005 144"
+      },
+      "integer_rebuild_hulls": {
+        "seconds": [
+          0.40613354183733463,
+          0.462311833165586
+        ],
+        "answer": "45238936050500005 144"
+      }
+    },
+    "collinear": {
+      "submitted_rational": {
+        "seconds": [
+          0.7824920825660229,
+          0.9072953332215548
+        ],
+        "answer": "0 1"
+      },
+      "improved_rational": {
+        "seconds": [
+          0.38675116654485464,
+          0.37735758256167173
+        ],
+        "answer": "0 1"
+      },
+      "integer_previous_library": {
+        "seconds": [
+          0.10474079102277756,
+          0.10343849938362837
+        ],
+        "answer": "0 1"
+      },
+      "integer_improved_library": {
+        "seconds": [
+          0.08975729160010815,
+          0.10035812482237816
+        ],
+        "answer": "0 1"
+      },
+      "integer_rebuild_hulls": {
+        "seconds": [
+          0.09840783290565014,
+          0.09555150009691715
+        ],
+        "answer": "0 1"
+      }
+    },
+    "all_equal": {
+      "submitted_rational": {
+        "seconds": [
+          0.1181713342666626,
+          0.11924145836383104
+        ],
+        "answer": "0 1"
+      },
+      "improved_rational": {
+        "seconds": [
+          0.10356533341109753,
+          0.10609354265034199
+        ],
+        "answer": "0 1"
+      },
+      "integer_previous_library": {
+        "seconds": [
+          0.0827939584851265,
+          0.08191254269331694
+        ],
+        "answer": "0 1"
+      },
+      "integer_improved_library": {
+        "seconds": [
+          0.0803330410271883,
+          0.0806193333119154
+        ],
+        "answer": "0 1"
+      },
+      "integer_rebuild_hulls": {
+        "seconds": [
+          0.07911716680973768,
+          0.0762389162555337
+        ],
+        "answer": "0 1"
+      }
+    }
+  },
+  "environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "rustc": "rustc 1.93.0 (254b59607 2026-01-19)"
+  }
+}

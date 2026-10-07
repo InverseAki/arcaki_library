@@ -24,7 +24,6 @@ pub fn build_mi_cartesian_tree<T>(a: &[T])->(Vec<(usize, usize)>, Vec<usize>, us
             root[i] = last;
             right[last] = i;
         } else {
-            //root[i] = i;
             r = i;
         }
         stack.push(i);
@@ -58,7 +57,6 @@ pub fn build_mx_cartesian_tree<T>(a: &[T])->(Vec<(usize, usize)>, Vec<usize>, us
             root[i] = last;
             right[last] = i;
         } else {
-            //root[i] = i;
             r = i;
         }
         stack.push(i);
