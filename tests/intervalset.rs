@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 use std::collections::BTreeMap;
-include!("../src/Basic/intervalset.rs");
+include!("../src/DataStructure/intervalset.rs");
 
 #[test]
 fn only_changed_coverage_is_returned() {

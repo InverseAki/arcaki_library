@@ -2,7 +2,7 @@
 #[path = "update_only.rs"] mod update_only;
 #[path = "candidates.rs"] mod candidates;
 #[path = "flat.rs"] mod flat;
-#[path = "../../src/Basic/predecessor64.rs"] mod current;
+#[path = "../../src/DataStructure/predecessor64.rs"] mod current;
 
 trait Set: Sized {
     fn new(n: usize) -> Self;

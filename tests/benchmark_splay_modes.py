@@ -16,7 +16,7 @@ p.add_argument('--repeats',type=int,default=5)
 p.add_argument('--output',type=Path)
 a=p.parse_args()
 if a.n<8 or a.operations<1 or a.repeats<1: p.error('n>=8, operations>=1, repeats>=1 required')
-code='#![allow(dead_code)]\ninclude!("'+str(ROOT/'src/SegmentTree/splay.rs')+'");\n'+r'''
+code='#![allow(dead_code)]\ninclude!("'+str(ROOT/'src/DataStructure/splay.rs')+'");\n'+r'''
 struct SumValues;
 impl SplayMonoid for SumValues {
  type S=i64;
@@ -85,7 +85,7 @@ fn main(){
  println!("{s:.9} {c}");
 }
 '''
-report={'n':a.n,'operations':a.operations,'repeats':a.repeats,'platform':platform.platform(),'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'source_sha256':hashlib.sha256((ROOT/'src/SegmentTree/splay.rs').read_bytes()).hexdigest(),'workloads':{}}
+report={'n':a.n,'operations':a.operations,'repeats':a.repeats,'platform':platform.platform(),'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'source_sha256':hashlib.sha256((ROOT/'src/DataStructure/splay.rs').read_bytes()).hexdigest(),'workloads':{}}
 with tempfile.TemporaryDirectory(prefix='splay-modes-') as d:
     src=Path(d)/'bench.rs';binary=Path(d)/'bench';src.write_text(code)
     subprocess.run(['rustc','--edition=2021','-O',str(src),'-o',str(binary)],check=True)

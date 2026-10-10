@@ -85,7 +85,7 @@ for i in range(250):
     if i%2:x=-x
     cases.append((f'gcd {x} {y}',str(math.gcd(x,y))))
 
-report={'seed':20261004,'platform':platform.platform(),'cases_per_build':len(cases),'oracle':'Python fractions.Fraction and math.gcd','rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'sha256':{f:hashlib.sha256((ROOT/f).read_bytes()).hexdigest() for f in ['src/Basic/ratio.rs','src/Basic/big_ratio.rs','src/NumberTheory/big_integer.rs']},'builds':{}}
+report={'seed':20261004,'platform':platform.platform(),'cases_per_build':len(cases),'oracle':'Python fractions.Fraction and math.gcd','rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'sha256':{f:hashlib.sha256((ROOT/f).read_bytes()).hexdigest() for f in ['src/NumberTheory/ratio.rs','src/NumberTheory/big_ratio.rs','src/NumberTheory/big_integer.rs']},'builds':{}}
 with tempfile.TemporaryDirectory(prefix='ratio-check-') as tmp:
     for label,flags in [('debug',[]),('release',['-O'])]:
         binary=Path(tmp)/label

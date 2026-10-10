@@ -1,6 +1,6 @@
 # 候補登録型の更新可能 Wavelet Matrix
 
-本体: [waveletmatrix_offline.rs](../src/Basic/waveletmatrix_offline.rs)
+本体: [waveletmatrix_offline.rs](../src/DataStructure/waveletmatrix_offline.rs)
 
 [ABC467 G — Many Sweets Problem](https://atcoder.jp/contests/abc467/tasks/abc467_g)
 のような「配列の1点更新＋区間内で総和を満たす最小個数」を扱う。

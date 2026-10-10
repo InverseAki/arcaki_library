@@ -2,7 +2,7 @@
 
 以下は最初の高速化時の記録。NilMonoid/ProdMonoidと追加APIについては [splay_modes.md](splay_modes.md) を参照。
 
-本体: `../src/SegmentTree/splay.rs`。公開trait、Nodeのコンストラクタ、SplayTreeの既存メソッドと引数順は維持。
+本体: `../src/DataStructure/splay.rs`。公開trait、Nodeのコンストラクタ、SplayTreeの既存メソッドと引数順は維持。
 追加APIは `len()`、`is_empty()`、`from_vec(Vec<S>)`。from_vecはO(n)で平衡形を作る。
 各操作の計算量は従来と同じ償却O(log n)。
 

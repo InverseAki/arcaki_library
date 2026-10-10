@@ -1,6 +1,6 @@
 # 点加算・矩形和：座標型と初期点 build（2026-10-06）
 
-`src/Basic/point_add_rectangle_sum.rs` をジェネリクス化し、初期点専用の `build` を追加した。public BIT の API、点加算・矩形和の引数順、質問順の返却、solve 後の消去を維持している。
+`src/OfflineQuery/point_add_rectangle_sum.rs` をジェネリクス化し、初期点専用の `build` を追加した。public BIT の API、点加算・矩形和の引数順、質問順の返却、solve 後の消去を維持している。
 
 ## API
 

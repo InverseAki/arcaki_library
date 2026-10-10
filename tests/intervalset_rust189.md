@@ -5,8 +5,8 @@
 以下の性能比較は差分列挙へ変更する前の1.89版の記録。現在の重みなし版は実際に被覆が変わった部分だけを返す仕様に更新した。[現在の仕様と性能](intervalset_delta.md)。過去の測定は [固定した実装](support/intervalset_rust189_before_delta.rs) で再現する。
 コピーするときは用途に応じて次の一つを選ぶ。
 
-- [IntervalSet](../src/Basic/intervalset_rust189.rs)
-- [IntervalSetV](../src/Basic/intervalsetv_rust189.rs)
+- [IntervalSet](../src/DataStructure/intervalset_rust189.rs)
+- [IntervalSetV](../src/DataStructure/intervalsetv_rust189.rs)
 
 型名・引数順は通常版と同じ。with_data は Vec を確保せずイテレータを返す。現在の重みなし版の要素は (T, T)、値付き版は (T, T, V, bool)。
 固定長の記録バッファを使い、途中破棄でも更新を完了する。

@@ -1,6 +1,6 @@
 # 正方行列の統合
 
-正本は `src/Basic/matrix.rs` の `SquareMatrix<M>`。行優先の連続した `Vec<M::S>` を持つ。
+正本は `src/LinearAlgebra/matrix.rs` の `SquareMatrix<M>`。行優先の連続した `Vec<M::S>` を持つ。
 加算・乗算の定義を `MatrixMonoid` に渡すので、通常の積、mod積、min-plus、boolの到達可能性を同じ型で扱える。
 行列積はO(n³)、累乗はO(n³ log k)、逆行列はO(n³)。セルの演算をO(1)とした計算量。
 

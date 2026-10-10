@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/Basic/ratio.rs");
+include!("../src/NumberTheory/ratio.rs");
 include!("../src/Gemetory/geometry.rs");
 include!("../src/Gemetory/convexhull.rs");
 fn p(x: i64, y: i64) -> IntPoint {

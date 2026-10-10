@@ -13,7 +13,7 @@ def build(out,name,library,driver):
 
 def libraries(baseline):
     if baseline:return 'include!('+json.dumps(str(HERE/'baseline.rs'))+');'
-    return '\n'.join('include!('+json.dumps(str(ROOT/p))+');' for p in ['src/Basic/ratio.rs','src/Gemetory/geometry.rs','src/Gemetory/convexhull.rs'])
+    return '\n'.join('include!('+json.dumps(str(ROOT/p))+');' for p in ['src/NumberTheory/ratio.rs','src/Gemetory/geometry.rs','src/Gemetory/convexhull.rs'])
 
 def case(points,p=5,q=7):return f'{len(points)} {p} {q}\n'+''.join(f'{x} {y}\n' for x,y in points)
 def run(binary,data):

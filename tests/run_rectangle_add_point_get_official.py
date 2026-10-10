@@ -42,10 +42,10 @@ def main():
     checker = compile_cpp(problem / "checker.cpp")
     verifier = compile_cpp(problem / "verifier.cpp")
     correct = compile_cpp(problem / "sol" / "correct.cpp")
-    implementation = (repo / "src" / "Basic" / "rectangle_add_point_get.rs").read_text()
+    implementation = (repo / "src" / "OfflineQuery" / "rectangle_add_point_get.rs").read_text()
     example = (repo / "examples" / "rectangle_add_point_get.rs").read_text()
     submission = work / "submission.rs"
-    submission.write_text(example.replace('include!("../src/Basic/rectangle_add_point_get.rs");', implementation))
+    submission.write_text(example.replace('include!("../src/OfflineQuery/rectangle_add_point_get.rs");', implementation))
     solver = work / "solver"
     subprocess.run(["rustc", "--edition=2021", "-O", str(submission), "-o", str(solver)], check=True)
     cases = work / "cases"

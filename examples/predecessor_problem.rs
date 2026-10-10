@@ -3,7 +3,7 @@
 mod basic_io;
 #[path = "../src/Basic/basic_output.rs"]
 mod basic_output;
-#[path = "../src/Basic/predecessor64.rs"]
+#[path = "../src/DataStructure/predecessor64.rs"]
 mod predecessor64;
 
 fn main() {

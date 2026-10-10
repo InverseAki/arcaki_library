@@ -62,7 +62,7 @@ pub fn run(workload:&str,n:usize,q:usize)->(f64,u64) {
 }
 '''
 code=''
-for label,file in [('before','tests/support/splay_baseline.rs'),('after','src/SegmentTree/splay.rs')]:
+for label,file in [('before','tests/support/splay_baseline.rs'),('after','src/DataStructure/splay.rs')]:
     code+=f'mod {label} {{ use std::{{fmt::Debug,ptr::null_mut,mem::swap}};\n'+(ROOT/file).read_text()+monoids+'\n}\n'
 code+=r'''
 fn main(){
@@ -75,7 +75,7 @@ fn main(){
  println!("{s:.9} {c}");
 }
 '''
-report={'platform':platform.platform(),'source_sha256':{name:hashlib.sha256((ROOT/file).read_bytes()).hexdigest() for name,file in [('before','tests/support/splay_baseline.rs'),('after','src/SegmentTree/splay.rs')]},'n':args.n,'operations':args.operations,'repeats':args.repeats,'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'workloads':{}}
+report={'platform':platform.platform(),'source_sha256':{name:hashlib.sha256((ROOT/file).read_bytes()).hexdigest() for name,file in [('before','tests/support/splay_baseline.rs'),('after','src/DataStructure/splay.rs')]},'n':args.n,'operations':args.operations,'repeats':args.repeats,'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),'workloads':{}}
 with tempfile.TemporaryDirectory(prefix='splay-bench-') as d:
     src=Path(d)/'bench.rs';binary=Path(d)/'bench'
     src.write_text(code)

@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-#[path = "../src/SegmentTree/sortable_sequence.rs"]
+#[path = "../src/DataStructure/sortable_sequence.rs"]
 mod sortable_sequence;
 use sortable_sequence::{KeyedAvlMonoid, SortableSequence};
 use std::io::{self, Read, Write};

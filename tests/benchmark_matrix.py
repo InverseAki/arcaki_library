@@ -16,13 +16,13 @@ start=source.index('pub type ModInt1000000007 =')
 end=source.index('#[allow(unused_imports)]\nuse std::{',start)
 code='use std::{marker::PhantomData,ops::*,str::FromStr};\n'+source[start:end]
 if a.acl_rlib: code='use ac_library::*;\n'
-files=['tests/support/doubling_matrix_baseline.rs','tests/support/mint_matrix_baseline.rs','src/Basic/matrix.rs','src/Basic/doubling_matrix.rs','src/Basic/mint_matrix.rs']
-for label,path in [('old_d','tests/support/doubling_matrix_baseline.rs'),('new_d','src/Basic/doubling_matrix.rs'),('old_m','tests/support/mint_matrix_baseline.rs'),('new_m','src/Basic/mint_matrix.rs')]:
+files=['tests/support/doubling_matrix_baseline.rs','tests/support/mint_matrix_baseline.rs','src/LinearAlgebra/matrix.rs','src/LinearAlgebra/doubling_matrix.rs','src/LinearAlgebra/mint_matrix.rs']
+for label,path in [('old_d','tests/support/doubling_matrix_baseline.rs'),('new_d','src/LinearAlgebra/doubling_matrix.rs'),('old_m','tests/support/mint_matrix_baseline.rs'),('new_m','src/LinearAlgebra/mint_matrix.rs')]:
     body=(ROOT/path).read_text() if label=='old_m' else f'include!({json.dumps(str(ROOT/path))});'
     # Only fix the pre-existing inverse borrow-check error; product stays unchanged.
     body=body.replace('a[(row, j)] -= factor * a[(col, j)];','let v = a[(col,j)]; a[(row,j)] -= factor * v;').replace('b[(row, j)] -= factor * b[(col, j)];','let v = b[(col,j)]; b[(row,j)] -= factor * v;')
     code+=f'mod {label} {{ const MOD:i64=998244353; type MI=super::ModInt998244353; {body} }}\n' 
-code+=f'mod raw {{ include!({json.dumps(str(ROOT/"src/Basic/matrix.rs"))}); }}\n'
+code+=f'mod raw {{ include!({json.dumps(str(ROOT/"src/LinearAlgebra/matrix.rs"))}); }}\n'
 code+=r'''
 use std::{hint::black_box,time::Instant};
 fn data(n:usize,sparse:bool)->Vec<u32>{let mut seed=127918u64;(0..n*n).map(|i|{seed^=seed<<13;seed^=seed>>7;seed^=seed<<17;if sparse && i%10!=0 {0} else {(seed%998244353)as u32}}).collect()}

@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/Basic/static_rectangle_add_rectangle_sum.rs");
+include!("../src/OfflineQuery/static_rectangle_add_rectangle_sum.rs");
 mod mint {
     include!("../src/NumberTheory/mint.rs");
 }

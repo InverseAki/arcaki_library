@@ -1,13 +1,13 @@
 # 2次元の基本幾何
 
 本体: `src/Gemetory/geometry.rs`（既存フォルダの綴りに合わせた）。
-提出時は `src/Basic/ratio.rs` と同じスコープへコピーする。既存の
+提出時は `src/NumberTheory/ratio.rs` と同じスコープへコピーする。既存の
 `closestpair.rs` / `delaunay.rs` は変更しない。
 凸包は新方式へ更新済み。詳細は [convexhull.md](convexhull.md) を参照。
 `src/lib.rs` は既存方針どおり空で、Cargoテストから直接includeする。
 
 ```rust
-include!("../src/Basic/ratio.rs");
+include!("../src/NumberTheory/ratio.rs");
 include!("../src/Gemetory/geometry.rs");
 
 fn main() {

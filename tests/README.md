@@ -17,8 +17,8 @@ ACLでも確認する場合は各スクリプトに `--acl-rlib /path/to/libac_l
 
 ## インターフェース
 
-- 既存の `Basic/couter.rs` の綴り、型名・メソッド名・引数順を維持。
-- `Basic/math.rs` の旧 `mod_inverse`、`fast_mod_pow`、`factorial_i64`、`factorial`、`comb` を保持。階乗・組合せの旧APIは同一スコープの `MOD: i64` に依存する。
+- 既存の `DataStructure/couter.rs` の綴り、型名・メソッド名・引数順を維持。
+- `NumberTheory/math.rs` の旧 `mod_inverse`、`fast_mod_pow`、`factorial_i64`、`factorial`、`comb` を保持。階乗・組合せの旧APIは同一スコープの `MOD: i64` に依存する。
 - `MintCombination` の `MI` は従来の同梱 `Mint` も使える。新たな `modulus()` は要求せず、素数modで前計算範囲が法未満であることは利用者の前提。
 - `NumberTheory/mint_combination.rs` 内の `convolution_merge` を維持し、修正版に更新。`Fps/convolution.rs` にも同じ補助関数があるので、同一スコープには片方だけをコピーする。
 - `BarrettCombination` と3種類の畳み込みバックエンドは新規ファイルとして追加。
@@ -60,7 +60,7 @@ ACLでも確認する場合は各スクリプトに `--acl-rlib /path/to/libac_l
 
 ## 正方行列の統合（2026-10-04）
 
-`Basic/matrix.rs` の `SquareMatrix<M>` に統合し、従来の `DoublingMatrix<M>` と MI用 `Matrix` の入口を維持。
+`LinearAlgebra/matrix.rs` の `SquareMatrix<M>` に統合し、従来の `DoublingMatrix<M>` と MI用 `Matrix` の入口を維持。
 [使い方・積の高速化・計測と検証](matrix.md)。旧2ファイルは `matrix.rs` を読み込むため、コピー時は共通本体も必要。
 本体テストは行列7本を加えて計38本。追加の同梱MI/ACL結合検証は `python3 tests/run_matrix.py`。
 
@@ -102,12 +102,12 @@ UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSeg
 
 ## Rollback Mo の追加型・削除型（2026-10-04）
 
-`Basic/rollbackmo.rs` に `RollbackMoState / RollbackMoSolver` と
+`OfflineQuery/rollbackmo.rs` に `RollbackMoState / RollbackMoSolver` と
 `RollbackMoDeleteState / RollbackMoDeleteSolver` を追加。
 `mo.rs` と同じ Data/Query/Ans、左右操作の添え字・データ、質問登録方式を使う。
 左右対称の State も提供。トークン付き snapshot/rollback を使い、solve は開始状態へ復元する。
 旧 `RollbackMoMonoid / solve_rollback_mo` は互換用に維持。
-[仕様・使用例・計算量・検証](../../algorithm_set/Basic/rollbackmo.md)。
+[仕様・使用例・計算量・検証](../../algorithm_set/OfflineQuery/rollbackmo.md)。
 `cargo test --offline --test rollback_mo` とreleaseで7本通過。
 
 
@@ -162,8 +162,14 @@ UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSeg
 
 - 多倍長整数の内部テストは `big_integer/ntt.rs` と `big_integer/non_ntt.rs`。本体からテスト時のみ読み込む。
 - AVL 木・SortableSequence の検証メソッドは `support/keyed_avl_invariants.rs` と `support/sortable_sequence_invariants.rs`。
-- `Basic/ratio.rs` に整数用の `floor` は含めない。整数補助は `Basic/math.rs` を使う。
-- `NumberTheory/crt.rs` は `Basic/math.rs` と同じスコープにコピーする。旧名 `ext_gcd` も math が提供する。
+- `NumberTheory/ratio.rs` に整数用の `floor` は含めない。整数補助は `NumberTheory/math.rs` を使う。
+- `NumberTheory/crt.rs` は `NumberTheory/math.rs` と同じスコープにコピーする。旧名 `ext_gcd` も math が提供する。
 - `NumberTheory/modcombination.rs` は固定 `MOD = 1_000_000_007` と math の互換入口。math と同じスコープに重ねてコピーせず、どちらかを使う。
 - `floor_sum.rs` は総和計算の別アルゴリズムとして維持する。
 - `math_integration.rs` で math・ratio・CRT の同時コピー、負の除数・整数境界、旧組合せ入口を検証する。
+
+## 分類の整理（2026-10-10）
+
+`Basic` からデータ構造を `DataStructure`、整数・有理数演算を `NumberTheory`、行列を `LinearAlgebra`、オフラインクエリを `OfflineQuery` へ移動。Range Parallel UnionFindは `Graph`、偏角ソートと矩形和集合面積は `Gemetory` に分類する。Splay・AVL・SortableSequenceも `DataStructure` に移動した。ファイル名と公開APIは維持し、テスト・使用例・検証スクリプト・解説の参照を更新した。
+
+分類変更後の確認: `cargo test --offline` と `cargo test --offline --release` で各217テストが通過。`run_math_migration.py`・`run_matrix.py` の同梱MI結合検証もdebug/releaseで通過し、解説集の使用例11件をコンパイル・実行した。移動した50実装の内容一致とRustの直接ファイル参照、移動した解説のリンクを確認した。

@@ -1,6 +1,6 @@
 # BitMatrix の整数行列積
 
-正本は `src/Basic/bitset.rs`。既存のBitSetと同じファイルに追加した。
+正本は `src/DataStructure/bitset.rs`。既存のBitSetと同じファイルに追加した。
 従来も `and_count_ones` / `or_count_ones` / `xor_count_ones` と右行列の転置を組み合わせれば実現できたが、行列積APIはなかった。
 
 ```rust

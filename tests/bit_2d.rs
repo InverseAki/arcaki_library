@@ -1,5 +1,5 @@
 use std::mem::take;
-include!("../src/Basic/bit_2d.rs");
+include!("../src/DataStructure/bit_2d.rs");
 
 #[test]
 fn empty_and_sparse_x() {

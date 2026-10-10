@@ -1,4 +1,4 @@
-#[path = "../src/Basic/rectangleunionarea.rs"]
+#[path = "../src/Gemetory/rectangleunionarea.rs"]
 mod rectangleunionarea;
 use rectangleunionarea::area_of_union_rectangles;
 

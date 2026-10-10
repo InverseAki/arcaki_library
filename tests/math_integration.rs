@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 const MOD: i64 = 998244353;
-include!("../src/Basic/math.rs");
-include!("../src/Basic/ratio.rs");
+include!("../src/NumberTheory/math.rs");
+include!("../src/NumberTheory/ratio.rs");
 include!("../src/NumberTheory/crt.rs");
 
 #[path = "../src/NumberTheory/modcombination.rs"]

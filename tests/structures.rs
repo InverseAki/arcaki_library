@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-#[path = "../src/Basic/binaryindexedtree.rs"]
+#[path = "../src/DataStructure/binaryindexedtree.rs"]
 mod binaryindexedtree;
 #[path = "../src/Graph/rollbackunionfind.rs"]
 mod rollbackunionfind;

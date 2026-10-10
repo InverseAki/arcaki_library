@@ -1,6 +1,6 @@
 # 静的な矩形加算・矩形和：4本BIT（2026-10-07）
 
-実装は `src/Basic/static_rectangle_add_rectangle_sum.rs`。単独コピー可能で、既存の点加算・矩形和、矩形加算・点取得と同じスコープに include しても衝突しない。
+実装は `src/OfflineQuery/static_rectangle_add_rectangle_sum.rs`。単独コピー可能で、既存の点加算・矩形和、矩形加算・点取得と同じスコープに include しても衝突しない。
 
 ## API
 

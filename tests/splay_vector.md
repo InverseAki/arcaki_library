@@ -1,6 +1,6 @@
 # SplayVector<T>（2026-10-04）
 
-本体は `../src/SegmentTree/splay.rs`。値だけを持つSplayTree<NilMonoid<T>>を、Vecに近いAPIで扱うラッパー。
+本体は `../src/DataStructure/splay.rs`。値だけを持つSplayTree<NilMonoid<T>>を、Vecに近いAPIで扱うラッパー。
 TにClone、Debug、Defaultを要求しない。元のSplayTreeのAPIとProdMonoid/遅延更新の用途は保持する。
 
 ```rust

@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/SegmentTree/splay.rs");
+include!("../src/DataStructure/splay.rs");
 
 struct Sequence;
 impl SplayMonoid for Sequence {

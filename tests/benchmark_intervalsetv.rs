@@ -6,7 +6,7 @@ mod baseline {
 }
 mod candidate {
     use std::collections::BTreeMap;
-    include!("../src/Basic/intervalsetv.rs");
+    include!("../src/DataStructure/intervalsetv.rs");
 }
 macro_rules! run {
     ($module:ident, $case:expr, $records:expr) => {{

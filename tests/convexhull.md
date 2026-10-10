@@ -1,13 +1,13 @@
 # 凸包と係数付きMinkowski和
 
 実体は `src/Gemetory/convexhull.rs`。
-`Basic/ratio.rs`、`Gemetory/geometry.rs`、`Gemetory/convexhull.rs` を
+`NumberTheory/ratio.rs`、`Gemetory/geometry.rs`、`Gemetory/convexhull.rs` を
 同じスコープにコピーして使う。外部クレートへの追加依存なし。
 
 ## 使用例
 
 ```rust
-include!("../src/Basic/ratio.rs");
+include!("../src/NumberTheory/ratio.rs");
 include!("../src/Gemetory/geometry.rs");
 include!("../src/Gemetory/convexhull.rs");
 

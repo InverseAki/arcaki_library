@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/Basic/rollbackvector.rs");
+include!("../src/DataStructure/rollbackvector.rs");
 
 #[test]
 fn nested_rollbacks_and_non_clone_values() {

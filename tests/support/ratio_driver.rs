@@ -1,7 +1,7 @@
 #![allow(dead_code)]
-include!("../../src/Basic/ratio.rs");
+include!("../../src/NumberTheory/ratio.rs");
 include!("../../src/NumberTheory/big_integer.rs");
-include!("../../src/Basic/big_ratio.rs");
+include!("../../src/NumberTheory/big_ratio.rs");
 use std::io::{self, Read, Write};
 fn pair<T: RatioInteger>(r: Result<Rational<T>, RatioError>) -> String {
     match r {

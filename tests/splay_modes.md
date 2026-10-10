@@ -2,7 +2,7 @@
 
 Vec風のAPIは [SplayVector<T>](splay_vector.md) を参照。
 
-本体: `../src/SegmentTree/splay.rs`。
+本体: `../src/DataStructure/splay.rs`。
 
 | 型 | 要素 | 区間積 | 遅延更新 |
 | --- | --- | --- | --- |

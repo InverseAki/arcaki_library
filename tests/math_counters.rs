@@ -1,13 +1,13 @@
 #![allow(dead_code)]
-#[path = "../src/Basic/barrett.rs"]
+#[path = "../src/NumberTheory/barrett.rs"]
 mod barrett;
-#[path = "../src/Basic/couter.rs"]
+#[path = "../src/DataStructure/couter.rs"]
 mod counter;
-#[path = "../src/Basic/hashcounter.rs"]
+#[path = "../src/DataStructure/hashcounter.rs"]
 mod hashcounter;
 mod math {
     const MOD: i64 = 998244353;
-    include!("../src/Basic/math.rs");
+    include!("../src/NumberTheory/math.rs");
 }
 mod combinations {
     use super::barrett::Barrett32;

@@ -2,9 +2,9 @@
 
 | 型 | 分子・分母の型 | 必要なソース |
 |---|---|---|
-| `Ratio` | i64 | `src/Basic/ratio.rs` |
+| `Ratio` | i64 | `src/NumberTheory/ratio.rs` |
 | `Ratio128` | i128 | 同上 |
-| `BigRatio` | 既存のBigInt（十進多倍長） | 上記と `src/NumberTheory/big_integer.rs`、`src/Basic/big_ratio.rs` |
+| `BigRatio` | 既存のBigInt（十進多倍長） | 上記と `src/NumberTheory/big_integer.rs`、`src/NumberTheory/big_ratio.rs` |
 
 共通本体は `Rational<T>`。RatioとRatio128は従来どおりCopy、BigRatioはClone。
 ソースの外部クレート・gcd関数・演算traitのimportは不要。
@@ -80,7 +80,7 @@ i128の中間交差積・和は最大256bitの内部作業領域で扱う。約�
 比較も大きな交差積を正確に比較し、大小関係がオーバーフローで逆転しない。
 BigRatioは整数演算・約分の全てに既存BigIntを使う。
 
-整数用の補助 `floor(a,b)` は `Basic/math.rs` に統合した。ratio.rs には含めない。
+整数用の補助 `floor(a,b)` は `NumberTheory/math.rs` に統合した。ratio.rs には含めない。
 math の `floor` / `modulo` は余りが非負のユークリッド除算。負の除数の場合は数学的な床と異なる。
 有理数の `.floor()` は分母を正に正規化した数学的な床を返す。
 

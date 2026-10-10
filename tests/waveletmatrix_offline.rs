@@ -1,4 +1,4 @@
-include!("../src/Basic/waveletmatrix_offline.rs");
+include!("../src/DataStructure/waveletmatrix_offline.rs");
 
 fn rng(seed: &mut u64) -> u64 {
     *seed ^= *seed << 7;

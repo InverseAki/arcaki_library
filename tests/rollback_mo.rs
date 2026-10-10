@@ -1,6 +1,6 @@
 #![allow(dead_code)]
-include!("../src/Basic/mo.rs");
-include!("../src/Basic/rollbackmo.rs");
+include!("../src/OfflineQuery/mo.rs");
+include!("../src/OfflineQuery/rollbackmo.rs");
 
 use std::collections::VecDeque;
 

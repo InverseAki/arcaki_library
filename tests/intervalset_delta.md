@@ -1,7 +1,7 @@
 # IntervalSet Rust 1.89版：被覆差分だけの列挙
 
-[実装](../src/Basic/intervalset_rust189.rs)。2026-10-06 に比較し、差分列挙版を採用。
-以下の性能測定の対象はRust 1.89対応の重みなし版。現在は1.91以降の [extract_if版](../src/Basic/intervalset.rs) も同じ差分・区間ペア形式を返す。値付き版の記録形式は維持する。
+[実装](../src/DataStructure/intervalset_rust189.rs)。2026-10-06 に比較し、差分列挙版を採用。
+以下の性能測定の対象はRust 1.89対応の重みなし版。現在は1.91以降の [extract_if版](../src/DataStructure/intervalset.rs) も同じ差分・区間ペア形式を返す。値付き版の記録形式は維持する。
 
 ## 戻り値の意味
 

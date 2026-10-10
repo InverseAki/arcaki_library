@@ -42,11 +42,11 @@ def main():
     checker = compile_cpp(problem / "checker.cpp")
     verifier = compile_cpp(problem / "verifier.cpp")
     correct = compile_cpp(problem / "sol" / "correct.cpp")
-    implementation = (repo / "src" / "Basic" / "static_rectangle_add_rectangle_sum.rs").read_text()
+    implementation = (repo / "src" / "OfflineQuery" / "static_rectangle_add_rectangle_sum.rs").read_text()
     example = (repo / "examples" / "static_rectangle_add_rectangle_sum.rs").read_text()
     submission = work / "submission.rs"
     mint_source = (repo / "src" / "NumberTheory" / "mint.rs").read_text()
-    submission.write_text(example.replace('include!("../src/Basic/static_rectangle_add_rectangle_sum.rs");', implementation)
+    submission.write_text(example.replace('include!("../src/OfflineQuery/static_rectangle_add_rectangle_sum.rs");', implementation)
         .replace('include!("../src/NumberTheory/mint.rs");', mint_source))
     solver = work / "solver"
     subprocess.run(["rustc", "--edition=2021", "-O", str(submission), "-o", str(solver)], check=True)

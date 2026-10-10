@@ -35,7 +35,7 @@ metadata = {
     'count_per_case': args.count,
     'repeats': args.repeats,
     'date': '2026-10-07',
-    'source_sha256': {str(p.name): hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT / 'baseline.rs', ROOT.parents[1] / 'src/Basic/predecessor64.rs']},
+    'source_sha256': {str(p.name): hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT / 'baseline.rs', ROOT.parents[1] / 'src/DataStructure/predecessor64.rs']},
 }
 with tempfile.TemporaryDirectory(prefix='predecessor64-') as tmp:
     for mode, extra in [('debug', []), ('release', ['-O'])]:

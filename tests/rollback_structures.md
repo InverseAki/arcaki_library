@@ -1,6 +1,6 @@
 # Rollback可能なデータ構造
 
-すべて `Basic/rollbackvector.rs` に依存し、DS内部で更新前の履歴長を積む。
+すべて `DataStructure/rollbackvector.rs` に依存し、DS内部で更新前の履歴長を積む。
 元のUF・重み付きUFの公開APIは維持。セグ木は別ファイル・別の型として追加した。
 
 | 本体 | 型 | 更新1回のrollback |

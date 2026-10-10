@@ -74,3 +74,13 @@ ACLが使えたりライブラリ化せず毎回書いていた場合などが�
 ・以後はsrcを直接改善。従来のファイル名・公開APIを基本として維持。
 ・BIT、セグ木、Rollback UnionFind、Counter、数学・組合せ、畳み込みを反映。
 ・互換性・仕様・統合後の検証方法: tests/README.md
+
+2026-10-10: 分類を整理
+・Basic: 入出力、二分探索、マージ、乱数、ハッシュ、更新補助。
+・DataStructure: BIT、集合、配列、Sparse Table、平方分割、SWAG、Wavelet Matrix、Splay・AVL。
+・NumberTheory: 整数・法演算、篩、組合せ、多倍長整数、有理数。
+・LinearAlgebra: 行列と行列累乗。
+・OfflineQuery: Mo・Rollback Mo、Hilbert順序、オフライン矩形クエリ。
+・Graph: UnionFindとグラフ。Gemetory: 偏角ソート、矩形和集合面積を含む幾何。
+・SegmentTree、Tree、String、Fpsはそれぞれの専門分類を維持。
+・ファイル名・公開APIは維持。コピー・include時は新しいパスを使う。解説集も同じ分類へ更新。

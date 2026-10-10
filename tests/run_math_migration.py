@@ -18,7 +18,7 @@ mi = source[start:end]
 code = "use std::{marker::PhantomData, ops::*, str::FromStr};\n" + mi
 code += "\ntype MI = ModInt998244353;\n"
 for module in ["math", "barrett"]:
-    code += f'mod {module} {{\n' + ("const MOD: i64 = 998244353;\n" if module == "math" else "") + (ROOT / f"src/Basic/{module}.rs").read_text() + "\n}\n"
+    code += f'mod {module} {{\n' + ("const MOD: i64 = 998244353;\n" if module == "math" else "") + (ROOT / f"src/NumberTheory/{module}.rs").read_text() + "\n}\n"
 for file in ["src/NumberTheory/mint_combination.rs", "tests/support/math_migration_cases.rs"]:
     code += (ROOT / file).read_text() + "\n"
 code += "fn convolution(a: &[MI], b: &[MI]) -> Vec<MI> { naive_product(a,b) }\n"
@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix="math-check-", dir=ROOT) as d:
 if args.acl_rlib:
     acl_code = "use ac_library::*;\ntype MI = ModInt998244353;\n"
     for module in ["math", "barrett"]:
-        acl_code += f'mod {module} {{\n' + ("const MOD: i64 = 998244353;\n" if module == "math" else "") + (ROOT / f"src/Basic/{module}.rs").read_text() + "\n}\n"
+        acl_code += f'mod {module} {{\n' + ("const MOD: i64 = 998244353;\n" if module == "math" else "") + (ROOT / f"src/NumberTheory/{module}.rs").read_text() + "\n}\n"
     for file in ["src/NumberTheory/mint_combination.rs", "tests/support/math_migration_cases.rs"]:
         acl_code += (ROOT / file).read_text() + "\n"
     lib = args.acl_rlib.resolve()

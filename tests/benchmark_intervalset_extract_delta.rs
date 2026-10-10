@@ -6,7 +6,7 @@ mod baseline {
 }
 mod candidate {
     use std::collections::BTreeMap;
-    include!("../src/Basic/intervalset.rs");
+    include!("../src/DataStructure/intervalset.rs");
 }
 macro_rules! normalize {
     (baseline, $iter:expr, $add:expr) => { $iter };

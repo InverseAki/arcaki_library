@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/SegmentTree/splay.rs");
+include!("../src/DataStructure/splay.rs");
 fn next(seed: &mut u64, n: usize) -> usize {
     *seed ^= *seed << 13;
     *seed ^= *seed >> 7;

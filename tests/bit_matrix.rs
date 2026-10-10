@@ -1,5 +1,5 @@
 use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign};
-include!("../src/Basic/bitset.rs");
+include!("../src/DataStructure/bitset.rs");
 
 fn next(seed: &mut u64) -> u64 {
     *seed ^= *seed << 13;

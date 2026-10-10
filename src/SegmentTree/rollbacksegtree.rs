@@ -1,4 +1,4 @@
-#[path = "../Basic/rollbackvector.rs"]
+#[path = "../DataStructure/rollbackvector.rs"]
 mod rollback_segtree_vector;
 
 pub trait RollbackSegtreeMonoid {

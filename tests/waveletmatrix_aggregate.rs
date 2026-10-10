@@ -1,5 +1,5 @@
-include!("../src/Basic/waveletmatrix_prefix.rs");
-include!("../src/Basic/waveletmatrix_monoid.rs");
+include!("../src/DataStructure/waveletmatrix_prefix.rs");
+include!("../src/DataStructure/waveletmatrix_monoid.rs");
 
 struct Sum;
 impl WaveletMonoid for Sum {

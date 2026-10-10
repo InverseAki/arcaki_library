@@ -1,13 +1,13 @@
 #![allow(dead_code, unused_imports)]
-include!("../src/Basic/matrix.rs");
+include!("../src/LinearAlgebra/matrix.rs");
 mod doubling_compat {
     const MOD: i64 = 998244353;
-    include!("../src/Basic/doubling_matrix.rs");
+    include!("../src/LinearAlgebra/doubling_matrix.rs");
 }
 mod mint_compat {
     include!("../src/NumberTheory/mint.rs");
     type MI = Mint<998244353>;
-    include!("../src/Basic/mint_matrix.rs");
+    include!("../src/LinearAlgebra/mint_matrix.rs");
     #[test]
     fn old_mint_interface_without_modulus_method() {
         for n in [0, 1, 3, 16, 17, 32, 65] {
@@ -271,7 +271,7 @@ fn invalid_shapes_indices_and_modulus_are_detected() {
 
 mod large_legacy_mod {
     const MOD: i64 = i64::MAX;
-    include!("../src/Basic/doubling_matrix.rs");
+    include!("../src/LinearAlgebra/doubling_matrix.rs");
     #[test]
     fn large_modulus_fallback_does_not_overflow() {
         for n in [0, 1, 2, 17] {

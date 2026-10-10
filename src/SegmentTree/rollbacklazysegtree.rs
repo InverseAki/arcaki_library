@@ -1,4 +1,4 @@
-#[path = "../Basic/rollbackvector.rs"]
+#[path = "../DataStructure/rollbackvector.rs"]
 mod rollback_lazy_vector;
 
 pub trait RollbackLazySegtreeMonoid {

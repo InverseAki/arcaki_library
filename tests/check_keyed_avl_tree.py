@@ -84,8 +84,8 @@ def main():
     parser.add_argument("--official-root", type=Path)
     parser.add_argument("--report", type=Path, default=ROOT / "tests/keyed_avl_results.json")
     args = parser.parse_args()
-    tree = (ROOT / "src/SegmentTree/keyed_avl_tree.rs").read_text()
-    seq = (ROOT / "src/SegmentTree/sortable_sequence.rs").read_text()
+    tree = (ROOT / "src/DataStructure/keyed_avl_tree.rs").read_text()
+    seq = (ROOT / "src/DataStructure/sortable_sequence.rs").read_text()
     seq = seq[seq.index("struct SortableBlock"):]
     example = (ROOT / "examples/point_set_range_sort_range_composite.rs").read_text()
     example = example[example.index("use std::io"):]

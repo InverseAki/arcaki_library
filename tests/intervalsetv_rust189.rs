@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 use std::collections::BTreeMap;
-include!("../src/Basic/intervalsetv_rust189.rs");
+include!("../src/DataStructure/intervalsetv_rust189.rs");
 mod previous {
     use std::collections::BTreeMap;
     include!("support/intervalsetv_before_extract.rs");

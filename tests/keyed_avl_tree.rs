@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-#[path = "../src/SegmentTree/sortable_sequence.rs"]
+#[path = "../src/DataStructure/sortable_sequence.rs"]
 mod sortable;
 use sortable::{KeyedAvlMonoid, KeyedAvlTree, SortableSequence};
 const MOD: u64 = 998_244_353;

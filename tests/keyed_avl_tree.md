@@ -2,8 +2,8 @@
 
 本体:
 
-- `../src/SegmentTree/keyed_avl_tree.rs`: `KeyedAvlTree<K, M>`
-- `../src/SegmentTree/sortable_sequence.rs`: `SortableSequence<K, M>`
+- `../src/DataStructure/keyed_avl_tree.rs`: `KeyedAvlTree<K, M>`
+- `../src/DataStructure/sortable_sequence.rs`: `SortableSequence<K, M>`
 - `../examples/point_set_range_sort_range_composite.rs`: 問題形式の入出力
 - `../../librarychecker/submissions/point_set_range_sort_range_composite.rs`: 依存ファイル不要の生成済み提出用コード
 

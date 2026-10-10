@@ -1,6 +1,6 @@
 # Wavelet Matrix の集約版
 
-追加した本体は `src/Basic/waveletmatrix_prefix.rs` と `src/Basic/waveletmatrix_monoid.rs`。
+追加した本体は `src/DataStructure/waveletmatrix_prefix.rs` と `src/DataStructure/waveletmatrix_monoid.rs`。
 各ファイルは隣の `waveletmatrix.rs` を内部モジュールへ読み込む。提出用に使う場合は、
 使用するファイルと `waveletmatrix.rs` を同じディレクトリに置き、前者を `include!` する。
 元の WaveletMatrix を同時に読み込んでも型名は衝突しない。

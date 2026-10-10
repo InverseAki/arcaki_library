@@ -3,7 +3,7 @@
 use std::collections::VecDeque;
 use std::ops::{Index, IndexMut};
 
-include!("../src/Basic/sparsetable.rs");
+include!("../src/DataStructure/sparsetable.rs");
 include!("../src/Tree/tree.rs");
 include!("../src/Tree/sparsetablelca.rs");
 

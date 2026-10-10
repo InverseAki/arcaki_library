@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/Basic/point_add_rectangle_sum.rs");
+include!("../src/OfflineQuery/point_add_rectangle_sum.rs");
 mod old {
     const I: i32 = i32::MAX;
     include!("support/point_add_rectangle_sum_baseline.rs");

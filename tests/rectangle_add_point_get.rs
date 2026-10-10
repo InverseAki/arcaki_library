@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-include!("../src/Basic/rectangle_add_point_get.rs");
+include!("../src/OfflineQuery/rectangle_add_point_get.rs");
 
 type Rect = (i32, i32, i32, i32, i64);
 type Op = RectangleAddPointGetQuery;

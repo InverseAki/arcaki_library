@@ -8,7 +8,7 @@ s=(ROOT.parent/'librarychecker/src/main.rs').read_text();start=s.index('pub type
 for backend,prefix,flags in [('bundled','use std::{marker::PhantomData,ops::*,str::FromStr};\n'+s[start:end],[])]+([('ACL','use ac_library::*;', ['--extern',f'ac_library={a.acl_rlib.resolve()}','-L',f'dependency={a.acl_rlib.resolve().parent}'])] if a.acl_rlib else []):
     code='#![allow(dead_code,unused_imports)]\n'+prefix+'\n'
     for label,mi in [('p998','ModInt998244353'),('p1e9','ModInt1000000007')]:
-        code+=f'mod {label} {{ type MI=super::{mi}; include!({json.dumps(str(ROOT/"src/Basic/mint_matrix.rs"))});\n'+r'''
+        code+=f'mod {label} {{ type MI=super::{mi}; include!({json.dumps(str(ROOT/"src/LinearAlgebra/mint_matrix.rs"))});\n'+r'''
 #[test] fn product_power_inverse(){
  let m=(MI::new(0)-MI::new(1)).val() as u64+1;
  let mut seed=1238918u64;
@@ -28,7 +28,7 @@ for backend,prefix,flags in [('bundled','use std::{marker::PhantomData,ops::*,st
 }
 '''
     # The old usize-only Mint also exercises the full-u32 conversion branch.
-    code+=f'mod wide {{ include!({json.dumps(str(ROOT/"src/NumberTheory/mint.rs"))}); type MI=Mint<4294967291>; include!({json.dumps(str(ROOT/"src/Basic/mint_matrix.rs"))});\n'+r'''
+    code+=f'mod wide {{ include!({json.dumps(str(ROOT/"src/NumberTheory/mint.rs"))}); type MI=Mint<4294967291>; include!({json.dumps(str(ROOT/"src/LinearAlgebra/mint_matrix.rs"))});\n'+r'''
 #[test] fn wide_modulus(){let n=17;let m=4294967291usize;let a=Matrix::new(n,vec![MI::new(m-1);n*n]);let b=a.mul(&a);assert!(b.as_slice().iter().all(|x|x.val()==n));}
 }
 '''

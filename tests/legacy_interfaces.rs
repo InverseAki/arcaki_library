@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_imports)]
 mod math {
     const MOD: i64 = 998244353;
-    include!("../src/Basic/math.rs");
+    include!("../src/NumberTheory/math.rs");
 }
 mod legacy_mint {
     include!("../src/NumberTheory/mint.rs");

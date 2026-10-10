@@ -1,4 +1,4 @@
-include!("../src/Basic/waveletmatrix_offline.rs");
+include!("../src/DataStructure/waveletmatrix_offline.rs");
 
 fn main() {
     use std::io::{Read, Write};

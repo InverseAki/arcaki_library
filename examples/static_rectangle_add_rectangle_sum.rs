@@ -1,6 +1,6 @@
 #[allow(dead_code)]
 mod static_rectangle_add_rectangle_sum {
-    include!("../src/Basic/static_rectangle_add_rectangle_sum.rs");
+    include!("../src/OfflineQuery/static_rectangle_add_rectangle_sum.rs");
 }
 #[allow(dead_code)]
 mod mint {

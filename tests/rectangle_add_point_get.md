@@ -1,6 +1,6 @@
 # 矩形加算・点取得のライブラリ化（2026-10-06）
 
-実装は `src/Basic/rectangle_add_point_get.rs`。独立してコピー可能で、点加算・矩形和のファイルと同じスコープに置いても public BIT などの名前が衝突しない。
+実装は `src/OfflineQuery/rectangle_add_point_get.rs`。独立してコピー可能で、点加算・矩形和のファイルと同じスコープに置いても public BIT などの名前が衝突しない。
 
 ## 使用例
 

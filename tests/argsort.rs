@@ -1,4 +1,4 @@
-include!("../src/Basic/argsort.rs");
+include!("../src/Gemetory/argsort.rs");
 
 #[test]
 fn comparator_obeys_total_order() {

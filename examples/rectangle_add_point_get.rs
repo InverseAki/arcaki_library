@@ -1,6 +1,6 @@
 #[allow(dead_code)]
 mod rectangle_add_point_get {
-    include!("../src/Basic/rectangle_add_point_get.rs");
+    include!("../src/OfflineQuery/rectangle_add_point_get.rs");
 }
 
 use rectangle_add_point_get::RectangleAddPointGet;
