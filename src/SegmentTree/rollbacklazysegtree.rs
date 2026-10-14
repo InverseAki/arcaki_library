@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/rollbacklazysegtree.rs
 #[path = "../DataStructure/rollbackvector.rs"]
 mod rollback_lazy_vector;
 

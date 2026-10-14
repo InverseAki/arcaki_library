@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/static_graph.rs
 pub struct CSR{
     n: usize,
     ac: Vec<usize>,

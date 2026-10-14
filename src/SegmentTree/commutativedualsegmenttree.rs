@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/commutativedualsegmenttree.rs
 pub trait CommutativeDualSegmentTreeMonoid{
     type S: Clone;
     type F: Clone;

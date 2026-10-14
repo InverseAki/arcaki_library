@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/sparsetablesq.rs
 const INF: i64 = 1<<60;
 
 pub fn bit_length(x: usize)->usize{

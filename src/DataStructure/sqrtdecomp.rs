@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/sqrtdecomp.rs
 pub trait SqrtDecomposition{
     type S: Clone;
     fn identity()->Self::S;

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/swag.rs
 pub trait SWAGMonoid{
     type S: Clone;
     fn identity()->Self::S;

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/rangesetsegtree.rs
 pub trait RangeSetSegtreeMonoid {
     type S: Clone;
     fn identity()->Self::S;

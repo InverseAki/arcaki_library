@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/rollbackmo.rs
 pub trait RollbackMoState {
     type Data;
     type Query;

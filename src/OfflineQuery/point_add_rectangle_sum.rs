@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/point_add_rectangle_sum.rs
 pub struct BIT<T>
 where
     T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + PartialOrd,

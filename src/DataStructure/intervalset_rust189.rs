@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/intervalset_rust189.rs
 #[derive(Clone)]
 pub struct IntervalSet<T: Ord+Copy>{
     s: BTreeMap<T, T>,

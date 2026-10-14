@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/rollbackvector.rs
 pub struct RollbackVector<T> {
     data: Vec<T>,
     hist: Vec<(usize, T)>,

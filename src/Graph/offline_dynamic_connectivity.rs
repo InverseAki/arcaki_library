@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/offline_dynamic_connectivity.rs
 use std::{mem::swap, collections::HashMap};
 
 pub struct RollbackUnionFind{

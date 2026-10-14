@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/bitset.rs
 const BITSET_BLOCK_BITS: usize = 64;
 const BITSET_SHIFT: usize = 6;
 const BITSET_MASK: usize = 63;

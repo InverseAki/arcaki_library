@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/waveletmatrix.rs
 #[derive(Clone, Debug)]
 struct BitVector {
     n: usize,

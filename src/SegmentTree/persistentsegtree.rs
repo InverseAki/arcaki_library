@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/persistentsegtree.rs
 pub trait SegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;

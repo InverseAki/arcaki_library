@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Fps/convolution.rs
 pub fn convolution_merge(vs: &mut Vec<Vec<MI>>) -> Vec<MI> {
     convolution_merge_with_mx(vs, usize::MAX)
 }

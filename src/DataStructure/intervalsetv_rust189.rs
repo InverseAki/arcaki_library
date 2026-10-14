@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/intervalsetv_rust189.rs
 #[derive(Clone)]
 pub struct IntervalSetV<T, V> where T: Ord + Copy, V: Eq + Copy{
     s: BTreeMap<T, (T, V)>,

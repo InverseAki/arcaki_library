@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/carteciantree.rs
 pub fn build_mi_cartesian_tree<T>(a: &[T])->(Vec<(usize, usize)>, Vec<usize>, usize) where T: Ord{
     if a.is_empty(){return (Vec::new(), Vec::new(), !0)}
     let n = a.len();

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/big_integer.rs
 #[derive(Clone, Default, Eq, PartialEq, Hash)]
 pub struct RadixBigInt<const BASE: u32> {
     negative: bool,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/couter.rs
 #[derive(Debug, Clone)]
 pub struct Counter<T> {
     c: usize,

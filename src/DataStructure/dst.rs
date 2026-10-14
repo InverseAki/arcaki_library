@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/dst.rs
 pub trait DSTSemiGroup {
     type S: Clone;
     fn op(&self, a: &Self::S, b: &Self::S) -> Self::S;

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/String/string_concat_order.rs
 #[inline]
 pub fn cmp_concat(sa: &[char], sb: &[char], za: &[usize], zb: &[usize])->Ordering{
     let (an, bn) = (sa.len(), sb.len());

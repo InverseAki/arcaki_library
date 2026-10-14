@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/static_rectangle_add_rectangle_sum.rs
 #[derive(Clone)]
 pub struct StaticRectangleAddRectangleSum<X = i32, Y = X, W = i128> {
     rectangles: Vec<(X, Y, X, Y, W)>,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/keyed_avl_tree.rs
 pub trait KeyedAvlMonoid {
     type S: Clone;
     fn identity() -> Self::S;

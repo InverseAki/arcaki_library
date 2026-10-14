@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/String/suffix_automaton.rs
 #[derive(Clone, Debug)]
 struct Node {
     next: HashMap<char, usize>,

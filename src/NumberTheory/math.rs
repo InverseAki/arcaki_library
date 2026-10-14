@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/math.rs
 pub trait MathInteger:
     Copy
     + Ord

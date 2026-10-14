@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/cumsum2d.rs
 pub struct Cumsum2D<T> where T: Copy+Add<Output=T>+Sub<Output=T>+Default{
     ac: Vec<Vec<T>>,
 }

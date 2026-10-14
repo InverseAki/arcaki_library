@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/String/aho_corasik.rs
 const SIGMA: usize = 26;
 
 pub struct AhoCorasik<const SIGMA: usize>{

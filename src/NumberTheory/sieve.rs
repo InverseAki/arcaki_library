@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/sieve.rs
 pub fn linear_sieve(mx: usize)->Vec<usize>{
     let mut lpf = vec![0; mx+1];
     lpf[1] = 1;

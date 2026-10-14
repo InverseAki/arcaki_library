@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/binaryindexedtree.rs
 pub struct BIT<T>
 where
     T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + PartialOrd,

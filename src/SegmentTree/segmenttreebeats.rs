@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/segmenttreebeats.rs
 pub fn bit_length(x: usize)->usize{
     64-x.saturating_sub(1).leading_zeros()as usize
 }

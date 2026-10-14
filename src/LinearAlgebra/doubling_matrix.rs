@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/LinearAlgebra/doubling_matrix.rs
 include!("matrix.rs");
 
 pub struct AddMulMonoid;

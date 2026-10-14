@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/barrett_combination.rs
 pub struct BarrettCombination {
     barrett: Barrett32,
     fact: Vec<u32>,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/binarysearch.rs
 pub fn binary_search<T>(t: T, a: &Vec<T>) -> usize where T: Copy+PartialOrd+Ord {
     let mut l = 0;
     let mut r = a.len() + 1;

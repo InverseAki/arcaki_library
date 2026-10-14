@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/merge.rs
 pub fn merge<T>(a: &[T], b: &[T])->Vec<T> where T: Ord+Copy{
     let mut i = 0;
     let mut j = 0;

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/mo.rs
 pub trait MoState {
     type Data;
     type Query;

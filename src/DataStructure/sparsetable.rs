@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/sparsetable.rs
 #[derive(Clone, Debug)]
 pub struct SparseTableMI<T: Copy> {
     table: Vec<Vec<T>>,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/lichaotree_line.rs
 #[derive(Clone, Copy, Debug)]
 struct LiChaoLine {
     a: i64, b: i128,

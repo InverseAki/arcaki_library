@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Fps/bostan-mori.rs
 pub mod fps {
     use super::{convolution, Mint};
     #[inline]

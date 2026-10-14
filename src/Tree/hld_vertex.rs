@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/hld_vertex.rs
 pub struct HLDVertex {
     parent: Vec<u32>,
     head: Vec<u32>,

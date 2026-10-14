@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/doublinglca.rs
 pub struct LCA {
     n: usize,
     log: usize,

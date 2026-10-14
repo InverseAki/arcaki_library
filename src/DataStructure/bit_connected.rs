@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/bit_connected.rs
 pub struct BITConcatenated<T>
 where
     T: Copy

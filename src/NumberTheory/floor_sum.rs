@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/floor_sum.rs
 pub fn floor_sum(n: i64, m: i64, a: i64, b: i64)->i64{
     let (a1, a2) = (a/m, a%m);
     let s = n*(n-1)/2*a1;

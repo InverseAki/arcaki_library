@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/centroiddecomposition.rs
 pub struct CentroidDecomposition {
     pre: Vec<usize>,
     level: Vec<usize>,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/weightedunionfind.rs
 pub trait UFMonoid{
     type S: Clone+PartialEq;
     fn identity()->Self::S;

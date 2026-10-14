@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/fenwick_set.rs
 pub struct BIT<T>
 where
     T: Copy

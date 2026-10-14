@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/ratio.rs
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct Rational<T: RatioInteger> {
     x: T,

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/bit_2d.rs
 pub struct BIT2D {
     h: usize,
     xs: Vec<i32>,

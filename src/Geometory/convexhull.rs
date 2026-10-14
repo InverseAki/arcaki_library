@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Geometory/convexhull.rs
 fn hull_turn<T: GeometryCoordinate>(a: Point<T>, b: Point<T>, c: Point<T>) -> std::cmp::Ordering {
     T::cmp_turn(a,b,c)
 }

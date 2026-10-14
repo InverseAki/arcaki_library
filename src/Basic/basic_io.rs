@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/basic_io.rs
 use std::io::{self, Read};
 
 pub struct Input {

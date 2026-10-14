@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/hilbert_order.rs
 const ROT_DELTA: [u32; 4] = [3, 0, 0, 1];
 #[inline]
 pub fn hilbert_order(x: u32, y: u32, pow: u32, rot: u32) -> u64 {

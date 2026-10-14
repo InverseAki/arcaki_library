@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/hashcounter.rs
 #[derive(Debug, Clone)]
 pub struct HashCounter<T, S = std::collections::hash_map::RandomState> {
     c: usize,

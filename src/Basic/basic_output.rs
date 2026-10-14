@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/basic_output.rs
 pub struct Output<W: std::io::Write = std::io::Stdout> {
     writer: std::io::BufWriter<W>,
 }

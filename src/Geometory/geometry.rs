@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Geometory/geometry.rs
 pub trait GeometryCoordinate: Copy + Ord {
     type Wide: GeometryNumber;
     fn wide(self) -> Self::Wide;

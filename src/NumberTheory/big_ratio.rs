@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/big_ratio.rs
 pub type BigRatio = Rational<BigInt>;
 impl<const B: u32> RatioInteger for RadixBigInt<B> {
     fn normalize(mut x: Self, mut y: Self) -> Result<(Self, Self), RatioError> {

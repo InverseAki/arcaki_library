@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/xor_bit.rs
 pub struct BIT<T>
 where
     T: Copy

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/factorize.rs
 #[inline(always)]
 fn gcd_u64(mut a: u64, mut b: u64) -> u64 {
     while b != 0 {

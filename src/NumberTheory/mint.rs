@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/mint.rs
 use std::{ops::*, fmt::{Display, Formatter}, sync::Once};
 
 #[derive(Copy, Clone, Debug)]

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/mo_on_tree.rs
 #[derive(Clone, Debug)]
 pub struct SparseTableMI<T: Ord + Copy> {
     table: Vec<Vec<T>>,

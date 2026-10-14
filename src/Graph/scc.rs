@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/scc.rs
 pub fn scc(n: usize, e: &Vec<(usize, usize)>) -> Vec<Vec<usize>>{
     let mut ord = Vec::with_capacity(n);
     let mut used = vec![false; n];

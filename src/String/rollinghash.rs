@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/String/rollinghash.rs
 const RM: u64 = (1u64<<61)-1;
 const RB: u64 = 1001399;
 #[inline]

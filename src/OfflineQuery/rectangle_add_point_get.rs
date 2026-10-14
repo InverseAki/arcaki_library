@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/OfflineQuery/rectangle_add_point_get.rs
 #[derive(Clone, Copy, Debug)]
 pub enum RectangleAddPointGetQuery<X = i32, Y = X> {
     Add { lx: X, ly: Y, rx: X, ry: Y, w: i64 },

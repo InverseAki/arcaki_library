@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/splay.rs
 pub trait SplayMonoid {
     type S: Clone + std::fmt::Debug;
     fn identity() -> Self::S;

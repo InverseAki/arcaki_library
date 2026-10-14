@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Fps/convolution_mod1000000007.rs
 pub fn convolution_mod1000000007(
     a: &[StaticModInt<Mod1000000007>],
     b: &[StaticModInt<Mod1000000007>],

@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/xorshift.rs
 pub struct XorShiftStar{
     state: u64,
 }

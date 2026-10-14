@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/predecessor64.rs
 #[derive(Clone, Debug)]
 pub struct Predecessor64 {
     mx: usize,

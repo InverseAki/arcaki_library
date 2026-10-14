@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Tree/sparsetablelca.rs
 #[derive(Clone,Debug)]
 pub struct STLCA{
     int: Vec<usize>,

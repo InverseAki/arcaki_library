@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Geometory/closestpair.rs
 pub fn closest_pair<T: GeometryCoordinate>(points: &[Point<T>]) -> Option<f64> {
     closest_pair_squared(points).map(|distance| distance.rational().to_f64().sqrt())
 }

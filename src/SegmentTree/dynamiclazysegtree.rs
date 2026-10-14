@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/dynamiclazysegtree.rs
 pub trait DynamicSegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;

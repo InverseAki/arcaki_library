@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/persistentunionfind.rs
 #[derive(Clone, Debug)]
 pub struct Node<T: Clone> {
     val: T,

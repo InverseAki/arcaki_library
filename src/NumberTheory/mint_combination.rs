@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/mint_combination.rs
 pub struct MintCombination {
     fact: Vec<MI>,
     inv_fact: Vec<MI>,

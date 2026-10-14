@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/nonavailable/convolution.rs
 pub trait NttModulus: Modulus {
     const PRIMITIVE_ROOT: u32;
 }

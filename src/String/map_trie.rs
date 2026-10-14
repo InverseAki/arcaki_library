@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/String/map_trie.rs
 pub struct Trie{
     node: Vec<FxMap<usize, usize>>,
     cnt: Vec<usize>,

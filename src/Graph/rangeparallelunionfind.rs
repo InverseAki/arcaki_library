@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Graph/rangeparallelunionfind.rs
 #[derive(Clone)]
 pub struct UnionFind{
     parent: Vec<i32>,

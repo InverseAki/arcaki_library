@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/block_decomp.rs
 pub struct FixBlock{
     n: usize,
     b: usize,

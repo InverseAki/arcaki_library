@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/waveletmatrix_prefix.rs
 mod wavelet_group_detail {
     include!("waveletmatrix.rs");
 

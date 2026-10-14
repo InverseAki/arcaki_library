@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/toptwo.rs
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct TopTwo<V = i64, K = usize> {
     a1: Option<(V, K)>,

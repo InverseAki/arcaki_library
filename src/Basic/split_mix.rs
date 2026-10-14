@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/split_mix.rs
 #[derive(Clone, Debug)]
 pub struct SplitMix64 {
     state: u64,

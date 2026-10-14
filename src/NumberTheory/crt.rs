@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/crt.rs
 pub fn crt(ss: &Vec<(usize, usize)>)->(usize, usize){
     let mut r = 0; let mut m = 1;
     for &(bi, mi) in ss{

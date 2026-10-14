@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/NumberTheory/barrett.rs
 #[derive(Clone, Copy)]
 pub struct Barrett32 {
     m: u64,

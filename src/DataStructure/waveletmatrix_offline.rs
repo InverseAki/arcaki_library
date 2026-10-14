@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/waveletmatrix_offline.rs
 #[allow(dead_code)]
 mod wavelet_offline_detail {
     include!("waveletmatrix.rs");

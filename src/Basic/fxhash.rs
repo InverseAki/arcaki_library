@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/fxhash.rs
 pub mod fxhash {
     use std::hash::BuildHasherDefault;
     const K: u64 = 0x517c_c1b7_2722_0a95;

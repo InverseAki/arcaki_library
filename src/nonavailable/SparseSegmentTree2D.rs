@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/nonavailable/SparseSegmentTree2D.rs
 pub trait SegmentTreeMonoid{
     type S: Copy+Debug;
     fn identity()->Self::S;

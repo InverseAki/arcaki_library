@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Fps/convolution_u64.rs
 pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     if a.is_empty() || b.is_empty() {
         return vec![];

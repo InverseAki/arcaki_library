@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/Basic/chminmax.rs
 pub trait Chmax: PartialOrd + Sized {
     #[inline]
     fn chmax(&mut self, rhs: Self) -> bool {

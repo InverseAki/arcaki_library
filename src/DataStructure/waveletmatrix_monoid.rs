@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/waveletmatrix_monoid.rs
 mod wavelet_monoid_detail {
     include!("waveletmatrix.rs");
 

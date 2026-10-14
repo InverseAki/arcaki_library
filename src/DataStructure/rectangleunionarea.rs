@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/DataStructure/rectangleunionarea.rs
 struct RectangleUnionAreaSegtree<T> {
     n: usize,
     count: Vec<usize>,

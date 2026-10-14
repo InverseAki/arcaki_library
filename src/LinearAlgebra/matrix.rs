@@ -1,3 +1,4 @@
+// Source: https://github.com/InverseAki/arcaki_library/blob/main/src/LinearAlgebra/matrix.rs
 pub trait MatrixMonoid {
     type S: Clone;
     fn sum(a: &Self::S, b: &Self::S) -> Self::S;
