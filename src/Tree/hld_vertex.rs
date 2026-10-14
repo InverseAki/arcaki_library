@@ -161,4 +161,9 @@ impl HLDVertex {
     pub fn get_index(&self, p: usize)->usize{
         self.int[p]as usize
     }
+
+    #[inline]
+    pub fn size(&self, p: usize)->usize {
+        (self.out[p]-self.int[p])as usize
+    }
 }
