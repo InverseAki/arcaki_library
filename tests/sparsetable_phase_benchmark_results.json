@@ -1,0 +1,81 @@
+{
+  "compiler": "rustc 1.89.0",
+  "target": "aarch64-apple-darwin",
+  "type": "u64",
+  "build": [
+    {
+      "n": 1024,
+      "kind": "min",
+      "baseline_ms": 0.006,
+      "current_ms": 0.005
+    },
+    {
+      "n": 1024,
+      "kind": "max",
+      "baseline_ms": 0.006,
+      "current_ms": 0.005
+    },
+    {
+      "n": 1024,
+      "kind": "by_key",
+      "baseline_ms": 0.026,
+      "current_ms": 0.028
+    },
+    {
+      "n": 100000,
+      "kind": "min",
+      "baseline_ms": 0.293,
+      "current_ms": 0.282
+    },
+    {
+      "n": 100000,
+      "kind": "max",
+      "baseline_ms": 0.28,
+      "current_ms": 0.262
+    },
+    {
+      "n": 100000,
+      "kind": "by_key",
+      "baseline_ms": 1.234,
+      "current_ms": 1.413
+    },
+    {
+      "n": 1000000,
+      "kind": "min",
+      "baseline_ms": 4.494,
+      "current_ms": 1.615
+    },
+    {
+      "n": 1000000,
+      "kind": "max",
+      "baseline_ms": 4.487,
+      "current_ms": 1.575
+    },
+    {
+      "n": 1000000,
+      "kind": "by_key",
+      "baseline_ms": 16.168,
+      "current_ms": 2.901
+    }
+  ],
+  "query": [
+    {
+      "n": 1024,
+      "q": 2000000,
+      "baseline_ms": 3.377,
+      "current_ms": 2.39
+    },
+    {
+      "n": 100000,
+      "q": 2000000,
+      "baseline_ms": 3.965,
+      "current_ms": 3.654
+    },
+    {
+      "n": 1000000,
+      "q": 2000000,
+      "baseline_ms": 15.366,
+      "current_ms": 12.618
+    }
+  ]
+}

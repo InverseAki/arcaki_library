@@ -59,6 +59,8 @@ impl<W: std::io::Write> Output<W> {
     }
 }
 
+const OUTPUT_DIGIT_PAIRS: &[u8; 200] = b"00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899";
+
 macro_rules! impl_unsigned_output {
     ($($name:ident, $line:ident, $helper:ident, $t:ty, $digits:expr);* $(;)?) => {
         impl<W: std::io::Write> Output<W> {
@@ -71,11 +73,19 @@ macro_rules! impl_unsigned_output {
                         at -= 1;
                         buf[at] = b'\n';
                     }
-                    loop {
+                    while value >= 100 {
+                        let pair = (value % 100) as usize * 2;
+                        value /= 100;
+                        at -= 2;
+                        buf[at..at + 2].copy_from_slice(&OUTPUT_DIGIT_PAIRS[pair..pair + 2]);
+                    }
+                    if value >= 10 {
+                        let pair = value as usize * 2;
+                        at -= 2;
+                        buf[at..at + 2].copy_from_slice(&OUTPUT_DIGIT_PAIRS[pair..pair + 2]);
+                    } else {
                         at -= 1;
-                        buf[at] = b'0' + (value % 10) as u8;
-                        value /= 10;
-                        if value == 0 { break; }
+                        buf[at] = b'0' + value as u8;
                     }
                     self.bytes(&buf[at..])
                 }
@@ -107,11 +117,19 @@ macro_rules! impl_signed_output {
                         at -= 1;
                         buf[at] = b'\n';
                     }
-                    loop {
+                    while magnitude >= 100 {
+                        let pair = (magnitude % 100) as usize * 2;
+                        magnitude /= 100;
+                        at -= 2;
+                        buf[at..at + 2].copy_from_slice(&OUTPUT_DIGIT_PAIRS[pair..pair + 2]);
+                    }
+                    if magnitude >= 10 {
+                        let pair = magnitude as usize * 2;
+                        at -= 2;
+                        buf[at..at + 2].copy_from_slice(&OUTPUT_DIGIT_PAIRS[pair..pair + 2]);
+                    } else {
                         at -= 1;
-                        buf[at] = b'0' + (magnitude % 10) as u8;
-                        magnitude /= 10;
-                        if magnitude == 0 { break; }
+                        buf[at] = b'0' + magnitude as u8;
                     }
                     if value < 0 {
                         at -= 1;

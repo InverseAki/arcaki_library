@@ -23,7 +23,7 @@ impl STLCA {
             }
         }
         lca_dfs(p, !0, edge, &mut data, &mut int, &mut dist);
-        let data = SparseTableMI::build_by_key(&data, |v| dist[v]);
+        let data = SparseTableMI::build_by_key(data, |v| dist[v]);
         STLCA { int, data, dist}
     }
     #[inline]

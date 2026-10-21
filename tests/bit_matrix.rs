@@ -189,3 +189,72 @@ fn logical_empty_rectangular_and_large_exponent() {
         assert!(std::panic::catch_unwind(|| prod(&BitMatrix::new(2, 3), &BitMatrix::new(2, 3), op)).is_err());
     }
 }
+
+#[test]
+fn binary_roundtrip_and_validation() {
+    for byte in 0..256u64 {
+        let text: Vec<_> = (0..8).map(|i| b'0' + ((byte >> i) & 1) as u8).collect();
+        let bits = BitSet::from_binary(&text);
+        assert_eq!(bits.data, vec![byte]);
+        let mut output = vec![0; 8];
+        bits.write_binary(&mut output);
+        assert_eq!(text, output);
+    }
+    for n in 0..260 {
+        let text: Vec<_> = (0..n).map(|i| b'0' + ((i * 17 + i / 7) % 2) as u8).collect();
+        let bits = BitSet::from_binary(&text);
+        let mut output = vec![0; n];
+        bits.write_binary(&mut output);
+        assert_eq!(text, output);
+        for i in 0..n { assert_eq!(bits.get(i), text[i] == b'1'); }
+    }
+    assert!(std::panic::catch_unwind(|| BitSet::from_binary(b"0102")).is_err());
+    assert!(std::panic::catch_unwind(|| BitSet::new(3).write_binary(&mut [0; 2])).is_err());
+}
+
+fn xor_row_model(a: &BitMatrix, b: &BitMatrix) -> BitMatrix {
+    let mut rows = vec![vec![0u64; b.width().div_ceil(64)]; a.height()];
+    for i in 0..a.height() {
+        for k in 0..a.width() {
+            if a.get(i, k) {
+                for j in 0..b.width() {
+                    rows[i][j / 64] ^= (b.get(k, j) as u64) << (j % 64);
+                }
+            }
+        }
+    }
+    BitMatrix::from_rows(b.width(), rows.into_iter().map(|r| BitSet::build(b.width(), r)).collect())
+}
+
+#[test]
+fn gf2_dispatch_boundaries_and_models() {
+    let mut seed = 20261020;
+    for (h, k, w) in [
+        (0, 65, 129), (513, 0, 129), (513, 65, 0),
+        (4, 129, 129), (5, 63, 64), (5, 64, 65), (65, 65, 63),
+        (16, 33, 257), (65, 129, 129), (256, 257, 513), (511, 31, 513), (512, 32, 1025), (513, 33, 65),
+        (513, 65, 129), (513, 129, 257), (513, 257, 513),
+        (513, 65, 1025), (513, 65, 2049), (513, 65, 4095),
+        (513, 65, 4096), (513, 65, 4097), (1, 4097, 1),
+    ] {
+        let a = make(h, k, 5, &mut seed);
+        let b = make(k, w, 5, &mut seed);
+        let expected = xor_row_model(&a, &b);
+        assert_eq!(a.prod_xor(&b), expected, "{h}x{k}x{w}");
+        for row in a.prod_xor(&b).rows() {
+            if w % 64 != 0 { assert_eq!(row.data.last().unwrap() >> (w % 64), 0); }
+        }
+    }
+    for mode in 0..5 {
+        let a = make(513, 65, mode, &mut seed);
+        let b = make(65, 129, (mode + 1) % 6, &mut seed);
+        assert_eq!(a.prod_xor(&b), xor_row_model(&a, &b));
+    }
+    let mut a = BitMatrix::new(513, 129);
+    for i in 0..513 { a.set(i, i % 129, true); }
+    let b = make(129, 257, 5, &mut seed);
+    assert_eq!(a.prod_xor(&b), xor_row_model(&a, &b));
+    for row in &mut a.rows { row.fill(); }
+    for i in 0..a.height() { a.set(i, i % 129, false); }
+    assert_eq!(a.prod_xor(&b), xor_row_model(&a, &b));
+}

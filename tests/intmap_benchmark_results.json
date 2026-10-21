@@ -1,0 +1,650 @@
+{
+  "measured_at_utc": "2026-10-20T15:10:12.744542+00:00",
+  "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "flags": [
+    "--edition=2021",
+    "-O"
+  ],
+  "repetitions": 6,
+  "warmups": 1,
+  "note": "Alternating backend order; median of six measurements after one warmup; setup and destruction excluded. All keys and miss probes are disjoint. Checksums and final contents checked by commutative checksums. Speedup = FxMap time / IntMap time.",
+  "sources": {
+    "src/Basic/fxhash.rs": "1497246ce559717dd68330aeb2f86f66fe717b45aeda0f09ed6124a226436d6a",
+    "src/DataStructure/intmap.rs": "e5f4d92429cc835a57938f1f029c44ed0fae97c9cdf0f02f55b2df97edf68717",
+    "tests/benchmark_intmap.rs": "19e477ee5842f136d095720d76ffe483837756f8cf451e541c6ce9e5079d5dc0"
+  },
+  "summary": [
+    {
+      "n": 1024,
+      "operation": "build",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.957,
+      "median": 1.01965,
+      "maximum": 1.0492
+    },
+    {
+      "n": 1024,
+      "operation": "build",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0667,
+      "median": 1.0773,
+      "maximum": 1.791
+    },
+    {
+      "n": 1024,
+      "operation": "grow",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9953,
+      "median": 1.0629,
+      "maximum": 1.1405
+    },
+    {
+      "n": 1024,
+      "operation": "grow",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1463,
+      "median": 1.1521,
+      "maximum": 1.7521
+    },
+    {
+      "n": 1024,
+      "operation": "hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0568,
+      "median": 1.11165,
+      "maximum": 1.151
+    },
+    {
+      "n": 1024,
+      "operation": "hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.2089,
+      "median": 1.21,
+      "maximum": 2.0953
+    },
+    {
+      "n": 1024,
+      "operation": "miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0584,
+      "median": 1.10275,
+      "maximum": 1.1363
+    },
+    {
+      "n": 1024,
+      "operation": "miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.2688,
+      "median": 1.293,
+      "maximum": 5.3401
+    },
+    {
+      "n": 1024,
+      "operation": "update",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0002,
+      "median": 1.0690499999999998,
+      "maximum": 1.0935
+    },
+    {
+      "n": 1024,
+      "operation": "update",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1138,
+      "median": 1.1191,
+      "maximum": 1.7081
+    },
+    {
+      "n": 1024,
+      "operation": "entry_hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0131,
+      "median": 1.0872,
+      "maximum": 1.1364
+    },
+    {
+      "n": 1024,
+      "operation": "entry_hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1647,
+      "median": 1.1756,
+      "maximum": 1.8588
+    },
+    {
+      "n": 1024,
+      "operation": "entry_miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0542,
+      "median": 1.1061,
+      "maximum": 1.1606
+    },
+    {
+      "n": 1024,
+      "operation": "entry_miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1897,
+      "median": 1.2166,
+      "maximum": 2.0527
+    },
+    {
+      "n": 1024,
+      "operation": "remove",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0211,
+      "median": 1.164,
+      "maximum": 1.5682
+    },
+    {
+      "n": 1024,
+      "operation": "remove",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0207,
+      "median": 2.6094,
+      "maximum": 2.6365
+    },
+    {
+      "n": 1024,
+      "operation": "mixed",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0131,
+      "median": 1.1017000000000001,
+      "maximum": 1.1421
+    },
+    {
+      "n": 1024,
+      "operation": "mixed",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1108,
+      "median": 1.2074,
+      "maximum": 2.0728
+    },
+    {
+      "n": 1024,
+      "operation": "iter",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.8448,
+      "median": 0.9838,
+      "maximum": 1.247
+    },
+    {
+      "n": 1024,
+      "operation": "iter",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 0.67,
+      "median": 0.677,
+      "maximum": 1.0403
+    },
+    {
+      "n": 100000,
+      "operation": "build",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9673,
+      "median": 1.0844999999999998,
+      "maximum": 1.1443
+    },
+    {
+      "n": 100000,
+      "operation": "build",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.165,
+      "median": 1.1742,
+      "maximum": 29.05
+    },
+    {
+      "n": 100000,
+      "operation": "grow",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0037,
+      "median": 1.0577,
+      "maximum": 1.1189
+    },
+    {
+      "n": 100000,
+      "operation": "grow",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.2219,
+      "median": 1.233,
+      "maximum": 17.0355
+    },
+    {
+      "n": 100000,
+      "operation": "hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.102,
+      "median": 1.1699000000000002,
+      "maximum": 1.253
+    },
+    {
+      "n": 100000,
+      "operation": "hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.3658,
+      "median": 1.3669,
+      "maximum": 49.9215
+    },
+    {
+      "n": 100000,
+      "operation": "miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0908,
+      "median": 1.2330999999999999,
+      "maximum": 1.3792
+    },
+    {
+      "n": 100000,
+      "operation": "miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.95,
+      "median": 1.9509,
+      "maximum": 19.2015
+    },
+    {
+      "n": 100000,
+      "operation": "update",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0491,
+      "median": 1.12415,
+      "maximum": 1.2087
+    },
+    {
+      "n": 100000,
+      "operation": "update",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.3274,
+      "median": 1.3665,
+      "maximum": 48.4623
+    },
+    {
+      "n": 100000,
+      "operation": "entry_hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.066,
+      "median": 1.1416,
+      "maximum": 1.2241
+    },
+    {
+      "n": 100000,
+      "operation": "entry_hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.3465,
+      "median": 1.3677,
+      "maximum": 48.6542
+    },
+    {
+      "n": 100000,
+      "operation": "entry_miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0626,
+      "median": 1.1104,
+      "maximum": 1.1745
+    },
+    {
+      "n": 100000,
+      "operation": "entry_miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.2131,
+      "median": 1.2517,
+      "maximum": 43.2498
+    },
+    {
+      "n": 100000,
+      "operation": "remove",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9914,
+      "median": 1.0404499999999999,
+      "maximum": 1.1048
+    },
+    {
+      "n": 100000,
+      "operation": "remove",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0088,
+      "median": 1.0269,
+      "maximum": 6.5696
+    },
+    {
+      "n": 100000,
+      "operation": "mixed",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0377,
+      "median": 1.09645,
+      "maximum": 1.1204
+    },
+    {
+      "n": 100000,
+      "operation": "mixed",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.1207,
+      "median": 1.1277,
+      "maximum": 14.0475
+    },
+    {
+      "n": 100000,
+      "operation": "iter",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9329,
+      "median": 0.9828,
+      "maximum": 0.9999
+    },
+    {
+      "n": 100000,
+      "operation": "iter",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 0.8771,
+      "median": 1.1111,
+      "maximum": 1.1166
+    },
+    {
+      "n": 1000000,
+      "operation": "build",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9763,
+      "median": 0.99515,
+      "maximum": 1.0688
+    },
+    {
+      "n": 1000000,
+      "operation": "build",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 0.9206,
+      "median": 0.9542,
+      "maximum": 2.951
+    },
+    {
+      "n": 1000000,
+      "operation": "grow",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0227,
+      "median": 1.0461,
+      "maximum": 1.083
+    },
+    {
+      "n": 1000000,
+      "operation": "grow",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.2153,
+      "median": 1.217,
+      "maximum": 4.1347
+    },
+    {
+      "n": 1000000,
+      "operation": "hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0227,
+      "median": 1.05065,
+      "maximum": 1.0803
+    },
+    {
+      "n": 1000000,
+      "operation": "hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0575,
+      "median": 1.0613,
+      "maximum": 2.3029
+    },
+    {
+      "n": 1000000,
+      "operation": "miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0162,
+      "median": 1.1219000000000001,
+      "maximum": 1.1539
+    },
+    {
+      "n": 1000000,
+      "operation": "miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.5856,
+      "median": 1.6123,
+      "maximum": 1.8432
+    },
+    {
+      "n": 1000000,
+      "operation": "update",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0339,
+      "median": 1.0634000000000001,
+      "maximum": 1.0882
+    },
+    {
+      "n": 1000000,
+      "operation": "update",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.046,
+      "median": 1.0726,
+      "maximum": 2.1674
+    },
+    {
+      "n": 1000000,
+      "operation": "entry_hit",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0559,
+      "median": 1.0577,
+      "maximum": 1.0677
+    },
+    {
+      "n": 1000000,
+      "operation": "entry_hit",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0449,
+      "median": 1.0767,
+      "maximum": 2.1346
+    },
+    {
+      "n": 1000000,
+      "operation": "entry_miss",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9823,
+      "median": 1.04305,
+      "maximum": 1.0844
+    },
+    {
+      "n": 1000000,
+      "operation": "entry_miss",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0332,
+      "median": 1.0553,
+      "maximum": 2.8314
+    },
+    {
+      "n": 1000000,
+      "operation": "remove",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 1.0042,
+      "median": 1.0621,
+      "maximum": 1.0776
+    },
+    {
+      "n": 1000000,
+      "operation": "remove",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.045,
+      "median": 1.0565,
+      "maximum": 1.304
+    },
+    {
+      "n": 1000000,
+      "operation": "mixed",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9659,
+      "median": 0.9974000000000001,
+      "maximum": 1.0157
+    },
+    {
+      "n": 1000000,
+      "operation": "mixed",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 1.0042,
+      "median": 1.0204,
+      "maximum": 2.2206
+    },
+    {
+      "n": 1000000,
+      "operation": "iter",
+      "patterns": [
+        "sequential",
+        "random"
+      ],
+      "minimum": 0.9968,
+      "median": 1.01655,
+      "maximum": 1.0524
+    },
+    {
+      "n": 1000000,
+      "operation": "iter",
+      "patterns": [
+        "shifted"
+      ],
+      "minimum": 0.6957,
+      "median": 1.9205,
+      "maximum": 1.9238
+    }
+  ]
+}

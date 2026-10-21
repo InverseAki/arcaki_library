@@ -11,10 +11,10 @@ include!("../src/Tree/sparsetablelca.rs");
 fn sparse_table_all_intervals() {
     for n in 0..70 {
         let values: Vec<_> = (0..n).map(|i| (i * 37 + 11) % 19).collect();
-        let min = SparseTableMI::build(&values);
-        let max = SparseTableMX::build(&values);
+        let min = SparseTableMI::build(values.clone());
+        let max = SparseTableMX::build(values.clone());
         let vertices: Vec<_> = (0..n).rev().collect();
-        let keyed = SparseTableMI::build_by_key(&vertices, |v| values[v]);
+        let keyed = SparseTableMI::build_by_key(vertices.clone(), |v| values[v]);
         for l in 0..n {
             for r in l + 1..=n {
                 assert_eq!(min.query(l, r), *values[l..r].iter().min().unwrap());
@@ -93,13 +93,19 @@ fn large_star_table_storage() {
     assert_eq!(lca.lca(1, n - 1), 0);
     assert_eq!(lca.distance(1, n - 1), 2);
     let tour_len = 2 * n - 1;
+    let blocks = tour_len.div_ceil(16);
     let cells: usize = (0..usize::BITS).map(|k| 1usize << k)
+        .take_while(|&w| w <= blocks).map(|w| blocks - w + 1).sum();
+    let SparseTableData::Blocked { values, prefix, suffix, table, .. } = &lca.data.data else { panic!("expected blocked storage"); };
+    assert_eq!(values.len(), tour_len);
+    assert_eq!(prefix.len(), tour_len);
+    assert_eq!(suffix.len(), tour_len);
+    assert_eq!(table.len(), cells);
+    let bytes = (values.capacity() + prefix.capacity()
+        + suffix.capacity() + table.capacity()) * std::mem::size_of::<usize>();
+    let old_cells: usize = (0..usize::BITS).map(|k| 1usize << k)
         .take_while(|&w| w <= tour_len).map(|w| tour_len - w + 1).sum();
-    let stored: usize = lca.data.table.iter().map(Vec::len).sum();
-    assert_eq!(stored, cells);
-    let bytes: usize = lca.data.table.iter()
-        .map(|row| row.capacity() * std::mem::size_of::<usize>()).sum();
-    assert_eq!(bytes, cells * std::mem::size_of::<usize>());
+    assert!(bytes < old_cells * std::mem::size_of::<usize>() / 4);
     assert_eq!(lca.dist.len(), n);
-    eprintln!("SparseTable payload: {bytes} bytes; old pair payload: {} bytes", cells * std::mem::size_of::<(usize, usize)>());
+    eprintln!("SparseTable payload: {bytes} bytes; previous payload: {} bytes", old_cells * std::mem::size_of::<usize>());
 }

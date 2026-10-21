@@ -45,6 +45,7 @@ out.flush().unwrap();
 
 各出力メソッドは `&mut Self` を返すのでチェーンできる。
 整数の10進表現をスタック上の配列に作り、改行もまとめてバッファへコピーする。
+200バイトの `00`〜`99` 表を使い、100で割った余りを2桁ずつ配置する。
 数字ごとの一時Stringやヒープ割当は発生しない。
 符号付き最小値は `unsigned_abs()` で処理し、debugでもオーバーフローしない。
 整数のu8出力と、バイトをそのまま書く `byte` は区別する。
@@ -114,3 +115,35 @@ python3 tests/predecessor64_performance/librarychecker/run.py --library-io
 生データは `tests/predecessor64_performance/librarychecker/results_library_io.csv`、
 実行条件は `metadata_library_io.json`。
 前回の測定ファイルを残すため、今回の出力ファイル名には `_library_io` を付けた。
+
+## 累積和提出による追加比較（2026-10-21）
+
+`examples/static_range_sum.rs` と同じ累積和処理で、旧I/Oと候補6種を比較した。
+採用したのは出力の2桁変換。Inputの実装・既存の公開API・BufWriterのエラー処理は維持した。
+入力の2桁読み、入力のスライス走査、出力の4桁分解も比較したが、安定した上積みがなく見送った。
+
+Rust 1.89 `-O`、aarch64 macOS、N=Q=500,000、11回の中央値。
+各ケースで1回ウォームアップし、実装の実行順を巡回させた。
+プロセス起動・ファイルからの入力・パイプへの出力回収・終了を含む。
+自作入力で、全ケース・全候補・全反復の出力を独立したPython累積和と全バイト照合した。
+同時にコンパイルやテストを走らせず最終測定した。
+
+| ケース | 旧実装 | 採用した2桁出力 | 短縮率 |
+|---|---:|---:|---:|
+| 9桁の非負数・ランダム区間 | 28.35ms | 24.73ms | 12.8% |
+| 0〜99・ランダム区間 | 19.10ms | 18.26ms | 4.4% |
+| 全0 | 12.71ms | 12.19ms | 4.1% |
+| 負数・ランダム区間 | 28.31ms | 25.18ms | 11.0% |
+| 全区間への問い合わせ | 19.25ms | 17.40ms | 9.6% |
+| 0〜9・長さ1の区間 | 13.61ms | 12.63ms | 7.2% |
+
+ローカルの変動を含む測定であり、Library Checkerの44msが同じ割合で短縮するとは限らない。
+最速提出との2倍差の解消は確認できていない。今回の変更は外部ジャッジ未提出。
+
+再実行: `python3 tests/run_basic_io_benchmark.py --repeats 11`
+候補生成コードと旧実装は `tests/run_basic_io_benchmark.py` と `tests/support/basic_{io,output}_baseline.rs`、
+全候補の各反復時間と環境は `tests/basic_io_benchmark_results.json` に保存する。
+
+Rust 1.89の `cargo test --offline --test basic_io_output` と同release実行で7テスト通過。
+既存の全整数型・符号付き最小値・10の累乗境界・乱数・容量0/1/2/7/64/65536・
+短い書き込み・Interrupted・Drop検証に加え、u16/i16の全値を容量7で照合した。

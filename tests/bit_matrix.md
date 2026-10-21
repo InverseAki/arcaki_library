@@ -25,7 +25,7 @@ assert_eq!(a.mul_xor(&b), vec![vec![0, 3], vec![3, 0]]);
 
 入力は0/1、出力は `Vec<Vec<usize>>`。集約は整数の和で、値の範囲は0..=K。
 OR–ANDの論理行列積が必要なら `mul_and` の結果を `x > 0` に、
-GF(2)の積なら `x & 1 != 0` に変換する。
+GF(2)の積には高速化された `prod_xor` を使う（[検証と使用例](matrix_product_mod_2.md)）。
 `mul_xor` はGF(2)の行列積ではない。
 
 `A` が H×K、`B` が K×W のとき、積の計算は `O(HW ceil(K/64))`。
@@ -65,7 +65,7 @@ assert_eq!(a.pow_or(2), product);
 
 内側次元0の `prod_and` は全true、`prod_or` / `prod_xor` は全false。
 非正方行列の累乗は指数0でもpanic。0×0の累乗は0×0。
-積は最悪 `O(HW ceil(K/64))` に転置・出力初期化が加わり、
+`prod_and` / `prod_or` の積は最悪 `O(HW ceil(K/64))` に転置・出力初期化が加わり、
 累乗は `O((N² + N³/64) log(e+1))`、0乗の構築は `O(N²/64+N)`。
 AND/OR/XORの論理行列積は結合的で、それぞれ上記の単位行列を持つため、繰り返し二乗法を使う。
 
@@ -95,3 +95,9 @@ releaseで512×512の乱数行列を測定した1回の結果（転置・出力�
 | XOR | 0.95 ms | 23.92 ms |
 
 性能は環境・入力依存。外部ジャッジへの提出は行っていない。
+
+## 2026-10-20: GF(2) 積の高速化
+
+`prod_xor` / `pow_xor` は Four Russians 法と形状・密度に応じた自動選択に変更。
+二進文字列の入出力、Library Checker 用の例、公式全ケースのハッシュ照合、
+比較ベンチマークは [matrix_product_mod_2.md](matrix_product_mod_2.md) を参照。

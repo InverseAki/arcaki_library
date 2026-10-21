@@ -129,6 +129,17 @@ fn output_all_integer_types_extrema_decimal_boundaries_and_random_values() {
 }
 
 #[test]
+fn output_exhaustive_small_integers() {
+    let mut out = Output::with_writer_capacity(7, Vec::new());
+    let mut expected = String::new();
+    for value in 0..=u16::MAX {
+        out.u16_line(value).i16_line(value as i16);
+        expected.push_str(&format!("{value}\n{}\n", value as i16));
+    }
+    assert_eq!(out.into_inner().unwrap(), expected.as_bytes());
+}
+
+#[test]
 fn output_raw_text_flush_and_drop() {
     let mut bytes = Vec::new();
     {

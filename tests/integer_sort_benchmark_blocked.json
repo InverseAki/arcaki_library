@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-21T00:05:30.642108+09:00",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)\nbinary: rustc\ncommit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c\ncommit-date: 2026-01-19\nhost: aarch64-apple-darwin\nrelease: 1.93.0\nLLVM version: 21.1.8",
+  "mode": "blocked",
+  "full": false,
+  "all_types": false,
+  "seed": 20261021,
+  "repetitions": 3,
+  "warmup": 1,
+  "batch": "max(1, 8192 // max(n, 1))",
+  "unit": "microseconds",
+  "timing": "sort only, including allocation, initialization, analysis, and final copy; excludes input generation, input reset, validation, and I/O",
+  "reused": "buffer allocated by untimed warmup, then retained across repetitions of the same case",
+  "order": "methods in fixed order; one process and one test thread; every method checked against sort_unstable before timing",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--release",
+    "--test",
+    "benchmark_integer_sort",
+    "--",
+    "--ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "records": [
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 83.812
+    },
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 86.584
+    },
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 201.6665
+    },
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 154.6245
+    },
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 268.187
+    },
+    {
+      "type": "u64",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 547.417
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 1407.792
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 914.916
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 1917.458
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 1299.0
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 1431.667
+    },
+    {
+      "type": "u64",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 1050.666
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 11101.042
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 7430.833
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 16437.292
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 11589.875
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 12992.041
+    },
+    {
+      "type": "u64",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 9446.0
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 24.3335
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 17.416
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 37.1665
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 25.1045
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 62.646
+    },
+    {
+      "type": "u32",
+      "n": 4096,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 88.3125
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 572.334
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 231.0
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 531.667
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 354.208
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 420.375
+    },
+    {
+      "type": "u32",
+      "n": 65536,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 307.833
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "std",
+      "median_us": 10455.083
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "selected",
+      "median_us": 3459.042
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block8x8",
+      "median_us": 8016.833
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block8x32",
+      "median_us": 5294.5
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block11x8",
+      "median_us": 5758.083
+    },
+    {
+      "type": "u32",
+      "n": 1000000,
+      "distribution": "random",
+      "method": "block11x32",
+      "median_us": 3963.833
+    }
+  ]
+}

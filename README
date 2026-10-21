@@ -84,3 +84,17 @@ ACLが使えたりライブラリ化せず毎回書いていた場合などが�
 ・Graph: UnionFindとグラフ。Gemetory: 偏角ソート、矩形和集合面積を含む幾何。
 ・SegmentTree、Tree、String、Fpsはそれぞれの専門分類を維持。
 ・ファイル名・公開APIは維持。コピー・include時は新しいパスを使う。解説集も同じ分類へ更新。
+
+2026-10-20: GF(2) 行列積を高速化
+・src/DataStructure/bitset.rs: BitMatrix::prod_xor / pow_xor。Four Russians 法と疎・密・長方形への対応。
+・提出例: examples/matrix_product_mod_2.rs。検証・性能比較: tests/matrix_product_mod_2.md。
+
+2026-10-21: 整数値の高速ソート
+・src/Basic/integer_sort.rs: integer_sort / integer_sort_with_buffer。u32・u64・usize・i64に対応。
+・比較ソート、数え上げ、LSD基数ソートを実測に基づいて切り替える。外部クレート不要。
+・使い方: ../algorithm_set/Basic/integer_sort.md。実験・性能比較・検証: tests/integer_sort.md。
+
+2026-10-21: 整数キーの高速Mapを追加
+・src/DataStructure/intmap.rs: U32Map<V> / U64Map<V> / UsizeMap<V>。整数専用ハッシュと標準HashMapの表を組み合わせ、既存FxMapは維持。
+・使い方: ../algorithm_set/DataStructure/intmap.md。検証・270条件の速度比較・再現手順: tests/intmap.md。
+・使用例: examples/associative_array.rs。

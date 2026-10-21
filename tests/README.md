@@ -1,5 +1,7 @@
 # 統合後の検証
 
+整数値の高速ソート（2026-10-21）: [API・候補実験・性能比較と検証](integer_sort.md)。
+
 実装の正本は `src/`。各ファイルを従来どおり main.rs にコピーして使う。
 `src/lib.rs` は従来どおり空で、テストから本体ファイルを直接読み込む。
 
@@ -173,3 +175,9 @@ UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSeg
 `Basic` からデータ構造を `DataStructure`、整数・有理数演算を `NumberTheory`、行列を `LinearAlgebra`、オフラインクエリを `OfflineQuery` へ移動。Range Parallel UnionFindは `Graph`、偏角ソートと矩形和集合面積は `Gemetory` に分類する。Splay・AVL・SortableSequenceも `DataStructure` に移動した。ファイル名と公開APIは維持し、テスト・使用例・検証スクリプト・解説の参照を更新した。
 
 分類変更後の確認: `cargo test --offline` と `cargo test --offline --release` で各217テストが通過。`run_math_migration.py`・`run_matrix.py` の同梱MI結合検証もdebug/releaseで通過し、解説集の使用例11件をコンパイル・実行した。移動した50実装の内容一致とRustの直接ファイル参照、移動した解説のリンクを確認した。
+
+## 整数キーの高速Map（2026-10-21）
+
+`IntMap<K, V>` と `U32Map<V>` / `U64Map<V>` / `UsizeMap<V>` を追加。
+[仕様・検証・既存FxMapとの速度比較・再現手順](intmap.md)。
+`cargo test --offline --test intmap` とrelease、Rust 1.89でも同じ8テストを確認。
