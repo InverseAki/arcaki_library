@@ -71,6 +71,11 @@ fn branching_versions_match_linear_search() {
                     }
                     assert_eq!(tree.parallel_max_right(&ts, x, predicate), right);
                     assert_eq!(tree.parallel_min_left(&ts, x, predicate), left);
+                    if k == 2 {
+                        let predicate = |a: &u64, b: &u64| *a <= limits[0] && *b <= limits[1];
+                        assert_eq!(tree.parallel_max_right2(ts[0], ts[1], x, predicate), right);
+                        assert_eq!(tree.parallel_min_left2(ts[0], ts[1], x, predicate), left);
+                    }
                     if k == 1 {
                         assert_eq!(tree.max_right(ts[0], x, |v| *v <= limits[0]), right);
                         assert_eq!(tree.min_left(ts[0], x, |v| *v <= limits[0]), left);
@@ -126,6 +131,16 @@ fn noncommutative_products_preserve_order() {
                 .last()
                 .unwrap();
             assert_eq!(tree.parallel_max_right(&ts, x, predicate), expected);
+            let pair_predicate =
+                |a: &String, b: &String| targets[0].starts_with(a) && targets[1].starts_with(b);
+            let pair_expected = (x..=16)
+                .take_while(|&r| pair_predicate(&tree.prod(ts[0], x, r), &tree.prod(ts[1], x, r)))
+                .last()
+                .unwrap();
+            assert_eq!(
+                tree.parallel_max_right2(ts[0], ts[1], x, pair_predicate),
+                pair_expected
+            );
 
             let targets: Vec<String> = ts
                 .iter()
@@ -146,6 +161,17 @@ fn noncommutative_products_preserve_order() {
                 .last()
                 .unwrap();
             assert_eq!(tree.parallel_min_left(&ts, x, predicate), expected);
+            let pair_predicate =
+                |a: &String, b: &String| targets[0].ends_with(a) && targets[1].ends_with(b);
+            let pair_expected = (0..=x)
+                .rev()
+                .take_while(|&l| pair_predicate(&tree.prod(ts[0], l, x), &tree.prod(ts[1], l, x)))
+                .last()
+                .unwrap();
+            assert_eq!(
+                tree.parallel_min_left2(ts[0], ts[1], x, pair_predicate),
+                pair_expected
+            );
         }
     }
 }
@@ -212,6 +238,16 @@ fn rolling_hash_common_prefix_and_suffix() {
             }
             assert_eq!(tree.parallel_max_right(&ts, x, equal), right);
             assert_eq!(tree.parallel_min_left(&ts, x, equal), left);
+            for pair in [[ts[0], ts[1]], [ts[0], ts[0]]] {
+                assert_eq!(
+                    tree.parallel_max_right2(pair[0], pair[1], x, |a, b| a == b),
+                    tree.parallel_max_right(&pair, x, equal),
+                );
+                assert_eq!(
+                    tree.parallel_min_left2(pair[0], pair[1], x, |a, b| a == b),
+                    tree.parallel_min_left(&pair, x, equal),
+                );
+            }
         }
     }
 }
@@ -244,4 +280,40 @@ fn rejects_right_start_out_of_bounds() {
 #[should_panic]
 fn rejects_left_end_out_of_bounds() {
     PersistentSegtree::<Sum>::new(4).parallel_min_left(&[0], 5, |_| true);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_false_identity_right() {
+    PersistentSegtree::<Sum>::new(4).parallel_max_right2(0, 0, 4, |_, _| false);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_false_identity_left() {
+    PersistentSegtree::<Sum>::new(4).parallel_min_left2(0, 0, 0, |_, _| false);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_invalid_second_version_right() {
+    PersistentSegtree::<Sum>::new(4).parallel_max_right2(0, 1, 4, |_, _| true);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_invalid_first_version_left() {
+    PersistentSegtree::<Sum>::new(4).parallel_min_left2(1, 0, 0, |_, _| true);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_right_start_out_of_bounds() {
+    PersistentSegtree::<Sum>::new(4).parallel_max_right2(0, 0, 5, |_, _| true);
+}
+
+#[test]
+#[should_panic]
+fn pair_rejects_left_end_out_of_bounds() {
+    PersistentSegtree::<Sum>::new(4).parallel_min_left2(0, 0, 5, |_, _| true);
 }

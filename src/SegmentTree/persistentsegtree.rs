@@ -178,6 +178,116 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.parallel_min_left_dfs(&roots, 0, self.n, r, &mut ac, &f)
     }
 
+    #[inline]
+    pub fn parallel_max_right2<F>(&self, t0: usize, t1: usize, l: usize, f: F) -> usize
+    where
+        F: Fn(&M::S, &M::S) -> bool,
+    {
+        assert!(l <= self.n);
+        let roots = [self.root[t0], self.root[t1]];
+        let mut ac = [M::identity(), M::identity()];
+        assert!(f(&ac[0], &ac[1]));
+        if l == self.n {
+            return self.n;
+        }
+        self.parallel_max_right2_dfs(roots, 0, self.n, l, &mut ac, &f)
+    }
+
+    #[inline]
+    pub fn parallel_min_left2<F>(&self, t0: usize, t1: usize, r: usize, f: F) -> usize
+    where
+        F: Fn(&M::S, &M::S) -> bool,
+    {
+        assert!(r <= self.n);
+        let roots = [self.root[t0], self.root[t1]];
+        let mut ac = [M::identity(), M::identity()];
+        assert!(f(&ac[0], &ac[1]));
+        if r == 0 {
+            return 0;
+        }
+        self.parallel_min_left2_dfs(roots, 0, self.n, r, &mut ac, &f)
+    }
+
+    fn parallel_max_right2_dfs<F>(
+        &self,
+        cur: [u32; 2],
+        l: usize,
+        r: usize,
+        x: usize,
+        ac: &mut [M::S; 2],
+        f: &F,
+    ) -> usize
+    where
+        F: Fn(&M::S, &M::S) -> bool,
+    {
+        if r <= x {
+            return x;
+        }
+        if x <= l {
+            let next = [
+                M::op(&ac[0], &self.data[cur[0] as usize].val),
+                M::op(&ac[1], &self.data[cur[1] as usize].val),
+            ];
+            if f(&next[0], &next[1]) {
+                *ac = next;
+                return r;
+            }
+            if l + 1 == r {
+                return l;
+            }
+        }
+        let m = (l + r) >> 1;
+        let ret = self.parallel_max_right2_dfs(
+            cur.map(|p| self.data[p as usize].left), l, m, x, ac, f,
+        );
+        if ret < m {
+            return ret;
+        }
+        self.parallel_max_right2_dfs(
+            cur.map(|p| self.data[p as usize].right), m, r, x, ac, f,
+        )
+    }
+
+    fn parallel_min_left2_dfs<F>(
+        &self,
+        cur: [u32; 2],
+        l: usize,
+        r: usize,
+        x: usize,
+        ac: &mut [M::S; 2],
+        f: &F,
+    ) -> usize
+    where
+        F: Fn(&M::S, &M::S) -> bool,
+    {
+        if x <= l {
+            return l;
+        }
+        if r <= x {
+            let next = [
+                M::op(&self.data[cur[0] as usize].val, &ac[0]),
+                M::op(&self.data[cur[1] as usize].val, &ac[1]),
+            ];
+            if f(&next[0], &next[1]) {
+                *ac = next;
+                return l;
+            }
+            if l + 1 == r {
+                return r;
+            }
+        }
+        let m = (l + r) >> 1;
+        let ret = self.parallel_min_left2_dfs(
+            cur.map(|p| self.data[p as usize].right), m, r, x, ac, f,
+        );
+        if ret > m {
+            return ret;
+        }
+        self.parallel_min_left2_dfs(
+            cur.map(|p| self.data[p as usize].left), l, m, x, ac, f,
+        )
+    }
+
     fn parallel_max_right_dfs<F>(
         &self,
         cur: &[u32],
