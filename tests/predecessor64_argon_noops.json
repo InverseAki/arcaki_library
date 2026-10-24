@@ -1,0 +1,178 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "machine": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "args": {
+    "variants": "baseline,current,nostore",
+    "count": 1000000,
+    "repeats": 11,
+    "output": "predecessor64_argon_noops",
+    "toolchain": "1.89.0",
+    "native": false,
+    "model": false,
+    "only": "noops"
+  },
+  "medians": [
+    {
+      "stride": "2",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.91033,
+      "min_ns": 0.80425,
+      "max_ns": 1.06383
+    },
+    {
+      "stride": "2",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.7515,
+      "min_ns": 0.65483,
+      "max_ns": 0.85183
+    },
+    {
+      "stride": "2",
+      "workload": "insert_present",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.70096,
+      "min_ns": 0.62704,
+      "max_ns": 0.86929
+    },
+    {
+      "stride": "2",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.95567,
+      "min_ns": 0.90542,
+      "max_ns": 1.08154
+    },
+    {
+      "stride": "2",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.67154,
+      "min_ns": 0.66446,
+      "max_ns": 0.73575
+    },
+    {
+      "stride": "2",
+      "workload": "remove_absent",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.65438,
+      "min_ns": 0.60683,
+      "max_ns": 0.76825
+    },
+    {
+      "stride": "64",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.75858,
+      "min_ns": 0.75338,
+      "max_ns": 0.83483
+    },
+    {
+      "stride": "64",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.62958,
+      "min_ns": 0.60975,
+      "max_ns": 0.67854
+    },
+    {
+      "stride": "64",
+      "workload": "insert_present",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.61654,
+      "min_ns": 0.60408,
+      "max_ns": 0.67196
+    },
+    {
+      "stride": "64",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.94196,
+      "min_ns": 0.93758,
+      "max_ns": 0.96742
+    },
+    {
+      "stride": "64",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.69642,
+      "min_ns": 0.68988,
+      "max_ns": 0.77054
+    },
+    {
+      "stride": "64",
+      "workload": "remove_absent",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.64096,
+      "min_ns": 0.62679,
+      "max_ns": 0.67292
+    },
+    {
+      "stride": "4096",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.80771,
+      "min_ns": 0.789,
+      "max_ns": 0.86987
+    },
+    {
+      "stride": "4096",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.70479,
+      "min_ns": 0.67537,
+      "max_ns": 0.78579
+    },
+    {
+      "stride": "4096",
+      "workload": "insert_present",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.65154,
+      "min_ns": 0.63617,
+      "max_ns": 0.67054
+    },
+    {
+      "stride": "4096",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.94492,
+      "min_ns": 0.93767,
+      "max_ns": 0.96671
+    },
+    {
+      "stride": "4096",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.69537,
+      "min_ns": 0.68983,
+      "max_ns": 0.73196
+    },
+    {
+      "stride": "4096",
+      "workload": "remove_absent",
+      "implementation": "nostore",
+      "suite": "noops",
+      "median_ns": 0.63262,
+      "min_ns": 0.62762,
+      "max_ns": 0.69008
+    }
+  ]
+}

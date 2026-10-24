@@ -1,0 +1,11 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "n": 10000000,
+  "q": 1000000,
+  "repeats": 9,
+  "note": "Local generated cases, not official tests. Same I/O code; includes process startup, input, output capture and destruction.",
+  "source_sha256": {
+    "baseline": "e80d84f45f91847fdb0f5f66fc47196408061b47d33cf23e6e90ab872dfc68f4",
+    "current": "ca2174608eaba4e24f5ca6b81d132f6ea78d5b3b5dbfd90af766d2c45752e326"
+  }
+}

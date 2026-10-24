@@ -1,0 +1,2656 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "machine": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "args": {
+    "variants": "baseline,current,combined_safe,propagation,iterated,iterated_propagation",
+    "count": 1000000,
+    "repeats": 9,
+    "output": "predecessor64_argon_final_candidates",
+    "toolchain": "1.89.0",
+    "native": false,
+    "model": false,
+    "only": "bench"
+  },
+  "medians": [
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.109,
+      "min_ns": 8.01842,
+      "max_ns": 8.81296
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.86996,
+      "min_ns": 7.80754,
+      "max_ns": 8.52846
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 8.03442,
+      "min_ns": 7.92167,
+      "max_ns": 8.57546
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 7.68408,
+      "min_ns": 7.549,
+      "max_ns": 7.72667
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 7.84542,
+      "min_ns": 7.76892,
+      "max_ns": 8.03354
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 7.79454,
+      "min_ns": 7.76346,
+      "max_ns": 7.95304
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.91821,
+      "min_ns": 6.90013,
+      "max_ns": 7.97463
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.70867,
+      "min_ns": 6.69167,
+      "max_ns": 7.71975
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 6.86183,
+      "min_ns": 6.84371,
+      "max_ns": 7.89208
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 6.44712,
+      "min_ns": 6.43187,
+      "max_ns": 7.52946
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 6.70812,
+      "min_ns": 6.6765,
+      "max_ns": 7.71192
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 6.69904,
+      "min_ns": 6.6795,
+      "max_ns": 7.71471
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.25125,
+      "min_ns": 6.24421,
+      "max_ns": 6.28446
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.08379,
+      "min_ns": 6.05825,
+      "max_ns": 6.10463
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 6.18412,
+      "min_ns": 6.17417,
+      "max_ns": 6.35071
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 6.11163,
+      "min_ns": 6.1015,
+      "max_ns": 6.14429
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 6.00437,
+      "min_ns": 5.99696,
+      "max_ns": 6.13563
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 6.06262,
+      "min_ns": 6.03717,
+      "max_ns": 6.09771
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.39529,
+      "min_ns": 9.77146,
+      "max_ns": 11.05225
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.89237,
+      "min_ns": 9.94733,
+      "max_ns": 10.98513
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 10.89563,
+      "min_ns": 9.91025,
+      "max_ns": 11.26554
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.93796,
+      "min_ns": 9.65437,
+      "max_ns": 11.13467
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.76454,
+      "min_ns": 10.23204,
+      "max_ns": 10.95158
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.72929,
+      "min_ns": 9.82025,
+      "max_ns": 11.02996
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.76992,
+      "min_ns": 10.48883,
+      "max_ns": 24.01029
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.10092,
+      "min_ns": 9.85171,
+      "max_ns": 11.44383
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.35512,
+      "min_ns": 11.66975,
+      "max_ns": 13.10704
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.13225,
+      "min_ns": 9.91413,
+      "max_ns": 11.99362
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 11.07921,
+      "min_ns": 9.866,
+      "max_ns": 11.37375
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 11.07608,
+      "min_ns": 9.89188,
+      "max_ns": 16.98729
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.77112,
+      "min_ns": 10.11679,
+      "max_ns": 11.68867
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.42642,
+      "min_ns": 10.01542,
+      "max_ns": 11.16592
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 11.68783,
+      "min_ns": 10.18204,
+      "max_ns": 12.86342
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.344,
+      "min_ns": 9.85529,
+      "max_ns": 11.106
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.07329,
+      "min_ns": 9.95058,
+      "max_ns": 11.19112
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.10512,
+      "min_ns": 9.95429,
+      "max_ns": 11.33771
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 3.66387,
+      "min_ns": 3.64258,
+      "max_ns": 4.09383
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 3.77562,
+      "min_ns": 3.75846,
+      "max_ns": 4.40979
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 4.26167,
+      "min_ns": 4.1905,
+      "max_ns": 4.70787
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 4.41862,
+      "min_ns": 3.95271,
+      "max_ns": 4.43942
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 3.74408,
+      "min_ns": 3.72583,
+      "max_ns": 4.20358
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 3.77771,
+      "min_ns": 3.75571,
+      "max_ns": 4.32092
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.59575,
+      "min_ns": 10.50846,
+      "max_ns": 12.21796
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.81842,
+      "min_ns": 10.69037,
+      "max_ns": 12.08904
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 10.99417,
+      "min_ns": 10.89846,
+      "max_ns": 12.0445
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.01938,
+      "min_ns": 10.64129,
+      "max_ns": 11.73321
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 11.05658,
+      "min_ns": 10.68979,
+      "max_ns": 12.41879
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.82571,
+      "min_ns": 10.73117,
+      "max_ns": 11.82996
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.57787,
+      "min_ns": 6.23475,
+      "max_ns": 7.14479
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.64904,
+      "min_ns": 6.12933,
+      "max_ns": 7.06967
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 6.96196,
+      "min_ns": 6.34396,
+      "max_ns": 7.11838
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 6.3185,
+      "min_ns": 5.99887,
+      "max_ns": 6.72788
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 6.27079,
+      "min_ns": 6.07221,
+      "max_ns": 6.86408
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 6.15854,
+      "min_ns": 6.06979,
+      "max_ns": 6.96837
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.15842,
+      "min_ns": 6.49071,
+      "max_ns": 13.65604
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.45346,
+      "min_ns": 6.02967,
+      "max_ns": 14.32587
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 7.23388,
+      "min_ns": 6.58638,
+      "max_ns": 12.87071
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 6.87421,
+      "min_ns": 6.45658,
+      "max_ns": 8.67629
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 7.96475,
+      "min_ns": 6.307,
+      "max_ns": 9.47058
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 7.79087,
+      "min_ns": 6.00325,
+      "max_ns": 17.98679
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.61263,
+      "min_ns": 6.73267,
+      "max_ns": 7.68829
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.07125,
+      "min_ns": 6.18379,
+      "max_ns": 7.16721
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 7.22033,
+      "min_ns": 6.31008,
+      "max_ns": 7.32975
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 7.08633,
+      "min_ns": 6.16458,
+      "max_ns": 7.16521
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 7.039,
+      "min_ns": 6.04004,
+      "max_ns": 7.135
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 7.07771,
+      "min_ns": 6.11388,
+      "max_ns": 7.26258
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.37717,
+      "min_ns": 11.31571,
+      "max_ns": 11.56046
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.01571,
+      "min_ns": 10.892,
+      "max_ns": 11.19425
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 11.16338,
+      "min_ns": 11.03875,
+      "max_ns": 11.97842
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.97908,
+      "min_ns": 10.86163,
+      "max_ns": 11.30779
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.89446,
+      "min_ns": 10.76283,
+      "max_ns": 11.15996
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 11.042,
+      "min_ns": 10.90675,
+      "max_ns": 11.15083
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.90133,
+      "min_ns": 11.89046,
+      "max_ns": 13.42658
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 12.49771,
+      "min_ns": 11.27275,
+      "max_ns": 12.78783
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.67538,
+      "min_ns": 11.71117,
+      "max_ns": 13.00958
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 12.4705,
+      "min_ns": 11.42958,
+      "max_ns": 12.90167
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.73308,
+      "min_ns": 11.50592,
+      "max_ns": 12.95779
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.77246,
+      "min_ns": 11.52388,
+      "max_ns": 12.84496
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.90371,
+      "min_ns": 11.42067,
+      "max_ns": 13.12525
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 12.52171,
+      "min_ns": 11.11633,
+      "max_ns": 13.24662
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.70862,
+      "min_ns": 11.43925,
+      "max_ns": 13.6355
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 12.3215,
+      "min_ns": 10.9255,
+      "max_ns": 15.56579
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.6945,
+      "min_ns": 11.31008,
+      "max_ns": 12.93688
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.727,
+      "min_ns": 11.90629,
+      "max_ns": 12.98371
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.12721,
+      "min_ns": 8.98746,
+      "max_ns": 10.27733
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.6265,
+      "min_ns": 8.60533,
+      "max_ns": 9.94579
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 9.77333,
+      "min_ns": 8.74467,
+      "max_ns": 9.87175
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 9.623,
+      "min_ns": 9.0395,
+      "max_ns": 9.73438
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 9.552,
+      "min_ns": 8.55946,
+      "max_ns": 9.77192
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 9.52521,
+      "min_ns": 8.53858,
+      "max_ns": 9.78446
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 14.96221,
+      "min_ns": 13.13021,
+      "max_ns": 15.35787
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 13.51358,
+      "min_ns": 12.92258,
+      "max_ns": 15.031
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 14.08687,
+      "min_ns": 12.91508,
+      "max_ns": 14.95971
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 14.104,
+      "min_ns": 12.62712,
+      "max_ns": 14.72254
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 14.07508,
+      "min_ns": 12.98721,
+      "max_ns": 14.84617
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 13.86017,
+      "min_ns": 13.09567,
+      "max_ns": 14.91571
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.68246,
+      "min_ns": 8.61033,
+      "max_ns": 10.28029
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.54787,
+      "min_ns": 8.48233,
+      "max_ns": 10.65683
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 8.85254,
+      "min_ns": 8.72817,
+      "max_ns": 10.55992
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 8.57946,
+      "min_ns": 8.44213,
+      "max_ns": 9.17458
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 8.59071,
+      "min_ns": 8.50917,
+      "max_ns": 9.05796
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 8.56387,
+      "min_ns": 8.47642,
+      "max_ns": 8.93763
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.18896,
+      "min_ns": 8.78954,
+      "max_ns": 12.50375
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.72479,
+      "min_ns": 8.54763,
+      "max_ns": 11.86121
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 9.33629,
+      "min_ns": 8.96717,
+      "max_ns": 14.397
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 8.73408,
+      "min_ns": 8.54333,
+      "max_ns": 10.26962
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 9.09242,
+      "min_ns": 8.82983,
+      "max_ns": 10.791
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 9.17112,
+      "min_ns": 8.73062,
+      "max_ns": 10.61558
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.78779,
+      "min_ns": 4.98075,
+      "max_ns": 6.42367
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.65533,
+      "min_ns": 4.88579,
+      "max_ns": 5.93233
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 5.67617,
+      "min_ns": 5.1215,
+      "max_ns": 6.16046
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 5.65383,
+      "min_ns": 4.87496,
+      "max_ns": 5.91688
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 5.59329,
+      "min_ns": 4.8025,
+      "max_ns": 5.70625
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 5.60742,
+      "min_ns": 4.84692,
+      "max_ns": 5.78633
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.267,
+      "min_ns": 12.19096,
+      "max_ns": 13.39329
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.6405,
+      "min_ns": 11.58158,
+      "max_ns": 12.44079
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 11.88329,
+      "min_ns": 11.72996,
+      "max_ns": 12.00892
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.70529,
+      "min_ns": 11.56333,
+      "max_ns": 11.84421
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 11.9535,
+      "min_ns": 11.84988,
+      "max_ns": 12.60433
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.02033,
+      "min_ns": 11.81504,
+      "max_ns": 12.50742
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.25604,
+      "min_ns": 6.23371,
+      "max_ns": 7.02837
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.84354,
+      "min_ns": 6.09767,
+      "max_ns": 6.89746
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 6.99042,
+      "min_ns": 6.23,
+      "max_ns": 7.1755
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 6.62371,
+      "min_ns": 5.90083,
+      "max_ns": 6.70237
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 6.81554,
+      "min_ns": 6.07562,
+      "max_ns": 6.88921
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 6.80987,
+      "min_ns": 6.07304,
+      "max_ns": 6.85583
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.60271,
+      "min_ns": 6.18867,
+      "max_ns": 6.93733
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.93975,
+      "min_ns": 5.92771,
+      "max_ns": 6.70442
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 6.22167,
+      "min_ns": 6.19829,
+      "max_ns": 6.96817
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 5.77487,
+      "min_ns": 5.75304,
+      "max_ns": 6.46662
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 5.95408,
+      "min_ns": 5.9355,
+      "max_ns": 6.66425
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 5.98179,
+      "min_ns": 5.94079,
+      "max_ns": 6.66162
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.71612,
+      "min_ns": 5.69475,
+      "max_ns": 6.41592
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.30221,
+      "min_ns": 5.26571,
+      "max_ns": 5.92671
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 5.41429,
+      "min_ns": 5.40196,
+      "max_ns": 6.07292
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 5.32583,
+      "min_ns": 5.29283,
+      "max_ns": 5.95558
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 5.23179,
+      "min_ns": 5.21233,
+      "max_ns": 5.92083
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 5.28221,
+      "min_ns": 5.25233,
+      "max_ns": 5.83579
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.75392,
+      "min_ns": 9.72033,
+      "max_ns": 9.99225
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.53083,
+      "min_ns": 9.48883,
+      "max_ns": 9.63529
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 9.72862,
+      "min_ns": 9.59479,
+      "max_ns": 9.81183
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 9.48217,
+      "min_ns": 9.38267,
+      "max_ns": 9.589
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 9.41725,
+      "min_ns": 9.34337,
+      "max_ns": 9.52275
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 9.48933,
+      "min_ns": 9.46542,
+      "max_ns": 9.65204
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.77975,
+      "min_ns": 10.71392,
+      "max_ns": 11.86725
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.40754,
+      "min_ns": 10.30896,
+      "max_ns": 11.26183
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 10.59804,
+      "min_ns": 10.52812,
+      "max_ns": 11.94546
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.38333,
+      "min_ns": 10.34212,
+      "max_ns": 11.34683
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.75479,
+      "min_ns": 10.65242,
+      "max_ns": 11.73142
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.73508,
+      "min_ns": 10.65246,
+      "max_ns": 11.70842
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.74867,
+      "min_ns": 10.65104,
+      "max_ns": 10.83996
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.33825,
+      "min_ns": 10.29817,
+      "max_ns": 10.46663
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 10.60146,
+      "min_ns": 10.49237,
+      "max_ns": 10.65525
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.26192,
+      "min_ns": 10.17404,
+      "max_ns": 10.35783
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.77121,
+      "min_ns": 10.70404,
+      "max_ns": 10.86642
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.74221,
+      "min_ns": 10.66458,
+      "max_ns": 10.77854
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.35158,
+      "min_ns": 8.26913,
+      "max_ns": 8.40208
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.07508,
+      "min_ns": 8.03521,
+      "max_ns": 8.14858
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 8.05979,
+      "min_ns": 7.979,
+      "max_ns": 8.08638
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 7.97042,
+      "min_ns": 7.94287,
+      "max_ns": 8.00367
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 7.935,
+      "min_ns": 7.87671,
+      "max_ns": 8.08042
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 7.86058,
+      "min_ns": 7.82613,
+      "max_ns": 8.02813
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.17925,
+      "min_ns": 11.64721,
+      "max_ns": 12.42554
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.93783,
+      "min_ns": 11.38492,
+      "max_ns": 12.13417
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 11.97317,
+      "min_ns": 11.49075,
+      "max_ns": 12.354
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.78342,
+      "min_ns": 11.14954,
+      "max_ns": 12.058
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.07317,
+      "min_ns": 11.7865,
+      "max_ns": 12.38708
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.08088,
+      "min_ns": 11.61425,
+      "max_ns": 12.34346
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.7725,
+      "min_ns": 11.28854,
+      "max_ns": 11.81608
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.38071,
+      "min_ns": 11.3665,
+      "max_ns": 11.49375
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 11.77908,
+      "min_ns": 11.52667,
+      "max_ns": 11.87663
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.40096,
+      "min_ns": 10.88746,
+      "max_ns": 11.47183
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.45358,
+      "min_ns": 12.36525,
+      "max_ns": 12.57167
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.47663,
+      "min_ns": 12.43442,
+      "max_ns": 12.60317
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.29387,
+      "min_ns": 11.79387,
+      "max_ns": 12.98379
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.84125,
+      "min_ns": 11.37308,
+      "max_ns": 12.57642
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.25529,
+      "min_ns": 11.81746,
+      "max_ns": 13.11629
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.73496,
+      "min_ns": 11.3245,
+      "max_ns": 12.49167
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 13.11454,
+      "min_ns": 12.52504,
+      "max_ns": 16.97638
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 13.26887,
+      "min_ns": 12.49212,
+      "max_ns": 13.70763
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.83188,
+      "min_ns": 8.801,
+      "max_ns": 9.64821
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.60042,
+      "min_ns": 8.55475,
+      "max_ns": 9.10979
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 8.54646,
+      "min_ns": 8.45092,
+      "max_ns": 8.83721
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 8.63588,
+      "min_ns": 8.56038,
+      "max_ns": 9.44887
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 8.926,
+      "min_ns": 8.85721,
+      "max_ns": 9.52233
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 8.7195,
+      "min_ns": 8.67042,
+      "max_ns": 9.43129
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 13.19546,
+      "min_ns": 13.01971,
+      "max_ns": 14.49029
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 12.79258,
+      "min_ns": 12.68971,
+      "max_ns": 13.398
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 13.07921,
+      "min_ns": 12.93979,
+      "max_ns": 13.30663
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 12.80096,
+      "min_ns": 12.64513,
+      "max_ns": 13.02538
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 13.49521,
+      "min_ns": 13.32508,
+      "max_ns": 13.61279
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 13.47804,
+      "min_ns": 13.30633,
+      "max_ns": 14.36433
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.965,
+      "min_ns": 5.01375,
+      "max_ns": 7.01179
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.80504,
+      "min_ns": 5.35433,
+      "max_ns": 5.97829
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 5.937,
+      "min_ns": 5.22292,
+      "max_ns": 6.45167
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 5.60975,
+      "min_ns": 4.98383,
+      "max_ns": 5.63971
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 5.78454,
+      "min_ns": 5.10121,
+      "max_ns": 6.34479
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 5.78392,
+      "min_ns": 5.12283,
+      "max_ns": 6.28046
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.0205,
+      "min_ns": 5.178,
+      "max_ns": 26.97192
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.42596,
+      "min_ns": 5.00788,
+      "max_ns": 11.538
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 9.55963,
+      "min_ns": 5.13754,
+      "max_ns": 17.91842
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 8.88471,
+      "min_ns": 7.74933,
+      "max_ns": 15.21975
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 8.73229,
+      "min_ns": 7.28637,
+      "max_ns": 11.31325
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 8.23142,
+      "min_ns": 7.17121,
+      "max_ns": 11.44337
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.70096,
+      "min_ns": 5.62558,
+      "max_ns": 12.34796
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.81288,
+      "min_ns": 5.12379,
+      "max_ns": 9.26029
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 7.69538,
+      "min_ns": 5.65712,
+      "max_ns": 13.53433
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 7.54962,
+      "min_ns": 5.457,
+      "max_ns": 11.55596
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 7.31137,
+      "min_ns": 5.56758,
+      "max_ns": 49.79212
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 7.30833,
+      "min_ns": 5.29375,
+      "max_ns": 26.265
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 13.89875,
+      "min_ns": 10.17554,
+      "max_ns": 56.25212
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 13.47575,
+      "min_ns": 9.8085,
+      "max_ns": 29.77896
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 13.25696,
+      "min_ns": 11.16275,
+      "max_ns": 28.88583
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 15.07062,
+      "min_ns": 11.20492,
+      "max_ns": 37.05687
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.69504,
+      "min_ns": 11.11483,
+      "max_ns": 25.89317
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 14.95271,
+      "min_ns": 9.87746,
+      "max_ns": 26.42496
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 13.55725,
+      "min_ns": 12.47346,
+      "max_ns": 15.0295
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 12.9515,
+      "min_ns": 11.92371,
+      "max_ns": 14.56258
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 13.21142,
+      "min_ns": 12.19396,
+      "max_ns": 14.82758
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 12.8465,
+      "min_ns": 11.83371,
+      "max_ns": 12.89183
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 13.25221,
+      "min_ns": 12.31721,
+      "max_ns": 13.83521
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 13.27696,
+      "min_ns": 12.28358,
+      "max_ns": 13.64679
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.13321,
+      "min_ns": 12.116,
+      "max_ns": 12.1835
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.78317,
+      "min_ns": 11.73212,
+      "max_ns": 11.87321
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.02896,
+      "min_ns": 11.95842,
+      "max_ns": 12.327
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.73629,
+      "min_ns": 11.64312,
+      "max_ns": 12.28067
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 12.27108,
+      "min_ns": 12.20442,
+      "max_ns": 12.98154
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 12.15663,
+      "min_ns": 12.12383,
+      "max_ns": 13.10758
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.55033,
+      "min_ns": 9.28983,
+      "max_ns": 10.53133
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.28654,
+      "min_ns": 8.83896,
+      "max_ns": 9.95117
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 8.92642,
+      "min_ns": 8.84079,
+      "max_ns": 9.56563
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 9.005,
+      "min_ns": 8.80192,
+      "max_ns": 9.57454
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 8.74612,
+      "min_ns": 8.68262,
+      "max_ns": 9.40675
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 8.75133,
+      "min_ns": 8.57271,
+      "max_ns": 9.45588
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 14.76017,
+      "min_ns": 13.41008,
+      "max_ns": 14.982
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 14.07375,
+      "min_ns": 12.78767,
+      "max_ns": 14.3015
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 14.07408,
+      "min_ns": 13.01967,
+      "max_ns": 14.34983
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 13.91125,
+      "min_ns": 12.84546,
+      "max_ns": 14.06513
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 13.9825,
+      "min_ns": 12.83775,
+      "max_ns": 14.23863
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 14.03288,
+      "min_ns": 12.87633,
+      "max_ns": 14.112
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 13.79675,
+      "min_ns": 12.73729,
+      "max_ns": 14.73233
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 13.39171,
+      "min_ns": 12.22483,
+      "max_ns": 15.69287
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 13.95579,
+      "min_ns": 12.60287,
+      "max_ns": 14.86571
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 13.35067,
+      "min_ns": 12.24483,
+      "max_ns": 14.61375
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 14.52446,
+      "min_ns": 13.41404,
+      "max_ns": 16.506
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 14.59896,
+      "min_ns": 13.43204,
+      "max_ns": 15.67042
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 12.69358,
+      "min_ns": 11.84596,
+      "max_ns": 13.84212
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 12.21504,
+      "min_ns": 11.42075,
+      "max_ns": 13.32075
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 12.73342,
+      "min_ns": 11.91713,
+      "max_ns": 13.86508
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 11.96325,
+      "min_ns": 11.376,
+      "max_ns": 13.28054
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 13.46267,
+      "min_ns": 12.56825,
+      "max_ns": 14.72933
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 13.39696,
+      "min_ns": 12.52833,
+      "max_ns": 14.58242
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.02958,
+      "min_ns": 10.16137,
+      "max_ns": 11.08808
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.73642,
+      "min_ns": 9.90754,
+      "max_ns": 12.02871
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 10.49283,
+      "min_ns": 9.68812,
+      "max_ns": 11.18538
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 10.54283,
+      "min_ns": 9.67958,
+      "max_ns": 10.62825
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 10.86479,
+      "min_ns": 10.0255,
+      "max_ns": 10.91196
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 10.62925,
+      "min_ns": 9.76775,
+      "max_ns": 10.71738
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 15.69383,
+      "min_ns": 15.16379,
+      "max_ns": 16.63121
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 14.92662,
+      "min_ns": 14.79763,
+      "max_ns": 16.66092
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "combined_safe",
+      "suite": "bench",
+      "median_ns": 15.59962,
+      "min_ns": 14.90517,
+      "max_ns": 16.23875
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "propagation",
+      "suite": "bench",
+      "median_ns": 15.38696,
+      "min_ns": 14.64996,
+      "max_ns": 16.58396
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated",
+      "suite": "bench",
+      "median_ns": 16.04988,
+      "min_ns": 15.47563,
+      "max_ns": 16.74842
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "iterated_propagation",
+      "suite": "bench",
+      "median_ns": 16.26471,
+      "min_ns": 15.33762,
+      "max_ns": 16.80033
+    }
+  ]
+}

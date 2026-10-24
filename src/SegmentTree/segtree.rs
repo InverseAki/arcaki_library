@@ -40,10 +40,10 @@ impl<M: SegtreeMonoid> Segtree<M> {
     pub fn from(a: Vec<M::S>) -> Self {
         let len = a.len();
         let n = len.next_power_of_two();
-        let mut data = vec![M::identity(); 2 * n];
-        for (i, v) in a.iter().enumerate() {
-            data[i + n] = v.clone();
-        }
+        let mut data = Vec::with_capacity(2 * n);
+        data.resize(n, M::identity());
+        data.extend(a);
+        data.resize_with(2 * n, M::identity);
         for i in (1..n).rev() {
             data[i] = M::op(&data[2 * i], &data[2 * i + 1]);
         }
@@ -109,7 +109,8 @@ impl<M: SegtreeMonoid> Segtree<M> {
             while l % 2 == 0 {
                 l >>= 1;
             }
-            if !f(&M::op(&ac, &self.data[l])) {
+            let next = M::op(&ac, &self.data[l]);
+            if !f(&next) {
                 while l < self.size {
                     l <<= 1;
                     let res = M::op(&ac, &self.data[l]);
@@ -120,7 +121,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
                 }
                 return l - self.size;
             }
-            ac = M::op(&ac, &self.data[l]);
+            ac = next;
             l += 1;
             !l.is_power_of_two()
         } {}
@@ -143,7 +144,8 @@ impl<M: SegtreeMonoid> Segtree<M> {
             while r > 1 && r % 2 == 1 {
                 r >>= 1;
             }
-            if !f(&M::op(&self.data[r], &ac)) {
+            let next = M::op(&self.data[r], &ac);
+            if !f(&next) {
                 while r < self.size {
                     r = 2 * r + 1;
                     let res = M::op(&self.data[r], &ac);
@@ -154,7 +156,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
                 }
                 return r + 1 - self.size;
             }
-            ac = M::op(&self.data[r], &ac);
+            ac = next;
             !r.is_power_of_two()
         } {}
         0

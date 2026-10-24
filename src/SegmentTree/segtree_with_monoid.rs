@@ -1,5 +1,5 @@
 // Source: https://github.com/InverseAki/arcaki_library/blob/main/src/SegmentTree/segtree_with_monoid.rs
-pub trait SegtreeMonoid{
+pub trait SegtreeMonoid {
     type S: Clone;
     fn identity() -> Self::S;
     fn op(&self, a: &Self::S, b: &Self::S) -> Self::S;
@@ -22,11 +22,10 @@ impl<M: SegtreeMonoid> Segtree<M> {
     pub fn from(a: Vec<M::S>, m: M) -> Self {
         let n = a.len().next_power_of_two();
         let e = M::identity();
-        let mut data = vec![e; 2 * n];
-
-        for (i, v) in a.into_iter().enumerate() {
-            data[i + n] = v;
-        }
+        let mut data = Vec::with_capacity(2 * n);
+        data.resize(n, e);
+        data.extend(a);
+        data.resize_with(2 * n, M::identity);
         for i in (1..n).rev() {
             data[i] = m.op(&data[2 * i], &data[2 * i + 1]);
         }
@@ -94,7 +93,8 @@ impl<M: SegtreeMonoid> Segtree<M> {
             while l % 2 == 0 {
                 l >>= 1;
             }
-            if !f(&self.m.op(&ac, &self.data[l])) {
+            let next = self.m.op(&ac, &self.data[l]);
+            if !f(&next) {
                 while l < self.n {
                     l <<= 1;
                     let res = self.m.op(&ac, &self.data[l]);
@@ -105,7 +105,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
                 }
                 return l - self.n;
             }
-            ac = self.m.op(&ac, &self.data[l]);
+            ac = next;
             l += 1;
             let z = l as isize;
             (z & -z) != z
@@ -129,7 +129,8 @@ impl<M: SegtreeMonoid> Segtree<M> {
             while r > 1 && r % 2 == 1 {
                 r >>= 1;
             }
-            if !f(&self.m.op(&self.data[r], &ac)) {
+            let next = self.m.op(&self.data[r], &ac);
+            if !f(&next) {
                 while r < self.n {
                     r = 2 * r + 1;
                     let res = self.m.op(&self.data[r], &ac);
@@ -140,7 +141,7 @@ impl<M: SegtreeMonoid> Segtree<M> {
                 }
                 return r + 1 - self.n;
             }
-            ac = self.m.op(&self.data[r], &ac);
+            ac = next;
             let z = r as isize;
             z & -z != z
         } {}

@@ -1,0 +1,43 @@
+{
+  "results": [
+    {
+      "compiler": "1.93.0",
+      "profile": "debug",
+      "passed": 218,
+      "failed": 0,
+      "ignored": 7,
+      "warnings": []
+    },
+    {
+      "compiler": "1.89.0",
+      "profile": "debug",
+      "passed": 11,
+      "failed": 0,
+      "ignored": 0,
+      "warnings": []
+    },
+    {
+      "compiler": "1.89.0",
+      "profile": "release",
+      "passed": 11,
+      "failed": 0,
+      "ignored": 0,
+      "warnings": []
+    },
+    {
+      "compiler": "1.93.0",
+      "profile": "release",
+      "passed": 11,
+      "failed": 0,
+      "ignored": 0,
+      "warnings": []
+    }
+  ],
+  "sources": {
+    "src/SegmentTree/segtree.rs": "dd9da4115f3817bab8737e5298b7cd91971f0576f7b5c93e1b98597df7e1a9c7",
+    "src/SegmentTree/segtree_with_monoid.rs": "a95436f84388bdb813b96c3860f9f83c18a6687ec7ae18ae91ee4af11c3b9673",
+    "src/SegmentTree/lazysegtree.rs": "c580745f5278b09c33d93a24d9fac512836233474b6f435b9dea04210b423129",
+    "tests/segment_tree_optimization.rs": "e241b3e08bf8500f289645fc33023ad338a3072d1dbae1735c18e16a4ef09b91"
+  },
+  "notes": "ARM64 macOS local tests; no external judge submission. Full suite uses cargo test --tests --offline; focused runs use --test segment_tree_optimization --test structures."
+}

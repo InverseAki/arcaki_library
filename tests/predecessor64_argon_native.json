@@ -1,0 +1,1936 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "machine": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "args": {
+    "variants": "baseline,current",
+    "count": 1000000,
+    "repeats": 11,
+    "output": "predecessor64_argon_native",
+    "toolchain": "1.89.0",
+    "native": true,
+    "model": false,
+    "only": null
+  },
+  "medians": [
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.9665,
+      "min_ns": 6.23492,
+      "max_ns": 7.37554
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.58662,
+      "min_ns": 5.84696,
+      "max_ns": 7.32921
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.12942,
+      "min_ns": 5.62942,
+      "max_ns": 6.23296
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.81262,
+      "min_ns": 5.327,
+      "max_ns": 5.90217
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.13729,
+      "min_ns": 4.77671,
+      "max_ns": 5.22912
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.01754,
+      "min_ns": 4.66067,
+      "max_ns": 5.14658
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.48483,
+      "min_ns": 8.34121,
+      "max_ns": 8.67725
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.36754,
+      "min_ns": 8.29721,
+      "max_ns": 8.66121
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.12871,
+      "min_ns": 8.60946,
+      "max_ns": 9.27846
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.5265,
+      "min_ns": 8.04033,
+      "max_ns": 9.02787
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.36288,
+      "min_ns": 7.93183,
+      "max_ns": 8.43783
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.96158,
+      "min_ns": 7.59896,
+      "max_ns": 8.04329
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 2.81592,
+      "min_ns": 2.79838,
+      "max_ns": 2.84375
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 2.89412,
+      "min_ns": 2.87525,
+      "max_ns": 2.94025
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.09942,
+      "min_ns": 7.99158,
+      "max_ns": 8.17625
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.20508,
+      "min_ns": 8.01033,
+      "max_ns": 8.33692
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.63663,
+      "min_ns": 4.59692,
+      "max_ns": 4.67146
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 4.41558,
+      "min_ns": 4.38733,
+      "max_ns": 4.46267
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.59946,
+      "min_ns": 4.42275,
+      "max_ns": 4.67458
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 4.28529,
+      "min_ns": 4.13679,
+      "max_ns": 4.3635
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.20254,
+      "min_ns": 4.18129,
+      "max_ns": 4.27317
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 3.90842,
+      "min_ns": 3.89375,
+      "max_ns": 3.94862
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.11304,
+      "min_ns": 6.86208,
+      "max_ns": 7.21954
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.86787,
+      "min_ns": 6.67183,
+      "max_ns": 6.94571
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.9,
+      "min_ns": 7.85996,
+      "max_ns": 8.00787
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.68858,
+      "min_ns": 7.66254,
+      "max_ns": 7.883
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.87133,
+      "min_ns": 7.81271,
+      "max_ns": 7.90504
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.55617,
+      "min_ns": 7.31058,
+      "max_ns": 7.60458
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.96896,
+      "min_ns": 5.91175,
+      "max_ns": 6.03287
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.72775,
+      "min_ns": 5.69313,
+      "max_ns": 5.80446
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 8.82583,
+      "min_ns": 8.67879,
+      "max_ns": 8.91954
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.53083,
+      "min_ns": 8.40592,
+      "max_ns": 8.66987
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.15771,
+      "min_ns": 5.11825,
+      "max_ns": 5.20638
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.01279,
+      "min_ns": 4.98642,
+      "max_ns": 5.09867
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.22533,
+      "min_ns": 5.18829,
+      "max_ns": 5.31088
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.07833,
+      "min_ns": 5.0445,
+      "max_ns": 5.13546
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 2.94362,
+      "min_ns": 2.92775,
+      "max_ns": 2.98525
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 2.89992,
+      "min_ns": 2.87421,
+      "max_ns": 2.96142
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.00863,
+      "min_ns": 6.93358,
+      "max_ns": 7.18612
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.85796,
+      "min_ns": 6.75312,
+      "max_ns": 6.936
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.69287,
+      "min_ns": 4.31712,
+      "max_ns": 15.84713
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 4.31571,
+      "min_ns": 4.14179,
+      "max_ns": 6.82475
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.3515,
+      "min_ns": 4.29496,
+      "max_ns": 5.16479
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 4.02704,
+      "min_ns": 3.97938,
+      "max_ns": 4.35992
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 3.95392,
+      "min_ns": 3.93333,
+      "max_ns": 4.48183
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 3.68621,
+      "min_ns": 3.66438,
+      "max_ns": 3.75954
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.75017,
+      "min_ns": 6.65763,
+      "max_ns": 6.79196
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.49658,
+      "min_ns": 6.45325,
+      "max_ns": 6.60667
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.41825,
+      "min_ns": 8.03096,
+      "max_ns": 27.57642
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.92708,
+      "min_ns": 7.80483,
+      "max_ns": 35.12817
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.54583,
+      "min_ns": 8.98404,
+      "max_ns": 9.73283
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.14862,
+      "min_ns": 8.60725,
+      "max_ns": 9.32029
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.37171,
+      "min_ns": 7.28196,
+      "max_ns": 8.05658
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.17217,
+      "min_ns": 7.02079,
+      "max_ns": 7.78496
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.91704,
+      "min_ns": 10.7705,
+      "max_ns": 11.71379
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.95262,
+      "min_ns": 10.36354,
+      "max_ns": 11.8365
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.76358,
+      "min_ns": 9.34571,
+      "max_ns": 10.26121
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.5355,
+      "min_ns": 9.11021,
+      "max_ns": 9.71521
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.89546,
+      "min_ns": 9.53325,
+      "max_ns": 10.36975
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.48283,
+      "min_ns": 9.10862,
+      "max_ns": 9.89233
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.36271,
+      "min_ns": 7.33087,
+      "max_ns": 7.55938
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 7.17075,
+      "min_ns": 7.15325,
+      "max_ns": 7.24508
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.75054,
+      "min_ns": 10.98242,
+      "max_ns": 23.8875
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.33762,
+      "min_ns": 10.6345,
+      "max_ns": 36.76617
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 5.14767,
+      "min_ns": 4.80454,
+      "max_ns": 6.35125
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.10142,
+      "min_ns": 4.62521,
+      "max_ns": 5.55537
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 4.77021,
+      "min_ns": 4.53479,
+      "max_ns": 6.29033
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 4.43612,
+      "min_ns": 4.28942,
+      "max_ns": 5.83633
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 3.21725,
+      "min_ns": 3.12533,
+      "max_ns": 5.42513
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 2.88608,
+      "min_ns": 2.84829,
+      "max_ns": 2.90754
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 6.16279,
+      "min_ns": 6.11654,
+      "max_ns": 6.81717
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 5.95042,
+      "min_ns": 5.89125,
+      "max_ns": 6.28008
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.35129,
+      "min_ns": 9.2225,
+      "max_ns": 9.50892
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.96458,
+      "min_ns": 8.87471,
+      "max_ns": 9.06196
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.282,
+      "min_ns": 9.04629,
+      "max_ns": 9.44858
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 8.95763,
+      "min_ns": 8.75325,
+      "max_ns": 9.92163
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 7.06071,
+      "min_ns": 6.92558,
+      "max_ns": 7.24446
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 6.75488,
+      "min_ns": 6.61879,
+      "max_ns": 6.90929
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.23108,
+      "min_ns": 10.13608,
+      "max_ns": 25.78046
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.62767,
+      "min_ns": 9.559,
+      "max_ns": 17.24338
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 10.60208,
+      "min_ns": 10.19267,
+      "max_ns": 11.38633
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 10.30604,
+      "min_ns": 9.80621,
+      "max_ns": 12.26242
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 11.84908,
+      "min_ns": 10.6695,
+      "max_ns": 40.61433
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 11.24721,
+      "min_ns": 10.31042,
+      "max_ns": 12.919
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 9.63733,
+      "min_ns": 9.57779,
+      "max_ns": 9.76392
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 9.36175,
+      "min_ns": 9.25688,
+      "max_ns": 9.63404
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "baseline",
+      "suite": "bench",
+      "median_ns": 14.08971,
+      "min_ns": 13.04817,
+      "max_ns": 15.52979
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "implementation": "current",
+      "suite": "bench",
+      "median_ns": 13.71412,
+      "min_ns": 12.73171,
+      "max_ns": 16.59004
+    },
+    {
+      "pattern": "empty",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 5.88783,
+      "min_ns": 5.55204,
+      "max_ns": 11.3865
+    },
+    {
+      "pattern": "empty",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 5.51717,
+      "min_ns": 5.40858,
+      "max_ns": 8.68279
+    },
+    {
+      "pattern": "empty",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 5.76017,
+      "min_ns": 5.59383,
+      "max_ns": 6.57329
+    },
+    {
+      "pattern": "empty",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 5.56696,
+      "min_ns": 5.39683,
+      "max_ns": 6.03287
+    },
+    {
+      "pattern": "empty",
+      "workload": "extrema",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 4.14517,
+      "min_ns": 4.08946,
+      "max_ns": 4.29087
+    },
+    {
+      "pattern": "empty",
+      "workload": "extrema",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.03558,
+      "min_ns": 3.92746,
+      "max_ns": 4.36888
+    },
+    {
+      "pattern": "empty",
+      "workload": "include",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 1.15867,
+      "min_ns": 1.13262,
+      "max_ns": 1.24146
+    },
+    {
+      "pattern": "empty",
+      "workload": "include",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 1.10792,
+      "min_ns": 1.09292,
+      "max_ns": 1.1545
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 8.80113,
+      "min_ns": 8.58296,
+      "max_ns": 9.02271
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 8.58538,
+      "min_ns": 8.40383,
+      "max_ns": 8.67658
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 8.84717,
+      "min_ns": 8.45333,
+      "max_ns": 8.93783
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 8.62533,
+      "min_ns": 8.27146,
+      "max_ns": 8.86258
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "extrema",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 6.03471,
+      "min_ns": 5.91792,
+      "max_ns": 6.66104
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "extrema",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 5.69333,
+      "min_ns": 5.6485,
+      "max_ns": 6.01479
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "include",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 1.19029,
+      "min_ns": 1.17129,
+      "max_ns": 1.22646
+    },
+    {
+      "pattern": "single_middle",
+      "workload": "include",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 1.14975,
+      "min_ns": 1.13421,
+      "max_ns": 1.49771
+    },
+    {
+      "pattern": "word_end",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 5.07458,
+      "min_ns": 4.98963,
+      "max_ns": 5.35679
+    },
+    {
+      "pattern": "word_end",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.91596,
+      "min_ns": 4.79779,
+      "max_ns": 5.30337
+    },
+    {
+      "pattern": "word_end",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 4.87483,
+      "min_ns": 4.83333,
+      "max_ns": 5.09504
+    },
+    {
+      "pattern": "word_end",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.71446,
+      "min_ns": 4.63725,
+      "max_ns": 4.90375
+    },
+    {
+      "pattern": "word_end",
+      "workload": "extrema",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 5.05162,
+      "min_ns": 5.00021,
+      "max_ns": 5.12417
+    },
+    {
+      "pattern": "word_end",
+      "workload": "extrema",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.77867,
+      "min_ns": 4.73754,
+      "max_ns": 4.87538
+    },
+    {
+      "pattern": "word_end",
+      "workload": "include",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 1.22179,
+      "min_ns": 1.21367,
+      "max_ns": 1.28375
+    },
+    {
+      "pattern": "word_end",
+      "workload": "include",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 1.18479,
+      "min_ns": 1.17217,
+      "max_ns": 1.21467
+    },
+    {
+      "pattern": "dense",
+      "workload": "strict",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 4.76312,
+      "min_ns": 4.45275,
+      "max_ns": 6.26387
+    },
+    {
+      "pattern": "dense",
+      "workload": "strict",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.56717,
+      "min_ns": 4.36446,
+      "max_ns": 5.01258
+    },
+    {
+      "pattern": "dense",
+      "workload": "inclusive",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 4.57475,
+      "min_ns": 4.51308,
+      "max_ns": 4.78333
+    },
+    {
+      "pattern": "dense",
+      "workload": "inclusive",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.53038,
+      "min_ns": 4.48688,
+      "max_ns": 4.59233
+    },
+    {
+      "pattern": "dense",
+      "workload": "extrema",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 4.51992,
+      "min_ns": 4.19979,
+      "max_ns": 5.34142
+    },
+    {
+      "pattern": "dense",
+      "workload": "extrema",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 4.34725,
+      "min_ns": 4.09796,
+      "max_ns": 4.89596
+    },
+    {
+      "pattern": "dense",
+      "workload": "include",
+      "implementation": "baseline",
+      "suite": "edges",
+      "median_ns": 1.361,
+      "min_ns": 1.33179,
+      "max_ns": 1.38121
+    },
+    {
+      "pattern": "dense",
+      "workload": "include",
+      "implementation": "current",
+      "suite": "edges",
+      "median_ns": 1.29012,
+      "min_ns": 1.28658,
+      "max_ns": 1.43188
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 5667.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 166.0,
+      "max_ns": 1417.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 292.0,
+      "min_ns": 250.0,
+      "max_ns": 459.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 291.0,
+      "min_ns": 250.0,
+      "max_ns": 416.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 3209.0,
+      "min_ns": 3208.0,
+      "max_ns": 3542.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 4125.0,
+      "min_ns": 4042.0,
+      "max_ns": 4375.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 5000.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 209.0,
+      "min_ns": 166.0,
+      "max_ns": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 334.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 291.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 12792.0,
+      "min_ns": 12750.0,
+      "max_ns": 12875.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 3583.0,
+      "min_ns": 3541.0,
+      "max_ns": 3750.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 208.0,
+      "min_ns": 208.0,
+      "max_ns": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 208.0,
+      "min_ns": 166.0,
+      "max_ns": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 250.0,
+      "max_ns": 292.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 292.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 2875.0,
+      "min_ns": 2792.0,
+      "max_ns": 3000.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 3667.0,
+      "min_ns": 3541.0,
+      "max_ns": 3750.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 209.0,
+      "min_ns": 208.0,
+      "max_ns": 333.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 208.0,
+      "min_ns": 166.0,
+      "max_ns": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 250.0,
+      "min_ns": 208.0,
+      "max_ns": 333.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 209.0,
+      "min_ns": 208.0,
+      "max_ns": 291.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 11583.0,
+      "min_ns": 11500.0,
+      "max_ns": 13042.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 3167.0,
+      "min_ns": 3166.0,
+      "max_ns": 3250.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 3333.0,
+      "min_ns": 3250.0,
+      "max_ns": 4375.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 1750.0,
+      "min_ns": 1625.0,
+      "max_ns": 7417.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 7042.0,
+      "min_ns": 6792.0,
+      "max_ns": 7666.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 5375.0,
+      "min_ns": 5125.0,
+      "max_ns": 5625.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 186958.0,
+      "min_ns": 157833.0,
+      "max_ns": 236833.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 126417.0,
+      "min_ns": 106459.0,
+      "max_ns": 159458.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 2292.0,
+      "min_ns": 2250.0,
+      "max_ns": 2375.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 1125.0,
+      "min_ns": 1125.0,
+      "max_ns": 1250.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 5041.0,
+      "min_ns": 4875.0,
+      "max_ns": 14750.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 3833.0,
+      "min_ns": 3708.0,
+      "max_ns": 4125.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 798584.0,
+      "min_ns": 689708.0,
+      "max_ns": 1086083.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 82666.0,
+      "min_ns": 70708.0,
+      "max_ns": 200625.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 1500.0,
+      "min_ns": 1416.0,
+      "max_ns": 1708.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 750.0,
+      "min_ns": 708.0,
+      "max_ns": 792.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 3125.0,
+      "min_ns": 3041.0,
+      "max_ns": 3292.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 2375.0,
+      "min_ns": 2250.0,
+      "max_ns": 2500.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 98584.0,
+      "min_ns": 98541.0,
+      "max_ns": 102083.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 66625.0,
+      "min_ns": 66583.0,
+      "max_ns": 81333.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 1417.0,
+      "min_ns": 1416.0,
+      "max_ns": 1500.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 709.0,
+      "min_ns": 667.0,
+      "max_ns": 958.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 3000.0,
+      "min_ns": 2792.0,
+      "max_ns": 3167.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 2250.0,
+      "min_ns": 2167.0,
+      "max_ns": 2500.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "string",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 533791.0,
+      "min_ns": 514375.0,
+      "max_ns": 605250.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "string",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 60750.0,
+      "min_ns": 58583.0,
+      "max_ns": 66958.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 76042.0,
+      "min_ns": 75791.0,
+      "max_ns": 87417.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 34458.0,
+      "min_ns": 34084.0,
+      "max_ns": 52333.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 163333.0,
+      "min_ns": 161709.0,
+      "max_ns": 190917.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 121791.0,
+      "min_ns": 120250.0,
+      "max_ns": 127917.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 76125.0,
+      "min_ns": 75834.0,
+      "max_ns": 107875.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 34542.0,
+      "min_ns": 34125.0,
+      "max_ns": 37833.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 163583.0,
+      "min_ns": 162083.0,
+      "max_ns": 204042.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 121792.0,
+      "min_ns": 120208.0,
+      "max_ns": 133833.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 76208.0,
+      "min_ns": 75875.0,
+      "max_ns": 110792.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 34750.0,
+      "min_ns": 34250.0,
+      "max_ns": 78333.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 168375.0,
+      "min_ns": 162125.0,
+      "max_ns": 181375.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 125167.0,
+      "min_ns": 120041.0,
+      "max_ns": 156792.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 78750.0,
+      "min_ns": 78541.0,
+      "max_ns": 130125.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "words",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 35917.0,
+      "min_ns": 35459.0,
+      "max_ns": 41958.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "baseline",
+      "suite": "constructors",
+      "median_ns": 169500.0,
+      "min_ns": 167458.0,
+      "max_ns": 183584.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "usize",
+      "implementation": "current",
+      "suite": "constructors",
+      "median_ns": 125958.0,
+      "min_ns": 124500.0,
+      "max_ns": 149584.0
+    },
+    {
+      "stride": "2",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 1.13817,
+      "min_ns": 0.97525,
+      "max_ns": 1.54917
+    },
+    {
+      "stride": "2",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.92071,
+      "min_ns": 0.79529,
+      "max_ns": 1.19742
+    },
+    {
+      "stride": "2",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 1.021,
+      "min_ns": 0.93888,
+      "max_ns": 1.17121
+    },
+    {
+      "stride": "2",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.74292,
+      "min_ns": 0.71554,
+      "max_ns": 0.94412
+    },
+    {
+      "stride": "64",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.76946,
+      "min_ns": 0.75313,
+      "max_ns": 0.83546
+    },
+    {
+      "stride": "64",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.62108,
+      "min_ns": 0.60913,
+      "max_ns": 0.638
+    },
+    {
+      "stride": "64",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.90687,
+      "min_ns": 0.90304,
+      "max_ns": 0.95208
+    },
+    {
+      "stride": "64",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.66821,
+      "min_ns": 0.66442,
+      "max_ns": 0.73167
+    },
+    {
+      "stride": "4096",
+      "workload": "insert_present",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.78321,
+      "min_ns": 0.75938,
+      "max_ns": 0.80288
+    },
+    {
+      "stride": "4096",
+      "workload": "insert_present",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.64987,
+      "min_ns": 0.64842,
+      "max_ns": 0.67621
+    },
+    {
+      "stride": "4096",
+      "workload": "remove_absent",
+      "implementation": "baseline",
+      "suite": "noops",
+      "median_ns": 0.94088,
+      "min_ns": 0.93696,
+      "max_ns": 0.95692
+    },
+    {
+      "stride": "4096",
+      "workload": "remove_absent",
+      "implementation": "current",
+      "suite": "noops",
+      "median_ns": 0.69342,
+      "min_ns": 0.689,
+      "max_ns": 0.72854
+    }
+  ],
+  "source_sha256": {
+    "baseline": "e80d84f45f91847fdb0f5f66fc47196408061b47d33cf23e6e90ab872dfc68f4",
+    "current": "ca2174608eaba4e24f5ca6b81d132f6ea78d5b3b5dbfd90af766d2c45752e326"
+  }
+}

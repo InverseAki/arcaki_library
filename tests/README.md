@@ -181,3 +181,8 @@ UFと重み付きUFをRollbackVectorに基づく実装へ変更し、RollbackSeg
 `IntMap<K, V>` と `U32Map<V>` / `U64Map<V>` / `UsizeMap<V>` を追加。
 [仕様・検証・既存FxMapとの速度比較・再現手順](intmap.md)。
 `cargo test --offline --test intmap` とrelease、Rust 1.89でも同じ8テストを確認。
+
+## セグメント木・遅延セグメント木の高速化（2026-10-22）
+
+通常版・モノイド保持版・遅延版の公開 API を保ち、構築・探索・伝播・部分配列取得を改善。
+[比較候補・性能・検証・再現手順](segment_tree_performance.md)。

@@ -148,6 +148,118 @@ impl<M: SegtreeMonoid> PersistentSegtree<M> {
         self.max_right_dfs(self.root[t] as usize, 0, self.n, l, &mut ac, &f)
     }
 
+    #[inline]
+    pub fn parallel_max_right<F>(&self, ts: &[usize], l: usize, f: F) -> usize
+    where
+        F: Fn(&[M::S]) -> bool,
+    {
+        assert!(l <= self.n);
+        let roots: Vec<u32> = ts.iter().map(|&t| self.root[t]).collect();
+        let mut ac: Vec<M::S> = ts.iter().map(|_| M::identity()).collect();
+        assert!(f(&ac));
+        if l == self.n || ts.is_empty() {
+            return self.n;
+        }
+        self.parallel_max_right_dfs(&roots, 0, self.n, l, &mut ac, &f)
+    }
+
+    #[inline]
+    pub fn parallel_min_left<F>(&self, ts: &[usize], r: usize, f: F) -> usize
+    where
+        F: Fn(&[M::S]) -> bool,
+    {
+        assert!(r <= self.n);
+        let roots: Vec<u32> = ts.iter().map(|&t| self.root[t]).collect();
+        let mut ac: Vec<M::S> = ts.iter().map(|_| M::identity()).collect();
+        assert!(f(&ac));
+        if r == 0 || ts.is_empty() {
+            return 0;
+        }
+        self.parallel_min_left_dfs(&roots, 0, self.n, r, &mut ac, &f)
+    }
+
+    fn parallel_max_right_dfs<F>(
+        &self,
+        cur: &[u32],
+        l: usize,
+        r: usize,
+        x: usize,
+        ac: &mut Vec<M::S>,
+        f: &F,
+    ) -> usize
+    where
+        F: Fn(&[M::S]) -> bool,
+    {
+        if r <= x {
+            return x;
+        }
+        if x <= l {
+            let next: Vec<M::S> = cur
+                .iter()
+                .zip(ac.iter())
+                .map(|(&p, a)| M::op(a, &self.data[p as usize].val))
+                .collect();
+            if f(&next) {
+                *ac = next;
+                return r;
+            }
+            if l + 1 == r {
+                return l;
+            }
+        }
+        let m = (l + r) >> 1;
+        let mut children: Vec<u32> = cur.iter().map(|&p| self.data[p as usize].left).collect();
+        let ret = self.parallel_max_right_dfs(&children, l, m, x, ac, f);
+        if ret < m {
+            return ret;
+        }
+        for (child, &p) in children.iter_mut().zip(cur) {
+            *child = self.data[p as usize].right;
+        }
+        self.parallel_max_right_dfs(&children, m, r, x, ac, f)
+    }
+
+    fn parallel_min_left_dfs<F>(
+        &self,
+        cur: &[u32],
+        l: usize,
+        r: usize,
+        x: usize,
+        ac: &mut Vec<M::S>,
+        f: &F,
+    ) -> usize
+    where
+        F: Fn(&[M::S]) -> bool,
+    {
+        if x <= l {
+            return l;
+        }
+        if r <= x {
+            let next: Vec<M::S> = cur
+                .iter()
+                .zip(ac.iter())
+                .map(|(&p, a)| M::op(&self.data[p as usize].val, a))
+                .collect();
+            if f(&next) {
+                *ac = next;
+                return l;
+            }
+            if l + 1 == r {
+                return r;
+            }
+        }
+        let m = (l + r) >> 1;
+        let mut children: Vec<u32> = cur.iter().map(|&p| self.data[p as usize].right).collect();
+        let ret = self.parallel_min_left_dfs(&children, m, r, x, ac, f);
+        if ret > m {
+            return ret;
+        }
+        for (child, &p) in children.iter_mut().zip(cur) {
+            *child = self.data[p as usize].left;
+        }
+        self.parallel_min_left_dfs(&children, l, m, x, ac, f)
+    }
+
     #[inline(always)]
     fn min_left_dfs<F>(&self, cur: usize, l: usize, r: usize, x: usize, ac: &mut M::S, f: &F) -> usize where F: Fn(&M::S)->bool{
         if x <= l {return l;}
