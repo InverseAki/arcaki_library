@@ -294,6 +294,7 @@ def prepare(directory, selected):
             text = text.replace('BUILD_IMPLS', impls)
         (directory / (kind + '.rs')).write_text(text)
     model = (ROOT / 'tests/predecessor64_performance/model.rs').read_text()
+    model = model.replace('include!("model_checks.rs");', (ROOT / 'tests/predecessor64_performance/model_checks.rs').read_text())
     model = model[:model.index('#[test] fn baseline_model')]
     model += '\n'.join(f'#[test] fn {name}_model() {{ verify::<{name}::Predecessor64>(); }}' for name in names)
     (directory / 'model.rs').write_text(model)

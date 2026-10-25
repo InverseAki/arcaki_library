@@ -1,0 +1,532 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "args": {
+    "variants": "baseline,pred,current",
+    "count": 1000000,
+    "repeats": 9,
+    "model": false,
+    "only": "bench",
+    "large": true,
+    "output": "veb_argon_accepted_large_repeat"
+  },
+  "source_sha256": {
+    "baseline": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626",
+    "current": "1fba8e5fdf880a98a7450a1fa8005dda934ce5555179c0fb768616bf02ab42b5",
+    "pred": "ca2174608eaba4e24f5ca6b81d132f6ea78d5b3b5dbfd90af766d2c45752e326"
+  },
+  "medians": [
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "baseline": 9.78275,
+      "pred": 8.98708,
+      "current": 8.81687
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "baseline": 9.66354,
+      "pred": 8.90929,
+      "current": 8.78542
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "baseline": 8.62425,
+      "pred": 7.38375,
+      "current": 7.51179
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "baseline": 11.12346,
+      "pred": 9.76412,
+      "current": 9.86129
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "extrema",
+      "baseline": 4.42804,
+      "pred": 5.36913,
+      "current": 4.16792
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "contains",
+      "baseline": 1.10629,
+      "pred": 1.453,
+      "current": 1.06862
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "empty",
+      "baseline": 4.35492,
+      "pred": 5.07892,
+      "current": 4.40992
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "boundary",
+      "baseline": 9.60442,
+      "pred": 8.94708,
+      "current": 8.68058
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "strict",
+      "baseline": 8.77571,
+      "pred": 6.49779,
+      "current": 6.62079
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "inclusive",
+      "baseline": 8.7825,
+      "pred": 6.51692,
+      "current": 6.62704
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "update",
+      "baseline": 8.62808,
+      "pred": 7.31746,
+      "current": 7.13629
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "mixed",
+      "baseline": 12.74404,
+      "pred": 10.16321,
+      "current": 10.0865
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "extrema",
+      "baseline": 4.43904,
+      "pred": 5.35833,
+      "current": 4.13592
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "contains",
+      "baseline": 1.11946,
+      "pred": 1.42413,
+      "current": 1.0695
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "empty",
+      "baseline": 4.38008,
+      "pred": 5.10175,
+      "current": 4.43663
+    },
+    {
+      "n": "16777216",
+      "stride": "65536",
+      "workload": "boundary",
+      "baseline": 8.76408,
+      "pred": 6.51983,
+      "current": 6.56896
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "strict",
+      "baseline": 8.77479,
+      "pred": 7.00908,
+      "current": 6.91779
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "inclusive",
+      "baseline": 8.82842,
+      "pred": 6.96492,
+      "current": 6.84992
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "update",
+      "baseline": 9.05971,
+      "pred": 6.89888,
+      "current": 7.57538
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "mixed",
+      "baseline": 11.43867,
+      "pred": 9.28742,
+      "current": 9.74212
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "extrema",
+      "baseline": 4.43742,
+      "pred": 5.37563,
+      "current": 4.13358
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "contains",
+      "baseline": 1.1405,
+      "pred": 1.42754,
+      "current": 1.08883
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "empty",
+      "baseline": 4.36842,
+      "pred": 5.09646,
+      "current": 4.44221
+    },
+    {
+      "n": "16777216",
+      "stride": "1048576",
+      "workload": "boundary",
+      "baseline": 8.75958,
+      "pred": 6.94879,
+      "current": 6.97267
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "strict",
+      "baseline": 5.65075,
+      "pred": 6.63729,
+      "current": 5.64121
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "inclusive",
+      "baseline": 5.57146,
+      "pred": 6.63233,
+      "current": 5.52296
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "update",
+      "baseline": 3.15529,
+      "pred": 3.80271,
+      "current": 3.25013
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "mixed",
+      "baseline": 6.80146,
+      "pred": 7.6075,
+      "current": 6.85463
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "extrema",
+      "baseline": 4.44075,
+      "pred": 5.39933,
+      "current": 4.11667
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "contains",
+      "baseline": 1.13437,
+      "pred": 1.42221,
+      "current": 1.09125
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "empty",
+      "baseline": 4.39262,
+      "pred": 5.097,
+      "current": 4.43796
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "boundary",
+      "baseline": 5.65058,
+      "pred": 6.62362,
+      "current": 5.60192
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "strict",
+      "baseline": 19.95917,
+      "pred": 14.85029,
+      "current": 13.12292
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "inclusive",
+      "baseline": 20.01433,
+      "pred": 14.71412,
+      "current": 13.07225
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "update",
+      "baseline": 13.00238,
+      "pred": 8.97325,
+      "current": 8.45108
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "mixed",
+      "baseline": 21.37221,
+      "pred": 13.37008,
+      "current": 13.20967
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "extrema",
+      "baseline": 4.46054,
+      "pred": 5.70421,
+      "current": 4.11512
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "contains",
+      "baseline": 7.03975,
+      "pred": 7.10675,
+      "current": 7.12512
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "empty",
+      "baseline": 10.08587,
+      "pred": 13.26729,
+      "current": 9.34758
+    },
+    {
+      "n": "268435456",
+      "stride": "4096",
+      "workload": "boundary",
+      "baseline": 19.66317,
+      "pred": 14.48717,
+      "current": 13.38371
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "strict",
+      "baseline": 25.41667,
+      "pred": 14.43388,
+      "current": 13.89508
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "inclusive",
+      "baseline": 25.91108,
+      "pred": 14.42804,
+      "current": 13.2015
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "update",
+      "baseline": 12.98312,
+      "pred": 8.59142,
+      "current": 8.43067
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "mixed",
+      "baseline": 23.13621,
+      "pred": 13.18817,
+      "current": 13.138
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "extrema",
+      "baseline": 4.48254,
+      "pred": 5.76429,
+      "current": 4.14663
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "contains",
+      "baseline": 7.18612,
+      "pred": 6.86254,
+      "current": 7.09854
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "empty",
+      "baseline": 9.96637,
+      "pred": 13.18788,
+      "current": 9.44371
+    },
+    {
+      "n": "268435456",
+      "stride": "65536",
+      "workload": "boundary",
+      "baseline": 25.62329,
+      "pred": 14.2325,
+      "current": 13.55492
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "strict",
+      "baseline": 23.07533,
+      "pred": 17.03,
+      "current": 15.66017
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "inclusive",
+      "baseline": 22.83762,
+      "pred": 16.6305,
+      "current": 15.35871
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "update",
+      "baseline": 10.06654,
+      "pred": 6.92087,
+      "current": 6.99442
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "mixed",
+      "baseline": 20.96075,
+      "pred": 13.45046,
+      "current": 13.08912
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "extrema",
+      "baseline": 4.43404,
+      "pred": 5.75008,
+      "current": 4.12437
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "contains",
+      "baseline": 7.44004,
+      "pred": 7.09592,
+      "current": 7.05125
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "empty",
+      "baseline": 9.78283,
+      "pred": 13.14658,
+      "current": 9.20825
+    },
+    {
+      "n": "268435456",
+      "stride": "1048576",
+      "workload": "boundary",
+      "baseline": 22.64558,
+      "pred": 16.44992,
+      "current": 15.66408
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "strict",
+      "baseline": 11.75696,
+      "pred": 16.70292,
+      "current": 10.97254
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "inclusive",
+      "baseline": 11.53313,
+      "pred": 16.43142,
+      "current": 10.56904
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "update",
+      "baseline": 4.018,
+      "pred": 5.05146,
+      "current": 3.89204
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "mixed",
+      "baseline": 10.632,
+      "pred": 13.63117,
+      "current": 10.12558
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "extrema",
+      "baseline": 4.56117,
+      "pred": 5.76379,
+      "current": 4.24179
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "contains",
+      "baseline": 7.78021,
+      "pred": 7.501,
+      "current": 7.8095
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "empty",
+      "baseline": 10.67442,
+      "pred": 14.575,
+      "current": 10.37175
+    },
+    {
+      "n": "268435456",
+      "stride": "268435456",
+      "workload": "boundary",
+      "baseline": 12.90713,
+      "pred": 17.89925,
+      "current": 11.67533
+    }
+  ]
+}

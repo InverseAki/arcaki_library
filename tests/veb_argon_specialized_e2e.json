@@ -1,0 +1,17 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "args": {
+    "variants": "baseline,pred,packed3,specialized",
+    "n": 10000000,
+    "q": 1000000,
+    "repeats": 9,
+    "output": "veb_argon_specialized_e2e"
+  },
+  "source_sha256": {
+    "baseline": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626",
+    "pred": "ca2174608eaba4e24f5ca6b81d132f6ea78d5b3b5dbfd90af766d2c45752e326",
+    "packed3": "097626f7d327ea1d34464475c57163f8244985d432238c44e2d66bd03cc33f10",
+    "specialized": "be9206ce175e26f5a5caebf69ce91a4696a475ac2fca40645d6e89e037d16255"
+  },
+  "note": "Local generated cases, not official tests. Identical I/O. Includes startup, construction, output-file writes and destruction. Per-child peak RSS from wait4. All outputs compared, small case also checked against sorted-list oracle."
+}

@@ -1,0 +1,852 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "args": {
+    "variants": "baseline,current,minimum",
+    "count": 500000,
+    "repeats": 7,
+    "model": true,
+    "only": "bench",
+    "large": false,
+    "output": "veb_argon_minimum"
+  },
+  "source_sha256": {
+    "baseline": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626",
+    "current": "21f7829e9a84e933ba805efb1fab6dcb73f0d09478f82dc61f5495a1da22a8d4",
+    "minimum": "b8bd792db8234b6d8a4bb9527ae59b306cdf42ffaef10738e508f31aa6d4e255"
+  },
+  "medians": [
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "strict",
+      "baseline": 5.502,
+      "current": 5.74742,
+      "minimum": 5.35567
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "inclusive",
+      "baseline": 4.07667,
+      "current": 4.105,
+      "minimum": 4.11183
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "update",
+      "baseline": 3.71075,
+      "current": 3.68725,
+      "minimum": 3.69408
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "mixed",
+      "baseline": 6.34808,
+      "current": 6.44592,
+      "minimum": 6.395
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "extrema",
+      "baseline": 3.77025,
+      "current": 3.77075,
+      "minimum": 3.83217
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "contains",
+      "baseline": 0.95183,
+      "current": 0.95267,
+      "minimum": 0.95233
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "empty",
+      "baseline": 4.27792,
+      "current": 4.33392,
+      "minimum": 4.32692
+    },
+    {
+      "n": "64",
+      "stride": "2",
+      "workload": "boundary",
+      "baseline": 4.36142,
+      "current": 4.343,
+      "minimum": 4.33683
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "strict",
+      "baseline": 6.897,
+      "current": 6.90833,
+      "minimum": 6.82633
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "inclusive",
+      "baseline": 6.958,
+      "current": 6.99092,
+      "minimum": 6.89133
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "update",
+      "baseline": 3.15775,
+      "current": 3.14233,
+      "minimum": 3.14292
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "mixed",
+      "baseline": 7.24167,
+      "current": 7.171,
+      "minimum": 7.28392
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "extrema",
+      "baseline": 3.79592,
+      "current": 3.78708,
+      "minimum": 3.84367
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "contains",
+      "baseline": 0.95192,
+      "current": 0.95475,
+      "minimum": 0.95508
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "empty",
+      "baseline": 4.33733,
+      "current": 4.37392,
+      "minimum": 4.37392
+    },
+    {
+      "n": "64",
+      "stride": "64",
+      "workload": "boundary",
+      "baseline": 4.38133,
+      "current": 4.37083,
+      "minimum": 4.34558
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "strict",
+      "baseline": 3.94117,
+      "current": 4.10033,
+      "minimum": 3.99292
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "inclusive",
+      "baseline": 4.0875,
+      "current": 4.022,
+      "minimum": 4.07325
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "update",
+      "baseline": 3.73525,
+      "current": 3.73242,
+      "minimum": 3.73917
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "mixed",
+      "baseline": 6.34533,
+      "current": 6.45183,
+      "minimum": 6.35942
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "extrema",
+      "baseline": 3.81408,
+      "current": 3.839,
+      "minimum": 3.83892
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "contains",
+      "baseline": 0.95875,
+      "current": 0.94917,
+      "minimum": 0.95008
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "empty",
+      "baseline": 4.31017,
+      "current": 4.414,
+      "minimum": 4.39983
+    },
+    {
+      "n": "4096",
+      "stride": "2",
+      "workload": "boundary",
+      "baseline": 4.56892,
+      "current": 4.44242,
+      "minimum": 4.40808
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "strict",
+      "baseline": 7.541,
+      "current": 7.54058,
+      "minimum": 7.43658
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "inclusive",
+      "baseline": 7.48017,
+      "current": 7.49283,
+      "minimum": 7.49642
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "update",
+      "baseline": 5.80342,
+      "current": 5.75142,
+      "minimum": 5.743
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "mixed",
+      "baseline": 8.419,
+      "current": 8.42692,
+      "minimum": 8.3445
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "extrema",
+      "baseline": 3.78592,
+      "current": 3.76267,
+      "minimum": 3.84242
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "contains",
+      "baseline": 0.95233,
+      "current": 0.95383,
+      "minimum": 0.95858
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "empty",
+      "baseline": 4.275,
+      "current": 4.36033,
+      "minimum": 4.34842
+    },
+    {
+      "n": "4096",
+      "stride": "64",
+      "workload": "boundary",
+      "baseline": 4.56333,
+      "current": 4.45383,
+      "minimum": 4.42692
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "strict",
+      "baseline": 4.95217,
+      "current": 4.93692,
+      "minimum": 4.94375
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "inclusive",
+      "baseline": 4.96708,
+      "current": 4.91583,
+      "minimum": 4.88042
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "update",
+      "baseline": 3.20283,
+      "current": 3.16683,
+      "minimum": 3.15508
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "mixed",
+      "baseline": 6.56675,
+      "current": 6.52517,
+      "minimum": 6.55792
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "extrema",
+      "baseline": 4.36575,
+      "current": 4.12825,
+      "minimum": 4.14933
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "contains",
+      "baseline": 0.9525,
+      "current": 0.95242,
+      "minimum": 0.95225
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "empty",
+      "baseline": 4.28892,
+      "current": 4.36175,
+      "minimum": 4.37225
+    },
+    {
+      "n": "4096",
+      "stride": "4096",
+      "workload": "boundary",
+      "baseline": 4.92167,
+      "current": 4.91883,
+      "minimum": 4.91725
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "strict",
+      "baseline": 3.9625,
+      "current": 4.11208,
+      "minimum": 3.99358
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "inclusive",
+      "baseline": 4.03775,
+      "current": 4.02933,
+      "minimum": 4.07142
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "update",
+      "baseline": 3.56317,
+      "current": 3.56825,
+      "minimum": 3.566
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "mixed",
+      "baseline": 6.13983,
+      "current": 6.17558,
+      "minimum": 6.20042
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "extrema",
+      "baseline": 3.75308,
+      "current": 3.76017,
+      "minimum": 3.815
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "contains",
+      "baseline": 0.93933,
+      "current": 0.93317,
+      "minimum": 0.93317
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "empty",
+      "baseline": 4.34192,
+      "current": 4.42575,
+      "minimum": 4.38183
+    },
+    {
+      "n": "262144",
+      "stride": "2",
+      "workload": "boundary",
+      "baseline": 4.66542,
+      "current": 4.53933,
+      "minimum": 4.4485
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "strict",
+      "baseline": 7.64192,
+      "current": 7.58575,
+      "minimum": 7.52817
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "inclusive",
+      "baseline": 7.68067,
+      "current": 7.57142,
+      "minimum": 7.58592
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "update",
+      "baseline": 5.81775,
+      "current": 5.72858,
+      "minimum": 5.71667
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "mixed",
+      "baseline": 8.49275,
+      "current": 8.44658,
+      "minimum": 8.40967
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "extrema",
+      "baseline": 3.80325,
+      "current": 3.76617,
+      "minimum": 3.82708
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "contains",
+      "baseline": 0.94733,
+      "current": 0.94833,
+      "minimum": 0.95467
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "empty",
+      "baseline": 4.30992,
+      "current": 4.37925,
+      "minimum": 4.36542
+    },
+    {
+      "n": "262144",
+      "stride": "64",
+      "workload": "boundary",
+      "baseline": 4.63275,
+      "current": 4.50858,
+      "minimum": 4.41775
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "strict",
+      "baseline": 7.98283,
+      "current": 7.93742,
+      "minimum": 7.8895
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "inclusive",
+      "baseline": 8.00117,
+      "current": 8.04283,
+      "minimum": 7.95842
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "update",
+      "baseline": 6.2485,
+      "current": 6.28375,
+      "minimum": 6.29017
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "mixed",
+      "baseline": 8.99217,
+      "current": 8.97525,
+      "minimum": 8.94033
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "extrema",
+      "baseline": 4.34333,
+      "current": 4.13767,
+      "minimum": 4.11658
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "contains",
+      "baseline": 0.95333,
+      "current": 0.95392,
+      "minimum": 0.95275
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "empty",
+      "baseline": 4.32875,
+      "current": 4.40433,
+      "minimum": 4.395
+    },
+    {
+      "n": "262144",
+      "stride": "4096",
+      "workload": "boundary",
+      "baseline": 7.99233,
+      "current": 7.97392,
+      "minimum": 7.96058
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "strict",
+      "baseline": 6.15483,
+      "current": 6.0045,
+      "minimum": 6.03075
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "inclusive",
+      "baseline": 6.09633,
+      "current": 5.87775,
+      "minimum": 5.89342
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "update",
+      "baseline": 3.15867,
+      "current": 3.14508,
+      "minimum": 3.14308
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "mixed",
+      "baseline": 6.83125,
+      "current": 6.79475,
+      "minimum": 6.8585
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "extrema",
+      "baseline": 4.43975,
+      "current": 4.18033,
+      "minimum": 4.19275
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "contains",
+      "baseline": 0.95225,
+      "current": 0.96425,
+      "minimum": 0.95942
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "empty",
+      "baseline": 4.314,
+      "current": 4.38783,
+      "minimum": 4.36192
+    },
+    {
+      "n": "262144",
+      "stride": "262144",
+      "workload": "boundary",
+      "baseline": 6.09975,
+      "current": 5.97992,
+      "minimum": 5.97792
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "strict",
+      "baseline": 4.1965,
+      "current": 4.32958,
+      "minimum": 4.19283
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "inclusive",
+      "baseline": 4.20325,
+      "current": 4.18425,
+      "minimum": 4.20942
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "update",
+      "baseline": 3.01025,
+      "current": 2.96633,
+      "minimum": 2.86617
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "mixed",
+      "baseline": 5.7665,
+      "current": 5.81975,
+      "minimum": 5.86717
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "extrema",
+      "baseline": 3.75575,
+      "current": 3.76658,
+      "minimum": 3.81233
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "contains",
+      "baseline": 1.33133,
+      "current": 1.30117,
+      "minimum": 1.27758
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "empty",
+      "baseline": 4.38467,
+      "current": 4.42783,
+      "minimum": 4.41225
+    },
+    {
+      "n": "16777216",
+      "stride": "2",
+      "workload": "boundary",
+      "baseline": 4.8275,
+      "current": 4.6545,
+      "minimum": 4.56183
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "strict",
+      "baseline": 8.76367,
+      "current": 8.77875,
+      "minimum": 8.64483
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "inclusive",
+      "baseline": 8.79783,
+      "current": 8.74017,
+      "minimum": 8.82867
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "update",
+      "baseline": 6.14442,
+      "current": 6.12233,
+      "minimum": 6.07975
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "mixed",
+      "baseline": 9.328,
+      "current": 9.32725,
+      "minimum": 9.31992
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "extrema",
+      "baseline": 3.74792,
+      "current": 3.75825,
+      "minimum": 3.81167
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "contains",
+      "baseline": 1.06458,
+      "current": 1.06875,
+      "minimum": 1.06292
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "empty",
+      "baseline": 4.37075,
+      "current": 4.44333,
+      "minimum": 4.42892
+    },
+    {
+      "n": "16777216",
+      "stride": "64",
+      "workload": "boundary",
+      "baseline": 4.76975,
+      "current": 4.57692,
+      "minimum": 4.49275
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "strict",
+      "baseline": 9.61367,
+      "current": 8.63067,
+      "minimum": 8.6215
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "inclusive",
+      "baseline": 9.62475,
+      "current": 8.61492,
+      "minimum": 8.63408
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "update",
+      "baseline": 8.61167,
+      "current": 7.43333,
+      "minimum": 7.4545
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "mixed",
+      "baseline": 11.08233,
+      "current": 9.79683,
+      "minimum": 9.78933
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "extrema",
+      "baseline": 4.35125,
+      "current": 4.13925,
+      "minimum": 4.11958
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "contains",
+      "baseline": 1.0745,
+      "current": 1.07317,
+      "minimum": 1.06142
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "empty",
+      "baseline": 4.33792,
+      "current": 4.42258,
+      "minimum": 4.40583
+    },
+    {
+      "n": "16777216",
+      "stride": "4096",
+      "workload": "boundary",
+      "baseline": 9.64667,
+      "current": 8.61758,
+      "minimum": 8.583
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "strict",
+      "baseline": 5.69392,
+      "current": 5.63608,
+      "minimum": 5.62508
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "inclusive",
+      "baseline": 5.5745,
+      "current": 5.4655,
+      "minimum": 5.52292
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "update",
+      "baseline": 3.14908,
+      "current": 3.60625,
+      "minimum": 3.107
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "mixed",
+      "baseline": 6.79983,
+      "current": 6.95817,
+      "minimum": 6.668
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "extrema",
+      "baseline": 4.37167,
+      "current": 4.17425,
+      "minimum": 4.12417
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "contains",
+      "baseline": 1.09333,
+      "current": 1.07658,
+      "minimum": 1.07892
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "empty",
+      "baseline": 4.37392,
+      "current": 4.49692,
+      "minimum": 4.44033
+    },
+    {
+      "n": "16777216",
+      "stride": "16777216",
+      "workload": "boundary",
+      "baseline": 5.67808,
+      "current": 5.58617,
+      "minimum": 5.61167
+    }
+  ]
+}

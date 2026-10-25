@@ -1,0 +1,902 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "args": {
+    "variants": "baseline,packed,bottomup,swar,exact",
+    "count": 100000,
+    "repeats": 3,
+    "model": true,
+    "only": "constructors",
+    "large": false,
+    "output": "veb_argon_constructors"
+  },
+  "source_sha256": {
+    "baseline": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626",
+    "packed": "5c6c17fe53175d8d16c394fe756d68c4eabb0597010dc4e59417582a165af4fa",
+    "bottomup": "6a204f83dbdd3a1716188dbfe3151d4719b499fbd1a9f25d3964604df6216625",
+    "swar": "012f7085c75f0d707c12e15a5497419a533b1989741cfbc9eb92d93b67ddc735",
+    "exact": "ec8587fb8c2a9bbfb47eaeef9e409ae17d76952d37d8a87d360364b50246af42"
+  },
+  "medians": [
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 167.0,
+      "packed": 167.0,
+      "bottomup": 292.0,
+      "swar": 166.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 167.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 167.0,
+      "exact": 166.0
+    },
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 375.0,
+      "packed": 375.0,
+      "bottomup": 500.0,
+      "swar": 334.0,
+      "exact": 416.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 125.0,
+      "packed": 167.0,
+      "bottomup": 292.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "packed": 125.0,
+      "bottomup": 250.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 292.0,
+      "packed": 333.0,
+      "bottomup": 416.0,
+      "swar": 250.0,
+      "exact": 291.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 125.0,
+      "packed": 125.0,
+      "bottomup": 250.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "packed": 125.0,
+      "bottomup": 250.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 291.0,
+      "packed": 291.0,
+      "bottomup": 375.0,
+      "swar": 250.0,
+      "exact": 291.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 125.0,
+      "packed": 125.0,
+      "bottomup": 250.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "packed": 125.0,
+      "bottomup": 209.0,
+      "swar": 125.0,
+      "exact": 125.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 292.0,
+      "packed": 291.0,
+      "bottomup": 375.0,
+      "swar": 250.0,
+      "exact": 250.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 166.0,
+      "packed": 208.0,
+      "bottomup": 292.0,
+      "swar": 208.0,
+      "exact": 209.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 167.0,
+      "packed": 166.0,
+      "bottomup": 292.0,
+      "swar": 208.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 4125.0,
+      "packed": 4125.0,
+      "bottomup": 4250.0,
+      "swar": 2083.0,
+      "exact": 4083.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 167.0,
+      "packed": 167.0,
+      "bottomup": 291.0,
+      "swar": 167.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 167.0,
+      "packed": 208.0,
+      "bottomup": 292.0,
+      "swar": 167.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 4000.0,
+      "packed": 4000.0,
+      "bottomup": 4084.0,
+      "swar": 2042.0,
+      "exact": 4000.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 167.0,
+      "packed": 208.0,
+      "bottomup": 291.0,
+      "swar": 167.0,
+      "exact": 166.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 167.0,
+      "packed": 167.0,
+      "bottomup": 291.0,
+      "swar": 208.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 4250.0,
+      "packed": 4292.0,
+      "bottomup": 4375.0,
+      "swar": 2083.0,
+      "exact": 4250.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 167.0,
+      "packed": 167.0,
+      "bottomup": 291.0,
+      "swar": 208.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 166.0,
+      "packed": 208.0,
+      "bottomup": 292.0,
+      "swar": 208.0,
+      "exact": 167.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 4083.0,
+      "packed": 4292.0,
+      "bottomup": 4416.0,
+      "swar": 2083.0,
+      "exact": 4250.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 208.0,
+      "packed": 208.0,
+      "bottomup": 292.0,
+      "swar": 208.0,
+      "exact": 167.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 166.0,
+      "packed": 167.0,
+      "bottomup": 291.0,
+      "swar": 208.0,
+      "exact": 166.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 3791.0,
+      "packed": 3792.0,
+      "bottomup": 3916.0,
+      "swar": 1875.0,
+      "exact": 3791.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 166.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 167.0,
+      "exact": 167.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 166.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 167.0,
+      "exact": 167.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 3833.0,
+      "packed": 3833.0,
+      "bottomup": 3958.0,
+      "swar": 1917.0,
+      "exact": 3833.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 125.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 167.0,
+      "exact": 166.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 167.0,
+      "exact": 167.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 3791.0,
+      "packed": 3583.0,
+      "bottomup": 3750.0,
+      "swar": 1834.0,
+      "exact": 3791.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 167.0,
+      "packed": 166.0,
+      "bottomup": 250.0,
+      "swar": 166.0,
+      "exact": 167.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 166.0,
+      "packed": 167.0,
+      "bottomup": 250.0,
+      "swar": 166.0,
+      "exact": 166.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 3791.0,
+      "packed": 3834.0,
+      "bottomup": 3917.0,
+      "swar": 1875.0,
+      "exact": 3792.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 1833.0,
+      "packed": 1833.0,
+      "bottomup": 2000.0,
+      "swar": 1875.0,
+      "exact": 1791.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 1667.0,
+      "packed": 1791.0,
+      "bottomup": 1917.0,
+      "swar": 1791.0,
+      "exact": 1791.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 153583.0,
+      "packed": 153750.0,
+      "bottomup": 153625.0,
+      "swar": 75208.0,
+      "exact": 153750.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 1459.0,
+      "packed": 1541.0,
+      "bottomup": 1459.0,
+      "swar": 1417.0,
+      "exact": 1375.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 1417.0,
+      "packed": 1458.0,
+      "bottomup": 1500.0,
+      "swar": 1417.0,
+      "exact": 1375.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 125083.0,
+      "packed": 125000.0,
+      "bottomup": 124959.0,
+      "swar": 61000.0,
+      "exact": 125042.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 1125.0,
+      "packed": 1167.0,
+      "bottomup": 1333.0,
+      "swar": 1167.0,
+      "exact": 1125.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 1166.0,
+      "packed": 1167.0,
+      "bottomup": 1292.0,
+      "swar": 1167.0,
+      "exact": 1167.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 106625.0,
+      "packed": 106500.0,
+      "bottomup": 106917.0,
+      "swar": 52042.0,
+      "exact": 106500.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 1042.0,
+      "packed": 1083.0,
+      "bottomup": 1083.0,
+      "swar": 1042.0,
+      "exact": 1000.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 1042.0,
+      "packed": 1083.0,
+      "bottomup": 1042.0,
+      "swar": 1041.0,
+      "exact": 1042.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 92250.0,
+      "packed": 92250.0,
+      "bottomup": 92250.0,
+      "swar": 45042.0,
+      "exact": 92291.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 1167.0,
+      "packed": 1042.0,
+      "bottomup": 1125.0,
+      "swar": 1167.0,
+      "exact": 1084.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 1167.0,
+      "packed": 1083.0,
+      "bottomup": 1125.0,
+      "swar": 1167.0,
+      "exact": 1125.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 82500.0,
+      "packed": 85333.0,
+      "bottomup": 82458.0,
+      "swar": 40333.0,
+      "exact": 83250.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 1292.0,
+      "packed": 1084.0,
+      "bottomup": 1000.0,
+      "swar": 1250.0,
+      "exact": 1208.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 1292.0,
+      "packed": 1125.0,
+      "bottomup": 1000.0,
+      "swar": 1291.0,
+      "exact": 1209.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 82541.0,
+      "packed": 82333.0,
+      "bottomup": 82250.0,
+      "swar": 37959.0,
+      "exact": 82500.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 958.0,
+      "packed": 834.0,
+      "bottomup": 958.0,
+      "swar": 958.0,
+      "exact": 917.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 958.0,
+      "packed": 875.0,
+      "bottomup": 958.0,
+      "swar": 958.0,
+      "exact": 917.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 75750.0,
+      "packed": 75667.0,
+      "bottomup": 75708.0,
+      "swar": 37042.0,
+      "exact": 75709.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 1167.0,
+      "packed": 1000.0,
+      "bottomup": 916.0,
+      "swar": 1166.0,
+      "exact": 1125.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 1208.0,
+      "packed": 1041.0,
+      "bottomup": 917.0,
+      "swar": 1167.0,
+      "exact": 1125.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 71042.0,
+      "packed": 70875.0,
+      "bottomup": 70750.0,
+      "swar": 34833.0,
+      "exact": 71000.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 24458.0,
+      "packed": 24125.0,
+      "bottomup": 24791.0,
+      "swar": 24041.0,
+      "exact": 24083.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 23792.0,
+      "packed": 22958.0,
+      "bottomup": 23833.0,
+      "swar": 23250.0,
+      "exact": 23000.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 2086750.0,
+      "packed": 2049209.0,
+      "bottomup": 2084458.0,
+      "swar": 993583.0,
+      "exact": 2065000.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 26375.0,
+      "packed": 24250.0,
+      "bottomup": 20750.0,
+      "swar": 26291.0,
+      "exact": 26000.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 26541.0,
+      "packed": 24500.0,
+      "bottomup": 21041.0,
+      "swar": 27000.0,
+      "exact": 26209.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 2046417.0,
+      "packed": 2039042.0,
+      "bottomup": 2038917.0,
+      "swar": 993417.0,
+      "exact": 2044709.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 21917.0,
+      "packed": 22250.0,
+      "bottomup": 23542.0,
+      "swar": 22916.0,
+      "exact": 22708.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 21292.0,
+      "packed": 20875.0,
+      "bottomup": 21042.0,
+      "swar": 21209.0,
+      "exact": 21083.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 2098167.0,
+      "packed": 2099834.0,
+      "bottomup": 2104500.0,
+      "swar": 1020542.0,
+      "exact": 2102791.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 26917.0,
+      "packed": 24583.0,
+      "bottomup": 20625.0,
+      "swar": 26917.0,
+      "exact": 26709.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 28500.0,
+      "packed": 29917.0,
+      "bottomup": 23750.0,
+      "swar": 31000.0,
+      "exact": 29208.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 2043208.0,
+      "packed": 2061292.0,
+      "bottomup": 2060708.0,
+      "swar": 999584.0,
+      "exact": 2058041.0
+    },
+    {
+      "words": "262144",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 32541.0,
+      "packed": 32250.0,
+      "bottomup": 32458.0,
+      "swar": 32584.0,
+      "exact": 31750.0
+    },
+    {
+      "words": "262144",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 32250.0,
+      "packed": 31916.0,
+      "bottomup": 32167.0,
+      "swar": 32250.0,
+      "exact": 31333.0
+    },
+    {
+      "words": "262144",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 42125.0,
+      "packed": 38667.0,
+      "bottomup": 31917.0,
+      "swar": 42083.0,
+      "exact": 41209.0
+    },
+    {
+      "words": "262144",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 41709.0,
+      "packed": 38250.0,
+      "bottomup": 31500.0,
+      "swar": 41709.0,
+      "exact": 40833.0
+    },
+    {
+      "words": "262144",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 33417.0,
+      "packed": 32250.0,
+      "bottomup": 31833.0,
+      "swar": 33417.0,
+      "exact": 32125.0
+    },
+    {
+      "words": "262144",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 32500.0,
+      "packed": 31916.0,
+      "bottomup": 31542.0,
+      "swar": 32500.0,
+      "exact": 31708.0
+    },
+    {
+      "words": "262144",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 42084.0,
+      "packed": 38708.0,
+      "bottomup": 32000.0,
+      "swar": 42208.0,
+      "exact": 41250.0
+    },
+    {
+      "words": "262144",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 41750.0,
+      "packed": 38334.0,
+      "bottomup": 31667.0,
+      "swar": 41709.0,
+      "exact": 40917.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 33792.0,
+      "packed": 33291.0,
+      "bottomup": 33834.0,
+      "swar": 33542.0,
+      "exact": 32625.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 32875.0,
+      "packed": 32625.0,
+      "bottomup": 32792.0,
+      "swar": 32834.0,
+      "exact": 32000.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 43500.0,
+      "packed": 45250.0,
+      "bottomup": 33042.0,
+      "swar": 44375.0,
+      "exact": 43416.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 42708.0,
+      "packed": 44375.0,
+      "bottomup": 32250.0,
+      "swar": 42583.0,
+      "exact": 41667.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 33250.0,
+      "packed": 32667.0,
+      "bottomup": 32459.0,
+      "swar": 33250.0,
+      "exact": 32416.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 33042.0,
+      "packed": 32541.0,
+      "bottomup": 32292.0,
+      "swar": 32959.0,
+      "exact": 32292.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 42833.0,
+      "packed": 44583.0,
+      "bottomup": 32334.0,
+      "swar": 42750.0,
+      "exact": 41917.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 42583.0,
+      "packed": 44375.0,
+      "bottomup": 32167.0,
+      "swar": 42541.0,
+      "exact": 41708.0
+    }
+  ]
+}

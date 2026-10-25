@@ -1,0 +1,11 @@
+{
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "n": 10000000,
+  "q": 1000000,
+  "repeats": 7,
+  "source_sha256": {
+    "baseline": "ca2174608eaba4e24f5ca6b81d132f6ea78d5b3b5dbfd90af766d2c45752e326",
+    "current": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626"
+  },
+  "note": "Local generated cases, not official tests. Same I/O code; includes process startup, input, output file writes and destruction. baseline=Predecessor64, current=VebTree. Peak RSS is per child via wait4."
+}

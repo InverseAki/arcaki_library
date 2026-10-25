@@ -1,0 +1,724 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "args": {
+    "variants": "baseline,flat,flat_build",
+    "count": 100000,
+    "repeats": 5,
+    "model": true,
+    "only": "constructors",
+    "large": false,
+    "output": "veb_argon_build"
+  },
+  "source_sha256": {
+    "baseline": "5b2c946cd82eaa1bc7160f59f6bbc37aefeb8fce18045e922cbcbde671157626",
+    "flat": "ff4001cd94aa07d3a1bde440082437b4747a9959b7e08f66cf774401d75a2bba",
+    "flat_build": "79dcb10f7467460d4414c1bb6670e83b909aec181e5115d60fac203d944d2be8"
+  },
+  "medians": [
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 167.0,
+      "flat_build": 208.0
+    },
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 167.0,
+      "flat": 208.0,
+      "flat_build": 208.0
+    },
+    {
+      "words": "1",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 292.0,
+      "flat": 292.0,
+      "flat_build": 333.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 167.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 208.0
+    },
+    {
+      "words": "1",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 292.0,
+      "flat": 292.0,
+      "flat_build": 333.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 167.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 167.0
+    },
+    {
+      "words": "1",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 291.0,
+      "flat": 292.0,
+      "flat_build": 292.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 208.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 125.0,
+      "flat": 167.0,
+      "flat_build": 167.0
+    },
+    {
+      "words": "1",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 291.0,
+      "flat": 292.0,
+      "flat_build": 292.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 417.0,
+      "flat_build": 375.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 250.0,
+      "flat": 417.0,
+      "flat_build": 417.0
+    },
+    {
+      "words": "64",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 4042.0,
+      "flat": 2167.0,
+      "flat_build": 2166.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 375.0,
+      "flat_build": 375.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 250.0,
+      "flat": 417.0,
+      "flat_build": 417.0
+    },
+    {
+      "words": "64",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 4000.0,
+      "flat": 2292.0,
+      "flat_build": 2291.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 375.0,
+      "flat_build": 334.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 250.0,
+      "flat": 417.0,
+      "flat_build": 417.0
+    },
+    {
+      "words": "64",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 4042.0,
+      "flat": 2292.0,
+      "flat_build": 2291.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 375.0,
+      "flat_build": 375.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 250.0,
+      "flat": 458.0,
+      "flat_build": 458.0
+    },
+    {
+      "words": "64",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 3583.0,
+      "flat": 1958.0,
+      "flat_build": 1958.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 166.0,
+      "flat": 250.0,
+      "flat_build": 209.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 209.0,
+      "flat": 250.0,
+      "flat_build": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 3542.0,
+      "flat": 1792.0,
+      "flat_build": 1791.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 167.0,
+      "flat": 250.0,
+      "flat_build": 209.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 208.0,
+      "flat": 291.0,
+      "flat_build": 291.0
+    },
+    {
+      "words": "65",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 3541.0,
+      "flat": 1792.0,
+      "flat_build": 1792.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 166.0,
+      "flat": 209.0,
+      "flat_build": 209.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 208.0,
+      "flat": 250.0,
+      "flat_build": 291.0
+    },
+    {
+      "words": "65",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 3541.0,
+      "flat": 1792.0,
+      "flat_build": 1792.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 166.0,
+      "flat": 208.0,
+      "flat_build": 209.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 208.0,
+      "flat": 250.0,
+      "flat_build": 250.0
+    },
+    {
+      "words": "65",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 3125.0,
+      "flat": 1625.0,
+      "flat_build": 1584.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 1792.0,
+      "flat": 5125.0,
+      "flat_build": 3458.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 5541.0,
+      "flat": 8917.0,
+      "flat_build": 6833.0
+    },
+    {
+      "words": "4096",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 145667.0,
+      "flat": 78084.0,
+      "flat_build": 76292.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 1708.0,
+      "flat": 4958.0,
+      "flat_build": 3167.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 5583.0,
+      "flat": 8917.0,
+      "flat_build": 6750.0
+    },
+    {
+      "words": "4096",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 124958.0,
+      "flat": 64000.0,
+      "flat_build": 62542.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 1334.0,
+      "flat": 4000.0,
+      "flat_build": 2584.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 3917.0,
+      "flat": 6250.0,
+      "flat_build": 4792.0
+    },
+    {
+      "words": "4096",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 106500.0,
+      "flat": 54458.0,
+      "flat_build": 53333.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 1167.0,
+      "flat": 3458.0,
+      "flat_build": 2209.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 3875.0,
+      "flat": 6250.0,
+      "flat_build": 4709.0
+    },
+    {
+      "words": "4096",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 92292.0,
+      "flat": 47500.0,
+      "flat_build": 46667.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 1167.0,
+      "flat": 2041.0,
+      "flat_build": 1000.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 3500.0,
+      "flat": 4333.0,
+      "flat_build": 3375.0
+    },
+    {
+      "words": "4097",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 92417.0,
+      "flat": 46041.0,
+      "flat_build": 45041.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 1417.0,
+      "flat": 2125.0,
+      "flat_build": 1000.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 3583.0,
+      "flat": 4416.0,
+      "flat_build": 3333.0
+    },
+    {
+      "words": "4097",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 82583.0,
+      "flat": 41083.0,
+      "flat_build": 40125.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 1042.0,
+      "flat": 1791.0,
+      "flat_build": 875.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 3166.0,
+      "flat": 3917.0,
+      "flat_build": 3000.0
+    },
+    {
+      "words": "4097",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 82333.0,
+      "flat": 41000.0,
+      "flat_build": 40166.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 1042.0,
+      "flat": 1542.0,
+      "flat_build": 709.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 2666.0,
+      "flat": 3209.0,
+      "flat_build": 2417.0
+    },
+    {
+      "words": "4097",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 75958.0,
+      "flat": 37792.0,
+      "flat_build": 36917.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 24917.0,
+      "flat": 71583.0,
+      "flat_build": 44667.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 81041.0,
+      "flat": 102459.0,
+      "flat_build": 79792.0
+    },
+    {
+      "words": "156250",
+      "pattern": "empty",
+      "constructor": "string",
+      "baseline": 2044541.0,
+      "flat": 1015000.0,
+      "flat_build": 1000625.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 28375.0,
+      "flat": 65042.0,
+      "flat_build": 40208.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 79750.0,
+      "flat": 97417.0,
+      "flat_build": 73250.0
+    },
+    {
+      "words": "156250",
+      "pattern": "dense",
+      "constructor": "string",
+      "baseline": 2083375.0,
+      "flat": 1046333.0,
+      "flat_build": 1001791.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 22333.0,
+      "flat": 61458.0,
+      "flat_build": 38458.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 74708.0,
+      "flat": 96000.0,
+      "flat_build": 75417.0
+    },
+    {
+      "words": "156250",
+      "pattern": "sparse",
+      "constructor": "string",
+      "baseline": 2049541.0,
+      "flat": 1010500.0,
+      "flat_build": 995916.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 27500.0,
+      "flat": 62250.0,
+      "flat_build": 37625.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 80791.0,
+      "flat": 98541.0,
+      "flat_build": 73833.0
+    },
+    {
+      "words": "156250",
+      "pattern": "random",
+      "constructor": "string",
+      "baseline": 2062416.0,
+      "flat": 1059000.0,
+      "flat_build": 1019917.0
+    },
+    {
+      "words": "262144",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 35875.0,
+      "flat": 104042.0,
+      "flat_build": 63500.0
+    },
+    {
+      "words": "262144",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 123083.0,
+      "flat": 189458.0,
+      "flat_build": 149583.0
+    },
+    {
+      "words": "262144",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 45334.0,
+      "flat": 110167.0,
+      "flat_build": 62708.0
+    },
+    {
+      "words": "262144",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 177917.0,
+      "flat": 200333.0,
+      "flat_build": 153250.0
+    },
+    {
+      "words": "262144",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 38042.0,
+      "flat": 103375.0,
+      "flat_build": 65625.0
+    },
+    {
+      "words": "262144",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 116708.0,
+      "flat": 190750.0,
+      "flat_build": 144250.0
+    },
+    {
+      "words": "262144",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 53083.0,
+      "flat": 112959.0,
+      "flat_build": 76042.0
+    },
+    {
+      "words": "262144",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 131583.0,
+      "flat": 195833.0,
+      "flat_build": 170459.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "words",
+      "baseline": 39334.0,
+      "flat": 76167.0,
+      "flat_build": 37167.0
+    },
+    {
+      "words": "262145",
+      "pattern": "empty",
+      "constructor": "usize",
+      "baseline": 122500.0,
+      "flat": 159416.0,
+      "flat_build": 119417.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "words",
+      "baseline": 46875.0,
+      "flat": 88375.0,
+      "flat_build": 49333.0
+    },
+    {
+      "words": "262145",
+      "pattern": "dense",
+      "constructor": "usize",
+      "baseline": 134625.0,
+      "flat": 175084.0,
+      "flat_build": 137292.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "words",
+      "baseline": 37042.0,
+      "flat": 77125.0,
+      "flat_build": 35625.0
+    },
+    {
+      "words": "262145",
+      "pattern": "sparse",
+      "constructor": "usize",
+      "baseline": 123542.0,
+      "flat": 162583.0,
+      "flat_build": 122667.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "words",
+      "baseline": 48583.0,
+      "flat": 89833.0,
+      "flat_build": 50208.0
+    },
+    {
+      "words": "262145",
+      "pattern": "random",
+      "constructor": "usize",
+      "baseline": 132041.0,
+      "flat": 172875.0,
+      "flat_build": 133667.0
+    }
+  ]
+}
